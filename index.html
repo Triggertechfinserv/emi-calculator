@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EMI Calculator (PDF Export - No Charts)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f6f7fb; margin:0; padding:20px; }
+    .container { max-width:1150px; margin:0 auto; background:white; border-radius:10px; padding:18px; box-shadow:0 6px 24px rgba(8,15,35,0.08); }
+    h1 { margin:0 0 12px 0; font-size:20px; }
+    .grid { display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-bottom:12px; }
+    label{ font-size:13px; color:#333; display:block; margin-bottom:6px; }
+    input, select { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:6px; font-size:14px; }
+    .small { font-size:13px; color:#666; }
+    .btn { padding:8px 12px; border-radius:8px; border:0; cursor:pointer; font-weight:600; }
+    .btn-indigo{ background:#4f46e5; color:white; }
+    .btn-green{ background:#16a34a; color:white; }
+    .btn-red{ background:#ef4444; color:white; }
+    .btn-gray{ background:#6b7280; color:white; }
+    .row { display:flex; gap:8px; align-items:center; }
+    .payments { margin:12px 0; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { padding:8px 6px; border-bottom:1px solid #eee; text-align:right; }
+    th:first-child, td:first-child { text-align:left; }
+    th { background:#fafafa; position:sticky; top:0; z-index:1; }
+    .summary { display:grid; grid-template-columns: repeat(4,1fr); gap:12px; margin:12px 0; }
+    .card { background:#fafafa; padding:10px 12px; border-radius:8px; text-align:left; }
+    .flex { display:flex; gap:8px; align-items:center; }
+    .small-muted{ font-size:12px; color:#777; }
+    .footer-note{ font-size:12px; color:#666; margin-top:12px; }
+  </style>
+
+  <!-- SheetJS (xlsx) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <!-- FileSaver -->
+  <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
+  <!-- jsPDF (UMD build) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- jsPDF AutoTable -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>EMI Calculator with Part-Payment </h1>
+
+    <div class="grid" style="margin-bottom:10px;">
+      <div>
+        <label>Loan Amount (Principal)</label>
+        <input id="loan" type="number" min="1" value="500000" />
+      </div>
+      <div>
+        <label>Annual Interest Rate (%)</label>
+        <input id="rate" type="number" step="0.01" min="0" value="11.0" />
+      </div>
+      <div>
+        <label>Tenure (Years)</label>
+        <input id="years" type="number" step="0.25" min="0.1" value="5" />
+      </div>
+    </div>
+
+    <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px;">
+      <div style="width:240px;">
+        <label>Mode</label>
+        <select id="mode">
+          <option value="tenure">Reduce Tenure (EMI fixed)</option>
+          <option value="emi">Reduce EMI (Tenure fixed)</option>
+        </select>
+      </div>
+
+      <div style="flex:1;">
+        <label>Add Part Payment (Month & Amount)</label>
+        <div class="row">
+          <input id="ppMonth" type="number" min="1" placeholder="Month (e.g. 12)" style="width:140px" />
+          <input id="ppAmount" type="number" min="0" placeholder="Amount (e.g. 100000)" />
+          <button id="addPp" class="btn btn-indigo">Add</button>
+          <button id="clearPps" class="btn btn-red">Clear All</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="payments">
+      <div class="small-muted">Part Payments (click remove to delete):</div>
+      <div id="paymentsList" style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"></div>
+    </div>
+
+    <div class="summary" id="dashboard">
+      <div class="card">
+        <div class="small-muted">Initial EMI</div>
+        <div id="initialEmi" style="font-size:18px; font-weight:700;">0</div>
+        <div class="small-muted">before prepayment</div>
+      </div>
+      <div class="card">
+        <div class="small-muted">New Tenure (months)</div>
+        <div id="newMonths" style="font-size:18px; font-weight:700;">0</div>
+      </div>
+      <div class="card">
+        <div class="small-muted">Total Interest Paid</div>
+        <div id="totalInterest" style="font-size:18px; font-weight:700;">0</div>
+      </div>
+      <div class="card">
+        <div class="small-muted">Total Payment</div>
+        <div id="totalPayment" style="font-size:18px; font-weight:700;">0</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr; gap:12px;">
+      <div>
+        <div style="margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+          <strong>Repayment Schedule</strong>
+          <div class="flex">
+            <button id="downloadXLSX" class="btn btn-green">Download Excel</button>
+            <button id="downloadPDF" class="btn btn-gray">Download PDF</button>
+          </div>
+        </div>
+        <div style="max-height:420px; overflow:auto; border-radius:8px; border:1px solid #eee;">
+          <table id="scheduleTable">
+            <thead>
+              <tr><th>Month</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Part Payment</th><th>Outstanding</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Tip: add one or more part payments (month number & amount). Choose *Reduce Tenure* to keep EMI the same (loan closes earlier), or *Reduce EMI* to keep tenure same and reduce monthly payment. Save the file to keep your data.
+    </div>
+  </div>
+
+<script>
+(function(){
+  // helpers
+  const fmt = (v) => {
+    const n = Math.round(Number(v) || 0);
+    return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0, minimumFractionDigits: 0 }).format(n);
+  };
+
+  function pmt(rate, nper, pv) {
+    if (nper === 0) return 0;
+    if (Math.abs(rate) < 1e-12) return pv / nper;
+    return (pv * rate) / (1 - Math.pow(1 + rate, -nper));
+  }
+
+  // DOM
+  const loanEl = document.getElementById('loan');
+  const rateEl = document.getElementById('rate');
+  const yearsEl = document.getElementById('years');
+  const modeEl = document.getElementById('mode');
+
+  const ppMonthEl = document.getElementById('ppMonth');
+  const ppAmountEl = document.getElementById('ppAmount');
+  const addPpBtn = document.getElementById('addPp');
+  const clearPpsBtn = document.getElementById('clearPps');
+  const paymentsList = document.getElementById('paymentsList');
+
+  const initialEmiEl = document.getElementById('initialEmi');
+  const newMonthsEl = document.getElementById('newMonths');
+  const totalInterestEl = document.getElementById('totalInterest');
+  const totalPaymentEl = document.getElementById('totalPayment');
+
+  const scheduleTbody = document.querySelector('#scheduleTable tbody');
+  const downloadXLSXBtn = document.getElementById('downloadXLSX');
+  const downloadPDFBtn = document.getElementById('downloadPDF');
+
+  // state
+  let payments = []; // array of {month:number, amount:number}
+
+  // ensure defaults and safety
+  function getInputs() {
+    const principal = Math.max(1, Math.round(Number(loanEl.value) || 1));
+    const annualRate = Math.max(0, Number(rateEl.value) || 0);
+    const tenureYears = Math.max(0.1, Number(yearsEl.value) || 0.1);
+    return { principal, annualRate, tenureYears, monthlyRate: annualRate/12/100, monthsInitial: Math.round(Math.max(1, tenureYears*12)) };
+  }
+
+  function renderPayments() {
+    paymentsList.innerHTML = '';
+    payments.forEach((p, idx) => {
+      const div = document.createElement('div');
+      div.style.background = '#f3f4f6';
+      div.style.padding = '8px';
+      div.style.borderRadius = '8px';
+      div.style.display = 'flex';
+      div.style.alignItems = 'center';
+      div.style.gap = '8px';
+      div.innerHTML = `<div class="small-muted">Month ${p.month} → ${fmt(p.amount)}</div>`;
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-red';
+      btn.style.padding = '6px';
+      btn.textContent = 'Remove';
+      btn.onclick = () => { payments.splice(idx,1); renderPayments(); computeAndRender(); };
+      div.appendChild(btn);
+      paymentsList.appendChild(div);
+    });
+    if (payments.length===0) paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
+  }
+
+  function addPayment() {
+    const m = Math.max(1, Math.round(Number(ppMonthEl.value) || 0));
+    const a = Math.max(0, Math.round(Number(ppAmountEl.value) || 0));
+    if (!a) { alert('Please enter a part payment amount > 0'); return; }
+    payments.push({month:m, amount:a});
+    payments.sort((x,y)=>x.month-y.month);
+    ppMonthEl.value=''; ppAmountEl.value='';
+    renderPayments();
+    computeAndRender();
+  }
+
+  function clearPayments(){
+    if(!confirm('Clear all part payments?')) return;
+    payments = [];
+    renderPayments();
+    computeAndRender();
+  }
+
+  // compute schedule
+  function computeSchedule() {
+    const { principal, monthlyRate, monthsInitial } = getInputs();
+    const mode = modeEl.value; // 'tenure' or 'emi'
+    const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
+    function partSum(m) { return payments.filter(p=>p.month===m).reduce((s,r)=>s+r.amount,0); }
+
+    const schedule = [];
+    let outstanding = principal;
+    let emi = initialEmi;
+    let remainingMonths = monthsInitial;
+
+    for (let month=1; month<=1200; month++) {
+      if (outstanding <= 0.0001) break;
+      const interest = outstanding * monthlyRate;
+      let principalComp = emi - interest;
+      if (principalComp < 0) principalComp = 0;
+
+      const part = partSum(month);
+
+      if (outstanding - principalComp - part <= 0) {
+        const finalInterest = outstanding * monthlyRate;
+        const finalPrincipal = outstanding;
+        const finalEmi = finalPrincipal + finalInterest;
+        schedule.push({ month, emi: Math.round(finalEmi), principalPaid: Math.round(finalPrincipal), interestPaid: Math.round(finalInterest), partPayment: Math.round(part), outstanding: 0 });
+        outstanding = 0;
+        break;
+      }
+
+      outstanding = outstanding - principalComp - part;
+
+      if (mode === 'emi' && part > 0) {
+        remainingMonths = Math.max(1, monthsInitial - month);
+        if (outstanding > 0) {
+          emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
+        }
+      }
+
+      schedule.push({ month, emi: Math.round(emi), principalPaid: Math.round(principalComp), interestPaid: Math.round(interest), partPayment: Math.round(part), outstanding: Math.round(Math.max(0, outstanding)) });
+
+      if (month > monthsInitial + 600) break;
+    }
+
+    return { schedule, initialEmi: Math.round(initialEmi) };
+  }
+
+  // render schedule and dashboard
+  function computeAndRender(){
+    const { schedule, initialEmi } = computeSchedule();
+
+    // table
+    scheduleTbody.innerHTML = '';
+    schedule.forEach(row=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${row.month}</td>
+                      <td style="text-align:right">${fmt(row.emi)}</td>
+                      <td style="text-align:right">${fmt(row.principalPaid)}</td>
+                      <td style="text-align:right">${fmt(row.interestPaid)}</td>
+                      <td style="text-align:right">${fmt(row.partPayment)}</td>
+                      <td style="text-align:right">${fmt(row.outstanding)}</td>`;
+      scheduleTbody.appendChild(tr);
+    });
+
+    // dashboard
+    const totalInterest = schedule.reduce((s,r)=>s+r.interestPaid, 0);
+    const totalPrincipal = schedule.reduce((s,r)=>s+r.principalPaid + r.partPayment, 0);
+    const totalPayment = totalInterest + totalPrincipal;
+
+    initialEmiEl.textContent = fmt(initialEmi);
+    newMonthsEl.textContent = schedule.length;
+    totalInterestEl.textContent = fmt(totalInterest);
+    totalPaymentEl.textContent = fmt(totalPayment);
+  }
+
+  // Excel export (omit Part Payment column if no part payments present)
+  function exportXLSX(){
+    const { schedule } = computeSchedule();
+    const hasPart = payments.some(p => p.amount && p.amount > 0);
+    const aoa = [ ['Loan Amount', loanEl.value], ['Annual Rate (%)', rateEl.value], ['Tenure (Years)', yearsEl.value], ['Mode', modeEl.value], [], ];
+    if (hasPart) {
+      aoa.push(['Month','EMI','Principal Paid','Interest Paid','Part Payment','Outstanding']);
+      schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding]));
+    } else {
+      aoa.push(['Month','EMI','Principal Paid','Interest Paid','Outstanding']);
+      schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]));
+    }
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Schedule');
+    const wbout = XLSX.write(wb, {bookType:'xlsx', type:'array'});
+    try { saveAs(new Blob([wbout],{type:"application/octet-stream"}), 'emi_schedule.xlsx'); } catch(e) { alert('Excel export failed: ' + e.message); }
+  }
+
+  // PDF export using jsPDF + autotable; omit Part Payment column if no non-zero part payments
+  function exportPDF(){
+    const { schedule, initialEmi } = computeSchedule();
+    const loan = Math.round(Number(loanEl.value) || 0);
+    const rate = Number(rateEl.value) || 0;
+    const years = Number(yearsEl.value) || 0;
+    const hasPart = payments.some(p => p.amount && p.amount > 0);
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 40;
+    let y = 40;
+
+    // Header background
+    doc.setFillColor(79,70,229);
+    doc.rect(0,0,pageWidth,60,'F');
+    doc.setFontSize(18);
+    doc.setTextColor(255,255,255);
+    doc.text('EMI Repayment Schedule', margin, 40);
+
+    y = 80;
+    // Loan detail cards (colored small boxes)
+    const cardW = 140;
+    const cardH = 40;
+    const gap = 12;
+    const cards = [
+      {label:'Loan Amount', value: fmt(loan), color: [79,70,229]},
+      {label:'Rate (%)', value: String(rate), color: [16,185,129]},
+      {label:'Tenure (yrs)', value: String(years), color: [234,179,8]},
+      {label:'Initial EMI', value: fmt(initialEmi), color: [239,68,68]}
+    ];
+    let x = margin;
+    cards.forEach(c=>{
+      doc.setFillColor(c.color[0], c.color[1], c.color[2]);
+      doc.roundedRect(x, y, cardW, cardH, 6, 6, 'F');
+      doc.setTextColor(255,255,255);
+      doc.setFontSize(10);
+      doc.text(c.label, x + 10, y + 14);
+      doc.setFontSize(13);
+      doc.setFont(undefined, 'bold');
+      doc.text(c.value, x + 10, y + 30);
+      doc.setFont(undefined, 'normal');
+      x += cardW + gap;
+    });
+
+    y += cardH + 18;
+
+    // Prepare table head/body for autotable
+    const head = hasPart ? [['Month','EMI','Principal','Interest','Part Payment','Outstanding']] : [['Month','EMI','Principal','Interest','Outstanding']];
+    const body = schedule.map(r => hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]);
+
+    doc.autoTable({
+      startY: y,
+      head: head,
+      body: body,
+      styles: { fontSize: 9 },
+      headStyles: { fillColor: [245,245,245], textColor: 20 },
+      margin: { left: margin, right: margin },
+      didDrawPage: function (data) {
+        const page = doc.internal.getNumberOfPages();
+        doc.setFontSize(9);
+        doc.setTextColor(120);
+        doc.text('Page ' + page, data.settings.margin.left, doc.internal.pageSize.height - 10);
+      },
+      theme: 'grid'
+    });
+
+    doc.save('emi_schedule.pdf');
+  }
+
+  // events
+  addPpBtn.addEventListener('click', addPayment);
+  clearPpsBtn.addEventListener('click', clearPayments);
+  [loanEl, rateEl, yearsEl, modeEl].forEach(el => el.addEventListener('input', computeAndRender));
+  downloadXLSXBtn.addEventListener('click', exportXLSX);
+  downloadPDFBtn.addEventListener('click', exportPDF);
+
+  // initial render
+  renderPayments();
+  computeAndRender();
+
+})();
+</script>
+</body>
+</html>
