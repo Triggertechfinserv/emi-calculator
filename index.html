@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>EMI Calculator-Techfinserv</title>
+  <title>EMI Calculator-TechFinserv</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f6f7fb; margin:0; padding:20px; }
@@ -28,6 +28,11 @@
     .flex { display:flex; gap:8px; align-items:center; }
     .small-muted{ font-size:12px; color:#777; }
     .footer-note{ font-size:12px; color:#666; margin-top:12px; }
+
+    /* desktop -> tablet responsiveness */
+    @media (max-width: 1024px) {
+      .container { padding:14px; }
+    }
 
     /* --- Mobile Responsiveness --- */
     @media (max-width: 768px) {
@@ -56,6 +61,44 @@
         overflow-x: auto;
       }
     }
+
+    /* --- Mobile friendly table -> convert rows to cards --- */
+    @media (max-width: 600px) {
+      table thead { display: none; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      tbody { padding: 0; }
+      tr {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background: white;
+      }
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        border: none;
+        text-align: left;
+        font-size: 13px;
+      }
+      td[data-label]:before {
+        content: attr(data-label) ":";
+        font-weight: 600;
+        margin-right: 10px;
+        color: #444;
+        width: 34%;
+        max-width: 140px;
+      }
+      td .value {
+        width: 66%;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   </style>
 
   <!-- SheetJS (xlsx) -->
@@ -69,7 +112,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>EMI Calculator with Part-Payment (PDF Export - No Charts)</h1>
+    <h1>EMI Calculator with Part-Payment-TechFiserv</h1>
 
     <div class="grid" style="margin-bottom:10px;">
       <div>
@@ -292,16 +335,42 @@
   function computeAndRender(){
     const { schedule, initialEmi } = computeSchedule();
 
-    // table
+    // Clear table
     scheduleTbody.innerHTML = '';
     schedule.forEach(row=>{
+      // build row with data-label attributes for mobile card layout
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${row.month}</td>
-                      <td style="text-align:right">${fmt(row.emi)}</td>
-                      <td style="text-align:right">${fmt(row.principalPaid)}</td>
-                      <td style="text-align:right">${fmt(row.interestPaid)}</td>
-                      <td style="text-align:right">${fmt(row.partPayment)}</td>
-                      <td style="text-align:right">${fmt(row.outstanding)}</td>`;
+
+      const tdMonth = document.createElement('td');
+      tdMonth.setAttribute('data-label','Month');
+      tdMonth.innerHTML = `<span class="value">${row.month}</span>`;
+      tr.appendChild(tdMonth);
+
+      const tdEmi = document.createElement('td');
+      tdEmi.setAttribute('data-label','EMI');
+      tdEmi.innerHTML = `<span class="value">${fmt(row.emi)}</span>`;
+      tr.appendChild(tdEmi);
+
+      const tdPrincipal = document.createElement('td');
+      tdPrincipal.setAttribute('data-label','Principal');
+      tdPrincipal.innerHTML = `<span class="value">${fmt(row.principalPaid)}</span>`;
+      tr.appendChild(tdPrincipal);
+
+      const tdInterest = document.createElement('td');
+      tdInterest.setAttribute('data-label','Interest');
+      tdInterest.innerHTML = `<span class="value">${fmt(row.interestPaid)}</span>`;
+      tr.appendChild(tdInterest);
+
+      const tdPart = document.createElement('td');
+      tdPart.setAttribute('data-label','Part Payment');
+      tdPart.innerHTML = `<span class="value">${fmt(row.partPayment)}</span>`;
+      tr.appendChild(tdPart);
+
+      const tdOut = document.createElement('td');
+      tdOut.setAttribute('data-label','Outstanding');
+      tdOut.innerHTML = `<span class="value">${fmt(row.outstanding)}</span>`;
+      tr.appendChild(tdOut);
+
       scheduleTbody.appendChild(tr);
     });
 
