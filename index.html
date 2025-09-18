@@ -1,200 +1,104 @@
 <!doctype html>
-    <h1></h1>
-  </header>
-</body>
-</html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TechFinServ — Professional EMI & Lending Tools</title>
-  <meta name="description" content="TechFinServ: audited EMI calculators and lightweight frontend tools for lenders, brokers and finance teams." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- hint browser to fetch calculator early -->
-  <link rel="preload" href="/emi-calculator.html" as="document">
-
-  <style>
-    :root{--bg:#ffffff;--muted:#6b7280;--accent:#0b69ff;--card:#f8fafc;--glass:rgba(11,105,255,0.06);--shadow:0 10px 30px rgba(2,6,23,0.08)}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#0f1724;-webkit-font-smoothing:antialiased}
-    .wrap{max-width:1100px;margin:0 auto;padding:36px}
-
-    /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;gap:18px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(180deg,#0b69ff,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    nav{display:flex;gap:16px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;font-weight:600}
-    .cta{background:var(--accent);padding:10px 14px;border-radius:10px;color:#fff;font-weight:700;text-decoration:none}
-
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;margin-top:28px}
-    .hero h1{font-size:28px;margin:0 0 8px}
-    .hero p{margin:0 0 18px;color:var(--muted);line-height:1.6}
-
-    /* Cards & features */
-    .card{background:#fff;padding:18px;border-radius:10px;border:1px solid #eef2f7;box-shadow:var(--shadow)}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-    .feature h4{margin:0 0 8px;color:var(--accent)}
-
-    /* Layout helpers */
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .muted{color:var(--muted)}
-    .small{font-size:13px;color:var(--muted)}
-
-    /* Footer */
-    footer{margin-top:36px;padding:20px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-
-    /* Responsive */
-    @media (max-width:980px){.hero{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}}
-    @media (max-width:560px){nav{display:none}.mobile-cta{display:inline-block}}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <a class="brand" href="/"> 
-<html lang="en"> 
-<head>
   <meta charset="utf-8">
+  <title>Tech Finserv</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    header {
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      background: #f9f9f9;
-    }
-    header img {
-      height: 190px; /* adjust logo size */
-      margin-right: 15px;
-    }
-    header h1 {
+    body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      font-size: 24px;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    header img {
+      max-height: 120px; /* adjust logo size */
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    header h1 {
+      font-size: 28px;
       margin: 0;
       color: #003366;
+    }
+
+    header p {
+      font-size: 16px;
+      margin: 5px 0 0;
+      color: #555;
+      font-style: italic;
+    }
+
+    main {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    main h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #003366;
+    }
+
+    main p {
+      font-size: 16px;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #003366;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #0055aa;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #f1f1f1;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #777;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="images/techfinserv-logo.png" alt="Tech Finserv Logo">
-      </a>
+    <img src="techfinserv-logo.png" alt="Tech Finserv Logo">
+    <h1>Tech Finserv</h1>
+    <p>With You at Every Step.</p>
+  </header>
 
-      <nav>
-        <a href="#services">Services</a>
-        <a href="#solutions">Solutions</a>
-        <a href="/blogs.html">Blogs</a>
-        <a href="#contact">Contact</a>
-        <!-- Open calculator directly in same tab -->
-        <a class="cta" href="/emi-calculator.html" id="open-emi">EMI Calculator</a>
-      </nav>
+  <main>
+    <h2>Welcome to Tech Finserv</h2>
+    <p>
+      At Tech Finserv, we combine technology with financial expertise to help you grow with confidence. 
+      Explore our solutions designed to make finance simpler, smarter, and more secure for everyone.
+    </p>
+    <a href="emi-calculator.html" class="btn">Try Our EMI Calculator</a>
+  </main>
 
-      <div class="mobile-cta" style="display:none">
-        <a class="cta" href="/emi-calculator.html" id="open-emi-mobile">EMI</a>
-      </div>
-    </header>
-
-    <main>
-      <!-- Hero -->
-      <section class="hero">
-        <div>
-          <h1>Precision EMI calculations for lending teams</h1>
-          <p>TechFinServ provides audited EMI calculators and lightweight frontend tools designed for accuracy, compliance and simple deployment.</p>
-
-          <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
-            <!-- Direct open in same tab -->
-            <a class="cta" href="/emi-calculator.html" id="open-emi-hero">Open Calculator</a>
-            <a href="#services" class="small">Explore services →</a>
-          </div>
-
-          <div class="features" style="margin-top:22px">
-            <div class="feature card">
-              <h4>Audited formulas</h4>
-              <p class="small">Consistent, testable financial logic with clear rounding and display rules.</p>
-            </div>
-            <div class="feature card">
-              <h4>Embed-ready</h4>
-              <p class="small">Drop into broker portals or load via iframe for reusable workflows.</p>
-            </div>
-            <div class="feature card">
-              <h4>Fast deployment</h4>
-              <p class="small">Minimal code — push to GitHub and connect to Netlify for instant hosting.</p>
-            </div>
-          </div>
-        </div>
-
-        <aside>
-          <div class="card" style="position:sticky;top:28px">
-            <div style="font-weight:700">Quick actions</div>
-            <ul style="margin:12px 0 0;padding-left:18px;color:var(--muted)">
-              <li>Use existing /emi-calculator.html</li>
-              <li>Open it directly from the site</li>
-              <li>Download results as CSV or copy to clipboard</li>
-            </ul>
-
-            <div style="margin-top:14px;display:flex;gap:8px">
-              <a class="cta" href="/emi-calculator.html">Open EMI</a>
-              <a class="small" href="/blogs.html">Read blogs</a>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- Services -->
-      <section id="services" style="margin-top:36px">
-        <h3 style="margin:0 0 10px">Services</h3>
-        <div class="grid-2" style="gap:14px">
-          <div class="card">
-            <strong>Custom EMI Calculators</strong>
-            <p class="small">Branded calculators with exportable reports and configurable rounding rules.</p>
-          </div>
-          <div class="card">
-            <strong>Policy & Rules Engine</strong>
-            <p class="small">Alert on violations and provide program recommendations automatically.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Solutions & contact -->
-      <section id="solutions" style="margin-top:28px">
-        <div class="grid-2">
-          <div>
-            <h3 style="margin:0 0 8px">Solutions</h3>
-            <p class="small">Prebuilt modules for underwriting checks, broker portals, and customer-facing calculators.</p>
-          </div>
-          <div>
-            <h3 style="margin:0 0 8px">Contact</h3>
-            <p class="small">Email: <a href="mailto:support@techfinserv.com">support@techfinserv.com</a></p>
-            <p class="small">For deployment help, reply here and I’ll provide step-by-step support.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Blogs teaser -->
-      <section style="margin-top:28px">
-        <h3 style="margin:0 0 8px">Latest insights</h3>
-        <div class="grid-2" style="margin-top:12px">
-          <div class="card">
-            <strong>EMI precision: why rounding matters</strong>
-            <p class="small">Short guide for QA and product teams to keep calculations consistent.</p>
-            <a class="small" href="/blogs.html">Read more →</a>
-          </div>
-          <div class="card">
-            <strong>Embedding calculators safely</strong>
-            <p class="small">Best practices for iframe integration and cross-origin setups.</p>
-            <a class="small" href="/blogs.html">Read more →</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div>© TechFinServ Made With Love</div>
-      <div class="small">Design And Maintained By Kiran Rathva</div>
-    </footer>
-  </div>
+  <footer>
+    Design and Maintained By Kiran Rathva
+  </footer>
 </body>
 </html>
