@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechFinServ — Home</title>
+  <meta name="description" content="TechFinServ — EMI calculator, loan tools and fintech solutions. Fast, simple, secure." />
+  <link rel="icon" href="#favicon" />
+  <style>
+    :root{--accent:#0066cc;--muted:#666}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0;color:#222;line-height:1.45}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .brand svg{width:48px;height:48px}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:500}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;padding:36px 0}
+    .hero h1{font-size:32px;margin:0 0 12px}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .card{padding:18px;border-radius:10px;background:#fff;border:1px solid #eee}
+    footer{border-top:1px solid #eee;margin-top:36px;padding:24px 0;color:var(--muted);font-size:14px}
+    @media (max-width:900px){
+      .features{grid-template-columns:1fr 1fr}
+      nav ul{display:none}
+      .mobile-nav{display:block}
+    }
+    @media (max-width:520px){.features{grid-template-columns:1fr}}
+    /* utility */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .center{display:flex;justify-content:center;align-items:center}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="/" class="brand">
+        <!-- Replace this SVG with your logo or a base64 data-uri image. Keeps file self-contained. -->
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TechFinServ logo">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#0066cc" />
+              <stop offset="1" stop-color="#00a3ff" />
+            </linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="18" fill="url(#g)" />
+          <text x="60" y="70" text-anchor="middle" font-family="sans-serif" font-size="46" fill="#fff" font-weight="700">TF</text>
+        </svg>
+        <div>
+          <div style="font-weight:700">TechFinServ</div>
+          <div class="small muted">Fintech tools & EMI calculator</div>
+        </div>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="btn" href="/emi-calculator.html">EMI Calculator</a></li>
+        </ul>
+      </nav>
+
+      <div class="mobile-nav center" style="display:none">
+        <a class="btn" href="/emi-calculator.html">EMI</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Quick EMI calculations & fintech tools for businesses</h1>
+          <p>Powerful, lightweight EMI calculator you can share with your team. Deploy fast on Netlify or GitHub Pages — no backend required.</p>
+          <div style="display:flex;gap:12px;align-items:center">
+            <a class="btn" href="/emi-calculator.html">Open EMI Calculator</a>
+            <a href="#services" class="small muted">See features →</a>
+          </div>
+
+          <div class="features">
+            <div class="card">
+              <strong>Embed-friendly</strong>
+              <div class="small muted">Single-file pages, base64 logos, drag & drop friendly.</div>
+            </div>
+            <div class="card">
+              <strong>Shareable</strong>
+              <div class="small muted">Send one HTML file to your team — no extra assets required.</div>
+            </div>
+            <div class="card">
+              <strong>SEO-ready</strong>
+              <div class="small muted">Meta tags and semantic HTML to help your pages rank.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <h2>Services</h2>
+        <p class="muted">Tools built for lenders, brokers and fintech teams.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+          <div class="card">
+            <h4 style="margin:0 0 8px">EMI Calculator</h4>
+            <p class="small muted">Fully client-side, exportable, and embeddable. Use our default HTML or replace styling to match your brand.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin:0 0 8px">Policy Alerts</h4>
+            <p class="small muted">Mark rule violations and display program eligibility (can be integrated via simple JS).</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" style="margin-top:18px">
+        <h2>About TechFinServ</h2>
+        <p class="muted">We build simple, sharable tools for loan calculations, underwriting checks and fintech workflows.</p>
+      </section>
+
+      <section id="contact" style="margin-top:18px">
+        <h2>Contact</h2>
+        <p class="muted">Email: <a href="mailto:hello@techfinserv.com">hello@techfinserv.com</a> | Domain: techfinserv.com</p>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>© TechFinServ • Built for fast deployment</div>
+        <div class="small muted">Made with ❤️ Design And Maintained By Kiran Rathva </div>
+      </div>
+      <div style="margin-top:10px;font-size:13px;color:#444;text-align:center"></div>
+    </footer>
+  </div>
+</body>
+</html>
