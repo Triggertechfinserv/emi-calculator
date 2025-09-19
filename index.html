@@ -1,199 +1,339 @@
-  <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Tech Finserv</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TechFinserv - Home</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="TechFinserv — modern financial tools and trusted expertise. Explore calculators, services and blog insights." />
   <style>
-    :root{
-      --accent:#003366;
-      --bg:#f7f8fa;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --max-width:1100px;
+    :root {
+      --accent: #003366;
+      --accent-2: #154a7b;
+      --muted: #6b7280;
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --glass: rgba(255,255,255,0.6);
+      --radius: 12px;
+      --max-width: 1150px;
     }
 
-    html,body{
-      height:100%;
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:#111827;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
+    /* base */
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+    a{color:inherit;text-decoration:none}
+    .page{min-height:100%;display:flex;flex-direction:column}
 
-    /* Layout wrapper to keep footer at bottom */
-    .page {
-      min-height:100%;
-      display:flex;
-      flex-direction:column;
-    }
-
-    /* Header: logo top-left */
-    header.site-header{
-      background:var(--card);
+    /* ========== HEADER (UNCHANGED) ========== */
+    header.site-header {
+      background: #ffffff;
       box-shadow: 0 2px 6px rgba(15,23,42,0.06);
-      padding:0px 16px;
-      position:relative;
+      padding: 6px 16px;
+      position: relative;
+      z-index: 9999;
     }
-    .header-inner{
-      max-width:var(--max-width);
-      margin:0 auto;
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
       display:flex;
       align-items:center;
       gap:16px;
     }
-
-    /* Logo styling (responsive) */
-    .logo-link{
-      display:inline-block;
-      line-height:0;
+    .logo-link { display:inline-block; line-height:0; }
+    .logo { display:block; width:auto; height:auto; max-height:64px; }
+    @media (min-width:1024px) { .logo { max-height:80px; } }
+    nav.site-nav { margin-left:auto; display:flex; align-items:center; gap:10px; }
+    .nav-links { display:flex; gap:8px; align-items:center; }
+    .btn {
+      display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:0;
     }
-    .logo {
-      display:block;
-      width:auto;
-      height:auto;
-      /* default safe size for mobile */
-      max-height:64px;
-    }
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
 
-    /* Primary content area */
-    main{
-      flex:1 0 auto;
-      max-width:var(--max-width);
-      margin:20px auto;
-      padding:20px;
-      width:calc(100% - 32px);
-    }
+    .menu-toggle{display:none;background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer}
+    .mobile-menu{display:none;position:absolute;right:16px;top:100%;background:var(--card);box-shadow:0 8px 30px rgba(15,23,42,0.12);border-radius:8px;overflow:hidden;margin-top:8px;min-width:160px}
+    .mobile-menu a{display:block;padding:10px 12px;border-bottom:1px solid #f1f5f9;color:var(--accent)}
+    .mobile-menu a:last-child{border-bottom:none}
+    @media (max-width:640px){ .nav-links{display:none} .menu-toggle{display:inline-flex} .mobile-menu{right:8px;left:auto} }
 
-    /* A simple card area */
+    /* ========== NEW LAYOUT ========== */
+    main.page-content{max-width:var(--max-width);margin:22px auto;padding:0 16px;flex:1 0 auto}
+
+    /* Hero with layered cards */
+    .hero-wrap {
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:24px;
+      align-items:stretch;
+    }
     .hero {
-      background:var(--card);
-      border-radius:12px;
+      background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
+      border-radius: var(--radius);
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(12,18,30,0.06);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:16px;
+      position:relative;
+      overflow:visible;
+    }
+    .hero .kicker { display:inline-block;padding:6px 10px;border-radius:999px;background:#eef6ff;color:var(--accent);font-weight:700;font-size:13px; }
+    .hero h1 { margin:0;font-size:28px;color:var(--accent-2);line-height:1.06; }
+    .hero p { margin:0;color:var(--muted);font-size:15px; }
+
+    /* Spotlight card to right */
+    .spotlight {
+      background: linear-gradient(180deg,#0f172a08, #ffffff);
+      border-radius: var(--radius);
       padding:18px;
-      box-shadow: 0 1px 3px rgba(15,23,42,0.04);
       display:flex;
       flex-direction:column;
       gap:12px;
+      box-shadow: 0 8px 26px rgba(12,18,30,0.06);
+      align-self:center;
     }
-    .hero h2{
-      margin:0;
-      font-size:20px;
-      color:var(--accent);
+    .spotlight h3 { margin:0;color:var(--accent);font-size:18px; }
+    .spotlight p { margin:0;color:var(--muted);font-size:14px; }
+    .cta-row { display:flex; gap:10px; flex-wrap:wrap; }
+
+    /* Feature grid (cards with icons) */
+    .features {
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:16px;
+      margin-top:18px;
     }
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
-    }
-    .actions{
-      margin-top:12px;
+    .feature {
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      box-shadow:0 6px 26px rgba(12,18,30,0.04);
       display:flex;
       gap:12px;
-      flex-wrap:wrap;
+      align-items:flex-start;
     }
-    .btn{
-      display:inline-block;
-      padding:10px 16px;
-      background:var(--accent);
-      color:white;
-      text-decoration:none;
-      border-radius:8px;
-      font-weight:600;
-      font-size:14px;
-      box-shadow: 0 6px 14px rgba(0,85,170,0.08);
+    .feature .icon {
+      width:52px;height:52px;border-radius:10px;background:linear-gradient(180deg,#eff6ff,#e6f0ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);
+      flex-shrink:0;
     }
-    .secondary{
-      background:transparent;
-      border:1px solid rgba(3,66,102,0.08);
-      color:var(--accent);
-    }
+    .feature h4 { margin:0;font-size:16px;color:var(--accent-2); }
+    .feature p { margin:6px 0 0 0;color:var(--muted);font-size:13px; }
 
-    /* Footer pinned at bottom */
-    footer.site-footer{
-      background:transparent;
-      padding:18px 12px;
-      color:var(--muted);
-      text-align:center;
-      font-size:13px;
-    }
+    /* Grid of service tiles */
+    .services-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:14px; margin-top:20px; }
+    .service-tile { background: linear-gradient(180deg,#fff,#fbfdff); padding:16px; border-radius:12px; box-shadow:0 6px 20px rgba(12,18,30,0.04); }
+    .service-tile h5{ margin:0 0 6px 0; color:var(--accent); }
+    .service-tile p{ margin:0;color:var(--muted); font-size:13px; }
 
-    /* Responsive layout: larger screens */
-    @media (min-width:640px){
-      .logo { max-height:80px; }
-      .hero{ padding:28px; }
-      .hero h2{ font-size:24px; }
-      .hero p{ font-size:16px; }
-    }
+    /* Testimonials */
+    .testimonials { margin-top:22px; display:grid; grid-template-columns: 1fr 1fr; gap:14px; align-items:start; }
+    .testimonial { background:var(--card); padding:16px; border-radius:12px; box-shadow:0 6px 20px rgba(12,18,30,0.03); }
+    .testimonial p { margin:0;color:var(--muted); font-size:14px; }
+    .testimonial .who { margin-top:10px;font-weight:700;color:var(--accent-2);font-size:13px; }
 
-    @media (min-width:1024px){
-      .logo { max-height:80px; }
-      .header-inner { padding:4px 0; }
-      main{ padding:32px; }
-      .hero{ display:grid; grid-template-columns: 1fr 360px; column-gap:24px; align-items:center; }
-      .hero-content{ order:1; }
-      .hero-aside{ order:2; }
-      .hero-aside .card{ padding:20px; }
-    }
+    /* CTA banner */
+    .cta-banner { margin-top:26px; background:linear-gradient(90deg,var(--accent),#154a7b); color:white; padding:22px; border-radius:14px; display:flex; justify-content:space-between; align-items:center; gap:16px; box-shadow:0 8px 30px rgba(12,18,30,0.08); }
+    .cta-banner .left { max-width:70%; }
+    .cta-banner h3 { margin:0;font-size:18px; }
+    .cta-banner p { margin:6px 0 0 0; opacity:0.95; }
 
-    /* Make image never overflow */
-    img { max-width:100%; height:auto; display:block; }
+    /* footer */
+    footer.site-footer { text-align:center; padding:18px 0; color:var(--muted); font-size:13px; margin-top:26px; }
+
+    /* responsive */
+    @media (max-width:1100px){ .hero-wrap{grid-template-columns:1fr 360px} }
+    @media (max-width:880px){
+      .hero-wrap{grid-template-columns:1fr}
+      .spotlight{order:-1}
+      .features{grid-template-columns:1fr 1fr}
+      .services-grid{grid-template-columns:1fr 1fr}
+      .testimonials{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      .features{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:1fr}
+      .hero{padding:18px}
+      .cta-banner { flex-direction:column; align-items:flex-start; }
+    }
   </style>
 </head>
 <body>
   <div class="page">
+    <!-- HEADER (unchanged) -->
     <header class="site-header" role="banner">
       <div class="header-inner">
-        <!-- clickable logo linking to home -->
         <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
           <img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo">
         </a>
 
-        <!-- optional right-side space for nav or button (kept simple) -->
-        <div style="margin-left:auto; display:flex; gap:10px; align-items:center;">
-          <!-- example small nav / CTA -->
-          <a class="btn" href="index.html" style="padding:8px 12px; font-size:13px;">Home</a>
-          <a class="btn" href="blogs.html" style="padding:8px 12px; font-size:13px;">Blogs</a>
-          <a class="btn" href="emi-calculator.html" style="padding:8px 12px; font-size:13px;">EMI Calculator</a>
-          <a class="btn secondary" href="contact.html" style="padding:8px 12px; font-size:13px;">Contact</a>
-        </div>
+        <nav class="site-nav" role="navigation" aria-label="Main navigation">
+          <div class="nav-links" id="navLinks">
+            <a class="btn btn-primary" href="index.html" aria-current="page">Home</a>
+            <a class="btn btn-primary" href="blogs.html">Blogs</a>
+            <a class="btn btn-primary" href="services.html">Services</a>
+            <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
+            <a class="btn btn-ghost" href="contact.html">Contact</a>
+          </div>
+
+          <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
+            <a href="index.html" role="menuitem">Home</a>
+            <a href="blogs.html" role="menuitem">Blogs</a>
+            <a href="services.html" role="menuitem">Services</a>
+            <a href="emi-calculator.html" role="menuitem">EMI Calculator</a>
+            <a href="contact.html" role="menuitem">Contact</a>
+          </div>
+        </nav>
       </div>
     </header>
 
-    <main role="main">
-      <section class="hero" aria-labelledby="welcome">
-        <div class="hero-content">
-          <h2 id="welcome">Welcome to Tech Finserv</h2>
-          <p>
-            We combine modern technology with trusted financial expertise to deliver simple, secure,
-            and transparent financial tools. Use our EMI calculator, explore services, or get in touch —
-            everything is optimized for mobile and desktop.
-          </p>
-          <div class="actions">
-            <a class="btn" href="emi-calculator.html">Try EMI Calculator</a>
-            <a class="btn secondary" href="about.html">Our Services</a>
+    <!-- MAIN -->
+    <main class="page-content" role="main" id="maincontent">
+      <!-- HERO + SPOTLIGHT -->
+      <section class="hero-wrap" aria-label="Welcome">
+        <div class="hero" role="region" aria-label="Intro">
+          <span class="kicker">Built for the modern borrower</span>
+          <h1>Make smarter loan decisions with clear tools & insights</h1>
+          <p>TechFinserv blends easy-to-use calculators with actionable articles and comparison tools — so you can choose the best loan for your needs and save on interest.</p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="emi-calculator.html">Try EMI Calculator</a>
+            <a class="btn btn-ghost" href="services.html">Compare Services</a>
+            <a class="btn btn-ghost" href="blogs.html">Read Guides</a>
+          </div>
+
+          <div style="display:flex; gap:12px; margin-top:10px; align-items:center; flex-wrap:wrap;">
+            <div style="background:linear-gradient(180deg,#eef6ff,#fff);padding:10px 12px;border-radius:10px;display:flex;flex-direction:column;">
+              <small style="color:var(--muted);font-size:12px">Avg savings</small>
+              <strong style="color:var(--accent);font-size:16px">₹ 28,450</strong>
+            </div>
+            <div style="background:linear-gradient(180deg,#fff7ed,#fff);padding:10px 12px;border-radius:10px;display:flex;flex-direction:column;">
+              <small style="color:var(--muted);font-size:12px">Trusted by</small>
+              <strong style="color:var(--accent);font-size:16px">10,000+ users</strong>
+            </div>
           </div>
         </div>
 
-        <aside class="hero-aside" aria-label="Quick links">
-          <div class="card" style="background:var(--card); border-radius:10px;">
-            <div style="padding:18px;">
-              <h3 style="margin:0 0 8px 0; font-size:16px; color:var(--accent);">Quick Tools</h3>
-              <p style="margin:0 0 12px 0; color:var(--muted); font-size:14px;">Calculate EMI, check plans, and view FAQs — all mobile-friendly.</p>
-              <a class="btn" href="emi-calculator.html" style="width:100%; text-align:center;">Open EMI Calculator</a>
-            </div>
+        <aside class="spotlight" role="region" aria-label="Quick tools">
+          <h3>Quick tools</h3>
+          <p>Open practical utilities that help you calculate, compare and plan.</p>
+
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
+            <a class="btn btn-ghost" href="loan-compare.html">Loan Comparison</a>
+            <a class="btn btn-ghost" href="savings-planner.html">Savings Planner</a>
+          </div>
+
+          <div style="margin-top:10px;border-radius:8px;padding:10px;background:linear-gradient(180deg,#f8fafc,#ffffff);box-shadow:inset 0 1px 0 rgba(255,255,255,0.6);">
+            <small style="color:var(--muted);font-size:12px">Need a demo?</small>
+            <div style="margin-top:6px;"><a class="btn btn-primary" href="contact.html">Request Demo</a></div>
           </div>
         </aside>
       </section>
 
-      <!-- more page sections can go here -->
+      <!-- FEATURES -->
+      <section class="features" aria-label="Key features">
+        <div class="feature">
+          <div class="icon">₹</div>
+          <div>
+            <h4>Transparent Calculations</h4>
+            <p>See full amortization schedules, breakdowns and impact of part-payments.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="icon">⚖️</div>
+          <div>
+            <h4>Compare Lenders</h4>
+            <p>Side-by-side comparisons with processing fees and effective rates.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="icon">📚</div>
+          <div>
+            <h4>Actionable Guides</h4>
+            <p>Guides written for borrowers — practical, concise and up-to-date.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES GRID -->
+      <section class="services-grid" aria-label="Services">
+        <div class="service-tile">
+          <h5>EMI & Amortization</h5>
+          <p>Generate schedules, export to Excel/PDF and test prepayment strategies.</p>
+        </div>
+        <div class="service-tile">
+          <h5>Loan Comparison</h5>
+          <p>Compare interest types, tenure, and net cost to find the best match.</p>
+        </div>
+        <div class="service-tile">
+          <h5>Advisory</h5>
+          <p>Speak to our experts for tailored loan planning and product selection.</p>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="testimonials" aria-label="What users say">
+        <div class="testimonial">
+          <p>"The EMI schedule tool helped me understand the true cost of my home loan. Prepayment simulation saved us thousands." </p>
+          <div class="who">— Priya S., Home buyer</div>
+        </div>
+        <div class="testimonial">
+          <p>"Clear, fast and practical. The comparison tool showed me a cheaper offer I hadn't found elsewhere."</p>
+          <div class="who">— Rahul M., Financial planner</div>
+        </div>
+      </section>
+
+      <!-- CTA banner -->
+      <section class="cta-banner" aria-label="Call to action">
+        <div class="left">
+          <h3>Ready to plan smarter?</h3>
+          <p>Get personalized guidance or try our interactive calculators to discover savings.</p>
+        </div>
+        <div class="right">
+          <a class="btn btn-primary" href="contact.html">Get a Demo</a>
+          <a class="btn btn-ghost" href="emi-calculator.html" style="margin-left:10px;">Try Calculator</a>
+        </div>
+      </section>
     </main>
 
-    <footer class="site-footer" role="contentinfo">
+    <!-- FOOTER -->
+    <footer class="site-footer">
       Design and Maintained By Kiran Rathva
     </footer>
   </div>
+
+  <script>
+    // mobile menu toggle (same as EMI page)
+    (function(){
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (!menuToggle) return;
+      menuToggle.addEventListener('click', function(e){
+        e.stopPropagation();
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu.setAttribute('aria-hidden', String(isOpen));
+      });
+      document.addEventListener('click', function(e){
+        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.style.display = 'none';
+          menuToggle.setAttribute('aria-expanded','false');
+          mobileMenu.setAttribute('aria-hidden','true');
+        }
+      });
+      // close on link click
+      if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }));
+      // hide on resize
+      window.addEventListener('resize', ()=>{ if (window.innerWidth > 640 && mobileMenu) { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); } });
+    })();
+  </script>
 </body>
 </html>
