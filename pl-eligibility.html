@@ -25,10 +25,57 @@
     .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;gap:16px;}
     .logo{display:block;max-height:64px;height:auto;width:auto;}
     @media(min-width:1024px){.logo{max-height:80px}}
-    .header-cta{margin-left:auto;display:flex;gap:10px;align-items:center;padding:8px 0;}
-    .btn{padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;font-weight:600;border:0;cursor:pointer;}
-    .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent);}
-    .pdf-btn{background:linear-gradient(180deg,#0b63b7,#084e8f);box-shadow:0 6px 18px rgba(3,66,102,0.12)}
+    .site-nav{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .nav-links{display:flex;gap:8px;align-items:center}
+    .header-cta{margin-left:8px}
+
+    /* Buttons + hover effects */
+    .btn {
+      padding:8px 12px;
+      border-radius:8px;
+      background:var(--accent);
+      color:#fff;
+      font-weight:600;
+      border:0;
+      cursor:pointer;
+      text-decoration: none !important;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .btn:hover {
+      background:#002244;
+      box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    }
+    .btn-ghost {
+      background:transparent;
+      border:1px solid rgba(3,66,102,0.2);
+      color:var(--accent);
+      text-decoration: none !important;
+      transition: background 0.2s ease, border 0.2s ease;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600;
+    }
+    .btn-ghost:hover {
+      background:rgba(3,66,102,0.08);
+      border-color:rgba(3,66,102,0.4);
+    }
+    .pdf-btn {
+      background:linear-gradient(180deg,#0b63b7,#084e8f);
+      box-shadow:0 6px 18px rgba(3,66,102,0.12);
+      text-decoration: none !important;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      padding:8px 12px;
+      border-radius:8px;
+      color:white;
+      font-weight:600;
+    }
+    .pdf-btn:hover {
+      box-shadow:0 8px 22px rgba(3,66,102,0.25);
+      transform: translateY(-1px);
+    }
 
     /* Cards & Inputs */
     .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 10px 30px rgba(12,18,30,0.06)}
@@ -42,12 +89,15 @@
     /* Table */
     .compare-wrap{margin-top:18px}
     .compare{width:100%;border-collapse:collapse;background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 12px 34px rgba(12,18,30,0.07);}
-    .compare th{background:#fff;font-weight:700;color:var(--accent);padding:14px 12px;border-bottom:2px solid var(--line);text-align:center;}
+    .compare thead th{background:#fff;font-weight:700;color:var(--accent);padding:14px 12px;border-bottom:2px solid var(--line);text-align:center;}
     .compare td{padding:12px;border-bottom:1px solid var(--line);text-align:center;font-size:14px;}
     .row-title{text-align:left;font-weight:600;color:#111827;}
     .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;}
     .badge.ok{background:#ecfdf5;color:var(--ok);border:1px solid #bbf7d0;}
     .badge.no{background:#fef2f2;color:var(--no);border:1px solid #fecaca;}
+
+    /* hover highlight for table rows */
+    .compare tbody tr:hover { background: #f5f9ff; }
 
     /* Mobile */
     @media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr);gap:14px}}
@@ -57,6 +107,7 @@
       .mobile-cards{display:grid;gap:16px;margin-top:16px}
       input,select{font-size:15px;padding:12px}
       h1{font-size:18px}
+      .nav-links{display:none}
     }
     @media(max-width:480px){
       body{font-size:14px}
@@ -76,33 +127,42 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="header-inner">
       <a href="index.html"><img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo"></a>
+
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-links" id="navLinks">
+          <a class="btn" href="index.html">Home</a>
+          <a class="btn" href="blogs.html">Blogs</a>
+          <a class="btn" href="services.html">Services</a>
+          <a class="btn" href="emi-calculator.html">EMI Calculator</a>
+          <a class="btn-ghost" href="contact.html">Contact</a>
+        </div>
+      </nav>
+
       <div class="header-cta">
-        <a class="btn" href="index.html" aria-current="page">Home</a>
-        <a class="btn" href="emi-calculator.html">EMI Calculator</a>
-        <button id="downloadPdf" class="btn pdf-btn">Download PDF</button>
+        <button id="downloadPdf" class="pdf-btn">Download PDF</button>
       </div>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" role="main">
     <section class="card" aria-labelledby="title">
       <h1 id="title">Loan Eligibility — Compare Banks</h1>
       <div class="grid" id="inputs">
-        <div><label for="salary">Net Salary (per month)</label><input id="salary" type="number" inputmode="numeric" value="0"></div>
-        <div><label for="oblig">Monthly Obligations / EMIs</label><input id="oblig" type="number" value="0"></div>
-        <div><label for="cc">Total Credit Card Outstanding</label><input id="cc" type="number" value="0"></div>
-        <div><label for="tenure">Tenure (years)</label><input id="tenure" type="number" step="0.5" value="5"></div>
-        <div><label for="rate">Interest Rate (annual %)</label><input id="rate" type="number" step="0.01" value="14.5"></div>
+        <div><label for="salary">Net Salary (per month)</label><input id="salary" type="number" inputmode="numeric" value="50000"></div>
+        <div><label for="oblig">Monthly Obligations / EMIs</label><input id="oblig" type="number" value="8000"></div>
+        <div><label for="cc">Total Credit Card Outstanding</label><input id="cc" type="number" value="20000"></div>
+        <div><label for="tenure">Tenure (years)</label><input id="tenure" type="number" step="0.5" value="20"></div>
+        <div><label for="rate">Interest Rate (annual %)</label><input id="rate" type="number" step="0.01" value="10.5"></div>
         <div><label for="home">Home loan on applicant</label><select id="home"><option value="no">No</option><option value="yes">Yes</option></select></div>
       </div>
       <div class="note">Credit card monthly obligation = 5% of outstanding. Final = lower of FOIR vs Multiplier. Final &lt; 100,000 → Not eligible.</div>
     </section>
 
     <section class="compare-wrap" aria-label="Comparison table">
-      <table class="compare" id="compareTable">
+      <table class="compare" id="compareTable" role="table">
         <thead>
           <tr>
             <th>Metric</th>
@@ -125,35 +185,65 @@
     <section class="mobile-cards" id="mobileCards" style="display:none;"></section>
   </main>
 
-  <footer style="text-align:center;padding:18px;color:var(--muted);font-size:13px">Design and Maintained By Kiran Rathva</footer>
+  <footer style="text-align:center;padding:18px;color:var(--muted);font-size:13px">
+    Design and Maintained By Kiran Rathva
+  </footer>
 
 <script>
+/* Full working JS (auto-calc + PDF) */
+
 (function(){
   const { jsPDF } = window.jspdf;
   const CC_PERCENT = 0.05;
   const ELIGIBILITY_FLOOR = 100000;
 
-  // bank rules
+  // Bank rules (same as you provided)
   const banks = {
-    bajaj: { name:'Bajaj Finance', multiplier:20, bands:[{min:0,max:50000,foir:0.60},{min:50000,max:100000,foir:0.65},{min:100000,max:Infinity,foir:0.70}], specialHomeLoan:{min:50000,max:100000,foir:0.70}},
-    tata:  { name:'Tata Capital', multiplier:25, bands:[{min:0,max:50000,foir:0.60},{min:50000,max:75000,foir:0.65},{min:75000,max:Infinity,foir:0.75}]},
-    hdfc:  { name:'HDFC Bank', multiplier:null, bands:[{min:0,max:50000,foir:0.60},{min:50000,max:70000,foir:0.65},{min:70000,max:Infinity,foir:0.70}], specialHomeLoan:{min:50000,max:70000,foir:0.70}}
+    bajaj: {
+      name: 'Bajaj Finance',
+      multiplier: 20,
+      bands: [
+        {min:0, max:50000, foir:0.60},
+        {min:50000, max:100000, foir:0.65},
+        {min:100000, max:Infinity, foir:0.70}
+      ],
+      specialHomeLoan:{min:50000,max:100000,foir:0.70}
+    },
+    tata: {
+      name: 'Tata Capital',
+      multiplier: 25,
+      bands: [
+        {min:0, max:50000, foir:0.60},
+        {min:50000, max:75000, foir:0.65},
+        {min:75000, max:Infinity, foir:0.75}
+      ]
+    },
+    hdfc: {
+      name: 'HDFC Bank',
+      multiplier: null,
+      bands: [
+        {min:0, max:50000, foir:0.60},
+        {min:50000, max:70000, foir:0.65},
+        {min:70000, max:Infinity, foir:0.70}
+      ],
+      specialHomeLoan:{min:50000,max:70000,foir:0.70}
+    }
   };
 
-  // dom refs
+  // DOM refs
   const salaryEl = document.getElementById('salary');
-  const obligEl   = document.getElementById('oblig');
-  const ccEl      = document.getElementById('cc');
-  const tenureEl  = document.getElementById('tenure');
-  const rateEl    = document.getElementById('rate');
-  const homeEl    = document.getElementById('home');
+  const obligEl  = document.getElementById('oblig');
+  const ccEl     = document.getElementById('cc');
+  const tenureEl = document.getElementById('tenure');
+  const rateEl   = document.getElementById('rate');
+  const homeEl   = document.getElementById('home');
 
   const mobileCardsWrap = document.getElementById('mobileCards');
 
   function fmt(n){ return new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(Math.round(n||0)); }
 
   function pv(rate, nper, pmt){
-    if(nper===0) return 0;
+    if(nper === 0) return 0;
     if(Math.abs(rate) < 1e-12) return pmt * nper;
     return pmt * (1 - Math.pow(1 + rate, -nper)) / rate;
   }
@@ -163,7 +253,7 @@
       const s = bank.specialHomeLoan;
       if(salary >= s.min && salary < s.max) return s.foir;
     }
-    for(const band of bank.bands) if(salary >= band.min && salary < band.max) return band.foir;
+    for(const b of bank.bands) if(salary >= b.min && salary < b.max) return b.foir;
     return bank.bands[bank.bands.length-1].foir;
   }
 
@@ -188,13 +278,13 @@
     const t   = Math.max(0.5, Number(tenureEl.value) || 0.5);
     const r   = Math.max(0, Number(rateEl.value) || 0);
     const home= homeEl.value === 'yes';
+
     const res = {
       bajaj: compute('bajaj', sal, obl, cc, t, r, home),
       tata:  compute('tata',  sal, obl, cc, t, r, home),
       hdfc:  compute('hdfc',  sal, obl, cc, t, r, home)
     };
 
-    // populate desktop cells
     ['bajaj','tata','hdfc'].forEach(k=>{
       document.getElementById(k+'_max').textContent = fmt(res[k].maxEmiAllowed);
       document.getElementById(k+'_foir_pct').textContent = (res[k].foir*100).toFixed(0) + '%';
@@ -211,15 +301,21 @@
   }
 
   function renderMobileCards(res){
-    // show mobile cards only on small screens; JS still prepares content
     mobileCardsWrap.innerHTML = '';
-    const list = [{k:'bajaj',name:'Bajaj',img:'images/bajaj.png'},{k:'tata',name:'Tata',img:'images/tata.png'},{k:'hdfc',name:'HDFC',img:'images/hdfc.png'}];
+    const list = [
+      {k:'bajaj', name:'Bajaj Finance', img:'images/bajaj.png'},
+      {k:'tata',  name:'Tata Capital',  img:'images/tata.png'},
+      {k:'hdfc',  name:'HDFC Bank',    img:'images/hdfc.png'}
+    ];
     list.forEach(b=>{
       const r = res[b.k];
       const card = document.createElement('div');
       card.className = 'bank-card';
       card.innerHTML = `
-        <div class="top"><img src="${b.img}" alt="${b.name}"><h3>${b.name}</h3></div>
+        <div class="top" style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
+          <img src="${b.img}" alt="${b.name}" style="width:36px;height:36px;object-fit:contain">
+          <h3 style="margin:0;font-size:16px;color:var(--accent)">${b.name}</h3>
+        </div>
         <div class="kv"><span>Max EMI Allowed</span><strong>${fmt(r.maxEmiAllowed)}</strong></div>
         <div class="kv"><span>FOIR %</span><strong>${(r.foir*100).toFixed(0)}%</strong></div>
         <div class="kv"><span>Eligibility (FOIR)</span><strong>${fmt(r.eligByFoir)}</strong></div>
@@ -229,7 +325,7 @@
       `;
       mobileCardsWrap.appendChild(card);
     });
-    // show/hide container based on viewport
+
     if (window.innerWidth <= 768) {
       mobileCardsWrap.style.display = 'grid';
     } else {
@@ -237,56 +333,30 @@
     }
   }
 
-  // wire events
-  document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input', debounce(render,120)));
-  window.addEventListener('resize', () => { renderMobileCards(render().res); });
+  // wire events: auto-calc on input
+  document.querySelectorAll('input,select').forEach(el => el.addEventListener('input', debounce(render, 120)));
+  window.addEventListener('resize', () => renderMobileCards(render().res));
   render();
 
-  // utility: debounce
+  // debounce
   function debounce(fn, ms){ let t; return function(){ clearTimeout(t); t=setTimeout(()=>fn.apply(this,arguments), ms);} }
 
-  // convert image element to dataURL (best-effort, handles CORS gracefully)
-  function imgToDataURL(imgSrc, maxSize=120){
-    return new Promise(resolve=>{
-      if(!imgSrc) return resolve(null);
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = function(){
-        try {
-          const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
-          const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
-          const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
-          const ctx = canvas.getContext('2d'); ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h); ctx.drawImage(img,0,0,w,h);
-          resolve(canvas.toDataURL('image/png'));
-        } catch(e){ resolve(null); }
-      };
-      img.onerror = function(){ resolve(null); };
-      img.src = imgSrc;
-      if(img.complete) img.onload();
-    });
-  }
-
-  // preload logos (best-effort) so PDF can embed them
-  let logoB=null, logoT=null, logoH=null;
-  (async function preload(){
-    logoB = await imgToDataURL('images/bajaj.png'); logoT = await imgToDataURL('images/tata.png'); logoH = await imgToDataURL('images/hdfc.png');
-    window.logoB = logoB; window.logoT = logoT; window.logoH = logoH;
-  })();
-
-  // PDF export (modern layout with colored verdict chips)
-  document.getElementById('downloadPdf').addEventListener('click', async function(){
+  // PDF export - modern UI; does NOT embed bank logos per your request
+  document.getElementById('downloadPdf').addEventListener('click', function(){
     const { inputs, res } = render();
     const doc = new jsPDF({ unit:'pt', format:'a4' });
-    const pageW = doc.internal.pageSize.getWidth(), margin = 36;
+    const pageW = doc.internal.pageSize.getWidth();
+    const margin = 36;
     let y = margin;
 
-    // header band
+    // Header
     doc.setFillColor(0,51,102); doc.rect(0,0,pageW,64,'F');
     doc.setFontSize(16); doc.setTextColor(255,255,255); doc.text('Loan Eligibility Comparison', margin, 42);
     doc.setFontSize(9); doc.setTextColor(220,220,220); doc.text(`Generated: ${new Date().toLocaleString()}`, pageW - margin, 42, { align: 'right' });
 
     y = 92;
-    // inputs cards (two-column)
+
+    // Inputs cards (two columns)
     const colGap = 12;
     const colW = (pageW - margin*2 - colGap)/2;
     const cardH = 52;
@@ -313,12 +383,12 @@
     drawInputBox(rightX, y, 'Home loan on applicant', inputs.home ? 'Yes' : 'No');
     y += cardH + 22;
 
-    // comparison title
+    // Comparison title
     doc.setFillColor(250,250,255); doc.roundedRect(margin, y-8, pageW - margin*2, 28, 6,6,'F');
     doc.setFontSize(12); doc.setTextColor(20); doc.text('Comparison — Eligibility per Bank', margin + 8, y - 0);
     y += 20;
 
-    // table data
+    // Table (no logos)
     const head = [['Metric','Bajaj','Tata','HDFC']];
     const body = [
       ['Max EMI Allowed', fmt(res.bajaj.maxEmiAllowed), fmt(res.tata.maxEmiAllowed), fmt(res.hdfc.maxEmiAllowed)],
@@ -338,17 +408,6 @@
       headStyles: { fillColor:[3,51,102], textColor:255, fontStyle:'bold' },
       columnStyles: { 0: { halign:'left', cellWidth:160 } },
       didDrawCell: function(data){
-        // header logos (best-effort)
-        if(data.section==='head' && data.row.index===0 && data.column.index>0){
-          const logos = [null, window.logoB, window.logoT, window.logoH];
-          const logo = logos[data.column.index];
-          if(logo){
-            const imgW = 30, imgH = 30;
-            const x = data.cell.x + (data.cell.width - imgW)/2;
-            const yImg = data.cell.y + (data.cell.height - imgH)/2;
-            try{ doc.addImage(logo, 'PNG', x, yImg, imgW, imgH); }catch(e){}
-          }
-        }
         // style verdict row with colored chips (green/red)
         if(data.section==='body' && data.row.index===5 && data.column.index>0){
           const txt = data.cell.text.join('');
