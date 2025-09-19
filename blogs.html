@@ -1,0 +1,27 @@
+/* --- copy/paste into <style> in head --- */
+/* Header styles (keeps appearance similar to homepage) */
+header.site-header {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+  padding: 0 16px;
+  position: relative;
+  z-index: 9999; /* ensure header sits above overlays */
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+.logo-link { display:inline-block; line-height:0; }
+.logo { display:block; height:auto; width:auto; max-height:64px; }
+/* adjust desktop logo size (change 140px to what you want) */
+@media (min-width:1024px){
+  .logo { max-height:140px; }
+}
+/* right-side CTA area */
+.header-ctas { margin-left:auto; display:flex; gap:10px; align-items:center; }
+.btn { display:inline-block; padding:8px 12px; border-radius:8px; font-weight:600; text-decoration:none; color:#fff; background:#003366; }
+.btn.secondary { background:transparent; border:1px solid rgba(3,66,102,0.08); color:#003366; }
