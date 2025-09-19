@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Loan Eligibility Comparison - TechFinserv</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --accent:#003366;
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --max-width:1150px;
+      --radius:10px;
+      --ok:#047857;
+      --danger:#b91c1c;
+    }
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max-width);margin:20px auto;padding:0 16px}
+
+    /* Header (kept visually like your site) */
+    header.site-header{background:var(--card);box-shadow:0 2px 6px rgba(15,23,42,0.06);padding:6px 16px;position:relative;z-index:9999}
+    .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;gap:16px}
+    .logo-link{display:inline-block;line-height:0}
+    .logo{display:block;max-height:64px}
+    @media(min-width:1024px){.logo{max-height:80px}}
+    .nav-links{margin-left:auto;display:flex;gap:8px;align-items:center}
+    .btn{padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer;font-weight:600}
+    .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
+
+    /* card & form layout */
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 30px rgba(12,18,30,0.05)}
+    h1{margin:0 0 8px 0;color:var(--accent);font-size:20px}
+    .muted{color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    label{display:block;margin-bottom:6px;font-size:13px}
+    input,select{width:100%;padding:8px 10px;border-radius:8px;border:1px solid #e6e8eb;font-size:14px;box-sizing:border-box}
+    .actions{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+
+    /* comparison table */
+    .compare-wrap{margin-top:18px;overflow:auto}
+    table.compare{width:100%;border-collapse:collapse;background:transparent}
+    table.compare thead th{background:#fff;border-bottom:2px solid #eef2f7;padding:12px;text-align:left;color:var(--accent)}
+    table.compare td, table.compare th{padding:12px;border-bottom:1px solid #f1f5f9}
+    table.compare td.center{text-align:center}
+    .small{font-size:13px;color:#111827}
+    .muted-sm{font-size:13px;color:var(--muted)}
+
+    @media(max-width:980px){
+      .grid{grid-template-columns:1fr}
+      table.compare thead{display:none}
+      table.compare, table.compare tbody, table.compare tr, table.compare td{display:block;width:100%}
+      table.compare tr{margin-bottom:12px;border:1px solid #f1f5f9;border-radius:8px;padding:12px}
+      table.compare td{border:none;padding:8px;}
+      table.compare td .row-title{font-weight:700;color:var(--muted);display:block;margin-bottom:6px}
+    }
+
+    .ok{color:var(--ok);font-weight:700}
+    .no{color:var(--danger);font-weight:700}
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
+        <img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo">
+      </a>
+      <nav class="nav-links" role="navigation" aria-label="Main">
+        <a class="btn-ghost" href="index.html">Home</a>
+        <a class="btn-ghost" href="blogs.html">Blogs</a>
+        <a class="btn" href="emi-calculator.html">EMI Calculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section class="card" aria-labelledby="title">
+      <h1 id="title">Loan Eligibility — Compare Banks</h1>
+      <p class="muted">Enter your details below. Credit card monthly obligation is calculated as <strong>5% of outstanding</strong>. Results below will show a side-by-side comparison: Max EMI Allowed, Eligibility (FOIR), Eligibility (Multiplier), and Final Eligibility (the lower of FOIR & Multiplier).</p>
+
+      <form id="form" onsubmit="return false;">
+        <div class="grid">
+          <div>
+            <label for="salary">Net Salary (per month) — ₹</label>
+            <input id="salary" type="number" min="0" value="50000" />
+          </div>
+          <div>
+            <label for="oblig">Monthly Obligations / EMIs — ₹</label>
+            <input id="oblig" type="number" min="0" value="8000" />
+          </div>
+          <div>
+            <label for="cc">Total Credit Card Outstanding — ₹</label>
+            <input id="cc" type="number" min="0" value="20000" />
+          </div>
+          <div>
+            <label for="tenure">Tenure (years)</label>
+            <input id="tenure" type="number" min="1" step="0.5" value="20" />
+          </div>
+          <div>
+            <label for="rate">Interest rate (annual %)</label>
+            <input id="rate" type="number" step="0.01" min="0" value="10.5" />
+          </div>
+          <div>
+            <label for="home">Home loan on applicant</label>
+            <select id="home">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="compute" class="btn">Compute</button>
+          <button id="reset" type="button" class="btn-ghost">Reset</button>
+          <div style="margin-left:auto" class="muted-sm">CC monthly = <strong>5%</strong> of CC outstanding</div>
+        </div>
+      </form>
+    </section>
+
+    <section class="card compare-section" id="results" style="display:none">
+      <h2 style="margin:0 0 12px 0; color:var(--accent)">Comparison — Results</h2>
+
+      <div class="compare-wrap">
+        <table class="compare" aria-describedby="compare-desc">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th class="center">Bajaj Finance Limited</th>
+              <th class="center">Tata Capital Limited</th>
+              <th class="center">HDFC Bank</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="small">Max EMI Allowed</td>
+              <td id="bajaj_max" class="center"></td>
+              <td id="tata_max" class="center"></td>
+              <td id="hdfc_max" class="center"></td>
+            </tr>
+
+            <tr>
+              <td class="small">Eligibility As Per FOIR</td>
+              <td id="bajaj_foir" class="center"></td>
+              <td id="tata_foir" class="center"></td>
+              <td id="hdfc_foir" class="center"></td>
+            </tr>
+
+            <tr>
+              <td class="small">Eligibility As Per Multiplier</td>
+              <td id="bajaj_mul" class="center"></td>
+              <td id="tata_mul" class="center"></td>
+              <td id="hdfc_mul" class="center"></td>
+            </tr>
+
+            <tr>
+              <td class="small">Final Eligibility (lower of FOIR & Multiplier)</td>
+              <td id="bajaj_final" class="center"></td>
+              <td id="tata_final" class="center"></td>
+              <td id="hdfc_final" class="center"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:12px" class="muted-sm">Notes: If a bank's Multiplier is unavailable (N/A) the final eligibility uses the FOIR-derived eligibility. All figures are indicative—banks may apply additional checks.</div>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:18px 0;color:var(--muted);font-size:13px">Design and Maintained By Kiran Rathva</footer>
+
+<script>
+(function(){
+  // helpers
+  function pv(ratePerPeriod, nper, pmt) {
+    if (nper === 0) return 0;
+    if (Math.abs(ratePerPeriod) < 1e-12) return pmt * nper;
+    return pmt * (1 - Math.pow(1 + ratePerPeriod, -nper)) / ratePerPeriod;
+  }
+  function fmt(n) {
+    return '₹ ' + new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(n || 0));
+  }
+
+  // banks (rules as confirmed)
+  const banks = {
+    bajaj: {
+      name: 'Bajaj Finance Limited',
+      multiplier: 20,
+      bands: [
+        { min: 0, max: 50000, foir: 0.60 },
+        { min: 50000, max: 100000, foir: 0.65 },
+        { min: 100000, max: Infinity, foir: 0.70 }
+      ],
+      specialHomeLoan: { min: 50000, max: 100000, foir: 0.70 }
+    },
+    tata: {
+      name: 'Tata Capital Limited',
+      multiplier: 25,
+      bands: [
+        { min:0, max:50000, foir:0.60 },
+        { min:50000, max:75000, foir:0.65 },
+        { min:75000, max:Infinity, foir:0.75 }
+      ]
+    },
+    hdfc: {
+      name: 'HDFC Bank',
+      multiplier: null, // NA
+      bands: [
+        { min:0, max:50000, foir:0.60 },
+        { min:50000, max:70000, foir:0.65 },
+        { min:70000, max:Infinity, foir:0.70 }
+      ],
+      specialHomeLoan: { min:50000, max:70000, foir:0.70 }
+    }
+  };
+
+  const CC_PERCENT = 0.05; // 5% monthly from outstanding
+
+  // DOM
+  const salaryEl = document.getElementById('salary');
+  const obligEl = document.getElementById('oblig');
+  const ccEl = document.getElementById('cc');
+  const tenureEl = document.getElementById('tenure');
+  const rateEl = document.getElementById('rate');
+  const homeEl = document.getElementById('home');
+
+  const computeBtn = document.getElementById('compute');
+  const resetBtn = document.getElementById('reset');
+  const resultsSection = document.getElementById('results');
+
+  const output = {
+    bajaj_max: document.getElementById('bajaj_max'),
+    bajaj_foir: document.getElementById('bajaj_foir'),
+    bajaj_mul: document.getElementById('bajaj_mul'),
+    bajaj_final: document.getElementById('bajaj_final'),
+
+    tata_max: document.getElementById('tata_max'),
+    tata_foir: document.getElementById('tata_foir'),
+    tata_mul: document.getElementById('tata_mul'),
+    tata_final: document.getElementById('tata_final'),
+
+    hdfc_max: document.getElementById('hdfc_max'),
+    hdfc_foir: document.getElementById('hdfc_foir'),
+    hdfc_mul: document.getElementById('hdfc_mul'),
+    hdfc_final: document.getElementById('hdfc_final')
+  };
+
+  function getFoir(bank, salary, hasHomeLoan) {
+    // special-home-loan override first
+    if (bank.specialHomeLoan && hasHomeLoan) {
+      const s = bank.specialHomeLoan;
+      if (salary >= s.min && salary < s.max) return s.foir;
+    }
+    for (const band of bank.bands) {
+      if (salary >= band.min && salary < band.max) return band.foir;
+    }
+    return bank.bands[bank.bands.length - 1].foir;
+  }
+
+  function computeForBank(bankKey, salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan) {
+    const bank = banks[bankKey];
+    const foir = getFoir(bank, salary, hasHomeLoan);
+    const ccMonthly = ccOutstanding * CC_PERCENT;
+    const maxEmiAllowed = Math.max(0, (salary * foir) - obligations - ccMonthly);
+
+    const months = Math.max(1, Math.round(tenureYears * 12));
+    const monthlyRate = Math.max(0, annualRate / 12 / 100);
+
+    const eligByFoir = Math.max(0, Math.round(pv(monthlyRate, months, maxEmiAllowed)));
+    const eligByMultiplier = (bank.multiplier ? Math.round(salary * bank.multiplier) : null);
+    let finalElig;
+    if (eligByMultiplier === null) finalElig = eligByFoir;
+    else finalElig = Math.min(eligByFoir, eligByMultiplier);
+
+    return {
+      foir,
+      ccMonthly,
+      maxEmiAllowed,
+      eligByFoir,
+      eligByMultiplier,
+      finalElig
+    };
+  }
+
+  function renderResults(results) {
+    // Bajaj
+    output.bajaj_max.textContent = fmt(results.bajaj.maxEmiAllowed);
+    output.bajaj_foir.textContent = fmt(results.bajaj.eligByFoir);
+    output.bajaj_mul.textContent = results.bajaj.eligByMultiplier ? fmt(results.bajaj.eligByMultiplier) : 'N/A';
+    output.bajaj_final.textContent = fmt(results.bajaj.finalElig);
+
+    // Tata
+    output.tata_max.textContent = fmt(results.tata.maxEmiAllowed);
+    output.tata_foir.textContent = fmt(results.tata.eligByFoir);
+    output.tata_mul.textContent = results.tata.eligByMultiplier ? fmt(results.tata.eligByMultiplier) : 'N/A';
+    output.tata_final.textContent = fmt(results.tata.finalElig);
+
+    // HDFC
+    output.hdfc_max.textContent = fmt(results.hdfc.maxEmiAllowed);
+    output.hdfc_foir.textContent = fmt(results.hdfc.eligByFoir);
+    output.hdfc_mul.textContent = results.hdfc.eligByMultiplier ? fmt(results.hdfc.eligByMultiplier) : 'N/A';
+    output.hdfc_final.textContent = fmt(results.hdfc.finalElig);
+  }
+
+  computeBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    const salary = Math.max(0, Number(salaryEl.value) || 0);
+    const obligations = Math.max(0, Number(obligEl.value) || 0);
+    const ccOutstanding = Math.max(0, Number(ccEl.value) || 0);
+    const tenureYears = Math.max(0.5, Number(tenureEl.value) || 0.5);
+    const annualRate = Math.max(0, Number(rateEl.value) || 0);
+    const hasHomeLoan = (homeEl.value === 'yes');
+
+    // compute per bank
+    const rBajaj = computeForBank('bajaj', salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan);
+    const rTata  = computeForBank('tata',  salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan);
+    const rHdfc  = computeForBank('hdfc',  salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan);
+
+    renderResults({ bajaj: rBajaj, tata: rTata, hdfc: rHdfc });
+
+    resultsSection.style.display = 'block';
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  resetBtn.addEventListener('click', function(){
+    salaryEl.value = 50000;
+    obligEl.value = 8000;
+    ccEl.value = 20000;
+    tenureEl.value = 20;
+    rateEl.value = 10.5;
+    homeEl.value = 'no';
+    document.getElementById('results').style.display = 'none';
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+})();
+</script>
+</body>
+</html>
