@@ -1,106 +1,197 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>Tech Finserv</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
+    :root{
+      --accent:#003366;
+      --bg:#f7f8fa;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --max-width:1100px;
     }
 
-    header {
-      text-align: center;
-      padding: 20px;
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    header img {
-      max-height: 200px;
-      display: block;
-      margin: 0 auto 40px auto;
+    /* Layout wrapper to keep footer at bottom */
+    .page {
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
     }
 
-    header h1 {
-      font-size: 1px;
-      margin: 0;
-      color: #003366;
+    /* Header: logo top-left */
+    header.site-header{
+      background:var(--card);
+      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+      padding:10px 16px;
+      position:relative;
+    }
+    .header-inner{
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:16px;
     }
 
-    header p {
-      font-size: 16px;
-      margin: 5px 0 0;
-      color: #555;
-      font-style: italic;
+    /* Logo styling (responsive) */
+    .logo-link{
+      display:inline-block;
+      line-height:0;
+    }
+    .logo {
+      display:block;
+      width:auto;
+      height:auto;
+      /* default safe size for mobile */
+      max-height:64px;
     }
 
-    main {
-      padding: 40px 20px;
-      text-align: center;
+    /* Primary content area */
+    main{
+      flex:1 0 auto;
+      max-width:var(--max-width);
+      margin:20px auto;
+      padding:20px;
+      width:calc(100% - 32px);
     }
 
-    main h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      color: #003366;
+    /* A simple card area */
+    .hero {
+      background:var(--card);
+      border-radius:12px;
+      padding:18px;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.04);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .hero h2{
+      margin:0;
+      font-size:20px;
+      color:var(--accent);
+    }
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+    .actions{
+      margin-top:12px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-block;
+      padding:10px 16px;
+      background:var(--accent);
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:600;
+      font-size:14px;
+      box-shadow: 0 6px 14px rgba(0,85,170,0.08);
+    }
+    .secondary{
+      background:transparent;
+      border:1px solid rgba(3,66,102,0.08);
+      color:var(--accent);
     }
 
-    main p {
-      font-size: 16px;
-      max-width: 700px;
-      margin: 0 auto 20px;
-      line-height: 1.6;
+    /* Footer pinned at bottom */
+    footer.site-footer{
+      background:transparent;
+      padding:18px 12px;
+      color:var(--muted);
+      text-align:center;
+      font-size:13px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #003366;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background 0.3s;
+    /* Responsive layout: larger screens */
+    @media (min-width:640px){
+      .logo { max-height:80px; }
+      .hero{ padding:28px; }
+      .hero h2{ font-size:24px; }
+      .hero p{ font-size:16px; }
     }
 
-    .btn:hover {
-      background: #0055aa;
+    @media (min-width:1024px){
+      .logo { max-height:120px; }
+      .header-inner { padding:4px 0; }
+      main{ padding:32px; }
+      .hero{ display:grid; grid-template-columns: 1fr 360px; column-gap:24px; align-items:center; }
+      .hero-content{ order:1; }
+      .hero-aside{ order:2; }
+      .hero-aside .card{ padding:20px; }
     }
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #f1f1f1;
-      margin-top: 40px;
-      font-size: 14px;
-      color: #777;
-    }
+    /* Make image never overflow */
+    img { max-width:100%; height:auto; display:block; }
   </style>
 </head>
 <body>
-  <header>
-    <a href="index.html">
-      <img src="images/techfinserv-logo.png" alt="Tech Finserv Logo">
-    </a>
-    <h1></h1>
-    <p></p>
-  </header>
+  <div class="page">
+    <header class="site-header" role="banner">
+      <div class="header-inner">
+        <!-- clickable logo linking to home -->
+        <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
+          <img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo">
+        </a>
 
-  <main>
-    <h2>Welcome to Tech Finserv</h2>
-    <p>
-      At Tech Finserv, we combine technology with financial expertise to help you grow with confidence. 
-      Explore our solutions designed to make finance simpler, smarter, and more secure for everyone.
-    </p>
-    <a href="emi-calculator.html" class="btn">Try Our EMI Calculator</a>
-  </main>
+        <!-- optional right-side space for nav or button (kept simple) -->
+        <div style="margin-left:auto; display:flex; gap:10px; align-items:center;">
+          <!-- example small nav / CTA -->
+          <a class="btn secondary" href="contact.html" style="padding:8px 12px; font-size:13px;">Contact</a>
+          <a class="btn" href="emi-calculator.html" style="padding:8px 12px; font-size:13px;">EMI Calculator</a>
+        </div>
+      </div>
+    </header>
 
-  <footer>
-    Made With ❤️ Design And Maintained By Kiran Rathva
-  </footer>
+    <main role="main">
+      <section class="hero" aria-labelledby="welcome">
+        <div class="hero-content">
+          <h2 id="welcome">Welcome to Tech Finserv</h2>
+          <p>
+            We combine modern technology with trusted financial expertise to deliver simple, secure,
+            and transparent financial tools. Use our EMI calculator, explore services, or get in touch —
+            everything is optimized for mobile and desktop.
+          </p>
+          <div class="actions">
+            <a class="btn" href="emi-calculator.html">Try EMI Calculator</a>
+            <a class="btn secondary" href="about.html">Our Services</a>
+          </div>
+        </div>
+
+        <aside class="hero-aside" aria-label="Quick links">
+          <div class="card" style="background:var(--card); border-radius:10px;">
+            <div style="padding:18px;">
+              <h3 style="margin:0 0 8px 0; font-size:16px; color:var(--accent);">Quick Tools</h3>
+              <p style="margin:0 0 12px 0; color:var(--muted); font-size:14px;">Calculate EMI, check plans, and view FAQs — all mobile-friendly.</p>
+              <a class="btn" href="emi-calculator.html" style="width:100%; text-align:center;">Open EMI Calculator</a>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- more page sections can go here -->
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      Design and Maintained By Kiran Rathva
+    </footer>
+  </div>
 </body>
 </html>
