@@ -124,14 +124,19 @@
     h1 { margin:0 0 12px 0; font-size:20px; }
 
     .grid { display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-bottom:12px; }
+    /* Fix: allow grid children to shrink properly to avoid merging */
+    .grid > div { min-width: 0; }
+
     label{ font-size:13px; color:#333; display:block; margin-bottom:6px; }
-    input, select { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:6px; font-size:14px; }
+    input, select { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:6px; font-size:14px; box-sizing: border-box; }
     .small { font-size:13px; color:#666; }
     .btn-indigo{ background:#4f46e5; color:white; }
     .btn-green{ background:#16a34a; color:white; }
     .btn-red{ background:#ef4444; color:white; }
     .btn-gray{ background:#6b7280; color:white; }
     .row { display:flex; gap:8px; align-items:center; }
+    /* Fix: make inputs inside .row flexible and prevent overflow */
+    .row input { flex: 1 1 auto; min-width: 0; }
     .payments { margin:12px 0; }
     table { width:100%; border-collapse:collapse; font-size:13px; }
     th, td { padding:8px 6px; border-bottom:1px solid #eee; text-align:right; }
@@ -632,4 +637,3 @@
 </script>
 </body>
 </html>
-
