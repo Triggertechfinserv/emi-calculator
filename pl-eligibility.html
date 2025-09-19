@@ -80,11 +80,8 @@
     <div class="header-inner">
       <a href="index.html"><img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo"></a>
       <div class="header-cta">
-        <a class="btn btn-primary" href="index.html" aria-current="page">Home</a>
-        <a class="btn btn-primary" href="blogs.html">Blogs</a>
-        <a class="btn btn-primary" href="services.html">Services</a>
-        <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
-        <a class="btn btn-ghost" href="contact.html">Contact</a>
+        <a class="btn" href="index.html" aria-current="page">Home</a>
+        <a class="btn" href="emi-calculator.html">EMI Calculator</a>
         <button id="downloadPdf" class="btn pdf-btn">Download PDF</button>
       </div>
     </div>
@@ -94,11 +91,11 @@
     <section class="card" aria-labelledby="title">
       <h1 id="title">Loan Eligibility — Compare Banks</h1>
       <div class="grid" id="inputs">
-        <div><label for="salary">Net Salary (per month)</label><input id="salary" type="number" inputmode="numeric" value="50000"></div>
-        <div><label for="oblig">Monthly Obligations / EMIs</label><input id="oblig" type="number" value="8000"></div>
-        <div><label for="cc">Total Credit Card Outstanding</label><input id="cc" type="number" value="20000"></div>
-        <div><label for="tenure">Tenure (years)</label><input id="tenure" type="number" step="0.5" value="20"></div>
-        <div><label for="rate">Interest Rate (annual %)</label><input id="rate" type="number" step="0.01" value="10.5"></div>
+        <div><label for="salary">Net Salary (per month)</label><input id="salary" type="number" inputmode="numeric" value="0"></div>
+        <div><label for="oblig">Monthly Obligations / EMIs</label><input id="oblig" type="number" value="0"></div>
+        <div><label for="cc">Total Credit Card Outstanding</label><input id="cc" type="number" value="0"></div>
+        <div><label for="tenure">Tenure (years)</label><input id="tenure" type="number" step="0.5" value="5"></div>
+        <div><label for="rate">Interest Rate (annual %)</label><input id="rate" type="number" step="0.01" value="14.5"></div>
         <div><label for="home">Home loan on applicant</label><select id="home"><option value="no">No</option><option value="yes">Yes</option></select></div>
       </div>
       <div class="note">Credit card monthly obligation = 5% of outstanding. Final = lower of FOIR vs Multiplier. Final &lt; 100,000 → Not eligible.</div>
