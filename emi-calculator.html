@@ -2,17 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>EMI Calculator-TechFinserv</title>
+  <title>EMI Calculator - TechFinserv</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="EMI calculator with part-payment options from TechFinserv — compute EMI, reduce tenure or EMI, export schedule to Excel/PDF." />
   <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f6f7fb; margin:0; padding:20px; }
-    .container { max-width:1150px; margin:0 auto; background:white; border-radius:10px; padding:18px; box-shadow:0 6px 24px rgba(8,15,35,0.08); }
+    :root {
+      --accent: #003366;
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --max-width: 1150px;
+    }
+
+    /* page basics */
+    html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:#111827; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    a { color:inherit; text-decoration:none; }
+
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      z-index: 99999;
+    }
+    .skip-link:focus {
+      left: 8px;
+      top: 8px;
+      width: auto;
+      height: auto;
+      padding: 8px 12px;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    /* Header */
+    header.site-header {
+      background: var(--card);
+      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+      padding: 6px 16px;
+      position: relative;
+      z-index: 9999; /* keeps header above overlays */
+    }
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .logo-link { display:inline-block; line-height:0; }
+    .logo { display:block; width:auto; height:auto; max-height:64px; }
+
+    /* Desktop logo bump */
+    @media (min-width:1024px) {
+      .logo { max-height:140px; } /* change this if you want bigger/smaller on desktop */
+    }
+
+    /* navigation / buttons */
+    nav.site-nav { margin-left:auto; display:flex; align-items:center; gap:10px; }
+    .nav-links { display:flex; gap:8px; align-items:center; }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:13px;
+      cursor:pointer;
+      border:0;
+    }
+    .btn-primary { background:var(--accent); color:#fff; }
+    .btn-ghost { background:transparent; border:1px solid rgba(3,66,102,0.08); color:var(--accent); }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display:none;
+      background:transparent;
+      border:0;
+      padding:8px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+    .mobile-menu {
+      display:none;
+      position:absolute;
+      right:16px;
+      top:100%;
+      background:var(--card);
+      box-shadow: 0 8px 30px rgba(15,23,42,0.12);
+      border-radius:8px;
+      overflow:hidden;
+      margin-top:8px;
+      min-width:160px;
+    }
+    .mobile-menu a {
+      display:block;
+      padding:10px 12px;
+      border-bottom:1px solid #f1f5f9;
+      color:var(--accent);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* Container for content (keeps same look) */
+    .page-content { max-width: var(--max-width); margin:20px auto; padding:0 16px; }
+
+    /* EMI container (kept from original) */
+    body .container {
+      max-width:1150px;
+      margin:0 auto;
+      background:var(--card);
+      border-radius:10px;
+      padding:18px;
+      box-shadow:0 6px 24px rgba(8,15,35,0.08);
+    }
+
     h1 { margin:0 0 12px 0; font-size:20px; }
+
     .grid { display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-bottom:12px; }
     label{ font-size:13px; color:#333; display:block; margin-bottom:6px; }
     input, select { width:100%; padding:8px 10px; border:1px solid #ddd; border-radius:6px; font-size:14px; }
     .small { font-size:13px; color:#666; }
-    .btn { padding:8px 12px; border-radius:8px; border:0; cursor:pointer; font-weight:600; }
     .btn-indigo{ background:#4f46e5; color:white; }
     .btn-green{ background:#16a34a; color:white; }
     .btn-red{ background:#ef4444; color:white; }
@@ -29,178 +143,202 @@
     .small-muted{ font-size:12px; color:#777; }
     .footer-note{ font-size:12px; color:#666; margin-top:12px; }
 
-    /* desktop -> tablet responsiveness */
+    /* responsive tweaks */
     @media (max-width: 1024px) {
       .container { padding:14px; }
     }
-
-    /* --- Mobile Responsiveness --- */
     @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr; /* stack inputs */
-      }
-
-      .summary {
-        grid-template-columns: 1fr 1fr; /* 2 cards per row */
-      }
-
-      .row {
-        flex-direction: column; /* stack part-payment inputs */
-        align-items: stretch;
-      }
-
-      .container {
-        padding: 12px;
-      }
-
-      table {
-        font-size: 12px;
-      }
-
-      .table-wrapper {
-        overflow-x: auto;
-      }
+      .grid { grid-template-columns:1fr; }
+      .summary { grid-template-columns:1fr 1fr; }
+      .row { flex-direction:column; align-items:stretch; }
+      .container { padding:12px; }
+      table { font-size:12px; }
+      .table-wrapper { overflow-x:auto; }
     }
 
-    /* --- Mobile friendly table -> convert rows to cards --- */
+    /* Mobile menu behavior */
+    @media (max-width: 640px) {
+      .nav-links { display:none; }
+      .menu-toggle { display:inline-flex; }
+      .mobile-menu { right:8px; left:auto; }
+    }
+
+    /* Mobile table -> cards */
     @media (max-width: 600px) {
       table thead { display: none; }
       table, tbody, tr, td { display: block; width: 100%; }
-      tbody { padding: 0; }
-      tr {
-        border: 1px solid #eee;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        padding: 10px;
-        background: white;
-      }
-      td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 0;
-        border: none;
-        text-align: left;
-        font-size: 13px;
-      }
-      td[data-label]:before {
-        content: attr(data-label) ":";
-        font-weight: 600;
-        margin-right: 10px;
-        color: #444;
-        width: 34%;
-        max-width: 140px;
-      }
-      td .value {
-        width: 66%;
-        text-align: right;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+      tr { border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; padding: 10px; background: white; }
+      td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border: none; text-align: left; font-size: 13px; }
+      td[data-label]:before { content: attr(data-label) ":"; font-weight: 600; margin-right: 10px; color: #444; width: 34%; max-width: 140px; }
+      td .value { width: 66%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     }
+
+    /* small utilities */
+    .muted { color:var(--muted); font-size:13px; }
+    .hidden { display:none !important; }
   </style>
 
-  <!-- SheetJS (xlsx) -->
+  <!-- Third-party libs used by your calculator (kept as in original) -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-  <!-- FileSaver -->
   <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
-  <!-- jsPDF (UMD build) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <!-- jsPDF AutoTable -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>EMI Calculator with Part-Payment  -TechFinServ</h1>
+  <a class="skip-link" href="#maincontent">Skip to content</a>
 
-    <div class="grid" style="margin-bottom:10px;">
-      <div>
-        <label>Loan Amount (Principal)</label>
-        <input id="loan" type="number" min="1" value="500000" />
-      </div>
-      <div>
-        <label>Annual Interest Rate (%)</label>
-        <input id="rate" type="number" step="0.01" min="0" value="11.0" />
-      </div>
-      <div>
-        <label>Tenure (Years)</label>
-        <input id="years" type="number" step="0.25" min="0.1" value="5" />
-      </div>
+  <!-- Header (copy of homepage header, responsive) -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
+        <img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo">
+      </a>
+
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-links" id="navLinks">
+          <a class="btn btn-ghost" href="index.html">Home</a>
+          <a class="btn btn-ghost" href="blogs.html">Blogs</a>
+          <a class="btn btn-ghost" href="contact.html">Contact</a>
+          <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
+        </div>
+
+        <!-- mobile toggle -->
+        <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">
+          <!-- simple hamburger icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
+          <a href="index.html" role="menuitem">Home</a>
+          <a href="blogs.html" role="menuitem">Blogs</a>
+          <a href="contact.html" role="menuitem">Contact</a>
+          <a href="emi-calculator.html" role="menuitem">EMI Calculator</a>
+        </div>
+      </nav>
     </div>
+  </header>
 
-    <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
-      <div style="width:240px;">
-        <label>Mode</label>
-        <select id="mode">
-          <option value="tenure">Reduce Tenure (EMI fixed)</option>
-          <option value="emi">Reduce EMI (Tenure fixed)</option>
-        </select>
-      </div>
+  <!-- Page content -->
+  <main id="maincontent" class="page-content" role="main">
+    <div class="container" role="region" aria-label="EMI Calculator">
+      <h1>EMI Calculator with Part-Payment - TechFinserv</h1>
 
-      <div style="flex:1;">
-        <label>Add Part Payment (Month & Amount)</label>
-        <div class="row">
-          <input id="ppMonth" type="number" min="1" placeholder="Month (e.g. 12)" style="width:140px" />
-          <input id="ppAmount" type="number" min="0" placeholder="Amount (e.g. 100000)" />
-          <button id="addPp" class="btn btn-indigo">Add</button>
-          <button id="clearPps" class="btn btn-red">Clear All</button>
+      <div class="grid" style="margin-bottom:10px;">
+        <div>
+          <label>Loan Amount (Principal)</label>
+          <input id="loan" type="number" min="1" value="500000" />
+        </div>
+        <div>
+          <label>Annual Interest Rate (%)</label>
+          <input id="rate" type="number" step="0.01" min="0" value="11.0" />
+        </div>
+        <div>
+          <label>Tenure (Years)</label>
+          <input id="years" type="number" step="0.25" min="0.1" value="5" />
         </div>
       </div>
-    </div>
 
-    <div class="payments">
-      <div class="small-muted">Part Payments (click remove to delete):</div>
-      <div id="paymentsList" style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"></div>
-    </div>
+      <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
+        <div style="width:240px;">
+          <label>Mode</label>
+          <select id="mode">
+            <option value="tenure">Reduce Tenure (EMI fixed)</option>
+            <option value="emi">Reduce EMI (Tenure fixed)</option>
+          </select>
+        </div>
 
-    <div class="summary" id="dashboard">
-      <div class="card">
-        <div class="small-muted">Initial EMI</div>
-        <div id="initialEmi" style="font-size:18px; font-weight:700;">0</div>
-        <div class="small-muted">before prepayment</div>
-      </div>
-      <div class="card">
-        <div class="small-muted">New Tenure (months)</div>
-        <div id="newMonths" style="font-size:18px; font-weight:700;">0</div>
-      </div>
-      <div class="card">
-        <div class="small-muted">Total Interest Paid</div>
-        <div id="totalInterest" style="font-size:18px; font-weight:700;">0</div>
-      </div>
-      <div class="card">
-        <div class="small-muted">Total Payment</div>
-        <div id="totalPayment" style="font-size:18px; font-weight:700;">0</div>
-      </div>
-    </div>
-
-    <div style="display:grid; grid-template-columns: 1fr; gap:12px;">
-      <div>
-        <div style="margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-          <strong>Repayment Schedule</strong>
-          <div class="flex">
-            <button id="downloadXLSX" class="btn btn-green">Download Excel</button>
-            <button id="downloadPDF" class="btn btn-gray">Download PDF</button>
+        <div style="flex:1;">
+          <label>Add Part Payment (Month & Amount)</label>
+          <div class="row">
+            <input id="ppMonth" type="number" min="1" placeholder="Month (e.g. 12)" style="width:140px" />
+            <input id="ppAmount" type="number" min="0" placeholder="Amount (e.g. 100000)" />
+            <button id="addPp" class="btn btn-indigo">Add</button>
+            <button id="clearPps" class="btn btn-red">Clear All</button>
           </div>
         </div>
-        <div class="table-wrapper" style="border-radius:8px; border:1px solid #eee; max-height:420px; overflow:auto;">
-          <table id="scheduleTable">
-            <thead>
-              <tr><th>Month</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Part Payment</th><th>Outstanding</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+      </div>
+
+      <div class="payments">
+        <div class="small-muted">Part Payments (click remove to delete):</div>
+        <div id="paymentsList" style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;"></div>
+      </div>
+
+      <div class="summary" id="dashboard">
+        <div class="card">
+          <div class="small-muted">Initial EMI</div>
+          <div id="initialEmi" style="font-size:18px; font-weight:700;">0</div>
+          <div class="small-muted">before prepayment</div>
+        </div>
+        <div class="card">
+          <div class="small-muted">New Tenure (months)</div>
+          <div id="newMonths" style="font-size:18px; font-weight:700;">0</div>
+        </div>
+        <div class="card">
+          <div class="small-muted">Total Interest Paid</div>
+          <div id="totalInterest" style="font-size:18px; font-weight:700;">0</div>
+        </div>
+        <div class="card">
+          <div class="small-muted">Total Payment</div>
+          <div id="totalPayment" style="font-size:18px; font-weight:700;">0</div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-note">
-      Tip: add one or more part payments (month number & amount). Choose *Reduce Tenure* to keep EMI the same (loan closes earlier), or *Reduce EMI* to keep tenure same and reduce monthly payment. Save the file to keep your data.
+      <div style="display:grid; grid-template-columns: 1fr; gap:12px;">
+        <div>
+          <div style="margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+            <strong>Repayment Schedule</strong>
+            <div class="flex">
+              <button id="downloadXLSX" class="btn btn-green">Download Excel</button>
+              <button id="downloadPDF" class="btn btn-gray">Download PDF</button>
+            </div>
+          </div>
+          <div class="table-wrapper" style="border-radius:8px; border:1px solid #eee; max-height:420px; overflow:auto;">
+            <table id="scheduleTable">
+              <thead>
+                <tr><th>Month</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Part Payment</th><th>Outstanding</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Tip: add one or more part payments (month number & amount). Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes earlier), or <em>Reduce EMI</em> to keep tenure same and reduce monthly payment. Save the file to keep your data.
+      </div>
     </div>
-  </div>
+  </main>
+
+  <footer style="text-align:center; padding:18px 0; color:var(--muted); font-size:13px;">
+    Design and Maintained By Kiran Rathva
+  </footer>
 
 <script>
 (function(){
+  // Mobile menu toggle behavior
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuToggle) {
+    menuToggle.addEventListener('click', function(){
+      const isOpen = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = isOpen ? 'none' : 'block';
+      menuToggle.setAttribute('aria-expanded', String(!isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(isOpen));
+    });
+    // close menu when clicking outside
+    document.addEventListener('click', function(e){
+      if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.style.display = 'none';
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  // --- EMI calculator code (kept from your original, with small improvements) ---
+
   // helpers
   const fmt = (v) => {
     const n = Math.round(Number(v) || 0);
@@ -476,11 +614,13 @@
   }
 
   // events
-  addPpBtn.addEventListener('click', addPayment);
-  clearPpsBtn.addEventListener('click', clearPayments);
-  [loanEl, rateEl, yearsEl, modeEl].forEach(el => el.addEventListener('input', computeAndRender));
-  downloadXLSXBtn.addEventListener('click', exportXLSX);
-  downloadPDFBtn.addEventListener('click', exportPDF);
+  const addPpBtnEl = document.getElementById('addPp');
+  const clearPpsBtnEl = document.getElementById('clearPps');
+  if (addPpBtnEl) addPpBtnEl.addEventListener('click', addPayment);
+  if (clearPpsBtnEl) clearPpsBtnEl.addEventListener('click', clearPayments);
+  [loanEl, rateEl, yearsEl, modeEl].forEach(el => { if (el) el.addEventListener('input', computeAndRender); });
+  if (downloadXLSXBtn) downloadXLSXBtn.addEventListener('click', exportXLSX);
+  if (downloadPDFBtn) downloadPDFBtn.addEventListener('click', exportPDF);
 
   // initial render
   renderPayments();
@@ -490,3 +630,4 @@
 </script>
 </body>
 </html>
+
