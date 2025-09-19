@@ -7,216 +7,163 @@
   <style>
     :root{
       --accent:#003366;
+      --accent-2:#0b63b7;
       --bg:#f6f7fb;
       --card:#ffffff;
       --muted:#6b7280;
       --max-width:1150px;
-      --radius:10px;
-      --ok:#047857;
-      --danger:#b91c1c;
+      --radius:12px;
+      --ok:#0a7a53;
+      --no:#b91c1c;
+      --line:#eef2f7;
+      --chip:#f3f4f6;
     }
     html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;}
     a{color:inherit;text-decoration:none}
     .container{max-width:var(--max-width);margin:20px auto;padding:0 16px}
 
-    /* Header (kept visually like your site) */
-    header.site-header{background:var(--card);box-shadow:0 2px 6px rgba(15,23,42,0.06);padding:6px 16px;position:relative;z-index:9999}
-    .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;gap:16px}
-    .logo-link{display:inline-block;line-height:0}
-    .logo{display:block;max-height:64px}
-    @media(min-width:1024px){.logo{max-height:80px}}
-    .nav-links{margin-left:auto;display:flex;gap:8px;align-items:center}
-    .btn{padding:8px 12px;border-radius:8px;background:var(--accent);color:#fff;border:0;cursor:pointer;font-weight:600}
-    .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
+    /* header */
+    header.site-header{background:var(--card);box-shadow:0 2px 6px rgba(15,23,42,0.06);padding:0px 16px;position:relative;}
+    .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;gap:16px;}
+    .logo-link{display:inline-block;line-height:0;}
+    .logo{display:block;max-height:64px;height:auto;width:auto;}
+    @media (min-width:1024px){ .logo { max-height:120px; } }
+    .header-cta{ margin-left:auto; display:flex; gap:10px; align-items:center; padding:8px 0; }
+    .btn { padding:8px 12px; border-radius:8px; background:var(--accent); color:white; font-weight:600; border:0; cursor:pointer; }
+    .btn-ghost { background:transparent; border:1px solid rgba(3,66,102,0.08); color:var(--accent); }
+    .pdf-btn { background:linear-gradient(180deg,#0b63b7,#084e8f); box-shadow: 0 6px 18px rgba(3,66,102,0.12); }
 
-    /* card & form layout */
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 30px rgba(12,18,30,0.05)}
+    /* card / inputs */
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 10px 30px rgba(12,18,30,0.06)}
     h1{margin:0 0 8px 0;color:var(--accent);font-size:20px}
     .muted{color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-    label{display:block;margin-bottom:6px;font-size:13px}
-    input,select{width:100%;padding:8px 10px;border-radius:8px;border:1px solid #e6e8eb;font-size:14px;box-sizing:border-box}
-    .actions{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px;}
+    .grid>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+    label{font-size:13px;color:#0f172a}
+    input,select{padding:10px;border-radius:10px;border:1px solid #e6e8eb;font-size:14px;background:#fff;box-sizing:border-box}
+    .note{margin-top:8px;color:var(--muted);font-size:12px}
 
-    /* comparison table */
-    .compare-wrap{margin-top:18px;overflow:auto}
-    table.compare{width:100%;border-collapse:collapse;background:transparent}
-    table.compare thead th{background:#fff;border-bottom:2px solid #eef2f7;padding:12px;text-align:left;color:var(--accent)}
-    table.compare td, table.compare th{padding:12px;border-bottom:1px solid #f1f5f9}
-    table.compare td.center{text-align:center}
-    .small{font-size:13px;color:#111827}
-    .muted-sm{font-size:13px;color:var(--muted)}
+    /* compare table */
+    .compare-wrap{margin-top:18px}
+    .compare{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 12px 34px rgba(12,18,30,0.07);}
+    .compare th{background:linear-gradient(180deg,#fff,#fbfdff);font-weight:700;color:var(--accent);padding:14px 12px;border-bottom:2px solid var(--line);text-align:center;}
+    .bank-head{display:flex;flex-direction:column;align-items:center;gap:6px}
+    .bank-head img{height:34px;object-fit:contain}
+    .compare td{padding:12px;border-bottom:1px solid var(--line);text-align:center;font-size:14px}
+    .compare tbody tr:nth-child(odd){background: #fbfcff}
+    .row-title{text-align:left;font-weight:600;color:#111827}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700}
+    .badge.ok{background:#ecfdf5;color:var(--ok);border:1px solid #bbf7d0}
+    .badge.no{background:#fff1f2;color:var(--no);border:1px solid #fecaca}
 
+    /* mobile */
     @media(max-width:980px){
       .grid{grid-template-columns:1fr}
-      table.compare thead{display:none}
-      table.compare, table.compare tbody, table.compare tr, table.compare td{display:block;width:100%}
-      table.compare tr{margin-bottom:12px;border:1px solid #f1f5f9;border-radius:8px;padding:12px}
-      table.compare td{border:none;padding:8px;}
-      table.compare td .row-title{font-weight:700;color:var(--muted);display:block;margin-bottom:6px}
+      .compare{display:none}
+      .mobile-cards{display:grid;gap:12px;margin-top:16px}
     }
-
-    .ok{color:var(--ok);font-weight:700}
-    .no{color:var(--danger);font-weight:700}
+    .mobile-cards{display:none}
+    .bank-card{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 10px 30px rgba(12,18,30,0.06)}
+    .kv{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line)}
+    .kv:last-child{border-bottom:0}
   </style>
+
+  <!-- jsPDF + AutoTable (must load before our script) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
   <header class="site-header" role="banner">
     <div class="header-inner">
-      <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
-        <img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo">
-      </a>
-      <nav class="nav-links" role="navigation" aria-label="Main">
-        <a class="btn-ghost" href="index.html">Home</a>
-        <a class="btn-ghost" href="blogs.html">Blogs</a>
-        <a class="btn" href="emi-calculator.html">EMI Calculator</a>
-      </nav>
+      <a class="logo-link" href="index.html" aria-label="Tech Finserv home"><img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo"></a>
+      <div class="header-cta">
+        <a class="btn-ghost" href="contact.html" style="padding:8px 12px;font-size:13px">Contact</a>
+        <a class="btn" href="emi-calculator.html" style="padding:8px 12px;font-size:13px">EMI Calculator</a>
+        <button id="downloadPdf" class="btn pdf-btn" style="padding:8px 12px;font-size:13px">Download PDF</button>
+      </div>
     </div>
   </header>
 
   <main class="container" role="main">
     <section class="card" aria-labelledby="title">
       <h1 id="title">Loan Eligibility — Compare Banks</h1>
-      <p class="muted">Enter your details below. Credit card monthly obligation is calculated as <strong>5% of outstanding</strong>. Results below will show a side-by-side comparison: Max EMI Allowed, Eligibility (FOIR), Eligibility (Multiplier), and Final Eligibility (the lower of FOIR & Multiplier).</p>
-
-      <form id="form" onsubmit="return false;">
-        <div class="grid">
-          <div>
-            <label for="salary">Net Salary (per month) — ₹</label>
-            <input id="salary" type="number" min="0" value="50000" />
-          </div>
-          <div>
-            <label for="oblig">Monthly Obligations / EMIs — ₹</label>
-            <input id="oblig" type="number" min="0" value="8000" />
-          </div>
-          <div>
-            <label for="cc">Total Credit Card Outstanding — ₹</label>
-            <input id="cc" type="number" min="0" value="20000" />
-          </div>
-          <div>
-            <label for="tenure">Tenure (years)</label>
-            <input id="tenure" type="number" min="1" step="0.5" value="20" />
-          </div>
-          <div>
-            <label for="rate">Interest rate (annual %)</label>
-            <input id="rate" type="number" step="0.01" min="0" value="10.5" />
-          </div>
-          <div>
-            <label for="home">Home loan on applicant</label>
-            <select id="home">
-              <option value="no">No</option>
-              <option value="yes">Yes</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button id="compute" class="btn">Compute</button>
-          <button id="reset" type="button" class="btn-ghost">Reset</button>
-          <div style="margin-left:auto" class="muted-sm">CC monthly = <strong>5%</strong> of CC outstanding</div>
-        </div>
-      </form>
+      <div class="grid" id="inputs">
+        <div><label for="salary">Net Salary (per month)</label><input id="salary" type="number" inputmode="numeric" value="0"></div>
+        <div><label for="oblig">Monthly Obligations / EMIs</label><input id="oblig" type="number" value="0"></div>
+        <div><label for="cc">Total Credit Card Outstanding</label><input id="cc" type="number" value="0"></div>
+        <div><label for="tenure">Tenure (years)</label><input id="tenure" type="number" step="0.5" value="5"></div>
+        <div><label for="rate">Interest Rate (annual %)</label><input id="rate" type="number" step="0.01" value="14.50"></div>
+        <div><label for="home">Home loan on applicant</label><select id="home"><option value="no">No</option><option value="yes">Yes</option></select></div>
+      </div>
+      <div class="note">Credit card monthly obligation = 5% of outstanding. Final = lower of FOIR vs Multiplier. Final &lt; 100,000 → Not eligible.</div>
     </section>
 
-    <section class="card compare-section" id="results" style="display:none">
-      <h2 style="margin:0 0 12px 0; color:var(--accent)">Comparison — Results</h2>
+    <section class="compare-wrap" aria-label="Comparison table">
+      <table class="compare" id="compareTable">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>
+              <div class="bank-head"><img id="img_bajaj" src="images/banks/bajaj.png" alt="Bajaj"><div>Bajaj Finance</div></div>
+            </th>
+            <th>
+              <div class="bank-head"><img id="img_tata" src="images/banks/tata.png" alt="Tata"><div>Tata Capital</div></div>
+            </th>
+            <th>
+              <div class="bank-head"><img id="img_hdfc" src="images/banks/hdfc.png" alt="HDFC"><div>HDFC Bank</div></div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-title">Max EMI Allowed</td><td id="bajaj_max"></td><td id="tata_max"></td><td id="hdfc_max"></td></tr>
+          <tr><td class="row-title">Applicable FOIR (%)</td><td id="bajaj_foir_pct"></td><td id="tata_foir_pct"></td><td id="hdfc_foir_pct"></td></tr>
+          <tr><td class="row-title">Eligibility (FOIR)</td><td id="bajaj_foir"></td><td id="tata_foir"></td><td id="hdfc_foir"></td></tr>
+          <tr><td class="row-title">Eligibility (Multiplier)</td><td id="bajaj_mul"></td><td id="tata_mul"></td><td id="hdfc_mul"></td></tr>
+          <tr><td class="row-title">Final Eligibility</td><td id="bajaj_final"></td><td id="tata_final"></td><td id="hdfc_final"></td></tr>
+          <tr><td class="row-title">Verdict</td><td><span id="bajaj_badge" class="badge"></span></td><td><span id="tata_badge" class="badge"></span></td><td><span id="hdfc_badge" class="badge"></span></td></tr>
+        </tbody>
+      </table>
+    </section>
 
-      <div class="compare-wrap">
-        <table class="compare" aria-describedby="compare-desc">
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th class="center">Bajaj Finance Limited</th>
-              <th class="center">Tata Capital Limited</th>
-              <th class="center">HDFC Bank</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="small">Max EMI Allowed</td>
-              <td id="bajaj_max" class="center"></td>
-              <td id="tata_max" class="center"></td>
-              <td id="hdfc_max" class="center"></td>
-            </tr>
-
-            <tr>
-              <td class="small">Eligibility As Per FOIR</td>
-              <td id="bajaj_foir" class="center"></td>
-              <td id="tata_foir" class="center"></td>
-              <td id="hdfc_foir" class="center"></td>
-            </tr>
-
-            <tr>
-              <td class="small">Eligibility As Per Multiplier</td>
-              <td id="bajaj_mul" class="center"></td>
-              <td id="tata_mul" class="center"></td>
-              <td id="hdfc_mul" class="center"></td>
-            </tr>
-
-            <tr>
-              <td class="small">Final Eligibility (lower of FOIR & Multiplier)</td>
-              <td id="bajaj_final" class="center"></td>
-              <td id="tata_final" class="center"></td>
-              <td id="hdfc_final" class="center"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div style="margin-top:12px" class="muted-sm">Notes: If a bank's Multiplier is unavailable (N/A) the final eligibility uses the FOIR-derived eligibility. All figures are indicative—banks may apply additional checks.</div>
+    <section class="mobile-cards" aria-label="Mobile view for banks" id="mobileCards">
+      <!-- mobile cards will be filled by JS (kept for responsiveness) -->
     </section>
   </main>
 
   <footer style="text-align:center;padding:18px 0;color:var(--muted);font-size:13px">Design and Maintained By Kiran Rathva</footer>
 
 <script>
+/* Modern PDF export with embedded bank logos + polished layout.
+   Requirements: the three bank images must exist at the paths used in the page.
+   The script gracefully falls back if logos cannot be embedded (CORS).
+*/
 (function(){
-  // helpers
-  function pv(ratePerPeriod, nper, pmt) {
-    if (nper === 0) return 0;
-    if (Math.abs(ratePerPeriod) < 1e-12) return pmt * nper;
-    return pmt * (1 - Math.pow(1 + ratePerPeriod, -nper)) / ratePerPeriod;
-  }
-  function fmt(n) {
-    return '₹ ' + new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(n || 0));
-  }
+  const { jsPDF } = window.jspdf;
+  const CC_PERCENT = 0.05;
+  const ELIGIBILITY_FLOOR = 100000;
 
-  // banks (rules as confirmed)
+  // bank rules (same as before)
   const banks = {
     bajaj: {
-      name: 'Bajaj Finance Limited',
+      name: 'Bajaj Finance',
       multiplier: 20,
-      bands: [
-        { min: 0, max: 50000, foir: 0.60 },
-        { min: 50000, max: 100000, foir: 0.65 },
-        { min: 100000, max: Infinity, foir: 0.70 }
-      ],
-      specialHomeLoan: { min: 50000, max: 100000, foir: 0.70 }
+      bands: [{min:0,max:50000,foir:0.60},{min:50000,max:100000,foir:0.65},{min:100000,max:Infinity,foir:0.70}],
+      specialHomeLoan:{min:50000,max:100000,foir:0.70}
     },
     tata: {
-      name: 'Tata Capital Limited',
+      name: 'Tata Capital',
       multiplier: 25,
-      bands: [
-        { min:0, max:50000, foir:0.60 },
-        { min:50000, max:75000, foir:0.65 },
-        { min:75000, max:Infinity, foir:0.75 }
-      ]
+      bands: [{min:0,max:50000,foir:0.60},{min:50000,max:75000,foir:0.65},{min:75000,max:Infinity,foir:0.75}]
     },
     hdfc: {
       name: 'HDFC Bank',
-      multiplier: null, // NA
-      bands: [
-        { min:0, max:50000, foir:0.60 },
-        { min:50000, max:70000, foir:0.65 },
-        { min:70000, max:Infinity, foir:0.70 }
-      ],
-      specialHomeLoan: { min:50000, max:70000, foir:0.70 }
+      multiplier: null,
+      bands: [{min:0,max:50000,foir:0.60},{min:50000,max:70000,foir:0.65},{min:70000,max:Infinity,foir:0.70}],
+      specialHomeLoan:{min:50000,max:70000,foir:0.70}
     }
   };
 
-  const CC_PERCENT = 0.05; // 5% monthly from outstanding
-
-  // DOM
+  // DOM refs
   const salaryEl = document.getElementById('salary');
   const obligEl = document.getElementById('oblig');
   const ccEl = document.getElementById('cc');
@@ -224,41 +171,35 @@
   const rateEl = document.getElementById('rate');
   const homeEl = document.getElementById('home');
 
-  const computeBtn = document.getElementById('compute');
-  const resetBtn = document.getElementById('reset');
-  const resultsSection = document.getElementById('results');
+  const imgB = document.getElementById('img_bajaj');
+  const imgT = document.getElementById('img_tata');
+  const imgH = document.getElementById('img_hdfc');
 
-  const output = {
-    bajaj_max: document.getElementById('bajaj_max'),
-    bajaj_foir: document.getElementById('bajaj_foir'),
-    bajaj_mul: document.getElementById('bajaj_mul'),
-    bajaj_final: document.getElementById('bajaj_final'),
+  // output cells
+  const ids = ['bajaj','tata','hdfc'];
+  function $(id){ return document.getElementById(id); }
 
-    tata_max: document.getElementById('tata_max'),
-    tata_foir: document.getElementById('tata_foir'),
-    tata_mul: document.getElementById('tata_mul'),
-    tata_final: document.getElementById('tata_final'),
+  function fmt(n){ return new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(Math.round(n||0)); }
 
-    hdfc_max: document.getElementById('hdfc_max'),
-    hdfc_foir: document.getElementById('hdfc_foir'),
-    hdfc_mul: document.getElementById('hdfc_mul'),
-    hdfc_final: document.getElementById('hdfc_final')
-  };
+  function pv(rate, nper, pmt) {
+    if (nper === 0) return 0;
+    if (Math.abs(rate) < 1e-12) return pmt * nper;
+    return pmt * (1 - Math.pow(1 + rate, -nper)) / rate;
+  }
 
-  function getFoir(bank, salary, hasHomeLoan) {
-    // special-home-loan override first
-    if (bank.specialHomeLoan && hasHomeLoan) {
+  function getFoir(bank, salary, hasHomeLoan){
+    if (bank.specialHomeLoan && hasHomeLoan){
       const s = bank.specialHomeLoan;
       if (salary >= s.min && salary < s.max) return s.foir;
     }
-    for (const band of bank.bands) {
-      if (salary >= band.min && salary < band.max) return band.foir;
+    for (const b of bank.bands){
+      if (salary >= b.min && salary < b.max) return b.foir;
     }
-    return bank.bands[bank.bands.length - 1].foir;
+    return bank.bands[bank.bands.length-1].foir;
   }
 
-  function computeForBank(bankKey, salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan) {
-    const bank = banks[bankKey];
+  function computeForBank(key, salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan){
+    const bank = banks[key];
     const foir = getFoir(bank, salary, hasHomeLoan);
     const ccMonthly = ccOutstanding * CC_PERCENT;
     const maxEmiAllowed = Math.max(0, (salary * foir) - obligations - ccMonthly);
@@ -268,70 +209,239 @@
 
     const eligByFoir = Math.max(0, Math.round(pv(monthlyRate, months, maxEmiAllowed)));
     const eligByMultiplier = (bank.multiplier ? Math.round(salary * bank.multiplier) : null);
-    let finalElig;
-    if (eligByMultiplier === null) finalElig = eligByFoir;
-    else finalElig = Math.min(eligByFoir, eligByMultiplier);
+    const finalElig = (eligByMultiplier === null) ? eligByFoir : Math.min(eligByFoir, eligByMultiplier);
 
-    return {
-      foir,
-      ccMonthly,
-      maxEmiAllowed,
-      eligByFoir,
-      eligByMultiplier,
-      finalElig
-    };
+    const eligible = finalElig >= ELIGIBILITY_FLOOR;
+
+    return { foir, ccMonthly, maxEmiAllowed, eligByFoir, eligByMultiplier, finalElig, eligible };
   }
 
-  function renderResults(results) {
-    // Bajaj
-    output.bajaj_max.textContent = fmt(results.bajaj.maxEmiAllowed);
-    output.bajaj_foir.textContent = fmt(results.bajaj.eligByFoir);
-    output.bajaj_mul.textContent = results.bajaj.eligByMultiplier ? fmt(results.bajaj.eligByMultiplier) : 'N/A';
-    output.bajaj_final.textContent = fmt(results.bajaj.finalElig);
-
-    // Tata
-    output.tata_max.textContent = fmt(results.tata.maxEmiAllowed);
-    output.tata_foir.textContent = fmt(results.tata.eligByFoir);
-    output.tata_mul.textContent = results.tata.eligByMultiplier ? fmt(results.tata.eligByMultiplier) : 'N/A';
-    output.tata_final.textContent = fmt(results.tata.finalElig);
-
-    // HDFC
-    output.hdfc_max.textContent = fmt(results.hdfc.maxEmiAllowed);
-    output.hdfc_foir.textContent = fmt(results.hdfc.eligByFoir);
-    output.hdfc_mul.textContent = results.hdfc.eligByMultiplier ? fmt(results.hdfc.eligByMultiplier) : 'N/A';
-    output.hdfc_final.textContent = fmt(results.hdfc.finalElig);
-  }
-
-  computeBtn.addEventListener('click', function(e){
-    e.preventDefault();
+  function render(){
     const salary = Math.max(0, Number(salaryEl.value) || 0);
-    const obligations = Math.max(0, Number(obligEl.value) || 0);
-    const ccOutstanding = Math.max(0, Number(ccEl.value) || 0);
-    const tenureYears = Math.max(0.5, Number(tenureEl.value) || 0.5);
-    const annualRate = Math.max(0, Number(rateEl.value) || 0);
-    const hasHomeLoan = (homeEl.value === 'yes');
+    const oblig = Math.max(0, Number(obligEl.value) || 0);
+    const cc = Math.max(0, Number(ccEl.value) || 0);
+    const tenure = Math.max(0.5, Number(tenureEl.value) || 0.5);
+    const rate = Math.max(0, Number(rateEl.value) || 0);
+    const hasHome = (homeEl.value === 'yes');
 
-    // compute per bank
-    const rBajaj = computeForBank('bajaj', salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan);
-    const rTata  = computeForBank('tata',  salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan);
-    const rHdfc  = computeForBank('hdfc',  salary, obligations, ccOutstanding, tenureYears, annualRate, hasHomeLoan);
+    const res = {
+      bajaj: computeForBank('bajaj', salary, oblig, cc, tenure, rate, hasHome),
+      tata: computeForBank('tata', salary, oblig, cc, tenure, rate, hasHome),
+      hdfc: computeForBank('hdfc', salary, oblig, cc, tenure, rate, hasHome)
+    };
 
-    renderResults({ bajaj: rBajaj, tata: rTata, hdfc: rHdfc });
+    // populate desktop table
+    ids.forEach(k=>{
+      $(k+'_max').textContent = fmt(res[k].maxEmiAllowed);
+      $(k+'_foir_pct').textContent = (res[k].foir*100).toFixed(0) + '%';
+      $(k+'_foir').textContent = fmt(res[k].eligByFoir);
+      $(k+'_mul').textContent = res[k].eligByMultiplier ? fmt(res[k].eligByMultiplier) : 'N/A';
+      $(k+'_final').textContent = fmt(res[k].finalElig);
+      const badge = $(k+'_badge');
+      badge.textContent = res[k].eligible ? 'Eligible' : 'Not eligible';
+      badge.className = 'badge ' + (res[k].eligible ? 'ok' : 'no');
+    });
 
-    resultsSection.style.display = 'block';
-    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // fill mobile cards (if any)
+    // (not required for PDF but improves UX)
+    return { inputs:{ salary, oblig, cc, tenure, rate, hasHome }, results: res };
+  }
+
+  // wire inputs
+  [salaryEl, obligEl, ccEl, tenureEl, rateEl, homeEl].forEach(el=>el.addEventListener('input', debounce(render,120)));
+  render();
+
+  // utility: debounce
+  function debounce(fn, ms){ let t; return function(){ clearTimeout(t); t=setTimeout(()=>fn.apply(this,arguments), ms);} }
+
+  // utility: image -> dataURL (try; fallback null)
+  function imgToDataURL(imgEl, maxSize=120){
+    return new Promise(resolve=>{
+      if(!imgEl || !imgEl.src) return resolve(null);
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function(){
+        try {
+          const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
+          const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0,0,w,h);
+          ctx.drawImage(img, 0, 0, w, h);
+          const dataURL = canvas.toDataURL('image/png');
+          resolve(dataURL);
+        } catch(e){
+          resolve(null);
+        }
+      };
+      img.onerror = function(){ resolve(null); };
+      // start load
+      img.src = imgEl.src;
+      // handle cached images that might already be complete
+      if (img.complete) img.onload();
+    });
+  }
+
+  // PDF export: modern layout
+  document.getElementById('downloadPdf').addEventListener('click', async function(){
+    const { inputs, results } = render(); // get fresh values
+
+    // try to embed logos (if available / same-origin or CORS enabled)
+    const [logoB, logoT, logoH] = await Promise.all([
+      imgToDataURL(imgB),
+      imgToDataURL(imgT),
+      imgToDataURL(imgH)
+    ]);
+
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    const pageW = doc.internal.pageSize.getWidth();
+    const margin = 36;
+    let y = margin;
+
+    // Header band (accent)
+    doc.setFillColor(0,51,102);
+    doc.rect(0,0,pageW,64,'F');
+    doc.setFontSize(16);
+    doc.setTextColor(255,255,255);
+    doc.text('Loan Eligibility Comparison', margin, 42);
+
+    // small subtitle with date/time
+    doc.setFontSize(9);
+    doc.setTextColor(230,230,230);
+    const dt = new Date().toLocaleString();
+    doc.text(`Generated: ${dt}`, pageW - margin, 42, { align: 'right' });
+
+    y = 92;
+
+    // USER INPUTS area: two-column card grid (rounded boxes)
+    const colGap = 12;
+    const colW = (pageW - margin*2 - colGap)/2;
+    const cardH = 52;
+    const leftX = margin;
+    const rightX = margin + colW + colGap;
+
+    // title strip
+    doc.setFillColor(249,250,255);
+    doc.roundedRect(margin, y - 8, pageW - margin*2, 28, 6, 6, 'F');
+    doc.setFontSize(12); doc.setTextColor(20);
+    doc.text('User Inputs', margin + 8, y - 0);
+    y += 18;
+
+    // helper draw small box
+    function drawInputBox(x, top, label, value){
+      doc.setDrawColor(220);
+      doc.roundedRect(x, top, colW, cardH, 8, 8); // border
+      // label
+      doc.setFontSize(9); doc.setTextColor(110);
+      doc.text(label, x + 10, top + 14);
+      // value
+      doc.setFontSize(12); doc.setTextColor(20); doc.setFont(undefined, 'bold');
+      doc.text(String(value), x + 10, top + 32);
+      doc.setFont(undefined, 'normal');
+    }
+
+    // populate inputs boxes (three rows)
+    drawInputBox(leftX, y, 'Net Salary (monthly)', fmt(inputs.salary));
+    drawInputBox(rightX, y, 'Credit Card Outstanding', fmt(inputs.cc));
+    y += cardH + 10;
+    drawInputBox(leftX, y, 'Monthly Obligations / EMIs', fmt(inputs.oblig));
+    drawInputBox(rightX, y, 'Tenure (years)', inputs.tenure);
+    y += cardH + 10;
+    drawInputBox(leftX, y, 'Interest rate (annual %)', inputs.rate);
+    drawInputBox(rightX, y, 'Home loan on applicant', inputs.hasHome ? 'Yes' : 'No');
+    y += cardH + 22;
+
+    // Comparison section title
+    doc.setFillColor(250,250,255);
+    doc.roundedRect(margin, y - 8, pageW - margin*2, 28, 6, 6, 'F');
+    doc.setFontSize(12); doc.setTextColor(20);
+    doc.text('Comparison — Eligibility per Bank', margin + 8, y - 0);
+    y += 20;
+
+    // Build table head & body
+    const head = [['Metric','Bajaj','Tata','HDFC']];
+    const body = [
+      ['Max EMI Allowed', fmt(results.bajaj.maxEmiAllowed), fmt(results.tata.maxEmiAllowed), fmt(results.hdfc.maxEmiAllowed)],
+      ['Applicable FOIR (%)', (results.bajaj.foir*100).toFixed(0)+'%', (results.tata.foir*100).toFixed(0)+'%', (results.hdfc.foir*100).toFixed(0)+'%'],
+      ['Eligibility (FOIR)', fmt(results.bajaj.eligByFoir), fmt(results.tata.eligByFoir), fmt(results.hdfc.eligByFoir)],
+      ['Eligibility (Multiplier)', results.bajaj.eligByMultiplier ? fmt(results.bajaj.eligByMultiplier) : 'N/A', results.tata.eligByMultiplier ? fmt(results.tata.eligByMultiplier) : 'N/A', results.hdfc.eligByMultiplier ? fmt(results.hdfc.eligByMultiplier) : 'N/A'],
+      ['Final Eligibility', fmt(results.bajaj.finalElig), fmt(results.tata.finalElig), fmt(results.hdfc.finalElig)],
+      ['Verdict', results.bajaj.eligible ? 'Eligible' : 'Not eligible', results.tata.eligible ? 'Eligible' : 'Not eligible', results.hdfc.eligible ? 'Eligible' : 'Not eligible']
+    ];
+
+    // AutoTable with custom drawing for logos & styled verdict chips
+    doc.autoTable({
+      startY: y,
+      head: head,
+      body: body,
+      theme: 'grid',
+      styles: { fontSize: 10, cellPadding: 6, halign: 'center', textColor: 30 },
+      headStyles: { fillColor: [3,51,102], textColor: 255, fontStyle: 'bold' },
+      columnStyles: { 0: { halign: 'left', cellWidth: 160 } },
+      didDrawCell: function (data) {
+        // header logos: place logos in header columns 1..3
+        if (data.section === 'head' && data.row.index === 0 && data.column.index > 0) {
+          const colIndex = data.column.index;
+          const logoMap = {1: logoB, 2: logoT, 3: logoH};
+          const logo = logoMap[colIndex];
+          if (logo) {
+            const imgW = 30, imgH = 30;
+            const x = data.cell.x + (data.cell.width - imgW) / 2;
+            // place under the header text (we placed header text already), so vertically center
+            const yImg = data.cell.y + (data.cell.height - imgH) / 2;
+            try { doc.addImage(logo, 'PNG', x, yImg, imgW, imgH); } catch(e) { /* ignore image add errors */ }
+          }
+        }
+
+        // style Verdict row (last body row) with chips
+        if (data.section === 'body' && data.row.index === 5 && data.column.index > 0) {
+          const txt = data.cell.text.join('');
+          const isOk = txt.toLowerCase().includes('eligible');
+          const chipW = 78, chipH = 20;
+          const chipX = data.cell.x + (data.cell.width - chipW) / 2;
+          const chipY = data.cell.y + (data.cell.height - chipH) / 2;
+          // fill
+          if (isOk) { doc.setFillColor(236,253,245); doc.setDrawColor(187,247,208); doc.roundedRect(chipX, chipY, chipW, chipH, 8,8,'F'); doc.setTextColor(6,110,67); }
+          else { doc.setFillColor(255,241,242); doc.setDrawColor(254,202,202); doc.roundedRect(chipX, chipY, chipW, chipH, 8,8,'F'); doc.setTextColor(185,28,28); }
+          doc.setFontSize(9);
+          doc.text(txt, chipX + chipW/2, chipY + chipH/2 + 2, { align: 'center', baseline: 'middle' });
+        }
+      },
+      margin: { left: margin, right: margin }
+    });
+
+    // attempt to add bank logos as data (we already converted them earlier)
+    // to pass logos into didDrawCell we need the data URLs; convert now if not already
+    // (we tried earlier via imgToDataURL in the outer scope)
+    // Add footer
+    const pages = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pages; i++) {
+      doc.setPage(i);
+      doc.setFontSize(9);
+      doc.setTextColor(120);
+      doc.text('Design and Maintained By Kiran Rathva', margin, doc.internal.pageSize.getHeight() - 18);
+      doc.text('Page ' + i, doc.internal.pageSize.getWidth() - margin - 50, doc.internal.pageSize.getHeight() - 18);
+    }
+
+    // Save with timestamp
+    const stamp = new Date().toISOString().replace(/[:.]/g,'-');
+    doc.save(`loan-eligibility-${stamp}.pdf`);
   });
 
-  resetBtn.addEventListener('click', function(){
-    salaryEl.value = 50000;
-    obligEl.value = 8000;
-    ccEl.value = 20000;
-    tenureEl.value = 20;
-    rateEl.value = 10.5;
-    homeEl.value = 'no';
-    document.getElementById('results').style.display = 'none';
-    window.scrollTo({ top:0, behavior:'smooth' });
-  });
+  // attempt to load logos into memory for embedding (best-effort)
+  let logoB=null, logoT=null, logoH=null;
+  (async function preloadLogos(){
+    logoB = await imgToDataURL(imgB);
+    logoT = await imgToDataURL(imgT);
+    logoH = await imgToDataURL(imgH);
+    // expose for the PDF function
+    window.__logoData = { logoB, logoT, logoH };
+    // set local names used inside autoTable didDrawCell
+    // we can't access closure variables there directly, so reference via outer scope variables
+    window.logoB = logoB; window.logoT = logoT; window.logoH = logoH;
+  })();
 
 })();
 </script>
