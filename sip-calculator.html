@@ -26,12 +26,19 @@
 
     /* header */
     header.site-header{background:#fff;box-shadow:0 2px 6px rgba(15,23,42,0.06);padding:10px 16px;position:relative;z-index:99}
-    .header-inner{display:flex;align-items:center;gap:12px;max-width:1600px;margin:0 auto}
+    .header-inner{display:flex;align-items:center;gap:12px;max-width:1600px;margin:0 auto;width:100%}
     .logo{max-height:56px}
     .nav-links{display:flex;gap:8px;margin-left:auto}
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:0}
     .btn-primary{background:var(--accent);color:#fff}
     .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
+
+    /* menu toggle & mobile menu */
+    .menu-toggle{display:none;align-items:center;justify-content:center;padding:8px;border-radius:8px;border:0;background:transparent;cursor:pointer;margin-left:auto}
+    .menu-toggle svg{display:block}
+    .mobile-menu{display:none;position:absolute;right:16px;top:66px;background:var(--card);box-shadow:0 10px 30px rgba(15,23,42,0.08);border-radius:12px;padding:8px;min-width:200px;z-index:200;border:1px solid rgba(3,66,102,0.04)}
+    .mobile-menu a{display:block;padding:10px 12px;border-radius:8px;color:var(--accent);font-weight:700;margin:4px 0}
+    .mobile-menu a:hover{background:#f1f5f9}
 
     /* main */
     main.page-content{flex:1;width:100%;padding:18px var(--page-padding);box-sizing:border-box}
@@ -80,6 +87,8 @@
       .quick-list a{padding:12px}
       .nav-links{display:none}
       .menu-toggle{display:inline-flex}
+      /* make mobile menu full width on very small screens */
+      .mobile-menu{right:12px;left:12px;top:64px;min-width:auto}
     }
 
     /* tiny phones */
@@ -103,22 +112,27 @@
         </a>
 
         <nav class="site-nav" aria-label="Main navigation">
-          <div class="nav-links">
-            <a class="btn btn-primary" href="index.html">Home</a>
-            <a class="btn btn-primary" href="blogs.html">Blogs</a>
-            <a class="btn btn-primary" href="services.html">Services</a>
-            <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
-            <a class="btn btn-ghost" href="contact.html">Contact</a>
+          <div class="nav-links" role="menubar">
+            <a class="btn btn-primary" href="index.html" role="menuitem">Home</a>
+            <a class="btn btn-primary" href="blogs.html" role="menuitem">Blogs</a>
+            <a class="btn btn-primary" href="services.html" role="menuitem">Services</a>
+            <a class="btn btn-primary" href="emi-calculator.html" role="menuitem">EMI Calculator</a>
+            <a class="btn btn-ghost" href="contact.html" role="menuitem">Contact</a>
           </div>
-          <button id="menuToggle" class="menu-toggle" aria-hidden="true" aria-label="Open menu" style="display:none">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round"/></svg>
+
+          <!-- visible on mobile -->
+          <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+              <path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round"/>
+            </svg>
           </button>
-          <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
-            <a href="index.html">Home</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="services.html">Services</a>
-            <a href="emi-calculator.html">EMI Calculator</a>
-            <a href="contact.html">Contact</a>
+
+          <div id="mobileMenu" class="mobile-menu" role="menu" aria-hidden="true">
+            <a href="index.html" role="menuitem">Home</a>
+            <a href="blogs.html" role="menuitem">Blogs</a>
+            <a href="services.html" role="menuitem">Services</a>
+            <a href="emi-calculator.html" role="menuitem">EMI Calculator</a>
+            <a href="contact.html" role="menuitem">Contact</a>
           </div>
         </nav>
       </div>
@@ -229,21 +243,72 @@
   </div>
 
   <script>
-    // mobile menu toggle
+    // mobile menu toggle with accessibility improvements
     (function(){
       const menuToggle = document.getElementById('menuToggle');
       const mobileMenu = document.getElementById('mobileMenu');
-      function setToggle(){
-        if(window.innerWidth <= 880) menuToggle && (menuToggle.style.display = 'inline-flex');
-        else { menuToggle && (menuToggle.style.display = 'none'); mobileMenu && (mobileMenu.style.display = 'none'); }
+
+      function setToggleVisibility(){
+        // show toggle on small screens (CSS also handles this) and ensure mobile menu hidden by default
+        if(window.innerWidth <= 880){
+          menuToggle && (menuToggle.style.display = 'inline-flex');
+        } else {
+          menuToggle && (menuToggle.style.display = 'none');
+          if(mobileMenu) { mobileMenu.style.display = 'none'; mobileMenu.setAttribute('aria-hidden','true'); }
+          if(menuToggle) { menuToggle.setAttribute('aria-expanded','false'); }
+        }
       }
-      setToggle();
-      window.addEventListener('resize', setToggle);
+
+      setToggleVisibility();
+      window.addEventListener('resize', setToggleVisibility);
+
+      // toggle click
       menuToggle?.addEventListener('click', e => {
         e.stopPropagation();
-        mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+        if(!isOpen){
+          mobileMenu.style.display = 'block';
+          mobileMenu.setAttribute('aria-hidden','false');
+          menuToggle.setAttribute('aria-expanded','true');
+          // focus first link for keyboard users
+          const first = mobileMenu.querySelector('a');
+          first && first.focus();
+        } else {
+          mobileMenu.style.display = 'none';
+          mobileMenu.setAttribute('aria-hidden','true');
+          menuToggle.setAttribute('aria-expanded','false');
+        }
       });
-      document.addEventListener('click', e => { if(!menuToggle?.contains(e.target) && !mobileMenu?.contains(e.target)) mobileMenu && (mobileMenu.style.display = 'none'); });
+
+      // close when clicking outside
+      document.addEventListener('click', function(e){
+        if(!menuToggle || !mobileMenu) return;
+        if(menuToggle.contains(e.target) || mobileMenu.contains(e.target)) return;
+        if(mobileMenu.style.display === 'block'){
+          mobileMenu.style.display = 'none';
+          mobileMenu.setAttribute('aria-hidden','true');
+          menuToggle.setAttribute('aria-expanded','false');
+        }
+      });
+
+      // keyboard: close on Escape
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && mobileMenu && mobileMenu.style.display === 'block'){
+          mobileMenu.style.display = 'none';
+          mobileMenu.setAttribute('aria-hidden','true');
+          menuToggle.setAttribute('aria-expanded','false');
+          menuToggle.focus();
+        }
+      });
+
+      // close menu when a mobile menu link is activated (helps single-page behaviour)
+      mobileMenu?.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          mobileMenu.style.display = 'none';
+          mobileMenu.setAttribute('aria-hidden','true');
+          menuToggle.setAttribute('aria-expanded','false');
+        });
+      });
     })();
 
     // wait for Chart.js
