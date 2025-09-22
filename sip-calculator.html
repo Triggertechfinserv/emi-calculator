@@ -19,62 +19,60 @@
       --page-padding:20px;
       --max-width:1150px;
     }
-
-    /* base */
     html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased}
     a{color:inherit;text-decoration:none}
     .page{min-height:100%;display:flex;flex-direction:column}
 
-    /* ========== HEADER (copied from index — used on both mobile & desktop) ========== */
-    header.site-header {
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
-      padding: 6px 16px;
-      position: relative;
-      z-index: 9999;
-    }
-    .header-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display:flex;
+    /* ============ HEADER (match index button sizing exactly) ============ */
+    header.site-header { background:#fff; box-shadow:0 2px 6px rgba(15,23,42,0.06); padding:6px 16px; position:relative; z-index:9999; }
+    .header-inner { max-width:var(--max-width); margin:0 auto; display:flex; align-items:center; gap:16px; }
+    .logo-link{line-height:0} .logo{max-height:64px; display:block}
+    @media (min-width:1024px){ .logo{max-height:80px} }
+    nav.site-nav{margin-left:auto; display:flex; align-items:center; gap:10px}
+    .nav-links{display:flex; gap:8px; align-items:center}
+
+    /* index button sizing (explicit) */
+    .nav-links .btn {
+      display:inline-flex;
       align-items:center;
-      gap:16px;
-    }
-    .logo-link { display:inline-block; line-height:0; }
-    .logo { display:block; width:auto; height:auto; max-height:64px; }
-    @media (min-width:1024px) { .logo { max-height:80px; } }
-    nav.site-nav { margin-left:auto; display:flex; align-items:center; gap:10px; }
-    .nav-links { display:flex; gap:8px; align-items:center; }
-    .btn {
-      display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:0;
+      justify-content:center;
+      padding:8px 12px;       /* same as index */
+      border-radius:8px;
+      font-weight:600;
+      font-size:13px;
+      cursor:pointer;
+      border:0;
+      line-height:1;
     }
     .btn-primary{background:var(--accent);color:#fff}
     .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
 
-    .menu-toggle{display:none;background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer}
-    .mobile-menu{display:none;position:absolute;right:16px;top:100%;background:var(--card);box-shadow:0 8px 30px rgba(15,23,42,0.12);border-radius:8px;overflow:hidden;margin-top:8px;min-width:160px}
-    .mobile-menu a{display:block;padding:10px 12px;border-bottom:1px solid #f1f5f9;color:var(--accent)}
-    .mobile-menu a:last-child{border-bottom:none}
-    @media (max-width:640px){ .nav-links{display:none} .menu-toggle{display:inline-flex} .mobile-menu{right:8px;left:auto} }
+    .menu-toggle{display:none} .mobile-menu{display:none}
 
-    /* ========== SIP PAGE LAYOUT ========== */
+    /* ============ PAGE / SIP LAYOUT ============ */
     main.page-content{flex:1;width:100%;padding:18px var(--page-padding);box-sizing:border-box;max-width:1400px;margin:0 auto}
+    .sip-wrapper{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
 
-    .sip-wrapper{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start;max-width:1400px;margin:0 auto;width:100%}
-
-    /* card */
     .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 8px 28px rgba(15,23,42,0.06);display:flex;flex-direction:column;gap:10px}
     .sip-sub{color:var(--muted);font-size:14px;margin-bottom:6px}
 
-    /* form rows */
     .sip-row{display:flex;gap:12px;align-items:center;margin-bottom:10px}
-    .sip-col{flex:1}
-    .sip-label{font-size:14px;color:var(--accent-2);display:block;margin-bottom:6px}
+    .sip-col{flex:1} .sip-label{font-size:14px;color:var(--accent-2);display:block;margin-bottom:6px}
     input[type=range]{width:100%;accent-color:var(--accent);height:32px}
-    .sip-number{width:140px;padding:9px;border-radius:8px;border:1px solid #dbe3e1;font-weight:600}
-    .value-bubble{background:#eef9f4;color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:700;text-align:center;min-width:86px}
 
-    /* chart - smaller and responsive */
+    /* bubble + suffix styling */
+    .value-bubble{
+      display:inline-flex;align-items:center;justify-content:flex-start;min-width:86px;padding:6px 12px;border-radius:10px;font-weight:700;border:1px solid transparent;background:#eef9f4;color:var(--accent);
+      position:relative; box-sizing:border-box;
+    }
+    .bubble-input{appearance:none;border:0;background:transparent;font-weight:700;color:var(--accent);text-align:left;padding:0;margin:0;width:100%;font-size:15px;line-height:1}
+    .bubble-input:focus{outline:3px solid rgba(3,66,102,0.12);outline-offset:3px;border-radius:6px}
+    .bubble-suffix{
+      margin-left:8px; font-weight:700; opacity:0.85; pointer-events:none; color:inherit; font-size:13px;
+    }
+    .value-bubble.percent{background:#fff6ea;color:#b45309;border:1px solid #fde1b8}
+    .value-bubble.years{background:#eef2ff;color:#1e3a8a;border:1px solid #dae8ff}
+
     .sip-chart-wrap{display:flex;gap:14px;align-items:center;margin-top:10px;flex-wrap:wrap}
     .sip-chart{flex:0 0 200px;max-width:200px;height:200px}
     .sip-chart canvas{width:100% !important;height:100% !important;display:block}
@@ -86,40 +84,31 @@
     .sip-summary{display:flex;gap:12px;margin-top:12px;border-top:1px dashed #e5e7eb;padding-top:12px;flex-wrap:wrap}
     .scol{flex:1;min-width:120px}
 
-    /* quick tools */
     .quick-card .inner{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(15,23,42,0.04);display:flex;flex-direction:column;gap:10px}
     .quick-list{display:flex;flex-direction:column;gap:10px;margin-top:8px}
     .quick-list a{display:block;padding:10px;border-radius:8px;text-align:center;background:var(--accent);color:#fff;font-weight:700;font-size:14px}
 
     footer.site-footer{text-align:center;padding:18px 0;color:var(--muted);font-size:13px;margin-top:18px}
 
-    /* MOBILE: responsive behaviour — header remains same as index (toggle used on small screens) */
     @media (max-width:880px){
       main.page-content{padding:12px 14px}
       .sip-wrapper{grid-template-columns:1fr;gap:14px}
       .card{padding:14px}
       .sip-chart{flex:0 0 160px;max-width:160px;height:160px;margin:0 auto}
       .sip-chart-wrap{flex-direction:column;align-items:center;text-align:center}
-      .sip-number{width:100%;max-width:260px}
-      .value-bubble{display:block;margin:8px auto 0}
-      .quick-list a{padding:12px}
-      /* header from index handles nav visibility (nav-links hidden on very small screens) */
     }
-
-    /* tiny phones */
     @media (max-width:420px){
       .sip-chart{flex:0 0 140px;height:140px}
-      .sip-number{font-size:14px}
       .value-bubble{padding:7px 10px}
+      .bubble-suffix{font-size:12px}
     }
 
-    /* accessibility focus */
-    input:focus, a:focus, button:focus{outline:3px solid rgba(3,66,102,0.12);outline-offset:2px}
+    input:focus, a:focus, button:focus{outline-offset:2px}
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- HEADER: exact same structure & behavior as your index file -->
+    <!-- HEADER (matches index styling for buttons) -->
     <header class="site-header" role="banner">
       <div class="header-inner">
         <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
@@ -134,78 +123,60 @@
             <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
             <a class="btn btn-ghost" href="contact.html">Contact</a>
           </div>
-
-          <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-          <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
-            <a href="index.html" role="menuitem">Home</a>
-            <a href="blogs.html" role="menuitem">Blogs</a>
-            <a href="services.html" role="menuitem">Services</a>
-            <a href="emi-calculator.html" role="menuitem">EMI Calculator</a>
-            <a href="contact.html" role="menuitem">Contact</a>
-          </div>
         </nav>
       </div>
     </header>
 
     <main class="page-content" role="main">
-      <!-- compact hidden H1 for SEO/accessibility -->
       <h1 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">SIP Calculator — TechFinserv</h1>
 
       <div class="sip-wrapper" aria-live="polite">
-        <!-- calculator -->
         <section class="card" aria-labelledby="sip-head">
           <h2 id="sip-head" style="display:none;">SIP Calculator</h2>
 
           <div class="sip-sub">Adjust monthly investment, expected return and time period to estimate the corpus.</div>
 
+          <!-- MONTHLY: slider + editable bubble -->
           <div class="sip-row">
             <div class="sip-col">
               <label class="sip-label" for="sipMonthlyRange">Monthly investment</label>
+              <!-- slider is focusable (tab-able) so keyboard users can move it -->
               <input id="sipMonthlyRange" type="range" min="100" max="200000" step="100" value="25000" />
             </div>
-            <div style="width:120px;text-align:right">
-              <div class="value-bubble" id="sipMonthlyValue">&#8377;25,000</div>
+            <div style="width:160px;text-align:right">
+              <label class="value-bubble" for="sipMonthlyBubble">
+                <input id="sipMonthlyBubble" class="bubble-input" type="text" inputmode="numeric" aria-label="Monthly investment (editable)" />
+                <span class="bubble-suffix" aria-hidden="true">₹</span>
+              </label>
             </div>
           </div>
 
-          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
-            <input id="sipMonthlyNumber" class="sip-number" type="number" value="25000" aria-label="Monthly investment" />
-            <div class="muted">per month</div>
-          </div>
-
+          <!-- RATE: slider + editable bubble + % suffix -->
           <div class="sip-row">
             <div class="sip-col">
               <label class="sip-label" for="sipRateRange">Expected return (p.a.)</label>
               <input id="sipRateRange" type="range" min="1" max="30" step="0.1" value="12" />
             </div>
             <div style="width:120px;text-align:right">
-              <div class="value-bubble" id="sipRateValue">12%</div>
+              <label class="value-bubble percent" for="sipRateBubble">
+                <input id="sipRateBubble" class="bubble-input" type="text" inputmode="decimal" aria-label="Expected return (editable)" />
+                <span class="bubble-suffix" aria-hidden="true">%</span>
+              </label>
             </div>
           </div>
 
-          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
-            <input id="sipRateNumber" class="sip-number" type="number" value="12" aria-label="Annual return percent" />
-            <div class="muted">annual</div>
-          </div>
-
+          <!-- YEARS: slider + editable bubble + Yr suffix -->
           <div class="sip-row">
             <div class="sip-col">
               <label class="sip-label" for="sipYearsRange">Time period</label>
               <input id="sipYearsRange" type="range" min="1" max="40" step="1" value="10" />
             </div>
             <div style="width:120px;text-align:right">
-              <div class="value-bubble" id="sipYearsValue">10 Yr</div>
+              <label class="value-bubble years" for="sipYearsBubble">
+                <input id="sipYearsBubble" class="bubble-input" type="text" inputmode="numeric" aria-label="Time period (editable)" />
+                <span class="bubble-suffix" aria-hidden="true">Yr</span>
+              </label>
             </div>
-          </div>
-
-          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
-            <input id="sipYearsNumber" class="sip-number" type="number" value="10" aria-label="Time period in years" />
-            <div class="muted">years</div>
           </div>
 
           <div class="sip-chart-wrap">
@@ -237,7 +208,6 @@
           </div>
         </section>
 
-        <!-- quick tools -->
         <aside class="quick-card">
           <div class="inner" role="complementary" aria-label="Quick tools">
             <h3 style="margin:0;color:var(--accent);font-size:18px">Quick Tools</h3>
@@ -257,78 +227,83 @@
   </div>
 
   <script>
-    // mobile menu toggle (same behavior as your index)
-    (function(){
-      const menuToggle = document.getElementById('menuToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      if (!menuToggle) return;
-      menuToggle.addEventListener('click', function(e){
-        e.stopPropagation();
-        const isOpen = mobileMenu.style.display === 'block';
-        mobileMenu.style.display = isOpen ? 'none' : 'block';
-        menuToggle.setAttribute('aria-expanded', String(!isOpen));
-        mobileMenu.setAttribute('aria-hidden', String(isOpen));
-      });
-      document.addEventListener('click', function(e){
-        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-          mobileMenu.style.display = 'none';
-          menuToggle.setAttribute('aria-expanded','false');
-          mobileMenu.setAttribute('aria-hidden','true');
-        }
-      });
-      // close on link click
-      if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }));
-      // hide on resize
-      window.addEventListener('resize', ()=>{ if (window.innerWidth > 640 && mobileMenu) { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); } });
-    })();
+    // permissive parsers/helpers
+    function unformatDigits(s){ if(!s) return NaN; const d = String(s).replace(/[^\d.-]/g,''); return d === '' ? NaN : Number(d); }
+    function unformatInt(s){ const n = unformatDigits(s); return isNaN(n) ? NaN : Math.round(n); }
+    function unformatFloat(s){ const n = unformatDigits(s); return isNaN(n) ? NaN : Number(n); }
+    function formatINR(n){ if(!isFinite(n)) return '₹0'; return '₹' + Math.round(n).toLocaleString('en-IN'); }
+    function formatPercent(n){ return (Number(n)||0).toFixed(1) + '%'; }
+    function formatYears(n){ return Math.round(n) + ' Yr'; }
 
     // wait for Chart.js
     function ready(fn){
       if(window.Chart) return fn();
-      const i = setInterval(()=>{ if(window.Chart){ clearInterval(i); fn(); } }, 30);
-      setTimeout(()=>clearInterval(i), 5000);
+      const t = setInterval(()=>{ if(window.Chart){ clearInterval(t); fn(); } },30);
+      setTimeout(()=>clearInterval(t),5000);
     }
 
     ready(function(){
-      // chart (smaller, thinner)
+      // chart
       const ctx = document.getElementById('sipDoughnut').getContext('2d');
       const sipChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: { labels:['Invested','Returns'], datasets:[{ data:[1,1], backgroundColor:['#003366','#2db07a'], borderWidth:0 }] },
-        options: {
-          cutout:'78%',
-          responsive:true,
-          maintainAspectRatio:false,
-          plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => '₹' + Math.round(c.parsed).toLocaleString('en-IN'), afterLabel: c => { const ds = c.dataset.data; const total = ds.reduce((s,v)=>s+v,0)||0; const pct = total?Math.round(c.parsed/total*100):0; return pct+'%'; } } } }
-        }
+        type:'doughnut',
+        data:{ labels:['Invested','Returns'], datasets:[{ data:[1,1], backgroundColor:['#003366','#2db07a'], borderWidth:0 }] },
+        options:{ cutout:'78%', responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => '₹' + Math.round(c.parsed).toLocaleString('en-IN'), afterLabel: c => { const ds=c.dataset.data; const total=ds.reduce((s,v)=>s+v,0)||0; const pct = total?Math.round(c.parsed/total*100):0; return pct + '%'; } } } } }
       });
 
-      // helpers & calc
-      function formatINR(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
+      // DOM
+      const el = id => document.getElementById(id);
+      const sipMonthlyRange = el('sipMonthlyRange'), sipMonthlyBubble = el('sipMonthlyBubble');
+      const sipRateRange = el('sipRateRange'), sipRateBubble = el('sipRateBubble');
+      const sipYearsRange = el('sipYearsRange'), sipYearsBubble = el('sipYearsBubble');
+
+      const sipInvested = el('sipInvested'), sipReturns = el('sipReturns'), sipCorpus = el('sipCorpus'), sipMonths = el('sipMonths');
+
+      // compute SIP
       function computeSIP(m,a,y){
-        const months = y*12; const mr = a/1200; let total = 0;
+        m = Number(m); a = Number(a); y = Number(y);
+        if(!isFinite(m)) m = Number(sipMonthlyRange.value);
+        if(!isFinite(a)) a = Number(sipRateRange.value);
+        if(!isFinite(y)) y = Number(sipYearsRange.value);
+        const months = Math.round(y*12); const mr = a/1200; let total = 0;
         for(let i=0;i<months;i++){ total += m; total *= (1 + mr); }
         return { invested: m*months, returns: total - m*months, corpus: total, months };
       }
 
-      // elements
-      const el = id => document.getElementById(id);
-      const sipMonthlyRange = el('sipMonthlyRange'), sipMonthlyNumber = el('sipMonthlyNumber'), sipMonthlyValue = el('sipMonthlyValue');
-      const sipRateRange = el('sipRateRange'), sipRateNumber = el('sipRateNumber'), sipRateValue = el('sipRateValue');
-      const sipYearsRange = el('sipYearsRange'), sipYearsNumber = el('sipYearsNumber'), sipYearsValue = el('sipYearsValue');
-      const sipInvested = el('sipInvested'), sipReturns = el('sipReturns'), sipCorpus = el('sipCorpus'), sipMonths = el('sipMonths');
+      // get numeric values preferring bubble if user typed something
+      function getMonthlyValue(){
+        const txt = (sipMonthlyBubble.value || '').trim();
+        if(txt === '') return Number(sipMonthlyRange.value);
+        const parsed = unformatInt(txt);
+        return isNaN(parsed) ? Number(sipMonthlyRange.value) : parsed;
+      }
+      function getRateValue(){
+        const txt = (sipRateBubble.value || '').trim();
+        if(txt === '') return Number(sipRateRange.value);
+        const parsed = unformatFloat(txt);
+        return isNaN(parsed) ? Number(sipRateRange.value) : parsed;
+      }
+      function getYearsValue(){
+        const txt = (sipYearsBubble.value || '').trim();
+        if(txt === '') return Number(sipYearsRange.value);
+        const parsed = unformatInt(txt);
+        return isNaN(parsed) ? Number(sipYearsRange.value) : parsed;
+      }
 
+      // update UI and chart; sliders sync thumbs to parsed values; slider -> bubble updates bubble text
       function updateAll(){
-        const m = Math.max(100, Math.round(Number(sipMonthlyRange.value)));
-        const a = Math.max(0.1, Number(sipRateRange.value));
-        const y = Math.max(1, Math.round(Number(sipYearsRange.value)));
+        const mVal = getMonthlyValue();
+        const rVal = getRateValue();
+        const yVal = getYearsValue();
 
-        sipMonthlyNumber.value = m; sipRateNumber.value = a; sipYearsNumber.value = y;
-        sipMonthlyValue.textContent = '₹' + m.toLocaleString('en-IN');
-        sipRateValue.textContent = a.toFixed(1) + '%';
-        sipYearsValue.textContent = y + ' Yr';
+        // sync slider thumbs proportionally (clamped)
+        const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+        sipMonthlyRange.value = clamp(Math.round(mVal||0), Number(sipMonthlyRange.min), Number(sipMonthlyRange.max));
+        sipRateRange.value = clamp(Number(rVal||0.1), Number(sipRateRange.min), Number(sipRateRange.max));
+        sipYearsRange.value = clamp(Math.round(yVal||1), Number(sipYearsRange.min), Number(sipYearsRange.max));
 
-        const res = computeSIP(m,a,y);
+        // compute and render
+        const res = computeSIP(mVal, rVal, yVal);
         sipInvested.textContent = formatINR(res.invested);
         sipReturns.textContent = formatINR(res.returns);
         sipCorpus.textContent = formatINR(res.corpus);
@@ -338,26 +313,60 @@
         sipChart.update();
       }
 
-      // sync events + focus scroll for mobile to avoid keyboard hiding controls
-      const inputs = [sipMonthlyRange, sipMonthlyNumber, sipRateRange, sipRateNumber, sipYearsRange, sipYearsNumber];
-      inputs.forEach(inp => {
-        inp.addEventListener('input', updateAll);
-        inp.addEventListener('change', updateAll);
-
-        inp.addEventListener('focus', ()=> {
-          // on small screens, scroll the focused control into center so keyboard doesn't hide lower parts
-          if(window.innerWidth <= 880){
-            setTimeout(()=> inp.scrollIntoView({behavior:'smooth', block:'center'}), 250);
-          }
-        }, {passive:true});
+      // --------- Slider -> Bubble (user moves slider, bubble updated to that number) ----------
+      sipMonthlyRange.addEventListener('input', ()=>{
+        // set bubble to slider numeric (no extra formatting) so both match
+        sipMonthlyBubble.value = String(Math.round(Number(sipMonthlyRange.value)));
+        updateAll();
+      });
+      sipRateRange.addEventListener('input', ()=>{
+        sipRateBubble.value = String(Number(sipRateRange.value).toFixed(1));
+        updateAll();
+      });
+      sipYearsRange.addEventListener('input', ()=>{
+        sipYearsBubble.value = String(Math.round(Number(sipYearsRange.value)));
+        updateAll();
       });
 
-      // number inputs to range sync
-      sipMonthlyNumber.addEventListener('change', ()=>{ let v = Math.round(Number(sipMonthlyNumber.value)||0); if(v<100) v=100; sipMonthlyRange.value = v; updateAll(); });
-      sipRateNumber.addEventListener('change', ()=>{ let v = Number(sipRateNumber.value)||1; if(v<0.1) v=0.1; sipRateRange.value = v; updateAll(); });
-      sipYearsNumber.addEventListener('change', ()=>{ let v = Math.round(Number(sipYearsNumber.value)||1); if(v<1) v=1; sipYearsRange.value = v; updateAll(); });
+      // --------- Bubble -> Slider (user types number, slider thumb moves proportionally) ----------
+      // Behavior: user-typed text is preserved exactly as typed; we parse numeric content to move the slider thumb proportionally.
+      sipMonthlyBubble.addEventListener('input', ()=>{
+        const parsed = unformatInt(sipMonthlyBubble.value);
+        if(!isNaN(parsed)){
+          // compute proportional thumb position: slider value = clamp(parsed, min, max)
+          const min = Number(sipMonthlyRange.min), max = Number(sipMonthlyRange.max);
+          const clamped = Math.min(Math.max(parsed, min), max);
+          sipMonthlyRange.value = clamped;
+        }
+        updateAll();
+      });
 
-      // initial
+      sipRateBubble.addEventListener('input', ()=>{
+        const parsed = unformatFloat(sipRateBubble.value);
+        if(!isNaN(parsed)){
+          const min = Number(sipRateRange.min), max = Number(sipRateRange.max);
+          const clamped = Math.min(Math.max(parsed, min), max);
+          sipRateRange.value = clamped;
+        }
+        updateAll();
+      });
+
+      sipYearsBubble.addEventListener('input', ()=>{
+        const parsed = unformatInt(sipYearsBubble.value);
+        if(!isNaN(parsed)){
+          const min = Number(sipYearsRange.min), max = Number(sipYearsRange.max);
+          const clamped = Math.min(Math.max(parsed, min), max);
+          sipYearsRange.value = clamped;
+        }
+        updateAll();
+      });
+
+      // initialize bubbles from sliders (user can immediately edit)
+      sipMonthlyBubble.value = String(Math.round(Number(sipMonthlyRange.value)));
+      sipRateBubble.value = String(Number(sipRateRange.value).toFixed(1));
+      sipYearsBubble.value = String(Math.round(Number(sipYearsRange.value)));
+
+      // initial compute
       updateAll();
     });
   </script>
