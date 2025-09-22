@@ -6,321 +6,265 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="SIP Calculator — TechFinserv" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
-
-  <!-- Chart.js for donut -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-    /* color variables and base exactly like your index */
     :root {
       --accent: #003366;
       --accent-2: #154a7b;
       --muted: #6b7280;
       --bg: #f6f7fb;
       --card: #ffffff;
-      --glass: rgba(255,255,255,0.6);
-      --radius: 12px;
-      --max-width: 1150px;
+      --radius: 14px;
+      --page-padding: 32px; /* horizontal page padding */
     }
 
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:#0f172a;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-    a{color:inherit;text-decoration:none}
-    .page{min-height:100%;display:flex;flex-direction:column}
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#0f172a;}
+    a{text-decoration:none;color:inherit}
+    .page{display:flex;flex-direction:column;min-height:100%}
 
-    /* ========== HEADER (copied from your index) ========== */
-    header.site-header {
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
-      padding: 6px 16px;
-      position: relative;
-      z-index: 9999;
-    }
-    .header-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      gap:16px;
-    }
-    .logo-link { display:inline-block; line-height:0; }
-    .logo { display:block; width:auto; height:auto; max-height:64px; }
-    @media (min-width:1024px) { .logo { max-height:80px; } }
-    nav.site-nav { margin-left:auto; display:flex; align-items:center; gap:10px; }
-    .nav-links { display:flex; gap:8px; align-items:center; }
-    .btn {
-      display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:0;
-    }
+    /* header */
+    header.site-header{background:#fff;box-shadow:0 2px 6px rgba(15,23,42,0.06);padding:12px 20px;z-index:99;position:relative}
+    .header-inner{display:flex;align-items:center;gap:16px}
+    .logo{max-height:64px}
+    nav.site-nav{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .nav-links{display:flex;gap:8px}
+    .btn{padding:8px 14px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;border:0}
     .btn-primary{background:var(--accent);color:#fff}
-    .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
-
-    .menu-toggle{display:none;background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer}
-    .mobile-menu{display:none;position:absolute;right:16px;top:100%;background:var(--card);box-shadow:0 8px 30px rgba(15,23,42,0.12);border-radius:8px;overflow:hidden;margin-top:8px;min-width:160px}
+    .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.1);color:var(--accent)}
+    .menu-toggle{display:none}@media(max-width:640px){.nav-links{display:none}.menu-toggle{display:inline-flex}}
+    .mobile-menu{display:none;position:absolute;right:16px;top:100%;background:#fff;box-shadow:0 8px 30px rgba(15,23,42,0.12);border-radius:8px;overflow:hidden;margin-top:8px;min-width:160px}
     .mobile-menu a{display:block;padding:10px 12px;border-bottom:1px solid #f1f5f9;color:var(--accent)}
-    .mobile-menu a:last-child{border-bottom:none}
-    @media (max-width:640px){ .nav-links{display:none} .menu-toggle{display:inline-flex} .mobile-menu{right:8px;left:auto} }
 
-    /* ========= Page container ========= */
-    main.page-content{max-width:var(--max-width);margin:22px auto;padding:0 16px;flex:1 0 auto}
-
-    /* SIP calculator specific styles */
-    .sip-wrapper {
-      margin-top:18px;
-      /* single column since aside removed */
-      display:block;
-      gap:18px;
-      align-items:start;
+    /* MAIN: now full-bleed with horizontal padding so it uses full screen width */
+    main.page-content{
+      flex:1;
+      width:100%;
+      padding:40px var(--page-padding);
+      box-sizing:border-box;
+      min-height:60vh;
     }
-    .card {
-      background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 8px 24px rgba(12,18,30,0.05);
-      border:1px solid rgba(7,18,28,0.03);
-      max-width:900px;
+
+    /* page heading centered at top (optional) */
+    .page-head { max-width:1400px; margin:0 auto 22px; text-align:center; }
+    .page-head h1{font-size:28px;color:var(--accent-2);margin:0}
+    .page-head p{color:var(--muted);margin:8px 0 0}
+
+    /* grid: left flexible calculator, right fixed quick tools */
+    .sip-wrapper{
+      display:grid;
+      grid-template-columns: 1fr 360px; /* left expands, right sidebar fixed */
+      gap:28px;
+      align-items:start;
+      max-width:calc(100% - (var(--page-padding) * 2)); /* ensure inner content respects padding */
       margin:0 auto;
     }
-    .sip-title { font-size:20px; margin:0 0 8px 0; color:var(--accent-2); font-weight:800; }
-    .sip-sub { color:var(--muted); font-size:13px; margin-bottom:12px; }
 
-    .sip-row { display:flex; gap:12px; align-items:center; margin-bottom:12px; }
-    .sip-col { flex:1; }
-    .sip-label { font-size:14px; margin-bottom:6px; color:var(--accent-2); }
-    .value-bubble { background:#eef9f4;color:var(--accent); padding:6px 10px;border-radius:8px; font-weight:700; min-width:86px; text-align:center; }
+    /* card styles */
+    .card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 8px 28px rgba(15,23,42,0.06)}
+    .sip-title{font-size:22px;font-weight:700;color:var(--accent-2);margin:0 0 10px}
+    .sip-sub{color:var(--muted);font-size:14px;margin-bottom:16px;text-align:left}
 
-    input[type="range"]{ width:100%; accent-color: var(--accent); }
-    input.sip-number { width:120px; padding:8px 10px; border-radius:8px; border:1px solid #e7f0ee; font-weight:700; }
+    .sip-row{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+    .sip-col{flex:1}
+    .sip-label{font-size:14px;margin-bottom:6px;color:var(--accent-2)}
+    .value-bubble{background:#eef9f4;color:var(--accent);padding:6px 12px;border-radius:8px;font-weight:700;text-align:center;min-width:100px}
+    input[type=range]{width:100%;accent-color:var(--accent)}
+    .sip-number{width:140px;padding:8px;border-radius:8px;border:1px solid #dbe3e1;font-weight:600}
 
-    .sip-chart-wrap { display:flex; gap:18px; align-items:center; flex-wrap:wrap; margin-top:8px; }
-    .sip-chart { flex:0 0 220px; max-width:220px; }
-    .sip-details { flex:1; min-width:220px; }
+    .sip-chart-wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-top:18px}
+    .sip-chart{flex:0 0 280px;max-width:280px}
+    .sip-details{flex:1;min-width:240px}
+    .sip-stat{margin-bottom:14px}
+    .sip-stat .muted{font-size:13px;color:var(--muted)}
+    .sip-stat .big{font-size:20px;font-weight:700;color:var(--accent-2)}
 
-    .sip-stat { margin-bottom:10px; }
-    .sip-stat .muted { font-size:13px; color:var(--muted); }
-    .sip-stat .big { font-size:18px; font-weight:800; color:var(--accent-2); }
+    .sip-summary{display:flex;gap:16px;margin-top:18px;border-top:1px dashed #e5e7eb;padding-top:14px}
+    .sip-summary .scol{flex:1}
 
-    .sip-summary { display:flex; gap:12px; margin-top:18px; border-top:1px dashed rgba(7,18,28,0.04); padding-top:12px; }
-    .sip-summary .scol { flex:1; }
+    /* quick tools (sidebar) */
+    .quick-card{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+    .quick-card .inner{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(15,23,42,0.04)}
+    .quick-card h3{margin:0;color:var(--accent);font-size:18px}
+    .quick-card p{margin:0;color:var(--muted);font-size:14px}
+    .quick-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .quick-list a{display:block;padding:10px;border-radius:8px;text-align:center;background:var(--accent);color:#fff;font-weight:700}
 
-    @media (max-width:880px){
-      .card{padding:14px}
+    footer.site-footer{text-align:center;padding:18px 0;color:var(--muted);font-size:13px;margin-top:28px}
+
+    /* responsiveness: stack on smaller screens */
+    @media (max-width:1100px){
+      .sip-wrapper{grid-template-columns: 1fr 320px; padding:0 8px}
     }
-
-    /* small footer */
-    footer.site-footer { text-align:center; padding:18px 0; color:var(--muted); font-size:13px; margin-top:26px; }
+    @media (max-width:880px){
+      .sip-wrapper{grid-template-columns:1fr}
+      main.page-content{padding:28px 18px}
+    }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- header (same as index) -->
-    <header class="site-header" role="banner">
-      <div class="header-inner">
-        <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
-          <img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo">
-        </a>
-
-        <nav class="site-nav" role="navigation" aria-label="Main navigation">
-          <div class="nav-links" id="navLinks">
+    <!-- header -->
+    <header class="site-header">
+      <div class="header-inner" style="width:100%;align-items:center;">
+        <a href="index.html"><img class="logo" src="images/techfinserv-logo.png" alt="TechFinserv logo"></a>
+        <nav class="site-nav" style="margin-left:auto;">
+          <div class="nav-links">
             <a class="btn btn-primary" href="index.html">Home</a>
             <a class="btn btn-primary" href="blogs.html">Blogs</a>
             <a class="btn btn-primary" href="services.html">Services</a>
             <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
             <a class="btn btn-ghost" href="contact.html">Contact</a>
           </div>
-
-          <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <button class="menu-toggle" id="menuToggle" aria-label="Menu toggle" style="margin-left:12px;display:none">
+            <svg width="22" height="22" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round"/></svg>
           </button>
-
-          <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
-            <a href="index.html" role="menuitem">Home</a>
-            <a href="blogs.html" role="menuitem">Blogs</a>
-            <a href="services.html" role="menuitem">Services</a>
-            <a href="emi-calculator.html" role="menuitem">EMI Calculator</a>
-            <a href="contact.html" role="menuitem">Contact</a>
+          <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <a href="index.html">Home</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="services.html">Services</a>
+            <a href="emi-calculator.html">EMI Calculator</a>
+            <a href="contact.html">Contact</a>
           </div>
         </nav>
       </div>
     </header>
 
-    <!-- main content -->
-    <main class="page-content" role="main" id="maincontent">
-      <section style="max-width:var(--max-width);margin:12px auto;padding:0 16px;">
-        <h1 style="margin:12px 0 8px;color:var(--accent-2);">SIP Calculator</h1>
-        <p style="margin:0 0 12px;color:var(--muted);">Visualize monthly investments and projected returns with monthly compounding. All values rounded and shown in &#8377;.</p>
+    <main class="page-content">
+      <div class="page-head">
+        <h1>SIP Calculator</h1>
+        <p>Visualize monthly investments and projected returns with monthly compounding.</p>
+      </div>
 
-        <div class="sip-wrapper">
-          <!-- calculator card (full-width) -->
-          <div class="card" aria-labelledby="sip-head">
-            <h2 id="sip-head" class="sip-title">Calculate SIP</h2>
-            <div class="sip-sub">Enter monthly amount, expected annual return and time period.</div>
+      <div class="sip-wrapper">
+        <!-- left: calculator (flexible, uses remaining width) -->
+        <div class="card" aria-labelledby="sip-head">
+          <h2 id="sip-head" class="sip-title">Calculate SIP</h2>
+          <div class="sip-sub">Adjust monthly investment, expected returns and time period.</div>
 
-            <!-- Monthly -->
-            <div class="sip-row">
-              <div class="sip-col">
-                <div class="sip-label">Monthly investment</div>
-                <input type="range" id="sipMonthlyRange" min="100" max="200000" step="100" value="25000" aria-label="Monthly investment slider">
-              </div>
-              <div style="width:140px;text-align:right">
-                <div class="value-bubble" id="sipMonthlyValue">&#8377;25,000</div>
-              </div>
+          <div class="sip-row">
+            <div class="sip-col">
+              <div class="sip-label">Monthly investment</div>
+              <input type="range" id="sipMonthlyRange" min="100" max="200000" step="100" value="25000">
             </div>
-            <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-              <input type="number" id="sipMonthlyNumber" class="sip-number" min="100" step="100" value="25000" aria-label="Monthly investment number">
-              <div class="muted">per month</div>
+            <div style="width:140px;text-align:right">
+              <div class="value-bubble" id="sipMonthlyValue">&#8377;25,000</div>
             </div>
+          </div>
 
-            <!-- Rate -->
-            <div class="sip-row">
-              <div class="sip-col">
-                <div class="sip-label">Expected return (p.a.)</div>
-                <input type="range" id="sipRateRange" min="1" max="30" step="0.1" value="12" aria-label="Annual return slider">
-              </div>
-              <div style="width:140px;text-align:right">
-                <div class="value-bubble" id="sipRateValue">12%</div>
-              </div>
-            </div>
-            <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
-              <input type="number" id="sipRateNumber" class="sip-number" min="0.1" step="0.1" value="12" aria-label="Annual return number">
-              <div class="muted">annual</div>
-            </div>
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;justify-content:flex-start">
+            <input type="number" id="sipMonthlyNumber" class="sip-number" value="25000">
+            <div style="color:var(--muted)">per month</div>
+          </div>
 
-            <!-- Years -->
-            <div class="sip-row">
-              <div class="sip-col">
-                <div class="sip-label">Time period</div>
-                <input type="range" id="sipYearsRange" min="1" max="40" step="1" value="10" aria-label="Investment period slider">
-              </div>
-              <div style="width:140px;text-align:right">
-                <div class="value-bubble" id="sipYearsValue">10 Yr</div>
-              </div>
+          <div class="sip-row">
+            <div class="sip-col">
+              <div class="sip-label">Expected return (p.a.)</div>
+              <input type="range" id="sipRateRange" min="1" max="30" step="0.1" value="12">
             </div>
-            <div style="display:flex;gap:10px;align-items:center;">
-              <input type="number" id="sipYearsNumber" class="sip-number" min="1" step="1" value="10" aria-label="Investment years number">
-              <div class="muted">years</div>
+            <div style="width:140px;text-align:right">
+              <div class="value-bubble" id="sipRateValue">12%</div>
             </div>
+          </div>
 
-            <!-- Chart + details -->
-            <div class="sip-chart-wrap" style="margin-top:12px;">
-              <div class="sip-chart">
-                <canvas id="sipDoughnut" width="220" height="220" aria-label="Portfolio composition"></canvas>
-              </div>
-              <div class="sip-details">
-                <div class="sip-stat">
-                  <div class="muted">Invested amount</div>
-                  <div class="big" id="sipInvested">&#8377;0</div>
-                </div>
-                <div class="sip-stat">
-                  <div class="muted">Estimated returns</div>
-                  <div class="big" id="sipReturns">&#8377;0</div>
-                </div>
-                <div class="sip-stat">
-                  <div class="muted">Estimated corpus</div>
-                  <div class="big" id="sipCorpus">&#8377;0</div>
-                </div>
-              </div>
-            </div>
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;justify-content:flex-start">
+            <input type="number" id="sipRateNumber" class="sip-number" value="12">
+            <div style="color:var(--muted)">annual</div>
+          </div>
 
-            <div class="sip-summary" aria-hidden="false">
-              <div class="scol">
-                <div class="muted">Total months</div>
-                <div class="big" id="sipMonths">0</div>
+          <div class="sip-row">
+            <div class="sip-col">
+              <div class="sip-label">Time period</div>
+              <input type="range" id="sipYearsRange" min="1" max="40" value="10">
+            </div>
+            <div style="width:140px;text-align:right">
+              <div class="value-bubble" id="sipYearsValue">10 Yr</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;justify-content:flex-start;margin-bottom:6px">
+            <input type="number" id="sipYearsNumber" class="sip-number" value="10">
+            <div style="color:var(--muted)">years</div>
+          </div>
+
+          <div class="sip-chart-wrap">
+            <div class="sip-chart"><canvas id="sipDoughnut" width="280" height="280"></canvas></div>
+            <div class="sip-details">
+              <div class="sip-stat">
+                <div class="muted">Invested amount</div>
+                <div class="big" id="sipInvested">&#8377;0</div>
               </div>
-              <div class="scol">
-                <div class="muted">Monthly rate</div>
-                <div class="big" id="sipMonthlyRate">0%</div>
+              <div class="sip-stat">
+                <div class="muted">Estimated returns</div>
+                <div class="big" id="sipReturns">&#8377;0</div>
+              </div>
+              <div class="sip-stat">
+                <div class="muted">Estimated corpus</div>
+                <div class="big" id="sipCorpus">&#8377;0</div>
               </div>
             </div>
           </div>
+
+          <div class="sip-summary">
+            <div class="scol">
+              <div class="muted">Total months</div>
+              <div class="big" id="sipMonths">0</div>
+            </div>
+          </div>
         </div>
-      </section>
+
+        <!-- right: quick tools (fixed width) -->
+        <div class="quick-card">
+          <div class="inner">
+            <h3>Quick Tools</h3>
+            <p>Jump to other calculators</p>
+            <div class="quick-list">
+              <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
+              <a class="btn btn-primary" href="pl-eligibility.html">Loan Eligibility</a>
+              <a class="btn btn-primary" href="lumpsum.html">Lumpsum Calculator</a>
+              <a class="btn btn-primary" href="swp.html">SWP Calculator</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
-    <footer class="site-footer">
-      Design and Maintained By Kiran Rathva
-    </footer>
+    <footer class="site-footer">Design and Maintained By Kiran Rathva</footer>
   </div>
 
-  <!-- header mobile menu JS (copied) -->
   <script>
-    (function(){
-      const menuToggle = document.getElementById('menuToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      if (!menuToggle) return;
-      menuToggle.addEventListener('click', function(e){
-        e.stopPropagation();
-        const isOpen = mobileMenu.style.display === 'block';
-        mobileMenu.style.display = isOpen ? 'none' : 'block';
-        menuToggle.setAttribute('aria-expanded', String(!isOpen));
-        mobileMenu.setAttribute('aria-hidden', String(isOpen));
-      });
-      document.addEventListener('click', function(e){
-        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-          mobileMenu.style.display = 'none';
-          menuToggle.setAttribute('aria-expanded','false');
-          mobileMenu.setAttribute('aria-hidden','true');
-        }
-      });
-      if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }));
-      window.addEventListener('resize', ()=>{ if (window.innerWidth > 640 && mobileMenu) { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); } });
-    })();
-  </script>
+    // mobile menu toggle (basic)
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle?.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+    });
+    document.addEventListener('click', e => {
+      if (!menuToggle?.contains(e.target) && !mobileMenu?.contains(e.target)) mobileMenu && (mobileMenu.style.display = 'none');
+    });
 
-  <!-- SIP calculator script -->
-  <script>
-    // Elements
-    const monthlyRange = document.getElementById('sipMonthlyRange');
-    const monthlyNumber = document.getElementById('sipMonthlyNumber');
-    const monthlyValue = document.getElementById('sipMonthlyValue');
-
-    const rateRange = document.getElementById('sipRateRange');
-    const rateNumber = document.getElementById('sipRateNumber');
-    const rateValue = document.getElementById('sipRateValue');
-
-    const yearsRange = document.getElementById('sipYearsRange');
-    const yearsNumber = document.getElementById('sipYearsNumber');
-    const yearsValue = document.getElementById('sipYearsValue');
-
-    const investedEl = document.getElementById('sipInvested');
-    const returnsEl = document.getElementById('sipReturns');
-    const corpusEl = document.getElementById('sipCorpus');
-    const monthsEl = document.getElementById('sipMonths');
-    const monthlyRateEl = document.getElementById('sipMonthlyRate');
-
-    // Chart — Invested = dark blue, Returns = green
+    // Chart.js donut (Invested = dark blue, Returns = green)
     const ctx = document.getElementById('sipDoughnut').getContext('2d');
     const sipChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Invested','Returns'],
-        datasets: [{
-          data: [1,1],
-          backgroundColor: ['#003366', '#2db07a'],
-          borderWidth: 0
-        }]
+        labels: ['Invested', 'Returns'],
+        datasets: [{ data: [1,1], backgroundColor: ['#003366','#2db07a'], borderWidth: 0 }]
       },
       options: {
         cutout: '70%',
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
           tooltip: {
             callbacks: {
               label: function(ctx) {
                 const val = Math.round(ctx.parsed);
-                return ctx.label + ': ' + '\u20B9' + val.toLocaleString('en-IN');
+                return ctx.label + ': ₹' + val.toLocaleString('en-IN');
               },
               afterLabel: function(ctx) {
                 const ds = ctx.dataset.data;
@@ -335,77 +279,60 @@
       }
     });
 
-    // helper — use unicode rupee for reliability
-    function formatINR(n){ return '\u20B9' + Math.round(n).toLocaleString('en-IN'); }
+    // helpers & calc
+    function formatINR(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
+    function computeSIP(m,a,y){ const months=y*12; const mr=a/1200; let total=0; for(let i=0;i<months;i++){ total += m; total *= (1+mr); } const invested = m*months; return { invested, returns: total - invested, corpus: total, months }; }
 
-    // monthly simulation: deposit at start then apply monthly interest
-    function computeSIP(monthlyAmount, annualRate, years){
-      const months = years * 12;
-      const mRate = annualRate / 100 / 12;
-      let total = 0;
-      for(let i=0;i<months;i++){
-        total += monthlyAmount;
-        total *= (1 + mRate);
-      }
-      const invested = monthlyAmount * months;
-      const returns = total - invested;
-      return { invested, returns, corpus: total, months, monthlyRate: mRate };
-    }
+    // elements
+    const sipMonthlyRange = document.getElementById('sipMonthlyRange');
+    const sipMonthlyNumber = document.getElementById('sipMonthlyNumber');
+    const sipMonthlyValue = document.getElementById('sipMonthlyValue');
+    const sipRateRange = document.getElementById('sipRateRange');
+    const sipRateNumber = document.getElementById('sipRateNumber');
+    const sipRateValue = document.getElementById('sipRateValue');
+    const sipYearsRange = document.getElementById('sipYearsRange');
+    const sipYearsNumber = document.getElementById('sipYearsNumber');
+    const sipYearsValue = document.getElementById('sipYearsValue');
+
+    const sipInvested = document.getElementById('sipInvested');
+    const sipReturns = document.getElementById('sipReturns');
+    const sipCorpus = document.getElementById('sipCorpus');
+    const sipMonths = document.getElementById('sipMonths');
 
     function updateAll(){
-      const monthly = Math.round(Number(monthlyRange.value));
-      const annual = Number(rateRange.value);
-      const years = Math.round(Number(yearsRange.value));
+      const m = Math.round(Number(sipMonthlyRange.value));
+      const a = Number(sipRateRange.value);
+      const y = Math.round(Number(sipYearsRange.value));
 
-      monthlyNumber.value = monthly;
-      rateNumber.value = annual;
-      yearsNumber.value = years;
+      sipMonthlyNumber.value = m;
+      sipRateNumber.value = a;
+      sipYearsNumber.value = y;
 
-      // set display bubbles using HTML entity fallback in static HTML; JS uses unicode
-      monthlyValue.innerHTML = '&#8377;' + monthly.toLocaleString('en-IN');
-      rateValue.textContent = Number(annual).toFixed(1) + '%';
-      yearsValue.textContent = years + ' Yr';
+      sipMonthlyValue.innerHTML = '₹' + m.toLocaleString('en-IN');
+      sipRateValue.textContent = a.toFixed(1) + '%';
+      sipYearsValue.textContent = y + ' Yr';
 
-      const result = computeSIP(monthly, annual, years);
+      const res = computeSIP(m,a,y);
+      sipInvested.textContent = formatINR(res.invested);
+      sipReturns.textContent = formatINR(res.returns);
+      sipCorpus.textContent = formatINR(res.corpus);
+      sipMonths.textContent = res.months;
 
-      investedEl.textContent = formatINR(result.invested);
-      returnsEl.textContent = formatINR(result.returns);
-      corpusEl.textContent = formatINR(result.corpus);
-      monthsEl.textContent = result.months;
-      monthlyRateEl.textContent = (result.monthlyRate * 100).toFixed(3) + '%';
-
-      // Chart uses rounded integers so tooltip shows no decimals
-      const invRound = Math.max(0, Math.round(result.invested));
-      const retRound = Math.max(0, Math.round(result.returns));
-      sipChart.data.datasets[0].data = [invRound, retRound];
+      sipChart.data.datasets[0].data = [Math.round(res.invested), Math.round(res.returns)];
       sipChart.update();
     }
 
-    // events
-    [monthlyRange, rateRange, yearsRange].forEach(el => el.addEventListener('input', updateAll));
-
-    monthlyNumber.addEventListener('change', ()=>{
-      let v = Math.round(Number(monthlyNumber.value) || 0);
-      if (v < Number(monthlyRange.min)) v = Number(monthlyRange.min);
-      if (v > Number(monthlyRange.max)) v = Number(monthlyRange.max);
-      monthlyRange.value = v; updateAll();
+    // bind events
+    ['input','change'].forEach(ev=>{
+      sipMonthlyRange.addEventListener(ev, updateAll);
+      sipRateRange.addEventListener(ev, updateAll);
+      sipYearsRange.addEventListener(ev, updateAll);
     });
+    sipMonthlyNumber.addEventListener('change', ()=>{ let v = Math.round(Number(sipMonthlyNumber.value) || 0); if(v < 100) v = 100; sipMonthlyRange.value = v; updateAll(); });
+    sipRateNumber.addEventListener('change', ()=>{ let v = Number(sipRateNumber.value) || 1; sipRateRange.value = v; updateAll(); });
+    sipYearsNumber.addEventListener('change', ()=>{ let v = Math.round(Number(sipYearsNumber.value) || 1); if(v < 1) v = 1; sipYearsRange.value = v; updateAll(); });
 
-    rateNumber.addEventListener('change', ()=>{
-      let v = Number(rateNumber.value) || 0;
-      if (v < Number(rateRange.min)) v = Number(rateRange.min);
-      if (v > Number(rateRange.max)) v = Number(rateRange.max);
-      rateRange.value = v; updateAll();
-    });
-
-    yearsNumber.addEventListener('change', ()=>{
-      let v = Math.round(Number(yearsNumber.value) || 1);
-      if (v < Number(yearsRange.min)) v = Number(yearsRange.min);
-      if (v > Number(yearsRange.max)) v = Number(yearsRange.max);
-      yearsRange.value = v; updateAll();
-    });
-
-    // init
+    // initial render
     updateAll();
   </script>
 </body>
