@@ -4,192 +4,119 @@
   <meta charset="utf-8" />
   <title>Smart Money Management — TechFinserv Blogs</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Smart money management tips for students, salaried professionals and business owners. Practical personal finance guide, savings, SIPs, tax planning and business finance." />
+  <meta name="description" content="Smart money management tips for students, salaried professionals, and business owners. Practical guide on savings, SIPs, EMI, tax planning and business finance." />
+  <!-- Suggested meta keywords for basic SEO (also use these in H2/H3, image alt, anchor text) -->
+  <meta name="keywords" content="money management, personal finance, SIP investing, EMI calculator, tax saving strategies, savings tips for salaried employees, financial planning for students, business finance management">
   <link rel="icon" type="image/png" href="images/favicon.png">
-  <style>
-    :root {
-      --accent: #003366;
-      --accent-2: #154a7b;
-      --muted: #6b7280;
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --glass: rgba(255,255,255,0.6);
-      --radius: 12px;
-      --max-width: 1150px;
-      --header-height: 76px; /* default header height */
-      --header-padding-vertical: 6px; /* default vertical padding */
-      --logo-max-height: 64px; /* default logo max height */
-    }
 
-    /* box-sizing and prevent horizontal page scroll */
+  <style>
+    :root{
+      --accent:#003366; --accent-2:#154a7b; --muted:#6b7280; --bg:#f6f7fb; --card:#fff; --radius:12px; --max-width:1150px;
+      --header-h:76px; --header-h-sm:56px;
+    }
     *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;overflow-x:hidden}
     a{color:inherit;text-decoration:none}
     .page{min-height:100%;display:flex;flex-direction:column}
 
-    /* HEADER (sticky + shrinkable) */
-    header.site-header {
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
-      padding: var(--header-padding-vertical) 16px;
-      position: sticky; /* <-- makes header stick */
-      top: 0;            /* stick to top */
-      z-index: 99999;    /* above everything */
+    /* HEADER (sticky + shrink) */
+    header.site-header{
+      background:#ffffff;
+      box-shadow:0 2px 6px rgba(15,23,42,0.06);
+      padding:8px 16px;
+      position:sticky; top:0; z-index:99999;
+      display:flex; align-items:center; transition:all 220ms ease;
+      height:var(--header-h);
       backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      height: var(--header-height);
-      display:flex;
-      align-items:center;
-      transition: height 220ms ease, padding 220ms ease, box-shadow 220ms ease;
     }
-    /* scrolled state */
-    header.site-header.scrolled {
-      --header-height: 56px;
-      --header-padding-vertical: 4px;
-      box-shadow: 0 6px 24px rgba(12,18,30,0.08);
+    header.site-header.scrolled{ height:var(--header-h-sm); box-shadow:0 6px 24px rgba(12,18,30,0.08); }
+
+    .header-inner{ max-width:var(--max-width); margin:0 auto; display:flex; align-items:center; gap:12px; width:100%; }
+    .logo-link{ display:inline-block; line-height:0; transition:transform 220ms ease; }
+    .logo{ display:block; width:auto; height:auto; max-height:64px; transition:max-height 220ms ease; }
+    header.site-header.scrolled .logo{ max-height:44px; }
+
+    nav.site-nav{ margin-left:auto; display:flex; align-items:center; gap:10px; }
+    .nav-links{ display:flex; gap:8px; align-items:center; }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; padding:8px 12px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer; border:0; }
+    .btn-primary{ background:var(--accent); color:#fff; }
+    .btn-ghost{ background:transparent; border:1px solid rgba(3,66,102,0.08); color:var(--accent); }
+
+    .menu-toggle{ display:none; background:transparent; border:0; padding:8px; border-radius:8px; cursor:pointer; }
+    .mobile-menu{ display:none; position:absolute; right:16px; top:100%; background:var(--card); box-shadow:0 8px 30px rgba(15,23,42,0.12); border-radius:8px; overflow:hidden; margin-top:8px; min-width:160px; }
+    .mobile-menu a{ display:block; padding:10px 12px; border-bottom:1px solid #f1f5f9; color:var(--accent); }
+    .mobile-menu a:last-child{ border-bottom:none; }
+
+    /* MAIN */
+    main.page-content{ max-width:var(--max-width); margin:10px auto; padding: calc(12px + var(--header-h)) 16px 40px; flex:1 0 auto; transition:padding 220ms ease; }
+
+    /* ARTICLE */
+    .article{ background:linear-gradient(180deg,#fff 0%,#fbfdff 100%); border-radius:var(--radius); padding:22px; box-shadow:0 10px 30px rgba(12,18,30,0.06); color:#0f172a; }
+    .article h1{ margin:0 0 10px 0; font-size:22px; color:var(--accent-2); line-height:1.08; }
+    .meta{ color:var(--muted); font-size:13px; margin-bottom:12px; }
+    .article p{ margin:0 0 12px; font-size:15px; color:#14202b; }
+    .article h2{ margin-top:16px; color:var(--accent-2); font-size:17px; }
+    .article ul{ margin:8px 0 12px 20px; color:var(--muted); }
+    .article blockquote{ border-left:4px solid #e6f0ff; padding-left:12px; margin:12px 0; background:#fbfdff; border-radius:6px; color:var(--muted); }
+
+    /* CAROUSEL */
+    .other-posts-wrap{ margin-top:18px; }
+    .carousel{ display:flex; align-items:center; gap:8px; }
+    .nav-btn{ background:var(--card); border:1px solid rgba(3,66,102,0.06); border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 6px 18px rgba(12,18,30,0.04); flex:0 0 40px; }
+    .carousel-track{ overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; display:flex; gap:12px; padding:6px; scrollbar-width:none; -ms-overflow-style:none; flex:1 1 auto; }
+    .carousel-track::-webkit-scrollbar{ display:none; }
+    .post-card{ scroll-snap-align:start; min-width:240px; max-width:260px; background:var(--card); border-radius:10px; padding:12px; box-shadow:0 6px 20px rgba(12,18,30,0.04); display:flex; flex-direction:column; gap:8px; flex:0 0 260px; }
+    .post-card img{ width:100%; height:110px; object-fit:cover; border-radius:8px; }
+    .post-card h4{ margin:0; font-size:15px; color:var(--accent-2); }
+    .post-card p{ margin:0; color:var(--muted); font-size:13px; }
+
+    /* small screens: match your index mobile header, stack CTAs, bigger tap areas */
+    @media (max-width:880px){
+      .nav-links{ display:none; }
+      .menu-toggle{ display:inline-flex; }
+      .mobile-menu{ right:8px; left:auto; }
+      main.page-content{ padding: calc(8px + var(--header-h)) 12px 28px; }
+      .article{ padding:18px; }
+      .post-card{ min-width:200px; max-width:220px; flex:0 0 220px; }
+      .btn{ padding:10px 14px; font-size:15px; border-radius:10px; }
+      /* stack CTA buttons full width */
+      .cta-stack{ display:flex; gap:10px; flex-direction:column; }
+      .cta-stack .btn{ width:100%; text-align:center; }
     }
 
-    .header-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      width:100%;
-    }
-    .logo-link { display:inline-block; line-height:0; transition: transform 220ms ease; }
-    .logo { display:block; width:auto; height:auto; max-height:var(--logo-max-height); transition: max-height 220ms ease, transform 220ms ease; }
-    /* reduce logo on scroll */
-    header.site-header.scrolled .logo { max-height:44px; transform: translateY(-1px); }
-    @media (min-width:1024px) { .logo { max-height:80px; } header.site-header.scrolled .logo { max-height:56px; } }
-
-    nav.site-nav { margin-left:auto; display:flex; align-items:center; gap:10px; }
-    .nav-links { display:flex; gap:8px; align-items:center; }
-    .btn {
-      display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:0;
-    }
-    .btn-primary{background:var(--accent);color:#fff}
-    .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
-    .menu-toggle{display:none;background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer}
-    .mobile-menu{display:none;position:absolute;right:16px;top:100%;background:var(--card);box-shadow:0 8px 30px rgba(15,23,42,0.12);border-radius:8px;overflow:hidden;margin-top:8px;min-width:160px}
-    .mobile-menu a{display:block;padding:10px 12px;border-bottom:1px solid #f1f5f9;color:var(--accent)}
-    .mobile-menu a:last-child{border-bottom:none}
-    @media (max-width:640px){ .nav-links{display:none} .menu-toggle{display:inline-flex} .mobile-menu{right:8px;left:auto} }
-
-    /* MAIN content (reduced spacing under header) */
-    main.page-content{
-      max-width:var(--max-width);
-      margin:12px auto; /* smaller top/bottom margin */
-      padding: calc(8px + var(--header-height)) 16px 32px 16px; /* top padding includes header height */
-      flex:1 0 auto;
-      transition: padding 220ms ease;
-    }
-    /* smaller top padding after header shrinks (visually tighter) */
-    header.site-header.scrolled ~ main.page-content{
-      padding: calc(8px + var(--header-height)) 16px 32px 16px;
-    }
-
-    /* Single-column article layout (full width inside container) */
-    .blog-wrap { display:block; width:100%; gap:24px; align-items:start; }
-    .article {
-      background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
-      border-radius: var(--radius);
-      padding:24px;
-      box-shadow: 0 10px 30px rgba(12,18,30,0.06);
-      color: #0f172a;
-      max-width:100%;
-    }
-    .article h1 { margin:0 0 12px 0; font-size:22px; color:var(--accent-2); line-height:1.1; }
-    .meta { color:var(--muted); font-size:13px; margin-bottom:14px; }
-    .article p { margin:0 0 12px 0; color: #14202b; font-size:15px; }
-    .article h2 { margin-top:18px; color:var(--accent-2); font-size:18px; }
-    .article ul { margin:8px 0 12px 20px; color:var(--muted); }
-    .article strong { color:var(--accent); }
-    .article blockquote { border-left:4px solid #e6f0ff; padding-left:12px; margin:12px 0; color:var(--muted); background:#fbfdff; border-radius:6px; }
-
-    /* Other Posts horizontal carousel (confined, won't cause page scroll) */
-    .other-posts-wrap { margin-top:18px; }
-    .carousel {
-      position:relative;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .carousel .nav-btn {
-      background:var(--card);
-      border:1px solid rgba(3,66,102,0.06);
-      border-radius:8px;
-      width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;
-      box-shadow:0 6px 18px rgba(12,18,30,0.04);
-      flex:0 0 40px;
-    }
-    .carousel-track {
-      overflow-x:auto;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-      display:flex;
-      gap:12px;
-      padding:6px;
-      scrollbar-width:none;
-      -ms-overflow-style:none;
-      flex:1 1 auto;
-    }
-    .carousel-track::-webkit-scrollbar{display:none}
-    .post-card {
-      scroll-snap-align:start;
-      min-width:260px;
-      max-width:260px;
-      background:var(--card);
-      border-radius:10px;
-      padding:14px;
-      box-shadow:0 6px 20px rgba(12,18,30,0.04);
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      flex:0 0 260px;
-    }
-    .post-card img{width:100%;height:120px;object-fit:cover;border-radius:8px}
-    .post-card h4{margin:0;font-size:15px;color:var(--accent-2)}
-    .post-card p{margin:0;color:var(--muted);font-size:13px}
-
-    /* footer */
-    footer.site-footer { text-align:center; padding:18px 0; color:var(--muted); font-size:13px; margin-top:26px; }
-
-    /* small helpers */
-    .muted{color:var(--muted)}
-    .small { font-size:13px; color:var(--muted) }
-
-    @media (max-width:1100px){ .article{padding:18px} }
     @media (max-width:520px){
-      .logo{max-height:64px}
-      .carousel .nav-btn{display:none}
-      .post-card{min-width:220px;max-width:220px;flex:0 0 220px}
-      main.page-content{padding: calc(8px + var(--header-height)) 12px 28px 12px}
+      header.site-header{ padding:6px 12px; }
+      .logo{ max-height:52px; }
+      header.site-header.scrolled .logo{ max-height:36px; }
+      .post-card img{ height:100px; }
+      .carousel .nav-btn{ display:none; }
+      .post-card{ min-width:180px; max-width:200px; flex:0 0 200px; }
+      main.page-content{ padding: calc(8px + var(--header-h-sm)) 12px 22px; }
     }
+
+    footer.site-footer{ text-align:center; padding:18px 0; color:var(--muted); font-size:13px; margin-top:26px; }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- HEADER (sticky + shrink) -->
+    <!-- header (mobile behaviour matches your index: menu-toggle + mobile-menu) -->
     <header class="site-header" role="banner" id="siteHeader">
       <div class="header-inner">
         <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
-          <img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo" id="siteLogo">
+          <img class="logo" id="siteLogo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
         </a>
 
         <nav class="site-nav" role="navigation" aria-label="Main navigation">
           <div class="nav-links" id="navLinks">
             <a class="btn btn-primary" href="index.html">Home</a>
-            <a class="btn btn-primary" href="blogs.html" aria-current="page">Blogs</a>
-            <a class="btn btn-primary" href="services.html">Services</a>
+            <a class="btn btn-primary" href="blogs.html">Blogs</a>
+            <a class="btn btn-primary" href="crm-test.html">CRM Test</a>
             <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
             <a class="btn btn-ghost" href="contact.html">Contact</a>
           </div>
 
           <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
 
           <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
@@ -203,128 +130,85 @@
       </div>
     </header>
 
-    <!-- MAIN -->
-    <main class="page-content" role="main" id="maincontent">
-      <div class="blog-wrap" aria-label="Blog">
+    <main class="page-content" id="maincontent" role="main">
+      <article class="article" role="article" aria-label="Smart Money Management">
+        <h1>Smart Money Management: A Complete Guide for Students, Salaried Professionals & Business Owners</h1>
+        <div class="meta">Published on <strong>September 23, 2025</strong> | By <strong>TechFinserv Team</strong></div>
 
-        <!-- ARTICLE (full width inside container) -->
-        <article class="article" role="article" aria-label="Smart Money Management">
-          <h1>Smart Money Management: A Complete Guide for Students, Salaried Professionals & Business Owners</h1>
-          <div class="meta">Published on <strong>September 23, 2025</strong> &nbsp; | &nbsp; By <strong>TechFinserv Team</strong></div>
+        <p>Money is more than currency — it’s a tool for opportunity, stability and future planning. This guide covers practical money management tips for students, salaried employees and business owners: budgeting, saving, investing, tax planning and business finance best practices.</p>
 
-          <p>Money is more than just currency—it’s a tool that shapes lifestyles, builds opportunities, and secures futures. Yet, for many people, managing money effectively feels like a challenge. Whether you are a student just learning about personal finance, a salaried professional juggling expenses and savings, or a business owner handling cash flow and investments, <strong>smart money management</strong> can make all the difference.</p>
+        <h2>Why money management matters</h2>
+        <p>Poor financial habits cause debt, missed opportunities and stress. Good planning builds stability, growth and peace of mind.</p>
 
-          <h2>Why Money Management Matters</h2>
-          <p>Financial stress is one of the leading causes of anxiety in today’s fast-paced world. Poor money habits can lead to:</p>
-          <ul>
-            <li>Rising debts</li>
-            <li>Lack of savings for emergencies</li>
-            <li>Missed opportunities for wealth creation</li>
-            <li>Uncertainty about retirement</li>
-          </ul>
-          <p>On the other hand, good financial planning builds <strong>stability, growth opportunities, and peace of mind</strong>.</p>
+        <h2>Money management for students</h2>
+        <ul>
+          <li><strong>Create a simple budget</strong> — use Google Sheets or a mobile app to track essentials, education and extras.</li>
+          <li><strong>Start small</strong> — save 10–20% of any income you receive.</li>
+          <li><strong>Avoid high-interest debt</strong> — borrow only for productive reasons and repay on time.</li>
+        </ul>
 
-          <h2>Money Management for Students</h2>
-          <ul>
-            <li><strong>Create a Simple Budget:</strong> Track expenses using Google Sheets or a budgeting app. Categorize essentials, education and extras.</li>
-            <li><strong>Start Saving Small:</strong> Deposit at least 10–20% of any income you get into a savings account.</li>
-            <li><strong>Avoid Debt Early:</strong> High-interest debt can trap you — borrow minimally and repay on time.</li>
-            <li><strong>Invest in Knowledge:</strong> Spend on certifications and skills that boost career prospects.</li>
-          </ul>
+        <h2>Money management for salaried professionals</h2>
+        <ul>
+          <li><strong>50-30-20 rule</strong> — 50% needs, 30% wants, 20% savings/investments.</li>
+          <li><strong>Emergency fund</strong> — 3–6 months of expenses.</li>
+          <li><strong>Start SIPs early</strong> — compounding benefits long-term wealth creation.</li>
+        </ul>
 
-          <h2>Money Management for Salaried Professionals</h2>
-          <ul>
-            <li><strong>50-30-20 Rule:</strong> 50% needs, 30% wants, 20% savings/investments.</li>
-            <li><strong>Emergency Fund:</strong> Keep 3–6 months of living expenses in a separate account.</li>
-            <li><strong>Invest Early:</strong> SIPs, PPF, index funds and retirement plans benefit from compounding.</li>
-            <li><strong>Control Lifestyle Inflation:</strong> Avoid raising spending proportionally with salary increases.</li>
-            <li><strong>Tax Planning:</strong> Use tax-saving instruments like ELSS, PPF under Section 80C.</li>
-          </ul>
+        <h2>Money management for business owners</h2>
+        <ul>
+          <li><strong>Separate business & personal funds</strong>.</li>
+          <li><strong>Monitor cash flow</strong> monthly and reinvest profits for growth.</li>
+          <li><strong>Insure and comply</strong> — protect operations and file taxes correctly.</li>
+        </ul>
 
-          <h2>Money Management for Business Owners</h2>
-          <ul>
-            <li><strong>Separate Personal & Business Finances:</strong> Use distinct bank accounts and bookkeeping.</li>
-            <li><strong>Monitor Cash Flow:</strong> Maintain monthly cash flow statements to track receipts and payments.</li>
-            <li><strong>Reinvest Profits:</strong> Allocate a portion of earnings for growth and technology upgrades.</li>
-            <li><strong>Build Business Credit:</strong> Maintain on-time payments to lenders to ensure future access to funding.</li>
-            <li><strong>Insurance & Compliance:</strong> Protect the business with proper insurance and timely tax filings.</li>
-          </ul>
+        <h2>Universal tips</h2>
+        <ul>
+          <li>Track expenses, automate savings, invest long-term and avoid unnecessary debt.</li>
+          <li>Link to calculators and tools — SIP, EMI and Loan comparison pages help users and SEO.</li>
+        </ul>
 
-          <h2>Universal Money Management Tips</h2>
-          <ul>
-            <li>Track expenses regularly.</li>
-            <li>Save first, spend later — automate transfers to savings/investments.</li>
-            <li>Invest for the long term and avoid timing the market.</li>
-            <li>Use loans for productive assets, not discretionary spending.</li>
-            <li>Review goals every 6–12 months and rebalance investments accordingly.</li>
-          </ul>
+        <blockquote>Pro tip: Add internal links to your calculators (SIP, EMI, Personal Loan tools). Google rewards pages that help users take action.</blockquote>
 
-          <h2>Final Thoughts</h2>
-          <p>Smart money management is not about how much you earn — it’s about how well you manage what you have. Start today with small, consistent steps. Over time, those steps compound into a secure and stress-free financial future.</p>
+        <!-- carousel / other posts -->
+        <div class="other-posts-wrap" aria-label="Other posts">
+          <h2 style="margin:12px 0 8px 0; color:var(--accent-2)">Other Posts</h2>
+          <div class="carousel" aria-hidden="false">
+            <button class="nav-btn" id="prevBtn" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 
-          <blockquote>Pro tip: Add internal links from this post to your calculators (SIP, EMI, Personal Loan tools). Pages that help users navigate to tools and calculators get rewarded by search engines.</blockquote>
+            <div class="carousel-track" id="carouselTrack" role="list">
+              <article class="post-card" role="listitem">
+                <img src="images/blog-sip-basics.jpg" alt="SIP basics - start SIP investing">
+                <h4>Beginner's Guide to SIPs</h4>
+                <p class="small">How to start SIPs and why compounding matters.</p>
+                <a href="blog-sip-guide.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
+              </article>
 
-          <!-- Other Posts Carousel (stays inside article, won't force page horizontal scroll) -->
-          <div class="other-posts-wrap" aria-label="Other posts">
-            <h2 style="margin:12px 0 8px 0; color:var(--accent-2)">Other Posts</h2>
-            <div class="carousel" aria-hidden="false">
-              <button class="nav-btn" id="prevBtn" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <article class="post-card" role="listitem">
+                <img src="images/blog-tax-saving.jpg" alt="Tax saving strategies for salaried">
+                <h4>Tax-saving Strategies for Salaried Employees</h4>
+                <p class="small">Practical 80C investments & tax tips.</p>
+                <a href="blog-tax-saving.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
+              </article>
 
-              <div class="carousel-track" id="carouselTrack" role="list">
-                <!-- Replace placeholder images/links with your real blog pages -->
-                <article class="post-card" role="listitem">
-                  <img src="images/blog-sip-basics.jpg" alt="SIP basics">
-                  <h4>Beginner's Guide to SIPs</h4>
-                  <p class="small">How to start SIPs and why compounding matters.</p>
-                  <a href="blog-sip-guide.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
-                </article>
-
-                <article class="post-card" role="listitem">
-                  <img src="images/blog-tax-saving.jpg" alt="Tax saving">
-                  <h4>Tax-saving Strategies for Salaried Employees</h4>
-                  <p class="small">Practical 80C investments & tax tips.</p>
-                  <a href="blog-tax-saving.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
-                </article>
-
-                <article class="post-card" role="listitem">
-                  <img src="images/blog-debt-management.jpg" alt="Debt management">
-                  <h4>Smart Debt Management</h4>
-                  <p class="small">Prioritize, refinance and pay off high-interest loans.</p>
-                  <a href="blog-debt-management.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
-                </article>
-
-                <article class="post-card" role="listitem">
-                  <img src="images/blog-business-finance.jpg" alt="Business finance">
-                  <h4>Cash Flow Tips for Small Businesses</h4>
-                  <p class="small">Keep operations liquid and profitable with simple rules.</p>
-                  <a href="blog-business-finance.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
-                </article>
-
-                <article class="post-card" role="listitem">
-                  <img src="images/blog-investing-basics.jpg" alt="Investing basics">
-                  <h4>Investing 101: Index Funds & ETFs</h4>
-                  <p class="small">Low-cost, long-term investing for steady wealth creation.</p>
-                  <a href="blog-indexfunds.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
-                </article>
-              </div>
-
-              <button class="nav-btn" id="nextBtn" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <article class="post-card" role="listitem">
+                <img src="images/blog-debt-management.jpg" alt="Debt management tips">
+                <h4>Smart Debt Management</h4>
+                <p class="small">Prioritize, refinance and pay off high-interest loans.</p>
+                <a href="blog-debt-management.html" class="small" style="margin-top:8px;color:var(--accent)">Read more →</a>
+              </article>
             </div>
+
+            <button class="nav-btn" id="nextBtn" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
-
-        </article>
-
-      </div>
+        </div>
+      </article>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      Design and Maintained By Kiran Rathva
-    </footer>
+    <footer class="site-footer">Design and Maintained By Kiran Rathva</footer>
   </div>
 
   <script>
-    // mobile menu toggle (same as your index)
+    // mobile menu toggle (matches your index)
     (function(){
       const menuToggle = document.getElementById('menuToggle');
       const mobileMenu = document.getElementById('mobileMenu');
@@ -337,82 +221,49 @@
         mobileMenu.setAttribute('aria-hidden', String(isOpen));
       });
       document.addEventListener('click', function(e){
-        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        if (menuToggle && !menuToggle.contains(e.target) && mobileMenu && !mobileMenu.contains(e.target)) {
           mobileMenu.style.display = 'none';
           menuToggle.setAttribute('aria-expanded','false');
           mobileMenu.setAttribute('aria-hidden','true');
         }
       });
       if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }));
-      window.addEventListener('resize', ()=>{ if (window.innerWidth > 640 && mobileMenu) { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); } });
+
+      // hide on resize
+      window.addEventListener('resize', ()=>{ if (window.innerWidth > 880 && mobileMenu) { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); } });
     })();
 
-    // Carousel behavior for Other Posts
+    // header shrink on scroll
+    (function(){
+      const header = document.getElementById('siteHeader');
+      const scrolled = 'scrolled';
+      const onScroll = () => {
+        if (window.scrollY > 16) header.classList.add(scrolled);
+        else header.classList.remove(scrolled);
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('load', onScroll, {passive:true});
+    })();
+
+    // carousel basic controls
     (function(){
       const track = document.getElementById('carouselTrack');
       const prev = document.getElementById('prevBtn');
       const next = document.getElementById('nextBtn');
       if (!track) return;
-
-      const getCardWidth = () => {
-        const card = track.querySelector('.post-card');
-        const gap = parseInt(getComputedStyle(track).gap || 12);
-        return card ? (card.offsetWidth + gap) : 280;
+      const gap = 12;
+      const cardWidth = () => {
+        const c = track.querySelector('.post-card');
+        return c ? (c.offsetWidth + gap) : 260;
       };
-
-      prev.addEventListener('click', ()=> {
-        track.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
-      });
-      next.addEventListener('click', ()=> {
-        track.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
-      });
-
-      // allow arrow keys when focused
-      track.setAttribute('tabindex','0');
-      track.addEventListener('keydown', (e)=> {
-        if (e.key === 'ArrowRight') track.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
-        if (e.key === 'ArrowLeft') track.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
-      });
-
-      // drag-to-scroll (desktop)
-      let isDown = false, startX, scrollLeft;
-      track.addEventListener('mousedown', (e)=> {
-        isDown = true;
-        track.classList.add('active');
-        startX = e.pageX - track.offsetLeft;
-        scrollLeft = track.scrollLeft;
-      });
-      track.addEventListener('mouseleave', ()=> { isDown = false; track.classList.remove('active'); });
-      track.addEventListener('mouseup', ()=> { isDown = false; track.classList.remove('active'); });
-      track.addEventListener('mousemove', (e)=> {
-        if(!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - track.offsetLeft;
-        const walk = (x - startX) * 1; //scroll-fast
-        track.scrollLeft = scrollLeft - walk;
-      });
-    })();
-
-    // Header shrink on scroll & smaller gap
-    (function(){
-      const header = document.getElementById('siteHeader');
-      const scrolledClass = 'scrolled';
-      let lastScroll = 0;
-
-      const onScroll = () => {
-        const y = window.scrollY || window.pageYOffset;
-        // add scrolled class after small threshold
-        if (y > 16) {
-          if (!header.classList.contains(scrolledClass)) header.classList.add(scrolledClass);
-        } else {
-          if (header.classList.contains(scrolledClass)) header.classList.remove(scrolledClass);
-        }
-        lastScroll = y;
-      };
-
-      // run on load in case the page isn't at 0
-      window.addEventListener('load', onScroll, {passive:true});
-      window.addEventListener('scroll', onScroll, {passive:true});
+      prev.addEventListener('click', ()=> track.scrollBy({left: -cardWidth(), behavior:'smooth'}));
+      next.addEventListener('click', ()=> track.scrollBy({left: cardWidth(), behavior:'smooth'}));
+      // drag to scroll
+      let isDown=false, startX, scrollLeft;
+      track.addEventListener('mousedown', e => { isDown=true; startX=e.pageX - track.offsetLeft; scrollLeft=track.scrollLeft; });
+      track.addEventListener('mouseup', ()=> isDown=false);
+      track.addEventListener('mouseleave', ()=> isDown=false);
+      track.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX); track.scrollLeft = scrollLeft - walk; });
     })();
   </script>
 </body>
