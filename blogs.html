@@ -5,127 +5,175 @@
   <title>Smart Money Management — TechFinserv Blogs</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Smart money management tips for students, salaried professionals, and business owners. Practical guide on savings, SIPs, EMI, tax planning and business finance." />
-  <meta name="keywords" content="money management, personal finance, SIP investing, EMI calculator, tax saving strategies, savings tips for salaried employees, financial planning for students, business finance management">
+  <meta name="keywords" content="personal finance guide, money management tips, SIP investing, EMI calculator India, tax saving strategies, savings tips for salaried employees, business cash flow tips">
 
-  <!-- Canonical (replace with actual page URL) -->
+  <!-- Canonical (replace with your real URL) -->
   <link rel="canonical" href="https://yourdomain.com/blog-smart-money.html">
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Twitter (replace URLs & handles) -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="TechFinserv" />
   <meta property="og:title" content="Smart Money Management: A Complete Guide for Students, Salaried Professionals & Business Owners" />
-  <meta property="og:description" content="Practical money management tips: budgeting, saving, SIP investing, EMI strategies and business finance. A clear guide for students, salaried employees and entrepreneurs." />
-  <!-- Replace with the final URL of the page -->
+  <meta property="og:description" content="Practical money management tips: budgeting, saving, SIP investing, EMI strategies and business finance." />
   <meta property="og:url" content="https://yourdomain.com/blog-smart-money.html" />
-  <!-- Replace with your share image (recommended 1200 x 630) -->
   <meta property="og:image" content="https://yourdomain.com/images/blog-share-smart-money.jpg" />
   <meta property="og:image:alt" content="Smart Money Management guide — SIP, EMI, savings, tax tips" />
   <meta property="article:published_time" content="2025-09-23T00:00:00+05:30" />
   <meta property="article:author" content="TechFinserv Team" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@YourTwitterHandle" />
   <meta name="twitter:creator" content="@YourTwitterHandle" />
   <meta name="twitter:title" content="Smart Money Management: A Complete Guide for Students, Salaried Professionals & Business Owners" />
-  <meta name="twitter:description" content="Practical money management tips: budgeting, saving, SIP investing, EMI strategies and business finance. A concise guide for students, salaried employees and business owners." />
+  <meta name="twitter:description" content="Practical money management tips: budgeting, saving, SIP investing, EMI strategies and business finance." />
   <meta name="twitter:image" content="https://yourdomain.com/images/blog-share-smart-money.jpg" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
   <style>
+    /* ========== VARIABLES ========== */
     :root{
-      --accent:#003366; --accent-2:#154a7b; --muted:#6b7280; --bg:#f6f7fb; --card:#fff; --radius:12px; --max-width:1150px;
-      --header-h:76px; --header-h-sm:56px;
+      --accent:#003366;
+      --accent-2:#154a7b;
+      --muted:#6b7280;
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --radius:12px;
+      --max-width:1150px;
+      --header-h:72px;
+      --header-h-sm:52px;
     }
+
+    /* ========== GLOBAL ========== */
     *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;overflow-x:hidden; -webkit-text-size-adjust:100%;}
     a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
     .page{min-height:100%;display:flex;flex-direction:column}
 
-    /* HEADER (sticky + shrink) */
+    /* ========== HEADER ========== */
     header.site-header{
-      background:#ffffff;
-      box-shadow:0 2px 6px rgba(15,23,42,0.06);
-      padding:8px 16px;
       position:sticky; top:0; z-index:99999;
-      display:flex; align-items:center; transition:all 220ms ease;
+      width:100%;
+      background:rgba(255,255,255,0.98);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow:0 1px 6px rgba(15,23,42,0.06);
+      transition:all .20s ease;
       height:var(--header-h);
-      backdrop-filter: blur(4px);
+      display:flex; align-items:center;
+      padding:10px 14px;
     }
-    header.site-header.scrolled{ height:var(--header-h-sm); box-shadow:0 6px 24px rgba(12,18,30,0.08); }
+    header.site-header.scrolled{
+      height:var(--header-h-sm);
+      box-shadow:0 6px 20px rgba(12,18,30,0.08);
+    }
+    .header-inner{
+      max-width:var(--max-width);
+      margin:0 auto;
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo-link{display:inline-block;line-height:0; transition:transform .20s ease;}
+    .logo{max-height:56px; transition:max-height .20s ease;}
+    header.site-header.scrolled .logo{ max-height:40px; }
 
-    .header-inner{ max-width:var(--max-width); margin:0 auto; display:flex; align-items:center; gap:12px; width:100%; }
-    .logo-link{ display:inline-block; line-height:0; transition:transform 220ms ease; }
-    .logo{ display:block; width:auto; height:auto; max-height:64px; transition:max-height 220ms ease; }
-    header.site-header.scrolled .logo{ max-height:44px; }
-
+    /* desktop nav (kept for large screens) */
     nav.site-nav{ margin-left:auto; display:flex; align-items:center; gap:10px; }
     .nav-links{ display:flex; gap:8px; align-items:center; }
     .btn{ display:inline-flex; align-items:center; justify-content:center; padding:8px 12px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer; border:0; }
     .btn-primary{ background:var(--accent); color:#fff; }
     .btn-ghost{ background:transparent; border:1px solid rgba(3,66,102,0.08); color:var(--accent); }
 
+    /* mobile menu toggle */
     .menu-toggle{ display:none; background:transparent; border:0; padding:8px; border-radius:8px; cursor:pointer; }
-    .mobile-menu{ display:none; position:absolute; right:16px; top:100%; background:var(--card); box-shadow:0 8px 30px rgba(15,23,42,0.12); border-radius:8px; overflow:hidden; margin-top:8px; min-width:160px; }
-    .mobile-menu a{ display:block; padding:10px 12px; border-bottom:1px solid #f1f5f9; color:var(--accent); }
+    .menu-toggle svg{ display:block; }
+    .mobile-menu{ display:none; position:absolute; right:10px; top:100%; background:var(--card); box-shadow:0 10px 30px rgba(12,18,30,0.12); border-radius:10px; overflow:hidden; margin-top:8px; min-width:160px; }
+    .mobile-menu a{ display:block; padding:12px 14px; border-bottom:1px solid #f1f5f9; color:var(--accent); font-weight:600; font-size:15px; }
     .mobile-menu a:last-child{ border-bottom:none; }
 
-    /* MAIN */
-    main.page-content{ max-width:var(--max-width); margin:10px auto; padding: calc(12px + var(--header-h)) 16px 40px; flex:1 0 auto; transition:padding 220ms ease; }
+    /* ========== MAIN & ARTICLE ========== */
+    main.page-content{ max-width:var(--max-width); margin:8px auto; padding: calc(12px + var(--header-h)) 14px 36px; flex:1 0 auto; transition:padding .20s ease; }
+    header.site-header.scrolled ~ main.page-content{ padding-top: calc(10px + var(--header-h-sm)); }
 
-    /* ARTICLE */
-    .article{ background:linear-gradient(180deg,#fff 0%,#fbfdff 100%); border-radius:var(--radius); padding:22px; box-shadow:0 10px 30px rgba(12,18,30,0.06); color:#0f172a; }
-    .article h1{ margin:0 0 10px 0; font-size:22px; color:var(--accent-2); line-height:1.08; }
-    .meta{ color:var(--muted); font-size:13px; margin-bottom:12px; }
+    .article{
+      background:linear-gradient(180deg,#fff 0%,#fbfdff 100%);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:0 10px 30px rgba(12,18,30,0.06);
+      color:#0f172a;
+      margin-bottom:12px;
+    }
+    .article h1{ margin:0 0 10px 0; font-size:20px; color:var(--accent-2); line-height:1.08; }
+    .meta{ color:var(--muted); font-size:13px; margin-bottom:10px; display:block; }
     .article p{ margin:0 0 12px; font-size:15px; color:#14202b; }
-    .article h2{ margin-top:16px; color:var(--accent-2); font-size:17px; }
-    .article ul{ margin:8px 0 12px 20px; color:var(--muted); }
+    .article h2{ margin-top:14px; color:var(--accent-2); font-size:16px; }
+    .article ul{ margin:8px 0 12px 18px; color:var(--muted); line-height:1.5; }
     .article blockquote{ border-left:4px solid #e6f0ff; padding-left:12px; margin:12px 0; background:#fbfdff; border-radius:6px; color:var(--muted); }
 
-    /* CAROUSEL */
+    /* ========== OTHER POSTS CAROUSEL (touch friendly) ========== */
     .other-posts-wrap{ margin-top:18px; }
     .carousel{ display:flex; align-items:center; gap:8px; }
     .nav-btn{ background:var(--card); border:1px solid rgba(3,66,102,0.06); border-radius:8px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 6px 18px rgba(12,18,30,0.04); flex:0 0 40px; }
-    .carousel-track{ overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; display:flex; gap:12px; padding:6px; scrollbar-width:none; -ms-overflow-style:none; flex:1 1 auto; }
+    .carousel-track{ overflow-x:auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling:touch; display:flex; gap:12px; padding:6px; scrollbar-width:none; -ms-overflow-style:none; flex:1 1 auto; }
     .carousel-track::-webkit-scrollbar{ display:none; }
-    .post-card{ scroll-snap-align:start; min-width:240px; max-width:260px; background:var(--card); border-radius:10px; padding:12px; box-shadow:0 6px 20px rgba(12,18,30,0.04); display:flex; flex-direction:column; gap:8px; flex:0 0 260px; }
+    .post-card{ scroll-snap-align:start; min-width:200px; max-width:260px; background:var(--card); border-radius:10px; padding:12px; box-shadow:0 6px 20px rgba(12,18,30,0.04); display:flex; flex-direction:column; gap:8px; flex:0 0 240px; }
     .post-card img{ width:100%; height:110px; object-fit:cover; border-radius:8px; }
     .post-card h4{ margin:0; font-size:15px; color:var(--accent-2); }
     .post-card p{ margin:0; color:var(--muted); font-size:13px; }
 
-    @media (max-width:880px){
-      .nav-links{ display:none; }
-      .menu-toggle{ display:inline-flex; }
-      .mobile-menu{ right:8px; left:auto; }
-      main.page-content{ padding: calc(8px + var(--header-h)) 12px 28px; }
-      .article{ padding:18px; }
-      .post-card{ min-width:200px; max-width:220px; flex:0 0 220px; }
-      .btn{ padding:10px 14px; font-size:15px; border-radius:10px; }
-      .cta-stack{ display:flex; gap:10px; flex-direction:column; }
+    /* ========== UTILITY / RESPONSIVE ========== */
+    @media (min-width:880px){
+      .menu-toggle{ display:none; }
+      .mobile-menu{ display:none; }
+      .nav-links{ display:flex; }
+      main.page-content{ padding: calc(14px + var(--header-h)) 20px 48px; }
+      .article{ padding:24px; }
+      .post-card{ min-width:240px; flex:0 0 260px; }
     }
-    @media (max-width:520px){
-      header.site-header{ padding:6px 12px; }
+
+    /* mobile first: show menu toggle & hide large nav on small screens */
+    @media (max-width:879px){
+      .nav-links{ display:none; }
+      .menu-toggle{ display:inline-flex; margin-left:auto; }
       .logo{ max-height:52px; }
       header.site-header.scrolled .logo{ max-height:36px; }
-      .post-card img{ height:100px; }
-      .carousel .nav-btn{ display:none; }
-      .post-card{ min-width:180px; max-width:200px; flex:0 0 200px; }
-      main.page-content{ padding: calc(8px + var(--header-h-sm)) 12px 22px; }
+      /* stack CTA if any */
+      .cta-stack{ display:flex; gap:10px; flex-direction:column; }
+      .btn{ padding:10px 14px; font-size:15px; }
+      .post-card{ min-width:200px; flex:0 0 200px; }
+      main.page-content{ padding: calc(10px + var(--header-h)) 14px 30px; }
     }
-    footer.site-footer{ text-align:center; padding:18px 0; color:var(--muted); font-size:13px; margin-top:26px; }
+
+    /* very small screens */
+    @media (max-width:420px){
+      .header-inner{ gap:8px; }
+      .logo{ max-height:48px; }
+      .article h1{ font-size:18px; }
+      .post-card img{ height:96px; }
+      .post-card{ min-width:180px; flex:0 0 180px; padding:10px; }
+      .nav-btn{ display:none; } /* hide carousel left/right buttons on tiny screens */
+      main.page-content{ padding: calc(10px + var(--header-h-sm)) 12px 22px; }
+    }
+
+    /* footer */
+    footer.site-footer{ text-align:center; padding:16px 10px; color:var(--muted); font-size:13px; margin-top:14px; }
+
+    /* accessibility focus */
+    a:focus, button:focus { outline:3px solid rgba(0,51,102,0.12); outline-offset:2px; border-radius:6px; }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- header (mobile behaviour matches your index: menu-toggle + mobile-menu) -->
-    <header class="site-header" role="banner" id="siteHeader">
+    <!-- HEADER -->
+    <header class="site-header" id="siteHeader" role="banner" aria-label="Main header">
       <div class="header-inner">
-        <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
-          <img class="logo" id="siteLogo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
+        <a class="logo-link" href="index.html" aria-label="TechFinserv home">
+          <img src="images/techfinserv-logo.png" alt="TechFinserv logo" class="logo" id="siteLogo">
         </a>
 
+        <!-- desktop nav (hidden on small screens) -->
         <nav class="site-nav" role="navigation" aria-label="Main navigation">
           <div class="nav-links" id="navLinks">
             <a class="btn btn-primary" href="index.html">Home</a>
@@ -135,11 +183,13 @@
             <a class="btn btn-ghost" href="contact.html">Contact</a>
           </div>
 
-          <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">
+          <!-- mobile menu toggle -->
+          <button id="menuToggle" class="menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu" title="Open menu">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
 
-          <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
+          <!-- mobile menu (appears under toggle) -->
+          <div id="mobileMenu" class="mobile-menu" role="menu" aria-hidden="true">
             <a href="index.html" role="menuitem">Home</a>
             <a href="blogs.html" role="menuitem">Blogs</a>
             <a href="services.html" role="menuitem">Services</a>
@@ -150,6 +200,7 @@
       </div>
     </header>
 
+    <!-- MAIN -->
     <main class="page-content" id="maincontent" role="main">
       <article class="article" role="article" aria-label="Smart Money Management">
         <h1>Smart Money Management: A Complete Guide for Students, Salaried Professionals & Business Owners</h1>
@@ -189,7 +240,7 @@
 
         <blockquote>Pro tip: Add internal links to your calculators (SIP, EMI, Personal Loan tools). Google rewards pages that help users take action.</blockquote>
 
-        <!-- carousel / other posts -->
+        <!-- Other posts carousel -->
         <div class="other-posts-wrap" aria-label="Other posts">
           <h2 style="margin:12px 0 8px 0; color:var(--accent-2)">Other Posts</h2>
           <div class="carousel" aria-hidden="false">
@@ -221,6 +272,7 @@
             <button class="nav-btn" id="nextBtn" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
+
       </article>
     </main>
 
@@ -228,44 +280,54 @@
   </div>
 
   <script>
-    // mobile menu toggle (matches your index)
+    // Mobile menu toggle (a11y-friendly)
     (function(){
       const menuToggle = document.getElementById('menuToggle');
       const mobileMenu = document.getElementById('mobileMenu');
-      if (!menuToggle) return;
+      if (!menuToggle || !mobileMenu) return;
+
+      const closeMenu = () => {
+        mobileMenu.style.display = 'none';
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      };
+      const openMenu = () => {
+        mobileMenu.style.display = 'block';
+        menuToggle.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+      };
+
       menuToggle.addEventListener('click', function(e){
         e.stopPropagation();
         const isOpen = mobileMenu.style.display === 'block';
-        mobileMenu.style.display = isOpen ? 'none' : 'block';
-        menuToggle.setAttribute('aria-expanded', String(!isOpen));
-        mobileMenu.setAttribute('aria-hidden', String(isOpen));
+        isOpen ? closeMenu() : openMenu();
       });
-      document.addEventListener('click', function(e){
-        if (menuToggle && !menuToggle.contains(e.target) && mobileMenu && !mobileMenu.contains(e.target)) {
-          mobileMenu.style.display = 'none';
-          menuToggle.setAttribute('aria-expanded','false');
-          mobileMenu.setAttribute('aria-hidden','true');
-        }
-      });
-      if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }));
 
-      // hide on resize
-      window.addEventListener('resize', ()=>{ if (window.innerWidth > 880 && mobileMenu) { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); } });
+      // close when clicking outside
+      document.addEventListener('click', function(e){
+        if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) closeMenu();
+      });
+
+      // close on link click
+      mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+      // close on resize to desktop
+      window.addEventListener('resize', ()=>{ if (window.innerWidth > 880) closeMenu(); });
     })();
 
-    // header shrink on scroll
+    // Header shrink on scroll
     (function(){
       const header = document.getElementById('siteHeader');
-      const scrolled = 'scrolled';
+      const threshold = 16;
       const onScroll = () => {
-        if (window.scrollY > 16) header.classList.add(scrolled);
-        else header.classList.remove(scrolled);
+        if (window.scrollY > threshold) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
       };
       window.addEventListener('scroll', onScroll, {passive:true});
       window.addEventListener('load', onScroll, {passive:true});
     })();
 
-    // carousel basic controls
+    // Carousel controls + touch/drag
     (function(){
       const track = document.getElementById('carouselTrack');
       const prev = document.getElementById('prevBtn');
@@ -274,16 +336,30 @@
       const gap = 12;
       const cardWidth = () => {
         const c = track.querySelector('.post-card');
-        return c ? (c.offsetWidth + gap) : 260;
+        return c ? (c.offsetWidth + gap) : 240;
       };
-      prev.addEventListener('click', ()=> track.scrollBy({left: -cardWidth(), behavior:'smooth'}));
-      next.addEventListener('click', ()=> track.scrollBy({left: cardWidth(), behavior:'smooth'}));
-      // drag to scroll
-      let isDown=false, startX, scrollLeft;
-      track.addEventListener('mousedown', e => { isDown=true; startX=e.pageX - track.offsetLeft; scrollLeft=track.scrollLeft; });
-      track.addEventListener('mouseup', ()=> isDown=false);
-      track.addEventListener('mouseleave', ()=> isDown=false);
-      track.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX); track.scrollLeft = scrollLeft - walk; });
+
+      prev.addEventListener('click', ()=> track.scrollBy({ left: -cardWidth(), behavior:'smooth' }));
+      next.addEventListener('click', ()=> track.scrollBy({ left: cardWidth(), behavior:'smooth' }));
+
+      // drag-to-scroll
+      let isDown = false, startX = 0, scrollLeft = 0;
+      track.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        track.setPointerCapture(e.pointerId);
+        startX = e.clientX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+        track.classList.add('dragging');
+      });
+      track.addEventListener('pointerup', (e) => { isDown = false; track.releasePointerCapture(e.pointerId); track.classList.remove('dragging'); });
+      track.addEventListener('pointercancel', () => { isDown = false; track.classList.remove('dragging'); });
+      track.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.clientX - track.offsetLeft;
+        const walk = (x - startX);
+        track.scrollLeft = scrollLeft - walk;
+      });
     })();
   </script>
 </body>
