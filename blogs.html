@@ -56,8 +56,10 @@
     @media (min-width:1024px){ .grid{ grid-template-columns: repeat(3, 1fr); } }
 
     .card{ background:var(--card); border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(12,18,30,0.06); display:flex; flex-direction:column; }
-    .thumb{ position:relative; height:170px; background:#e2e8f0; }
-    .thumb img{ width:100%; height:100%; object-fit:cover; }
+    .thumb { display:block; position:relative; height:170px; background:#e2e8f0; border-radius:12px 12px 0 0; overflow:hidden; }
+    .thumb img{ width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
+    .card:hover .thumb img{ transform:scale(1.08); }
+
     .badge{ position:absolute; left:10px; top:10px; background:#0ea5e9; color:#fff; font-weight:700; font-size:12px; padding:5px 8px; border-radius:999px; }
     .body{ padding:12px; display:flex; flex-direction:column; gap:8px; }
     .title{ margin:0; font-size:16px; color:var(--accent-2); line-height:1.25; }
@@ -112,7 +114,7 @@
     <main class="page-content" id="maincontent" role="main">
       <section id="postsGrid" class="grid">
         <article class="card">
-          <div class="thumb"><span class="badge">EMI</span><img src="images/what-is-emi.png" alt="What is EMI cover"></div>
+          <a class="thumb" href="what-is-emi.html"><span class="badge">EMI</span><img src="images/what-is-emi.png" alt="What is EMI cover"></a>
           <div class="body">
             <h2 class="title">What is EMI? Complete Guide</h2>
             <p class="meta"><span>Sep 26, 2025</span> · <span>6 min read</span></p>
@@ -122,7 +124,7 @@
         </article>
 
         <article class="card">
-          <div class="thumb"><span class="badge">SIP</span><img src="images/techfinserv-logo.png" alt="SIP cover"></div>
+          <a class="thumb" href="blog-sip-guide.html"><span class="badge">SIP</span><img src="images/techfinserv-logo.png" alt="SIP cover"></a>
           <div class="body">
             <h2 class="title">Beginner's Guide to SIPs</h2>
             <p class="meta"><span>Sep 15, 2025</span> · <span>5 min read</span></p>
@@ -132,7 +134,7 @@
         </article>
 
         <article class="card">
-          <div class="thumb"><span class="badge">Tax</span><img src="images/techfinserv-logo.png" alt="Tax tips cover"></div>
+          <a class="thumb" href="blog-tax-saving.html"><span class="badge">Tax</span><img src="images/techfinserv-logo.png" alt="Tax tips cover"></a>
           <div class="body">
             <h2 class="title">Tax-saving Strategies for Salaried</h2>
             <p class="meta"><span>Sep 10, 2025</span> · <span>7 min read</span></p>
@@ -142,7 +144,7 @@
         </article>
 
         <article class="card">
-          <div class="thumb"><span class="badge">Business</span><img src="images/techfinserv-logo.png" alt="Debt management cover"></div>
+          <a class="thumb" href="blog-debt-management.html"><span class="badge">Business</span><img src="images/techfinserv-logo.png" alt="Debt management cover"></a>
           <div class="body">
             <h2 class="title">Smart Debt Management</h2>
             <p class="meta"><span>Sep 02, 2025</span> · <span>5 min read</span></p>
@@ -152,7 +154,7 @@
         </article>
 
         <article class="card">
-          <div class="thumb"><span class="badge">Basics</span><img src="images/techfinserv-logo.png" alt="Student money tips"></div>
+          <a class="thumb" href="blog-smart-money.html"><span class="badge">Basics</span><img src="images/techfinserv-logo.png" alt="Student money tips"></a>
           <div class="body">
             <h2 class="title">Money Basics for Students</h2>
             <p class="meta"><span>Aug 28, 2025</span> · <span>4 min read</span></p>
@@ -162,7 +164,7 @@
         </article>
 
         <article class="card">
-          <div class="thumb"><span class="badge">EMI</span><img src="images/techfinserv-logo.png" alt="EMI calculator tips"></div>
+          <a class="thumb" href="emi-calculator.html"><span class="badge">EMI</span><img src="images/techfinserv-logo.png" alt="EMI calculator tips"></a>
           <div class="body">
             <h2 class="title">EMI Calculator: Tips & Tricks</h2>
             <p class="meta"><span>Aug 20, 2025</span> · <span>3 min read</span></p>
@@ -201,6 +203,3 @@
   </script>
 </body>
 </html>
-
-
-
