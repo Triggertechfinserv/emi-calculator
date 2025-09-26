@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.techfinserv.com/sitemap.xml
+Sitemap: https://www.techfinserv.com/sitemap.xml.gz
