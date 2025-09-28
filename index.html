@@ -5,9 +5,14 @@
   <title>TechFinserv - Home</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="TechFinserv — modern financial tools and trusted expertise. Explore calculators, services and blog insights." />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Google AdSense (global) -->
+  <meta name="google-adsense-account" content="ca-pub-4180233192929131">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
+          crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -158,6 +163,13 @@
       .hero{padding:18px}
       .cta-banner { flex-direction:column; align-items:flex-start; }
     }
+
+    /* OPTIONAL: a tiny, policy-safe wrapper to avoid layout shift before an ad fills.
+       Do not style the ad content itself. */
+    .ad-block {
+      display:block;
+      margin:12px 0;
+    }
   </style>
 </head>
 <body>
@@ -203,6 +215,17 @@
           <span class="kicker">Built for the modern borrower</span>
           <h1>Make smarter loan decisions with clear tools & insights</h1>
           <p>TechFinserv blends easy-to-use calculators with actionable articles and comparison tools — so you can choose the best loan for your needs and save on interest.</p>
+
+          <!-- Ad 1: In-article (below hero intro) -->
+          <div class="ad-block" role="complementary" aria-label="Advertisement">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="REPLACE_WITH_YOUR_SLOT_ID_1"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
 
           <div class="cta-row">
             <a class="btn btn-primary" href="pl-eligibility.html">Personal Loan Eligibility calculator</a>
@@ -266,6 +289,17 @@
         </div>
       </section>
 
+      <!-- Ad 2: Between Features and Services -->
+      <div class="ad-block" role="complementary" aria-label="Advertisement">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-client="ca-pub-4180233192929131"
+             data-ad-slot="REPLACE_WITH_YOUR_SLOT_ID_2"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
       <!-- SERVICES GRID -->
       <section class="services-grid" aria-label="Services">
         <div class="service-tile">
@@ -293,6 +327,17 @@
           <div class="who">— Mukesh Dhankani., Financial planner</div>
         </div>
       </section>
+
+      <!-- Ad 3: After Testimonials -->
+      <div class="ad-block" role="complementary" aria-label="Advertisement">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-client="ca-pub-4180233192929131"
+             data-ad-slot="REPLACE_WITH_YOUR_SLOT_ID_3"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
 
       <!-- CTA banner -->
       <section class="cta-banner" aria-label="Call to action">
@@ -334,9 +379,19 @@
         }
       });
       // close on link click
-      if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }));
+      if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+        mobileMenu.style.display='none';
+        menuToggle.setAttribute('aria-expanded','false');
+        mobileMenu.setAttribute('aria-hidden','true');
+      }));
       // hide on resize
-      window.addEventListener('resize', ()=>{ if (window.innerWidth > 640 && mobileMenu) { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); } });
+      window.addEventListener('resize', ()=>{
+        if (window.innerWidth > 640 && mobileMenu) {
+          mobileMenu.style.display='none';
+          menuToggle.setAttribute('aria-expanded','false');
+          mobileMenu.setAttribute('aria-hidden','true');
+        }
+      });
     })();
   </script>
 </body>
