@@ -164,12 +164,10 @@
       .cta-banner { flex-direction:column; align-items:flex-start; }
     }
 
-    /* OPTIONAL: a tiny, policy-safe wrapper to avoid layout shift before an ad fills.
-       Do not style the ad content itself. */
-    .ad-block {
-      display:block;
-      margin:12px 0;
-    }
+    /* OPTIONAL: a tiny, policy-safe wrapper to avoid layout shift before an ad fills. */
+    .ad-block { display:block; margin:12px 0; }
+    /* Reserve a bit of height for the 300x50 EonAds slot on mobile */
+    .ad-eon-300x50 { min-height:50px; display:flex; align-items:center; justify-content:center; }
   </style>
 </head>
 <body>
@@ -216,15 +214,14 @@
           <h1>Make smarter loan decisions with clear tools & insights</h1>
           <p>TechFinserv blends easy-to-use calculators with actionable articles and comparison tools — so you can choose the best loan for your needs and save on interest.</p>
 
-          <!-- Ad 1: In-article (below hero intro) -->
-          <div class="ad-block" role="complementary" aria-label="Advertisement">
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-client="ca-pub-4180233192929131"
-                 data-ad-slot="REPLACE_WITH_YOUR_SLOT_ID_1"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          <!-- Ad 1: In-article (below hero intro) — EonAds (non-intrusive) -->
+          <div class="ad-block ad-eon-300x50" role="complementary" aria-label="Advertisement">
+            <!-- ads by Eonads -->
+            <a href="https://www.eonads.com" target="_blank" rel="sponsored noopener">Ads by Eonads</a>
+            <ins class="e300x50" id="eon-300x50-hero"
+                 data-revive-hash="da22bbd2cfc6a27440bbe2f6ebd926f4"
+                 data-revive-zoneid="64703"
+                 data-revive-id="f87497be83f6ed6b52c3b340d803ae0d"></ins>
           </div>
 
           <div class="cta-row">
@@ -289,7 +286,8 @@
         </div>
       </section>
 
-      <!-- Ad 2: Between Features and Services -->
+      <!-- Ad 2: Between Features and Services (kept for future AdSense; currently commented to avoid mixed networks) -->
+      <!--
       <div class="ad-block" role="complementary" aria-label="Advertisement">
         <ins class="adsbygoogle"
              style="display:block; text-align:center;"
@@ -299,6 +297,7 @@
              data-full-width-responsive="true"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
+      -->
 
       <!-- SERVICES GRID -->
       <section class="services-grid" aria-label="Services">
@@ -328,16 +327,16 @@
         </div>
       </section>
 
-      <!-- Ad 3: After Testimonials -->
-      <div class="ad-block" role="complementary" aria-label="Advertisement">
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-client="ca-pub-4180233192929131"
-             data-ad-slot="REPLACE_WITH_YOUR_SLOT_ID_3"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <!-- Ad 3: After Testimonials — EonAds duplicate slot (optional). Uncomment if you want two placements. -->
+      <!--
+      <div class="ad-block ad-eon-300x50" role="complementary" aria-label="Advertisement">
+        <a href="https://www.eonads.com" target="_blank" rel="sponsored noopener">Ads by Eonads</a>
+        <ins class="e300x50" id="eon-300x50-bottom"
+             data-revive-hash="da22bbd2cfc6a27440bbe2f6ebd926f4"
+             data-revive-zoneid="64703"
+             data-revive-id="f87497be83f6ed6b52c3b340d803ae0d"></ins>
       </div>
+      -->
 
       <!-- CTA banner -->
       <section class="cta-banner" aria-label="Call to action">
@@ -357,6 +356,9 @@
       Design and Maintained By Kiran Rathva
     </footer>
   </div>
+
+  <!-- Load EonAds once near the end for performance -->
+  <script async src="//network.eonads.com/adserver/www/delivery/asyncjs.php"></script>
 
   <script>
     // mobile menu toggle (same as EMI page)
