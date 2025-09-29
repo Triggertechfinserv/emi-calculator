@@ -136,7 +136,7 @@
     /* Testimonials */
     .testimonials { margin-top:22px; display:grid; grid-template-columns: 1fr 1fr; gap:14px; align-items:start; }
     .testimonial { background:var(--card); padding:16px; border-radius:12px; box-shadow:0 6px 20px rgba(12,18,30,0.03); }
-    .testimonial p { margin:0;color:var(--muted);font-size:14px; }
+    .testimonial p { margin:0;color:var(--muted); font-size:14px; }
     .testimonial .who { margin-top:10px;font-weight:700;color:var(--accent-2);font-size:13px; }
 
     /* CTA banner */
@@ -179,10 +179,6 @@
 
     /* Hero ad is small/mobile-first */
     .ad-hero { display:block; }
-
-    /* Mobile-only ad slot (hidden ≥768px) */
-    .ad-mobile-only { display:block; }
-    @media (min-width:768px) { .ad-mobile-only { display:none; } }
   </style>
 </head>
 <body>
@@ -272,4 +268,152 @@
             <small style="color:var(--muted);font-size:12px">Need a demo?</small>
             <div style="margin-top:6px;"><a class="btn btn-primary" href="contact.html">Request Demo</a></div>
           </div>
-       
+        </aside>
+      </section>
+
+      <!-- Ad 2: Leaderboard 728x90 (desktop only) after hero; auto-collapses on no fill -->
+      <div class="ad-slot ad-top-desktop" aria-label="Advertisement">
+        <!-- ads by Eonads -->
+        <a href="https://www.eonads.com" class="ex1" target="_blank" rel="sponsored noopener">Ads by Eonads</a>
+        <ins class="e728x90" id="eon-728x90-top"
+             data-revive-hash="da22bbd2cfc6a27440bbe2f6ebd926f4"
+             data-revive-zoneid="64747"
+             data-revive-id="f87497be83f6ed6b52c3b340d803ae0d"></ins>
+      </div>
+
+      <!-- FEATURES -->
+      <section class="features" aria-label="Key features">
+        <div class="feature">
+          <div class="icon">₹</div>
+          <div>
+            <h4>Transparent Calculations</h4>
+            <p>See full amortization schedules, breakdowns and impact of part-payments.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="icon">⚖️</div>
+          <div>
+            <h4>Compare Lenders</h4>
+            <p>Side-by-side comparisons with processing fees and effective rates.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="icon">📚</div>
+          <div>
+            <h4>Actionable Guides</h4>
+            <p>Guides written for borrowers — practical, concise and up-to-date.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES GRID -->
+      <section class="services-grid" aria-label="Services">
+        <div class="service-tile">
+          <h5>EMI & Amortization</h5>
+          <p>Generate schedules, export to Excel/PDF and test prepayment strategies.</p>
+        </div>
+        <div class="service-tile">
+          <h5>Loan Comparison</h5>
+          <p>Compare interest types, tenure, and net cost to find the best match.</p>
+        </div>
+        <div class="service-tile">
+          <h5>Advisory</h5>
+          <p>Speak to our experts for tailored loan planning and product selection.</p>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="testimonials" aria-label="What users say">
+        <div class="testimonial">
+          <p>"The EMI schedule tool helped me understand the true cost of my home loan. Prepayment simulation saved us thousands." </p>
+          <div class="who">— Deepak Sharma., Home buyer</div>
+        </div>
+        <div class="testimonial">
+          <p>"Clear, fast and practical. The comparison tool showed me a cheaper offer I hadn't found elsewhere."</p>
+          <div class="who">— Mukesh Dhankani., Financial planner</div>
+        </div>
+      </section>
+
+      <!-- CTA banner -->
+      <section class="cta-banner" aria-label="Call to action">
+        <div class="left">
+          <h3>Ready to plan smarter?</h3>
+          <p>Get personalized guidance or try our interactive calculators to discover savings.</p>
+        </div>
+        <div class="right">
+          <a class="btn btn-primary" href="contact.html">Get a Demo</a>
+          <a class="btn btn-primary" href="emi-calculator.html" style="margin-left:10px;">Try Calculator</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      Design and Maintained By Kiran Rathva
+    </footer>
+  </div>
+
+  <!-- Load EonAds once near the end for performance -->
+  <script async src="https://network.eonads.com/adserver/www/delivery/asyncjs.php"></script>
+
+  <script>
+    // mobile menu toggle (same as EMI page)
+    (function(){
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (!menuToggle) return;
+      menuToggle.addEventListener('click', function(e){
+        e.stopPropagation();
+        const isOpen = mobileMenu.style.display === 'block';
+        mobileMenu.style.display = isOpen ? 'none' : 'block';
+        menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu.setAttribute('aria-hidden', String(isOpen));
+      });
+      document.addEventListener('click', function(e){
+        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.style.display = 'none';
+          menuToggle.setAttribute('aria-expanded','false');
+          mobileMenu.setAttribute('aria-hidden','true');
+        }
+      });
+      // close on link click
+      if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+        mobileMenu.style.display='none';
+        menuToggle.setAttribute('aria-expanded','false');
+        mobileMenu.setAttribute('aria-hidden','true');
+      }));
+      // hide on resize
+      window.addEventListener('resize', ()=>{
+        if (window.innerWidth > 640 && mobileMenu) {
+          mobileMenu.style.display='none';
+          menuToggle.setAttribute('aria-expanded','false');
+          mobileMenu.setAttribute('aria-hidden','true');
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    // Collapse ad containers if no creative renders (zero unused space)
+    (function() {
+      function collapseIfEmpty(containerId) {
+        var el = document.getElementById(containerId);
+        if (!el) return;
+        // If the EonAds script hasn't inserted a child or size is zero, remove wrapper
+        if (!el.firstElementChild || el.offsetHeight === 0) {
+          var wrapper = el.closest('.ad-slot');
+          if (wrapper) wrapper.remove();
+        }
+      }
+      window.addEventListener('load', function() {
+        setTimeout(function(){
+          collapseIfEmpty('eon-300x50-hero'); // hero 300x50
+          collapseIfEmpty('eon-728x90-top');  // desktop 728x90
+        }, 1600);
+      });
+    })();
+  </script>
+</body>
+</html>
