@@ -1,1 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Blogs — Personal Finance Tips, EMI, SIPs & Tax | TechFinserv</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <meta name="description" content="Explore TechFinserv blogs: beginner-friendly money tips, EMI & SIP guides, calculators, and tax-saving strategies for students, salaried pros, and business owners." />
+  <link rel="canonical" href="https://yourdomain.com/blogs.html" />
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <style>
+    :root{
+      --accent:#003366;
+      --accent-2:#154a7b;
+      --muted:#6b7280;
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --radius:12px;
+      --max-width:1150px;
+      --header-h-mobile:56px;
+      --header-h-mobile-shrink:44px;
+      --header-h-desktop:76px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:#0f172a;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;-webkit-font-smoothing:antialiased; overflow-x:hidden;}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+    .page{min-height:100%;display:flex;flex-direction:column}
+
+    /* Header */
+    header.site-header{ position:sticky; top:0; left:0; right:0; z-index:1200; background:#fff; display:flex; align-items:center; height:var(--header-h-mobile); padding:8px 12px; box-shadow:0 1px 6px rgba(15,23,42,0.06); transition:height .18s ease, padding .18s ease, box-shadow .18s ease; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+    header.site-header.shrink{ height:var(--header-h-mobile-shrink); box-shadow:0 6px 20px rgba(12,18,30,0.08); }
+    .header-inner{ max-width:var(--max-width); margin:0 auto; width:100%; display:flex; align-items:center; gap:12px; }
+    .logo{ height:40px; width:auto; transition:height .18s ease; }
+    header.site-header.shrink .logo{ height:32px; }
+    nav.site-nav{ margin-left:auto; display:flex; align-items:center; gap:10px; }
+    .nav-links{ display:flex; gap:8px; align-items:center; }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; padding:8px 12px; border-radius:8px; font-weight:600; font-size:14px; cursor:pointer; border:0; }
+    .btn-primary{ background:var(--accent); color:#fff; }
+    .btn-ghost{ background:transparent; border:1px solid rgba(3,66,102,0.08); color:var(--accent); }
+    .menu-toggle{ display:none; background:transparent; border:0; padding:8px; border-radius:8px; cursor:pointer; }
+    .menu-toggle svg{ width:22px; height:22px; display:block; }
+    .mobile-menu{ display:none; position:absolute; right:16px; top:100%; background:var(--card); box-shadow:0 8px 30px rgba(15,23,42,0.12); border-radius:8px; overflow:hidden; margin-top:8px; min-width:160px; z-index:1300; }
+    .mobile-menu a{ display:block; padding:10px 12px; border-bottom:1px solid #f1f5f9; color:var(--accent); font-weight:600; }
+
+    /* Hero */
+    .hero{ background:linear-gradient(180deg,#eaf3ff 0%,#fff 60%); border-bottom:1px solid #e2e8f0; }
+    .hero-inner{ max-width:var(--max-width); margin:0 auto; padding: clamp(16px,3vw,28px) 12px; }
+    .hero h1{ margin:0 0 6px; font-size: clamp(20px,2.7vw,28px); color:var(--accent-2); line-height:1.15; }
+    .hero p{ margin:0; color:var(--muted); font-size:clamp(14px,1.5vw,16px); }
+
+    /* Grid */
+    main.page-content{ max-width:var(--max-width); margin:0 auto; padding: 8px 12px 28px; }
+    .grid{ display:grid; gap:12px; grid-template-columns: 1fr; }
+    @media (min-width:700px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width:1024px){ .grid{ grid-template-columns: repeat(3, 1fr); } }
+
+    .card{ background:var(--card); border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(12,18,30,0.06); display:flex; flex-direction:column; }
+    .thumb { display:block; position:relative; height:170px; background:#e2e8f0; border-radius:12px 12px 0 0; overflow:hidden; }
+    .thumb img{ width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
+    .card:hover .thumb img{ transform:scale(1.08); }
+
+    .badge{ position:absolute; left:10px; top:10px; background:#0ea5e9; color:#fff; font-weight:700; font-size:12px; padding:5px 8px; border-radius:999px; }
+    .body{ padding:12px; display:flex; flex-direction:column; gap:8px; }
+    .title{ margin:0; font-size:16px; color:var(--accent-2); line-height:1.25; }
+    .excerpt{ margin:0; color:#334155; font-size:14px; }
+    .meta{ display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:12px; }
+    .actions{ margin-top:auto; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .read{ color:var(--accent); font-weight:700; }
+
+    footer.site-footer{ text-align:center; padding:14px 12px 26px; color:var(--muted); font-size:13px; }
+
+    @media (min-width:880px){ header.site-header{ height:var(--header-h-desktop); padding:10px 20px; } .logo{ height:56px; } header.site-header.shrink{ height:64px; } .nav-links{ display:flex; } .menu-toggle{ display:none; } .mobile-menu{ display:none !important; } }
+    @media (max-width:879px){ .nav-links{ display:none; } .menu-toggle{ display:inline-flex; margin-left:auto; } .logo{ height:40px; } header.site-header.shrink .logo{ height:32px; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Header -->
+    <header class="site-header" id="siteHeader" role="banner">
+      <div class="header-inner">
+        <a class="logo-link" href="index.html" aria-label="TechFinserv home">
+          <img class="logo" src="images/techfinserv-logo.png" alt="TechFinserv logo" loading="lazy">
+        </a>
+        <nav class="site-nav">
+          <div class="nav-links">
+            <a class="btn btn-primary" href="index.html">Home</a>
+            <a class="btn btn-primary" href="blogs.html">Blogs</a>
+            <a class="btn btn-primary" href="services.html">Services</a>
+            <a class="btn btn-primary" href="emi-calculator.html">EMI Calculator</a>
+            <a class="btn btn-ghost" href="contact.html">Contact</a>
+          </div>
+          <button id="menuToggle" class="menu-toggle"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div id="mobileMenu" class="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="services.html">Services</a>
+            <a href="emi-calculator.html">EMI Calculator</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>TechFinserv Blogs</h1>
+        <p>Fresh, practical personal finance content — with calculators you can use right away.</p>
+      </div>
+    </section>
+
+    <!-- Grid with all posts -->
+    <main class="page-content" id="maincontent" role="main">
+      <section id="postsGrid" class="grid">
+        <article class="card">
+          <a class="thumb" href="what-is-emi.html"><span class="badge">EMI</span><img src="images/what-is-emi.png" alt="What is EMI cover"></a>
+          <div class="body">
+            <h2 class="title">What is EMI? Complete Guide</h2>
+            <p class="meta"><span>Sep 26, 2025</span> · <span>6 min read</span></p>
+            <p class="excerpt">Understand interest vs principal, types of interest, part payment and foreclosure — plus tips to save interest.</p>
+            <div class="actions"><a class="read" href="what-is-emi.html">Read →</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb" href="flexi-hybrid-loan.html"><span class="badge">Loans</span><img src="images/flexi-hybrid-loan.png" alt="SIP cover"></a>
+          <div class="body">
+            <h2 class="title">Flexi Hybrid Loan: Interest-Only + Dropline Explained</h2>
+            <p class="meta"><span>Sep 28, 2025</span> · <span>5 min read</span></p>
+            <p class="excerpt">Discover how Flexi Hybrid Loans combine the benefits of overdraft and term loans. Learn about the 2-phase structure (interest-only + dropline),Flexible withdrawals and part-payments make this the smarter way to borrow.</p>
+            <div class="actions"><a class="read" href="flexi-hybrid-loan.html">Read →</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb" href="blog-tax-saving.html"><span class="badge">Tax</span><img src="images/techfinserv-logo.png" alt="Tax tips cover"></a>
+          <div class="body">
+            <h2 class="title">Tax-saving Strategies for Salaried</h2>
+            <p class="meta"><span>Sep 10, 2025</span> · <span>7 min read</span></p>
+            <p class="excerpt">Practical 80C options and planning ideas to keep more of your income.</p>
+            <div class="actions"><a class="read" href="blog-tax-saving.html">Read →</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb" href="blog-debt-management.html"><span class="badge">Business</span><img src="images/techfinserv-logo.png" alt="Debt management cover"></a>
+          <div class="body">
+            <h2 class="title">Smart Debt Management</h2>
+            <p class="meta"><span>Sep 02, 2025</span> · <span>5 min read</span></p>
+            <p class="excerpt">Prioritize repayments, refinance high-interest loans, and build a clear payoff plan.</p>
+            <div class="actions"><a class="read" href="blog-debt-management.html">Read →</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb" href="blog-smart-money.html"><span class="badge">Basics</span><img src="images/techfinserv-logo.png" alt="Student money tips"></a>
+          <div class="body">
+            <h2 class="title">Money Basics for Students</h2>
+            <p class="meta"><span>Aug 28, 2025</span> · <span>4 min read</span></p>
+            <p class="excerpt">Budgeting, saving, and avoiding debt — a starter playbook for campus life.</p>
+            <div class="actions"><a class="read" href="blog-smart-money.html">Read →</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb" href="emi-calculator.html"><span class="badge">EMI</span><img src="images/techfinserv-logo.png" alt="EMI calculator tips"></a>
+          <div class="body">
+            <h2 class="title">EMI Calculator: Tips & Tricks</h2>
+            <p class="meta"><span>Aug 20, 2025</span> · <span>3 min read</span></p>
+            <p class="excerpt">Get the most out of your EMI planning with step-up, prepayment and tenure tweaks.</p>
+            <div class="actions"><a class="read" href="emi-calculator.html">Try Calculator →</a></div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">Design and Maintained By Kiran Rathva</footer>
+  </div>
+
+  <script>
+    // Mobile menu
+    (function(){
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (!menuToggle || !mobileMenu) return;
+      const open = () => { mobileMenu.style.display='block'; menuToggle.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); };
+      const close = () => { mobileMenu.style.display='none'; menuToggle.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); };
+      menuToggle.addEventListener('click', (e)=>{ e.stopPropagation(); (mobileMenu.style.display==='block')?close():open(); });
+      document.addEventListener('click', (e)=>{ if(!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) close(); });
+      mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', close));
+      window.addEventListener('resize', ()=>{ if (window.innerWidth>880) close(); });
+    })();
+
+    // Header shrink
+    (function(){
+      const header = document.getElementById('siteHeader');
+      if(!header) return;
+      const onScroll=()=>{ if(window.scrollY>10) header.classList.add('shrink'); else header.classList.remove('shrink'); };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('load', onScroll, {passive:true});
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
 
