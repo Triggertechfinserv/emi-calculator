@@ -11,8 +11,7 @@
 
   <!-- Google AdSense (global) -->
   <meta name="google-adsense-account" content="ca-pub-4180233192929131">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
-          crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131" crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -21,184 +20,113 @@
       --muted: #6b7280;
       --bg: #f6f7fb;
       --card: #ffffff;
-      --glass: rgba(255,255,255,0.6);
       --radius: 12px;
       --max-width: 1150px;
+      --shadow: 0 8px 26px rgba(12,18,30,0.06);
+      --border: 1px solid #eef2f7;
     }
 
     /* base */
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
     a{color:inherit;text-decoration:none}
-    .page{min-height:100%;display:flex;flex-direction:column}  
+    .page{min-height:100%;display:flex;flex-direction:column}
 
-    /* ========== HEADER (UNCHANGED) ========== */
-    header.site-header {
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(15,23,42,0.06);
-      padding: 6px 16px;
-      position: relative;
-      z-index: 9999;
-    }
-    .header-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      gap:16px;
-    }
-    .logo-link { display:inline-block; line-height:0; }
-    .logo { display:block; width:auto; height:auto; max-height:64px; }
-    @media (min-width:1024px) { .logo { max-height:80px; } }
-    nav.site-nav { margin-left:auto; display:flex; align-items:center; gap:10px; }
-    .nav-links { display:flex; gap:8px; align-items:center; }
-    .btn {
-      display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:0;
-    }
+    /* header */
+    header.site-header{background:#fff;box-shadow:0 2px 6px rgba(15,23,42,0.06);padding:6px 16px;position:relative;z-index:10}
+    .header-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;gap:16px}
+    .logo-link{display:inline-block;line-height:0}
+    .logo{display:block;height:auto;max-height:64px}
+    @media (min-width:1024px){.logo{max-height:80px}}
+    nav.site-nav{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .nav-links{display:flex;gap:8px;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:0}
     .btn-primary{background:var(--accent);color:#fff}
     .btn-ghost{background:transparent;border:1px solid rgba(3,66,102,0.08);color:var(--accent)}
-
     .menu-toggle{display:none;background:transparent;border:0;padding:8px;border-radius:8px;cursor:pointer}
-    .mobile-menu{display:none;position:absolute;right:16px;top:100%;background:var(--card);box-shadow:0 8px 30px rgba(15,23,42,0.12);border-radius:8px;overflow:hidden;margin-top:8px;min-width:160px}
+    .mobile-menu{display:none;position:absolute;right:16px;top:100%;background:#fff;box-shadow:0 8px 30px rgba(15,23,42,0.12);border-radius:8px;overflow:hidden;margin-top:8px;min-width:160px}
     .mobile-menu a{display:block;padding:10px 12px;border-bottom:1px solid #f1f5f9;color:var(--accent)}
     .mobile-menu a:last-child{border-bottom:none}
-    @media (max-width:640px){ .nav-links{display:none} .menu-toggle{display:inline-flex} .mobile-menu{right:8px;left:auto} }
+    @media (max-width:640px){.nav-links{display:none}.menu-toggle{display:inline-flex}.mobile-menu{right:8px;left:auto}}
 
-    /* ========== NEW LAYOUT ========== */
+    /* layout */
     main.page-content{max-width:var(--max-width);margin:22px auto;padding:0 16px;flex:1 0 auto}
 
-    /* Hero with layered cards */
-    .hero-wrap {
+    /* hero area */
+    .hero-wrap{
       display:grid;
-      grid-template-columns: 1fr 420px;
+      grid-template-columns: 1fr 360px;
       gap:24px;
-      align-items:stretch;
+      align-items:start; /* key: prevents left column stretching down */
     }
-    .hero {
-      background: linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
-      border-radius: var(--radius);
+    .hero{
+      background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
+      border-radius:var(--radius);
       padding:28px;
-      box-shadow: 0 10px 30px rgba(12,18,30,0.06);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:16px;
-      position:relative;
-      overflow:visible;
+      box-shadow:var(--shadow);
+      display:flex;flex-direction:column;gap:16px
     }
-    .hero .kicker { display:inline-block;padding:6px 10px;border-radius:999px;background:#eef6ff;color:var(--accent);font-weight:700;font-size:13px; }
-    .hero h1 { margin:0;font-size:21px;color:var(--accent-2);line-height:1.06; }
-    .hero p { margin:0;color:var(--muted);font-size:15px; }
+    .hero .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef6ff;color:var(--accent);font-weight:700;font-size:13px}
+    .hero h1{margin:0;font-size:21px;color:var(--accent-2);line-height:1.06}
+    .hero p{margin:0;color:var(--muted);font-size:15px}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
 
-    /* Spotlight card to right */
-    .spotlight {
-      background: linear-gradient(180deg,#0f172a08, #ffffff);
-      border-radius: var(--radius);
+    /* right panel (no big ad inside) */
+    .spotlight{
+      background:linear-gradient(180deg,#f8fafc,#ffffff);
+      border-radius:var(--radius);
       padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      box-shadow: 0 8px 26px rgba(12,18,30,0.06);
-      align-self:center;
+      display:flex;flex-direction:column;gap:12px;
+      box-shadow:var(--shadow);
+      align-self:start;
     }
-    .spotlight h3 { margin:0;color:var(--accent);font-size:18px; }
-    .spotlight p { margin:0;color:var(--muted);font-size:14px; }
-    .cta-row { display:flex; gap:10px; flex-wrap:wrap; }
+    .spotlight h3{margin:0;color:var(--accent);font-size:18px}
+    .spotlight p{margin:0;color:var(--muted);font-size:14px}
 
-    /* Feature grid (cards with icons) */
-    .features {
-      display:grid;
-      grid-template-columns: repeat(3,1fr);
-      gap:16px;
-      margin-top:18px;
-    }
-    .feature {
-      background:var(--card);
-      padding:18px;
-      border-radius:12px;
-      box-shadow:0 6px 26px rgba(12,18,30,0.04);
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-    }
-    .feature .icon {
-      width:52px;height:52px;border-radius:10px;background:linear-gradient(180deg,#eff6ff,#e6f0ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);
-      flex-shrink:0;
-    }
-    .feature h4 { margin:0;font-size:16px;color:var(--accent-2); }
-    .feature p { margin:6px 0 0 0;color:var(--muted);font-size:13px; }
+    /* sections */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .feature{background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 26px rgba(12,18,30,0.04);display:flex;gap:12px;align-items:flex-start}
+    .feature .icon{width:52px;height:52px;border-radius:10px;background:linear-gradient(180deg,#eff6ff,#e6f0ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);flex-shrink:0}
+    .feature h4{margin:0;font-size:16px;color:var(--accent-2)}
+    .feature p{margin:6px 0 0;color:var(--muted);font-size:13px}
 
-    /* Grid of service tiles */
-    .services-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:14px; margin-top:20px; }
-    .service-tile { background: linear-gradient(180deg,#fff,#fbfdff); padding:16px; border-radius:12px; box-shadow:0 6px 20px rgba(12,18,30,0.04); }
-    .service-tile h5{ margin:0 0 6px 0; color:var(--accent); }
-    .service-tile p{ margin:0;color:var(--muted); font-size:13px; }
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+    .service-tile{background:linear-gradient(180deg,#fff,#fbfdff);padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(12,18,30,0.04)}
+    .service-tile h5{margin:0 0 6px;color:var(--accent)}
+    .service-tile p{margin:0;color:var(--muted);font-size:13px}
 
-    /* Testimonials */
-    .testimonials { margin-top:22px; display:grid; grid-template-columns: 1fr 1fr; gap:14px; align-items:start; }
-    .testimonial { background:var(--card); padding:16px; border-radius:12px; box-shadow:0 6px 20px rgba(12,18,30,0.03); }
-    .testimonial p { margin:0;color:var(--muted); font-size:14px; }
-    .testimonial .who { margin-top:10px;font-weight:700;color:var(--accent-2);font-size:13px; }
+    .testimonials{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .testimonial{background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(12,18,30,0.03)}
+    .testimonial p{margin:0;color:var(--muted);font-size:14px}
+    .testimonial .who{margin-top:10px;font-weight:700;color:var(--accent-2);font-size:13px}
 
-    /* CTA banner */
-    .cta-banner { margin-top:26px; background:linear-gradient(90deg,var(--accent),#154a7b); color:white; padding:22px; border-radius:14px; display:flex; justify-content:space-between; align-items:center; gap:16px; box-shadow:0 8px 30px rgba(12,18,30,0.08); }
-    .cta-banner .left { max-width:70%; }
-    .cta-banner h3 { margin:0;font-size:18px; }
-    .cta-banner p { margin:6px 0 0 0; opacity:0.95; }
+    .cta-banner{margin-top:26px;background:linear-gradient(90deg,var(--accent),#154a7b);color:#fff;padding:22px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;gap:16px;box-shadow:0 8px 30px rgba(12,18,30,0.08)}
+    .cta-banner .left{max-width:70%}
+    .cta-banner h3{margin:0;font-size:18px}
+    .cta-banner p{margin:6px 0 0;opacity:.95}
 
-    /* footer */
-    footer.site-footer { text-align:center; padding:18px 0; color:var(--muted); font-size:13px; margin-top:26px; }
+    footer.site-footer{text-align:center;padding:18px 0;color:var(--muted);font-size:13px;margin-top:26px}
+
+    /* small inline ad container */
+    .ad-block{display:block;margin:12px 0}
+    .ad-eon-300x50{min-height:50px;display:flex;align-items:center;justify-content:center}
 
     /* responsive */
-    @media (max-width:1100px){ .hero-wrap{grid-template-columns:1fr 360px} }
+    @media (max-width:1100px){.hero-wrap{grid-template-columns:1fr}}
     @media (max-width:880px){
-      .hero-wrap{grid-template-columns:1fr}
-      .spotlight{order:-1}
       .features{grid-template-columns:1fr 1fr}
       .services-grid{grid-template-columns:1fr 1fr}
       .testimonials{grid-template-columns:1fr}
     }
     @media (max-width:520px){
-      .features{grid-template-columns:1fr}
-      .services-grid{grid-template-columns:1fr}
+      .features,.services-grid{grid-template-columns:1fr}
       .hero{padding:18px}
-      .cta-banner { flex-direction:column; align-items:flex-start; }
-    }
-
-    /* OPTIONAL: a tiny, policy-safe wrapper to avoid layout shift before an ad fills. */
-    .ad-block { display:block; margin:12px 0; }
-
-    /* Reserve a bit of height for the 300x50 EonAds slot on mobile */
-    .ad-eon-300x50 { min-height:50px; display:flex; align-items:center; justify-content:center; }
-
-    /* NEW: right-rail skyscraper wrapper to prevent CLS */
-    .rail-ad-160x600 {
-      width:160px;
-      height:600px;       /* reserve full height */
-      margin:8px auto 0;  /* center in the 420px spotlight column */
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:8px;
-      overflow:hidden;
-      background:#fff;    /* subtle placeholder bg */
-      border:1px solid #eef2f7;
-    }
-    .rail-ad-160x600 ins.e160x600 {
-      display:inline-block;
-      width:160px;
-      height:600px;
-    }
-    .ad-label {
-      text-align:center;
-      color:#94a3b8;
-      font-size:12px;
-      margin-top:6px;
+      .cta-banner{flex-direction:column;align-items:flex-start}
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- HEADER (unchanged) -->
+    <!-- HEADER -->
     <header class="site-header" role="banner">
       <div class="header-inner">
         <a class="logo-link" href="index.html" aria-label="Tech Finserv home">
@@ -233,24 +161,22 @@
 
     <!-- MAIN -->
     <main class="page-content" role="main" id="maincontent">
-      <!-- HERO + SPOTLIGHT -->
+      <!-- HERO + LIGHT RIGHT PANEL -->
       <section class="hero-wrap" aria-label="Welcome">
         <div class="hero" role="region" aria-label="Intro">
           <span class="kicker">Built for the modern borrower</span>
           <h1>Make smarter loan decisions with clear tools & insights</h1>
           <p>TechFinserv blends easy-to-use calculators with actionable articles and comparison tools — so you can choose the best loan for your needs and save on interest.</p>
 
-          <!-- Ad 1: In-article (below hero intro) — EonAds (non-intrusive) -->
+          <!-- Inline Eonads (kept, small, non-intrusive) -->
           <div class="ad-block ad-eon-300x50" role="complementary" aria-label="Advertisement">
-            <!-- EonAds slot: 300x50; removed extra text link -->
             <ins class="e300x50" id="eon-300x50-hero"
                  style="display:inline-block;width:300px;height:50px"
                  data-revive-hash="da22bbd2cfc6a27440bbe2f6ebd926f4"
                  data-revive-zoneid="64703"
                  data-revive-id="f87497be83f6ed6b52c3b340d803ae0d"></ins>
             <script>
-              // UX fallback: if no ad fills within ~2s, show a subtle house link
-              (function() {
+              (function(){
                 var el = document.getElementById('eon-300x50-hero');
                 setTimeout(function(){
                   if (el && !el.firstElementChild) {
@@ -294,18 +220,6 @@
             <small style="color:var(--muted);font-size:12px">Need a demo?</small>
             <div style="margin-top:6px;"><a class="btn btn-primary" href="contact.html">Request Demo</a></div>
           </div>
-
-          <!-- NEW: Right-rail Eonads 160x600 skyscraper -->
-          <div class="rail-ad-160x600" role="complementary" aria-label="Advertisement">
-            <!-- ads by Eonads -->
-            <ins class="e160x600" id="eon-160x600-rail"
-                 data-revive-hash="da22bbd2cfc6a27440bbe2f6ebd926f4"
-                 data-revive-zoneid="64745"
-                 data-revive-id="f87497be83f6ed6b52c3b340d803ae0d"></ins>
-            <!-- no extra script tag here; loaded once at the end of body -->
-          </div>
-          <div class="ad-label" aria-hidden="true">Ad</div>
-          <!-- /Eonads -->
         </aside>
       </section>
 
@@ -336,19 +250,6 @@
         </div>
       </section>
 
-      <!-- Ad 2: Between Features and Services (kept for future AdSense; currently commented to avoid mixed networks) -->
-      <!--
-      <div class="ad-block" role="complementary" aria-label="Advertisement">
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-client="ca-pub-4180233192929131"
-             data-ad-slot="REPLACE_WITH_YOUR_SLOT_ID_2"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
-      -->
-
       <!-- SERVICES GRID -->
       <section class="services-grid" aria-label="Services">
         <div class="service-tile">
@@ -368,7 +269,7 @@
       <!-- TESTIMONIALS -->
       <section class="testimonials" aria-label="What users say">
         <div class="testimonial">
-          <p>"The EMI schedule tool helped me understand the true cost of my home loan. Prepayment simulation saved us thousands." </p>
+          <p>"The EMI schedule tool helped me understand the true cost of my home loan. Prepayment simulation saved us thousands."</p>
           <div class="who">— Deepak Sharma., Home buyer</div>
         </div>
         <div class="testimonial">
@@ -376,17 +277,6 @@
           <div class="who">— Mukesh Dhankani., Financial planner</div>
         </div>
       </section>
-
-      <!-- Ad 3: After Testimonials — EonAds duplicate slot (optional). Uncomment if you want two placements. -->
-      <!--
-      <div class="ad-block ad-eon-300x50" role="complementary" aria-label="Advertisement">
-        <a href="https://www.eonads.com" target="_blank" rel="sponsored noopener">Ads by Eonads</a>
-        <ins class="e300x50" id="eon-300x50-bottom"
-             data-revive-hash="da22bbd2cfc6a27440bbe2f6ebd926f4"
-             data-revive-zoneid="64703"
-             data-revive-id="f87497be83f6ed6b52c3b340d803ae0d"></ins>
-      </div>
-      -->
 
       <!-- CTA banner -->
       <section class="cta-banner" aria-label="Call to action">
@@ -402,16 +292,14 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
-      Design and Maintained By Kiran Rathva
-    </footer>
+    <footer class="site-footer">Design and Maintained By Kiran Rathva</footer>
   </div>
 
   <!-- Load EonAds once near the end for performance -->
   <script async src="https://network.eonads.com/adserver/www/delivery/asyncjs.php"></script>
 
   <script>
-    // mobile menu toggle (same as EMI page)
+    // mobile menu toggle
     (function(){
       const menuToggle = document.getElementById('menuToggle');
       const mobileMenu = document.getElementById('mobileMenu');
@@ -430,13 +318,11 @@
           mobileMenu.setAttribute('aria-hidden','true');
         }
       });
-      // close on link click
       if (mobileMenu) mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
         mobileMenu.style.display='none';
         menuToggle.setAttribute('aria-expanded','false');
         mobileMenu.setAttribute('aria-hidden','true');
       }));
-      // hide on resize
       window.addEventListener('resize', ()=>{
         if (window.innerWidth > 640 && mobileMenu) {
           mobileMenu.style.display='none';
