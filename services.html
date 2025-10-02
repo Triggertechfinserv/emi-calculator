@@ -26,9 +26,9 @@
       --maxw: 1200px;
 
       /* ===== Scroll shrink controls ===== */
-      --msl-start: 0;    /* px from top when shrinking begins */
-      --msl-end: 160;    /* px when fully shrunk */
-      --t: 0;            /* 0..1 set by JS */
+      --msl-start: 0;
+      --msl-end: 160;
+      --t: 0;
 
       /* base sizes */
       --nav-pad: 12px;
@@ -47,10 +47,12 @@
       --cta-radius: 12px;
       --cta-radius-min: 10px;
 
-      --logo-scale-min: 0.86; /* how small the logo gets at t=1 */
+      --logo-scale-min: 0.86;
     }
 
     * { box-sizing: border-box; }
+    html, body { overflow-x: hidden; } /* MOBILE: prevent sideways scroll when drawer is off-screen */
+
     body {
       margin: 0;
       font-family: Inter, system-ui, sans-serif;
@@ -77,6 +79,7 @@
       position: sticky; top: 0; z-index: 40;
       background: rgba(255,255,255,0.75);
       backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
       border-bottom: 1px solid var(--border);
       transition: box-shadow 200ms ease;
       /* expose t to children */
@@ -153,11 +156,10 @@
     }
 
     /* =============== MOBILE MENU — SIDE DRAWER (ADDED) =============== */
-    /* Toggle button hidden on desktop */
     .menu-toggle { display: none; }
     .menu-toggle {
       border: 0; background: transparent; padding: 8px; margin-right: -8px;
-      cursor: pointer; border-radius: 10px;
+      cursor: pointer; border-radius: 10px; touch-action: manipulation; /* MOBILE: snappier taps */
     }
     .menu-toggle:focus-visible { outline: 2px solid rgba(14,165,233,0.6); outline-offset: 2px; }
     .menu-toggle .menu-icon,
@@ -171,76 +173,68 @@
       transition: transform 160ms ease, opacity 160ms ease;
     }
     .menu-toggle .menu-icon::before,
-    .menu-toggle .menu-icon::after {
-      content: "";
-      position: absolute; left: 0;
-    }
+    .menu-toggle .menu-icon::after { content: ""; position: absolute; left: 0; }
     .menu-toggle .menu-icon::before { top: -7px; }
     .menu-toggle .menu-icon::after  { top: 7px; }
     .topbar.menu-open .menu-toggle .menu-icon { transform: rotate(45deg); }
     .topbar.menu-open .menu-toggle .menu-icon::before { transform: rotate(90deg); top: 0; }
     .topbar.menu-open .menu-toggle .menu-icon::after  { opacity: 0; }
 
-    /* Backdrop for drawer (only used on mobile) */
+    /* Backdrop */
     .menu-backdrop {
       position: fixed; inset: 0;
       background: rgba(2,6,23,0.35);
-      opacity: 0;
-      pointer-events: none;
+      opacity: 0; pointer-events: none;
       transition: opacity 160ms ease;
-      z-index: 39; /* below .topbar (40) but above content */
+      z-index: 39; /* below topbar (40), above page */
     }
-    .topbar.menu-open ~ .menu-backdrop {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    body.drawer-open .menu-backdrop { opacity: 1; pointer-events: auto; }
 
     @media (max-width: 900px) {
       .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
 
-      /* turn the existing nav.menu into a right-side drawer */
+      /* Drawer styles */
       .topbar .menu {
         position: fixed;
-        top: 0; right: 0; bottom: 0;
-        width: min(82vw, 360px);
-        padding: 80px 18px 24px; /* space for header area */
+        top: 0; right: 0; bottom: 0; left: auto;
+        width: min(86vw, 360px);
+        padding: max(env(safe-area-inset-top), 64px) 18px 24px;
         display: grid;
         grid-auto-rows: minmax(44px, auto);
         gap: 10px;
 
-        background: rgba(255,255,255,0.75);
+        background: rgba(255,255,255,0.78);
         border-left: 1px solid var(--border);
-        backdrop-filter: blur(16px) saturate(170%);
-        -webkit-backdrop-filter: blur(16px) saturate(170%);
+        backdrop-filter: blur(14px) saturate(170%);
+        -webkit-backdrop-filter: blur(14px) saturate(170%);
         box-shadow: -8px 0 24px rgba(2,6,23,0.12);
 
-        transform: translateX(100%);
+        transform: translate3d(100%,0,0); /* HIDDEN: fully off-screen to the right */
+        will-change: transform;           /* GPU hint */
         transition: transform 220ms ease;
         z-index: 41; /* above header */
+        overscroll-behavior: contain; /* prevents body pull-to-refresh while scrolling drawer */
+      }
+      .topbar.menu-open .menu {
+        transform: translate3d(0,0,0);   /* VISIBLE: slide in */
       }
 
-      /* bigger, tap-friendly links inside drawer */
+      /* Tap-friendly links */
       .topbar .menu a {
         display: block;
         padding: 14px 14px;
         font-size: 16px;
-        background: rgba(255,255,255,0.7);
+        background: rgba(255,255,255,0.72);
         border: 1px solid var(--border);
         border-radius: 14px;
       }
       .topbar .menu a:hover { background: var(--surface-strong); }
 
-      /* reveal drawer when open */
-      .topbar.menu-open .menu {
-        transform: translateX(0);
-      }
-
-      /* header row tweaks on mobile so button sits nicely */
+      /* Header spacing for toggle */
       header.nav { gap: 10px; }
-      /* keep inline menu visible on desktop; nothing to change here for mobile since it's fixed */
     }
 
-    /* lock body scroll when menu open (mobile) */
+    /* lock body scroll when drawer open */
     body.no-scroll { overflow: hidden; }
   </style>
 </head>
@@ -250,7 +244,7 @@
       <header class="nav">
         <a href="/" aria-label="TechFinserv home"><img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo"></a>
 
-        <!-- Mobile menu toggle (desktop remains unchanged) -->
+        <!-- Mobile menu toggle (desktop unchanged) -->
         <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
           <span class="menu-icon"></span>
         </button>
@@ -264,7 +258,7 @@
     </div>
   </div>
 
-  <!-- Backdrop for side drawer (outside header so it covers page) -->
+  <!-- Backdrop for side drawer -->
   <div class="menu-backdrop" hidden></div>
 
   <main>
@@ -400,38 +394,58 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Smooth scroll-based shrink for header + logo + buttons (crisp text)
+    // Smooth shrink: DISABLE on mobile to remove lag.
     (function () {
       const topbar = document.querySelector('.topbar');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mq = window.matchMedia('(max-width: 900px)');
 
-      // Controls
       const start = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--msl-start')) || 0;
       const end   = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--msl-end')) || 160;
 
-      function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
+      function clamp(n,a,b){ return Math.min(b, Math.max(a, n)); }
+      let attached = false;
 
-      function update() {
+      function setT(val){ topbar && topbar.style.setProperty('--t', val.toFixed(3)); }
+
+      function onScroll() {
         const y = window.scrollY || document.documentElement.scrollTop || 0;
         const t = clamp((y - start) / Math.max(1, end - start), 0, 1);
-        topbar.style.setProperty('--t', t.toFixed(3));
+        setT(t);
       }
 
-      update();
-      if (!prefersReduced) {
+      function enableDesktopShrink() {
+        if (attached || prefersReduced) return;
+        attached = true;
+        onScroll();
         let ticking = false;
         window.addEventListener('scroll', () => {
           if (!ticking) {
-            requestAnimationFrame(() => { update(); ticking = false; });
+            requestAnimationFrame(() => { onScroll(); ticking = false; });
             ticking = true;
           }
         }, { passive: true });
-        window.addEventListener('resize', update, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
       }
+
+      function disableMobileShrink() {
+        setT(0);
+      }
+
+      function updateMode(e) {
+        if (mq.matches) { // mobile
+          disableMobileShrink();
+        } else {
+          enableDesktopShrink();
+        }
+      }
+
+      updateMode();
+      mq.addEventListener?.('change', updateMode);
     })();
   </script>
 
-  <!-- Mobile menu JS: side drawer -->
+  <!-- Mobile menu JS: side drawer with fixes -->
   <script>
     (function () {
       const topbar    = document.querySelector('.topbar');
@@ -441,7 +455,7 @@
       const backdrop  = document.querySelector('.menu-backdrop');
       if (!topbar || !header || !menu || !toggle || !backdrop) return;
 
-      // Ensure accessible relationship without editing your HTML
+      // Accessible relationship
       if (!menu.id) menu.id = 'primary-menu';
       toggle.setAttribute('aria-controls', menu.id);
 
@@ -450,51 +464,47 @@
 
       function openMenu() {
         topbar.classList.add('menu-open');
-        document.body.classList.add('no-scroll');
+        document.body.classList.add('no-scroll', 'drawer-open');
         toggle.setAttribute('aria-expanded', 'true');
         toggle.setAttribute('aria-label', 'Close menu');
         backdrop.hidden = false;
-        // move focus into the menu for accessibility
         const firstLink = menu.querySelector('a');
         if (firstLink) firstLink.focus({preventScroll:true});
       }
       function closeMenu() {
         topbar.classList.remove('menu-open');
-        document.body.classList.remove('no-scroll');
+        document.body.classList.remove('no-scroll', 'drawer-open');
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-label', 'Open menu');
         backdrop.hidden = true;
-        toggle.focus({preventScroll:true});
       }
       function toggleMenu() {
         if (!isMobile()) return; // ignore on desktop
         topbar.classList.contains('menu-open') ? closeMenu() : openMenu();
       }
 
-      // Click toggle
+      // Toggle click
       toggle.addEventListener('click', (e) => {
         e.preventDefault();
         toggleMenu();
-      });
+      }, { passive: false });
 
       // Backdrop click closes
-      backdrop.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu, { passive: true });
 
       // Close when clicking any menu link (mobile)
       menu.addEventListener('click', (e) => {
         const a = e.target.closest('a');
         if (a && isMobile()) closeMenu();
-      });
+      }, { passive: true });
 
       // ESC to close
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && topbar.classList.contains('menu-open')) closeMenu();
       });
 
-      // On resize: if we go to desktop, ensure menu is closed & body scroll restored
-      window.addEventListener('resize', () => {
-        if (!isMobile()) closeMenu();
-      });
+      // On resize: if we go to desktop, ensure closed
+      window.addEventListener('resize', () => { if (!isMobile()) closeMenu(); }, { passive: true });
 
       // Initial state
       closeMenu();
