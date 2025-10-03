@@ -26,9 +26,9 @@
       --maxw: 1200px;
 
       /* ===== Scroll shrink controls ===== */
-      --msl-start: 0;
-      --msl-end: 160;
-      --t: 0;
+      --msl-start: 0;    /* px from top when shrinking begins */
+      --msl-end: 160;    /* px when fully shrunk */
+      --t: 0;            /* 0..1 set by JS */
 
       /* base sizes */
       --nav-pad: 12px;
@@ -47,12 +47,10 @@
       --cta-radius: 12px;
       --cta-radius-min: 10px;
 
-      --logo-scale-min: 0.86;
+      --logo-scale-min: 0.86; /* how small the logo gets at t=1 */
     }
 
     * { box-sizing: border-box; }
-    html, body { overflow-x: hidden; } /* MOBILE: prevent sideways scroll when drawer is off-screen */
-
     body {
       margin: 0;
       font-family: Inter, system-ui, sans-serif;
@@ -79,7 +77,6 @@
       position: sticky; top: 0; z-index: 40;
       background: rgba(255,255,255,0.75);
       backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
       border-bottom: 1px solid var(--border);
       transition: box-shadow 200ms ease;
       /* expose t to children */
@@ -97,7 +94,6 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: var(--padY) 0;
       transition: padding 160ms ease;
-      position: relative;
     }
 
     .brand-logo {
@@ -154,102 +150,14 @@
     @media (prefers-reduced-motion: reduce) {
       header.nav, .brand-logo, nav.menu a, .cta { transition: none; }
     }
-
-    /* =============== MOBILE MENU — SIDE DRAWER (ADDED) =============== */
-    .menu-toggle { display: none; }
-    .menu-toggle {
-      border: 0; background: transparent; padding: 8px; margin-right: -8px;
-      cursor: pointer; border-radius: 10px; touch-action: manipulation; /* MOBILE: snappier taps */
-    }
-    .menu-toggle:focus-visible { outline: 2px solid rgba(14,165,233,0.6); outline-offset: 2px; }
-    .menu-toggle .menu-icon,
-    .menu-toggle .menu-icon::before,
-    .menu-toggle .menu-icon::after {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      position: relative;
-      transition: transform 160ms ease, opacity 160ms ease;
-    }
-    .menu-toggle .menu-icon::before,
-    .menu-toggle .menu-icon::after { content: ""; position: absolute; left: 0; }
-    .menu-toggle .menu-icon::before { top: -7px; }
-    .menu-toggle .menu-icon::after  { top: 7px; }
-    .topbar.menu-open .menu-toggle .menu-icon { transform: rotate(45deg); }
-    .topbar.menu-open .menu-toggle .menu-icon::before { transform: rotate(90deg); top: 0; }
-    .topbar.menu-open .menu-toggle .menu-icon::after  { opacity: 0; }
-
-    /* Backdrop */
-    .menu-backdrop {
-      position: fixed; inset: 0;
-      background: rgba(2,6,23,0.35);
-      opacity: 0; pointer-events: none;
-      transition: opacity 160ms ease;
-      z-index: 39; /* below topbar (40), above page */
-    }
-    body.drawer-open .menu-backdrop { opacity: 1; pointer-events: auto; }
-
-    @media (max-width: 900px) {
-      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
-
-      /* Drawer styles */
-      .topbar .menu {
-        position: fixed;
-        top: 0; right: 0; bottom: 0; left: auto;
-        width: min(86vw, 360px);
-        padding: max(env(safe-area-inset-top), 64px) 18px 24px;
-        display: grid;
-        grid-auto-rows: minmax(44px, auto);
-        gap: 10px;
-
-        background: rgba(255,255,255,0.78);
-        border-left: 1px solid var(--border);
-        backdrop-filter: blur(14px) saturate(170%);
-        -webkit-backdrop-filter: blur(14px) saturate(170%);
-        box-shadow: -8px 0 24px rgba(2,6,23,0.12);
-
-        transform: translate3d(100%,0,0); /* HIDDEN: fully off-screen to the right */
-        will-change: transform;           /* GPU hint */
-        transition: transform 220ms ease;
-        z-index: 41; /* above header */
-        overscroll-behavior: contain; /* prevents body pull-to-refresh while scrolling drawer */
-      }
-      .topbar.menu-open .menu {
-        transform: translate3d(0,0,0);   /* VISIBLE: slide in */
-      }
-
-      /* Tap-friendly links */
-      .topbar .menu a {
-        display: block;
-        padding: 14px 14px;
-        font-size: 16px;
-        background: rgba(255,255,255,0.72);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-      }
-      .topbar .menu a:hover { background: var(--surface-strong); }
-
-      /* Header spacing for toggle */
-      header.nav { gap: 10px; }
-    }
-
-    /* lock body scroll when drawer open */
-    body.no-scroll { overflow: hidden; }
   </style>
 </head>
 <body>
   <div class="topbar">
     <div class="container">
       <header class="nav">
-        <a href="/" aria-label="TechFinserv home"><img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo"></a>
-
-        <!-- Mobile menu toggle (desktop unchanged) -->
-        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-          <span class="menu-icon"></span>
-        </button>
-
-        <nav class="menu" role="navigation" aria-label="Primary">
+        <a href="/" aria-label="TechFinserv home"><img class="brand-logo" src="images/logo.png" alt="TechFinserv logo"></a>
+        <nav class="menu">
           <a href="#blog">Blog</a>
           <a href="#about">About</a>
           <a class="cta" href="#tools">Tools</a>
@@ -257,9 +165,6 @@
       </header>
     </div>
   </div>
-
-  <!-- Backdrop for side drawer -->
-  <div class="menu-backdrop" hidden></div>
 
   <main>
     <section class="hero">
@@ -270,8 +175,10 @@
           <p class="subtitle">Plan loans with our EMI Calculator, grow wealth with SIP tools, check loan eligibility instantly, and explore expert blogs on tax-saving, credit score, and smart money management.</p>
           <p class="subtitle">TechFinserv is your all-in-one finance hub — use calculators for EMIs, SIP returns, and loan eligibility, while learning from easy-to-read blogs on investments, tax hacks, savings tips, and credit improvement strategies.</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="cta" href="#tools">Explore Tools</a>
-            <a class="cta" style="background:transparent;border:1px solid var(--border);color:var(--text);" href="#blog">Read the Blog</a>
+            <a class="cta" href="#tools" style="padding:10px 14px; border-radius:12px;">Explore Tools</a>
+            <a href="#blog" style="padding:10px 14px; border-radius:12px; font-weight:600;
+               background:transparent; border:1px solid var(--border); color:var(--text);
+               display:inline-block; text-decoration:none;">Read the Blog</a>
           </div>
         </div>
 
@@ -279,7 +186,7 @@
           <h3 style="margin:0 0 16px;">Quick Tools</h3>
           <p class="subtitle">Get instant answers with calculators and long-term wisdom from our blogs your all-in-one finance hub.</p>
           <div class="toolbox">
-            <button onclick="location.href='emi-calculator.html'">EMI Calculator</button>
+            <button onclick="location.href="emi-calculator/">EMI Calculator</button>
             <button onclick="location.href='sip-calculator.html'">SIP Calculator</button>
             <button onclick="location.href='personal-loan-eligibility.html'">Loan Eligibility Calculator</button>
           </div>
@@ -290,22 +197,22 @@
     <section class="container" style="margin:60px auto;">
       <h2>Popular Finance Calculators</h2>
       <div class="blog-grid">
-        <a href="emi-calculator.html" class="post glass">
-          <img src="emi-calculator.png" alt="EMI Calculator">
+        <a href="/emi-calculator" class="post glass">
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="EMI Calculator">
           <div class="content">
             <h4>EMI Calculator</h4>
             <p>Plan your monthly loan repayments quickly and compare options with our smart EMI calculator.</p>
           </div>
         </a>
         <a href="sip-calculator.html" class="post glass">
-          <img src="sip.jpg" alt="SIP Calculator">
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="SIP Calculator">
           <div class="content">
             <h4>SIP Calculator</h4>
             <p>Estimate your returns from Systematic Investment Plans and see the power of compounding in action.</p>
           </div>
         </a>
         <a href="personal-loan-eligibility.html" class="post glass">
-          <img src="loan.jpg" alt="Loan Eligibility Calculator">
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="Loan Eligibility Calculator">
           <div class="content">
             <h4>Loan Eligibility Calculator</h4>
             <p>Check your loan eligibility instantly and understand how banks decide your borrowing capacity.</p>
@@ -345,14 +252,13 @@
         <h2>Latest from the Blog</h2>
         <div class="blog-grid">
           <a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1565372910784-6070d2b3c3d0?q=80&w=1200&auto=format&fit=crop" alt="Coins with arrow" loading="lazy">
+            <img src="images/flexi-hybrid-loan.png" alt="Coins with arrow" loading="lazy">
             <div class="content">
               <h4>How to Choose Between Fixed & Floating Home Loan Rates</h4>
               <div class="meta">By TechFinserv • Sep 2025 • 6 min read</div>
               <p>We break down the pros and cons of interest rate types — and when each makes sense for you.</p>
             </div>
           </a>
-
           <a href="#" class="post glass">
             <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop" alt="Calculator and notebook" loading="lazy">
             <div class="content">
@@ -361,7 +267,6 @@
               <p>Understand compounding, volatility, and the cost averaging effect so you can pick the right strategy.</p>
             </div>
           </a>
-
           <a href="#" class="post glass">
             <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="Piggy bank" loading="lazy">
             <div class="content">
@@ -370,9 +275,8 @@
               <p>From ELSS to PPF, learn the allowances and typical returns before the financial year ends.</p>
             </div>
           </a>
-
           <a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="Laptop charts" loading="lazy">
+            <img src="images/what-is-emi.png" alt="Laptop charts" loading="lazy">
             <div class="content">
               <h4>Credit Score: 9 Practical Habits to Boost It</h4>
               <div class="meta">By TechFinserv • Aug 2025 • 4 min read</div>
@@ -394,120 +298,34 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Smooth shrink: DISABLE on mobile to remove lag.
+    // Smooth scroll-based shrink for header + logo + buttons (crisp text)
     (function () {
       const topbar = document.querySelector('.topbar');
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const mq = window.matchMedia('(max-width: 900px)');
 
+      // Controls
       const start = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--msl-start')) || 0;
       const end   = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--msl-end')) || 160;
 
-      function clamp(n,a,b){ return Math.min(b, Math.max(a, n)); }
-      let attached = false;
+      function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
 
-      function setT(val){ topbar && topbar.style.setProperty('--t', val.toFixed(3)); }
-
-      function onScroll() {
+      function update() {
         const y = window.scrollY || document.documentElement.scrollTop || 0;
         const t = clamp((y - start) / Math.max(1, end - start), 0, 1);
-        setT(t);
+        topbar.style.setProperty('--t', t.toFixed(3));
       }
 
-      function enableDesktopShrink() {
-        if (attached || prefersReduced) return;
-        attached = true;
-        onScroll();
+      update();
+      if (!prefersReduced) {
         let ticking = false;
         window.addEventListener('scroll', () => {
           if (!ticking) {
-            requestAnimationFrame(() => { onScroll(); ticking = false; });
+            requestAnimationFrame(() => { update(); ticking = false; });
             ticking = true;
           }
         }, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
       }
-
-      function disableMobileShrink() {
-        setT(0);
-      }
-
-      function updateMode(e) {
-        if (mq.matches) { // mobile
-          disableMobileShrink();
-        } else {
-          enableDesktopShrink();
-        }
-      }
-
-      updateMode();
-      mq.addEventListener?.('change', updateMode);
-    })();
-  </script>
-
-  <!-- Mobile menu JS: side drawer with fixes -->
-  <script>
-    (function () {
-      const topbar    = document.querySelector('.topbar');
-      const header    = document.querySelector('.topbar .nav');
-      const menu      = header?.querySelector('.menu');
-      const toggle    = header?.querySelector('.menu-toggle');
-      const backdrop  = document.querySelector('.menu-backdrop');
-      if (!topbar || !header || !menu || !toggle || !backdrop) return;
-
-      // Accessible relationship
-      if (!menu.id) menu.id = 'primary-menu';
-      toggle.setAttribute('aria-controls', menu.id);
-
-      const BREAKPOINT = 900;
-      const isMobile = () => window.matchMedia(`(max-width:${BREAKPOINT}px)`).matches;
-
-      function openMenu() {
-        topbar.classList.add('menu-open');
-        document.body.classList.add('no-scroll', 'drawer-open');
-        toggle.setAttribute('aria-expanded', 'true');
-        toggle.setAttribute('aria-label', 'Close menu');
-        backdrop.hidden = false;
-        const firstLink = menu.querySelector('a');
-        if (firstLink) firstLink.focus({preventScroll:true});
-      }
-      function closeMenu() {
-        topbar.classList.remove('menu-open');
-        document.body.classList.remove('no-scroll', 'drawer-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open menu');
-        backdrop.hidden = true;
-      }
-      function toggleMenu() {
-        if (!isMobile()) return; // ignore on desktop
-        topbar.classList.contains('menu-open') ? closeMenu() : openMenu();
-      }
-
-      // Toggle click
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleMenu();
-      }, { passive: false });
-
-      // Backdrop click closes
-      backdrop.addEventListener('click', closeMenu, { passive: true });
-
-      // Close when clicking any menu link (mobile)
-      menu.addEventListener('click', (e) => {
-        const a = e.target.closest('a');
-        if (a && isMobile()) closeMenu();
-      }, { passive: true });
-
-      // ESC to close
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && topbar.classList.contains('menu-open')) closeMenu();
-      });
-
-      // On resize: if we go to desktop, ensure closed
-      window.addEventListener('resize', () => { if (!isMobile()) closeMenu(); }, { passive: true });
-
-      // Initial state
-      closeMenu();
     })();
   </script>
 </body>
