@@ -13,8 +13,8 @@
       --bg: #f6f9ff;
       --bg-accent1: rgba(14,165,233,0.20);
       --bg-accent2: rgba(16,185,129,0.18);
-      --surface: rgba(255,255,255,0.75);
-      --surface-strong: rgba(255,255,255,0.9);
+      --surface: rgba(255,255,255,0.78);     /* slightly more solid for medium blur */
+      --surface-strong: rgba(255,255,255,0.92);
       --text: #0f172a;
       --muted: #475569;
       --border: rgba(2,6,23,0.12);
@@ -45,39 +45,45 @@
     .glass {
       background: var(--surface);
       border: 1px solid var(--border);
-      backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      /* MEDIUM blur for cards only when overlapping content; keeps look consistent */
+      backdrop-filter: blur(10px) saturate(160%);
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
       box-shadow: var(--shadow);
       border-radius: var(--radius);
     }
 
-    /* ========== HEADER: Glassy Blur Only (no shrink) ========== */
+    /* ========== HEADER: Medium blur with better visibility ========== */
     .topbar {
       position: sticky; top: 0; z-index: 40;
-      background: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.68);  /* less transparent so blur feels stronger */
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      backdrop-filter: blur(12px) saturate(170%);   /* MEDIUM blur */
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
       isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);     /* subtle lift to separate from content */
     }
     .topbar::before {
       content: "";
       position: absolute; inset: 0;
       pointer-events: none;
-      background: rgba(255,255,255,0.6); /* frosted veil to avoid merging with content */
-      opacity: 0.22;                     /* increase to ~0.30 if you want more separation */
+      background: rgba(255,255,255,0.7);  /* soft frost veil */
+      opacity: 0.28;                      /* slight increase to avoid “too transparent” */
       border-bottom: 1px solid var(--border);
     }
 
     header.nav {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 0; /* your original spacing */
+      padding: 12px 0;
     }
-    .brand-logo { height: 65px; border-radius: 10px; } /* unchanged */
+    .brand-logo { height: 65px; border-radius: 10px; }
     nav.menu { display: flex; gap: 14px; }
     nav.menu a { padding: 8px 12px; border-radius: 10px; color: var(--muted); transition: background 200ms ease; font-size: 15px; }
     nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
     .cta { background: var(--gradient-solid); color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600; }
+
+    /* Mobile navbar additions (hidden on desktop) */
+    .mobile-menu-toggle { display: none; }
+    .mobile-menu { display: none; }
 
     /* ========== PAGE CONTENT (unchanged) ========== */
     .hero { padding: 48px 0 28px; position: relative; }
@@ -104,24 +110,152 @@
       .hero-grid { grid-template-columns: 1fr; }
       .blog-grid { grid-template-columns: 1fr; }
     }
+
+    /* ===== Mobile Header + Performance (no blur on mobile to avoid lag) ===== */
+    @media (max-width: 768px) {
+      :root {
+        --radius: 14px;
+        --shadow: 0 6px 18px rgba(2,6,23,0.08), 0 2px 8px rgba(2,6,23,0.06);
+      }
+
+      .topbar {
+        background: #ffffffee;
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      }
+      .topbar::before { display: none; }
+
+      .glass {
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: var(--shadow);
+      }
+
+      header.nav { padding: 8px 0; }
+      .brand-logo { height: 48px; border-radius: 8px; }
+
+      nav.menu { display: none; }
+      .mobile-menu-toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        width: 28px;
+        height: 22px;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+      }
+      .mobile-menu-toggle span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: var(--text);
+        border-radius: 2px;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        padding: 10px 0 14px;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+      }
+      .mobile-menu a {
+        padding: 12px 16px;
+        font-size: 15px;
+        color: var(--muted);
+      }
+      .mobile-menu a:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body { line-height: 1.55; }
+      .hero { padding: 28px 0 16px; }
+      .hero h2 { font-size: clamp(18px, 5.2vw, 22px); margin-bottom: 8px; }
+      .subtitle { font-size: 14px; margin-bottom: 14px; }
+
+      .hero-grid { grid-template-columns: 1fr !important; gap: 16px; }
+      .main { padding: 12px 0 40px; }
+      .blog-grid { grid-template-columns: 1fr !important; gap: 14px; }
+
+      .hero-card { padding: 18px; }
+      .post.glass { border-radius: 14px; }
+      .post img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+      .post .content { padding: 14px; }
+      .post h4 { font-size: 16px; margin-bottom: 6px; }
+      .post .meta { font-size: 12px; }
+
+      .toolbox { gap: 10px; padding: 16px; }
+      .toolbox button {
+        min-height: 48px;
+        font-size: 16px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+      }
+
+      footer { padding: 22px 0 56px; }
+    }
+
+    .mobile-menu.open { display: flex !important; }
+
+    @media (prefers-reduced-transparency: reduce) {
+      .topbar, .glass {
+        background: #ffffff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+    }
+
+    /* Defer off-screen work for smoother scroll */
+    section, .post.glass {
+      content-visibility: auto;
+      contain-intrinsic-size: 600px 800px;
+    }
   </style>
 </head>
 <body>
-  <!-- Header (glassy blur only) -->
+  <!-- Header -->
   <div class="topbar">
     <div class="container">
       <header class="nav">
-        <a href="/" aria-label="TechFinserv home"><img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo"></a>
-        <nav class="menu">
+        <a href="/" aria-label="TechFinserv home">
+          <img class="brand-logo" src="images/logo.png" alt="TechFinserv logo">
+        </a>
+
+        <!-- Desktop menu -->
+        <nav class="menu" aria-label="Primary">
           <a href="#blog">Blog</a>
           <a href="#about">About</a>
           <a class="cta" href="#tools">Tools</a>
         </nav>
+
+        <!-- Mobile hamburger -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
       </header>
+
+      <!-- Mobile dropdown -->
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
+        <a href="#blog">Blog</a>
+        <a href="#about">About</a>
+        <a href="#tools" style="font-weight:600;color:var(--accent-1)">Tools</a>
+      </nav>
     </div>
   </div>
 
-  <!-- Main content (your original content kept intact) -->
+  <!-- Main content (unchanged) -->
   <main>
     <section class="hero">
       <div class="container hero-grid">
@@ -152,21 +286,21 @@
       <h2>Popular Finance Calculators</h2>
       <div class="blog-grid">
         <a href="emi-calculator.html" class="post glass">
-          <img src="emi-calculator.png" alt="EMI Calculator">
+          <img decoding="async" src="emi-calculator.png" alt="EMI Calculator">
           <div class="content">
             <h4>EMI Calculator</h4>
             <p>Plan your monthly loan repayments quickly and compare options with our smart EMI calculator.</p>
           </div>
         </a>
         <a href="sip-calculator.html" class="post glass">
-          <img src="sip.jpg" alt="SIP Calculator">
+          <img decoding="async" src="sip.jpg" alt="SIP Calculator">
           <div class="content">
             <h4>SIP Calculator</h4>
             <p>Estimate your returns from Systematic Investment Plans and see the power of compounding in action.</p>
           </div>
         </a>
         <a href="personal-loan-eligibility.html" class="post glass">
-          <img src="loan.jpg" alt="Loan Eligibility Calculator">
+          <img decoding="async" src="loan.jpg" alt="Loan Eligibility Calculator">
           <div class="content">
             <h4>Loan Eligibility Calculator</h4>
             <p>Check your loan eligibility instantly and understand how banks decide your borrowing capacity.</p>
@@ -236,7 +370,7 @@
         <h2>Latest from the Blog</h2>
         <div class="blog-grid">
           <a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop" alt="Coins with arrow" loading="lazy">
+            <img decoding="async" src="https://images.unsplash.com/photo-1565372910784-6070d2b3c3d0?q=80&w=1200&auto=format&fit=crop" alt="Coins with arrow" loading="lazy">
             <div class="content">
               <h4>How to Choose Between Fixed & Floating Home Loan Rates</h4>
               <div class="meta">By TechFinserv • Sep 2025 • 6 min read</div>
@@ -245,7 +379,7 @@
           </a>
 
           <a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop" alt="Calculator and notebook" loading="lazy">
+            <img decoding="async" src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop" alt="Calculator and notebook" loading="lazy">
             <div class="content">
               <h4>SIP vs Lumpsum: Which Builds Wealth Faster?</h4>
               <div class="meta">By TechFinserv • Sep 2025 • 5 min read</div>
@@ -254,7 +388,7 @@
           </a>
 
           <a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="Piggy bank" loading="lazy">
+            <img decoding="async" src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="Piggy bank" loading="lazy">
             <div class="content">
               <h4>Top 7 Tax-Saving Investments Under Section 80C</h4>
               <div class="meta">By TechFinserv • Aug 2025 • 7 min read</div>
@@ -263,32 +397,14 @@
           </a>
 
           <a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="Laptop charts" loading="lazy">
+            <img decoding="async" src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="Laptop charts" loading="lazy">
             <div class="content">
               <h4>Credit Score: 9 Practical Habits to Boost It</h4>
               <div class="meta">By TechFinserv • Aug 2025 • 4 min read</div>
               <p>Simple steps that move the needle without complex hacks — pay-on-time, utilization, and more.</p>
             </div>
           </a>
-			
-         <a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="Laptop charts" loading="lazy">
-            <div class="content">
-              <h4>Credit Score: 9 Practical Habits to Boost It</h4>
-              <div class="meta">By TechFinserv • Aug 2025 • 4 min read</div>
-              <p>Simple steps that move the needle without complex hacks — pay-on-time, utilization, and more.</p>
-            </div>
-          </a>
-        
-	 	<a href="#" class="post glass">
-            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="Laptop charts" loading="lazy">
-            <div class="content">
-              <h4>Credit Score: 9 Practical Habits to Boost It</h4>
-              <div class="meta">By TechFinserv • Aug 2025 • 4 min read</div>
-              <p>Simple steps that move the needle without complex hacks — pay-on-time, utilization, and more.</p>
-            </div>
-          </a>
-		</div>
+        </div>
       </section>
     </div>
   </main>
@@ -302,7 +418,33 @@
   <script>
     // year
     document.getElementById('year').textContent = new Date().getFullYear();
-    // NOTE: No shrink/scroll JS added — header blur is constant and lightweight.
+
+    // Mobile menu toggle (lightweight)
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      });
+
+      // Close menu when a link is clicked
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      });
+
+      // Reset on resize to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
+    })();
   </script>
 </body>
 </html>
