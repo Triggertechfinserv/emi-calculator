@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Service Not Available — TechFinserv</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Currently this service is not available. We’re working on it at TechFinserv." />
+
+  <!-- Favicon + Font -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f9ff;
+      --bg-accent1: rgba(14,165,233,0.20);
+      --bg-accent2: rgba(16,185,129,0.18);
+      --surface: rgba(255,255,255,0.78);
+      --surface-strong: rgba(255,255,255,0.92);
+      --text: #0f172a;
+      --muted: #475569;
+      --border: rgba(2,6,23,0.12);
+      --accent-1: #0ea5e9;
+      --accent-2: #10b981;
+      --radius: 16px;
+      --shadow: 0 12px 34px rgba(2,6,23,0.10), 0 4px 14px rgba(2,6,23,0.06);
+      --maxw: 1200px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    body::before {
+      content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="none"><defs><radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(120 40) scale(900 500)"><stop offset="0" stop-color="%230ea5e9" stop-opacity="0.20"/><stop offset="0.6" stop-color="%230ea5e9" stop-opacity="0"/></radialGradient><radialGradient id="g" cx="1" cy="0.3" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1080 240) scale(900 500)"><stop offset="0" stop-color="%2310b981" stop-opacity="0.18"/><stop offset="0.6" stop-color="%2310b981" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="800" fill="%23f6f9ff"/><rect width="1200" height="800" fill="url(%23b)"/><rect width="1200" height="800" fill="url(%23g)"/></svg>');
+      background-size:cover; background-repeat:no-repeat; background-position:center;
+    }
+
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+    /* ===== Header (copied from main site) ===== */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar::after {
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+    }
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+    }
+    .brand-logo {
+      height: 65px; border-radius: 10px;
+      display:block; width:auto; object-fit:contain;
+      filter:none; mix-blend-mode:normal;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: var(--muted); transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
+    .cta {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
+    }
+
+    /* ===== Main card ===== */
+    main { min-height: 70vh; display:grid; place-items:center; padding:32px 0; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px) saturate(160%);
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px; text-align:center; max-width: 720px; width:100%;
+    }
+    h1 { margin:0 0 10px; font-size: clamp(22px, 4.5vw, 28px); }
+    .subtitle { color: var(--muted); margin:0 0 20px; font-size:15px; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:12px 14px; border-radius:12px; border:1px solid var(--border);
+      background:#fff; color:var(--text); font-weight:600; cursor:pointer; text-decoration:none;
+      box-shadow:0 6px 16px rgba(2,6,23,0.06);
+    }
+    .btn.primary { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color:#fff; border:0; }
+
+    /* ===== Footer (copied from main site) ===== */
+    footer.glass {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: var(--muted);
+    }
+    footer.glass::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      opacity:0.8; pointer-events:none;
+    }
+
+    /* ===== Mobile ===== */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:var(--text); border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:var(--muted); text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: var(--text); }
+      .card{ padding:20px; }
+      footer.glass { padding:22px 0 56px; }
+    }
+    .mobile-menu.open { display:flex !important; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="topbar">
+    <div class="container">
+      <header class="nav">
+        <a href="/" aria-label="TechFinserv home">
+          <img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
+        </a>
+        <nav class="menu" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="blogs/">Blog</a>
+          <a href="emi-calculator.html">EMI calculator</a>
+          <a href="#contact" class="cta">Contact</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
+        <a href="/">Home</a>
+        <a href="blogs/">Blog</a>
+        <a href="emi-calculator.html">EMI calculator</a>
+        <a href="#contact" style="font-weight:600;color:var(--accent-1)">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <main>
+    <div class="container">
+      <div class="card" role="status" aria-live="polite">
+        <svg width="52" height="52" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm1 14h-2v-2h2v2Zm0-4h-2V6h2v6Z" fill="currentColor" opacity="0.9"/>
+        </svg>
+        <h1>Currently this service is not available</h1>
+        <p class="subtitle">We’re working on it to make it great. Please check back soon.</p>
+        <div class="actions">
+          <a class="btn primary" href="/">← Back to Home</a>
+          <a class="btn" href="emi-calculator.html">Try EMI Calculator</a>
+          <a class="btn" href="sip-calculator.html">Try SIP Calculator</a>
+          <a class="btn" href="blogs/">Read our Blogs</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="glass">
+    <div class="container">
+      <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+      <p class="subtitle" style="font-size:13px">Need something urgently? <a href="mailto:hello@techfinserv.com">hello@techfinserv.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
+    })();
+  </script>
+</body>
+</html>
