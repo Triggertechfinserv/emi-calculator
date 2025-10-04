@@ -224,6 +224,240 @@
       content-visibility: auto;
       contain-intrinsic-size: 600px 800px;
     }
+
+    /* === Blue+Green Glassy Header & Footer (non-intrusive overrides) === */
+    /* Header bar: glass + subtle blue→green blend */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.60);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      box-shadow: 0 8px 20px rgba(2,6,23,0.08);
+      isolation: isolate;
+      overflow: hidden; /* contain gradient layers */
+    }
+
+    /* Frost veil (kept soft) */
+    .topbar::before {
+      content: "";
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background: rgba(255,255,255,0.55);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Blue+Green blend layer */
+    .topbar::after {
+      content: "";
+      position: absolute; inset: -20% -10%;
+      pointer-events: none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+      mix-blend-mode: normal; /* keeps it subtle on white */
+      opacity: 1;
+    }
+
+    /* Keep your existing header content spacing/behavior */
+    header.nav { padding: 12px 0; }
+
+    /* Footer: glass + blue→green ribbon blend */
+    footer.glass {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,0.75);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+    }
+
+    /* Footer gradient wash */
+    footer.glass::before {
+      content: "";
+      position: absolute; inset: -10% -10% -40% -10%;
+      pointer-events: none;
+      background:
+        radial-gradient(900px 400px at 10% 0%, rgba(14,165,233,0.20), transparent 60%),
+        radial-gradient(900px 400px at 90% 0%, rgba(16,185,129,0.20), transparent 60%);
+      opacity: 1;
+    }
+
+    /* Thin gradient top border accent for footer */
+    footer.glass::after {
+      content: "";
+      position: absolute; left: 0; right: 0; top: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      opacity: 0.8;
+    }
+
+    /* Desktop/Tablet hover polish for menu links against the glass */
+    nav.menu a:hover {
+      background: rgba(255,255,255,0.9);
+      color: var(--text);
+      box-shadow: 0 6px 14px rgba(2,6,23,0.06);
+    }
+
+    /* Mobile: keep performance high (no blur/gradients) */
+    @media (max-width: 768px) {
+      .topbar {
+        background: #ffffffee;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      .topbar::before,
+      .topbar::after {
+        display: none !important;
+      }
+
+      footer.glass {
+        background: #ffffff;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      footer.glass::before,
+      footer.glass::after {
+        display: none !important;
+      }
+    }
+
+    /* Accessibility: respect reduced transparency preferences */
+    @media (prefers-reduced-transparency: reduce) {
+      .topbar,
+      footer.glass {
+        background: #ffffff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      .topbar::before,
+      .topbar::after,
+      footer.glass::before,
+      footer.glass::after {
+        display: none !important;
+      }
+    }
+  
+    /* === ULTRA-SMOOTH MODE (no expensive blur while scrolling) === */
+    :root {
+      --shadow-smooth: 0 4px 12px rgba(2,6,23,0.06), 0 1px 4px rgba(2,6,23,0.04);
+    }
+
+    /* Header + footer emulate glass without backdrop-filter */
+    .topbar {
+      background: rgba(255,255,255,0.78) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow: var(--shadow-smooth) !important;
+      overflow: hidden;
+    }
+    .topbar::before { background: rgba(255,255,255,0.55) !important; }
+    .topbar::after {
+      background:
+        radial-gradient(900px 360px at 0% 0%, rgba(14,165,233,0.16), transparent 60%),
+        radial-gradient(900px 360px at 100% 30%, rgba(16,185,129,0.16), transparent 60%) !important;
+    }
+
+    /* Footer keeps same vibe, cheaper to paint */
+    footer.glass {
+      background: rgba(255,255,255,0.85) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow: inset 0 -6px 14px rgba(2,6,23,0.04) !important;
+    }
+    footer.glass::before {
+      background:
+        radial-gradient(700px 280px at 10% 0%, rgba(14,165,233,0.14), transparent 60%),
+        radial-gradient(700px 280px at 90% 0%, rgba(16,185,129,0.14), transparent 60%) !important;
+    }
+
+    /* Card polish but cheaper */
+    .glass { box-shadow: var(--shadow-smooth) !important; }
+
+    /* Containment hints reduce reflow/repaint work */
+    .post.glass, .hero-card, section, footer.glass {
+      contain: layout paint style;
+    }
+
+    /* Hover state without costly re-blur */
+    nav.menu a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(2,6,23,0.06);
+      background: rgba(255,255,255,0.92);
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    /* Mobile strict: no blur anywhere */
+    @media (max-width: 768px) {
+      .glass, .topbar, footer.glass {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+    }
+  
+    /* === Scroll-Simplify Mode: disable heavy paint while user is scrolling === */
+    .topbar { will-change: transform; transform: translateZ(0); }
+    main { will-change: contents; }
+
+    /* When body has .scrolling, use cheaper paints */
+    body.scrolling {
+      background: var(--bg) !important; /* drop radial gradients during scroll */
+    }
+    body.scrolling .topbar::after,
+    body.scrolling footer.glass::before {
+      opacity: 0 !important; /* hide blue+green wash while moving */
+    }
+    body.scrolling .glass,
+    body.scrolling .post.glass,
+    body.scrolling .hero-card {
+      box-shadow: none !important; /* drop shadows while moving */
+      border: 1px solid var(--border) !important; /* keep structure */
+    }
+
+    /* Reduce shadow cost always (already lighter earlier, keep here as safety) */
+    :root { --shadow: 0 6px 16px rgba(2,6,23,0.08), 0 2px 8px rgba(2,6,23,0.06); }
+  
+    /* === NUCLEAR PERF MODE for Chrome: raster background + simpler paint === */
+    /* 1) Replace multi-radial CSS background with a single rasterized SVG (data URI).
+          This is composited once and scrolls stutter-free. */
+    body { background: var(--bg) !important; }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="none"><defs><radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(120 40) rotate(0) scale(900 500)"><stop offset="0" stop-color="%230ea5e9" stop-opacity="0.20"/><stop offset="0.6" stop-color="%230ea5e9" stop-opacity="0"/></radialGradient><radialGradient id="g" cx="1" cy="0.3" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1080 240) rotate(0) scale(900 500)"><stop offset="0" stop-color="%2310b981" stop-opacity="0.18"/><stop offset="0.6" stop-color="%2310b981" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="800" fill="%23f6f9ff"/><rect width="1200" height="800" fill="url(%23b)"/><rect width="1200" height="800" fill="url(%23g)"/></svg>');
+      background-size: cover; background-repeat: no-repeat; background-position: center;
+      will-change: opacity; transform: translateZ(0);
+    }
+
+    /* 2) Turn off content-visibility auto (can cause jank in Chrome on complex grids). */
+    section, .post.glass { content-visibility: visible !important; contain-intrinsic-size: auto !important; }
+
+    /* 3) Ensure header/footer are on their own layers; drop any hidden heavy effects while moving */
+    .topbar, footer.glass { backface-visibility: hidden; transform: translateZ(0); will-change: transform; }
+
+    /* Keep scroll-simplify behavior, but it now fades a single image (cheap) */
+    body.scrolling::before { opacity: 0.9; }
+
+    /* 4) Safer sticky behavior hint */
+    .topbar { contain: paint; }
+  
+    /* Disable auto on/off color blend while scrolling */
+    body.scrolling::before,
+    body.scrolling .topbar::after,
+    body.scrolling footer.glass::before { opacity: 1 !important; }
+    body.scrolling .glass,
+    body.scrolling .post.glass,
+    body.scrolling .hero-card { box-shadow: var(--shadow) !important; }
+  
+    /* Re-enable blur effect for header/footer */
+    .topbar {
+      backdrop-filter: blur(14px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+    }
+    footer.glass {
+      backdrop-filter: blur(12px) saturate(170%) !important;
+      -webkit-backdrop-filter: blur(12px) saturate(170%) !important;
+    }
   </style>
 </head>
 <body>
@@ -237,9 +471,11 @@
 
         <!-- Desktop menu -->
         <nav class="menu" aria-label="Primary">
-          <a href="blogs/">Blog</a>
+          <a href="/" aria-label="TechFinserv home">Home</a>
+		  <a href="blogs/">Blog</a>
+		  <a href="blogs/">EMI calculator</a>
           <a href="#about">About</a>
-          <a class="cta" href="#tools">Tools</a>
+          <a class="cta" href="#tools">Apply Now</a>
         </nav>
 
         <!-- Mobile hamburger -->
@@ -250,9 +486,11 @@
 
       <!-- Mobile dropdown -->
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
-        <a href="/blogs">Blog</a>
+        <a href="/" aria-label="TechFinserv home">Home</a>
+		<a href="/blogs">Blog</a>
+		<a href="blogs/">EMI calculator</a>
         <a href="#about">About</a>
-        <a href="#tools" style="font-weight:600;color:var(--accent-1)">Tools</a>
+        <a href="#tools" style="font-weight:600;color:var(--accent-1)"></a>
       </nav>
     </div>
   </div>
@@ -268,7 +506,7 @@
           <p class="subtitle">TechFinserv is your all-in-one finance hub — use calculators for EMIs, SIP returns, and loan eligibility, while learning from easy-to-read blogs on investments, tax hacks, savings tips, and credit improvement strategies.</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
             <a class="cta" href="#tools">Explore Tools</a>
-            <a class="cta" style="background:transparent;border:1px solid var(--border);color:var(--text);" href="/blogs">Read the Blog</a>
+            <a class="cta" style="background:transparent;border:1px solid var(--border);color:var(--text);" href="/blogs">Read the blogs</a>
           </div>
         </div>
 
@@ -413,7 +651,7 @@
 
   <footer id="about" class="glass" style="margin-top:24px;">
     <div class="container">
-      <p>© <span id="year"></span> TechFinserv — Modern finance blog.</p>
+      <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
     </div>
   </footer>
 
@@ -447,6 +685,8 @@
         if (window.innerWidth > 768) setExpanded(false);
       });
     })();
+  
   </script>
+  
 </body>
 </html>
