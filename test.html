@@ -45,6 +45,7 @@
     }
 
     * { box-sizing: border-box; }
+    html, body { width:100%; overflow-x:hidden; } /* prevent sideways scroll on mobile */
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
       background: var(--bg);
@@ -55,7 +56,7 @@
     .glass { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
       backdrop-filter: blur(10px) saturate(160%); -webkit-backdrop-filter: blur(10px) saturate(160%); box-shadow: var(--shadow); }
 
-    /* Header (new site) */
+    /* Header (new site) — unchanged for desktop */
     .topbar { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.78);
       border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); }
     header.nav { display:flex; justify-content:space-between; align-items:center; padding: 12px 0; }
@@ -134,6 +135,34 @@
       td[data-label]:before { content: attr(data-label) ":"; font-weight: 600; margin-right: 10px; color: var(--muted); width: 40%; max-width: 160px; }
       td .value { width: 60%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     }
+
+    /* =========================
+       MOBILE-ONLY header menu (copied style from Home)
+       ========================= */
+    .mobile-menu-toggle{ display:none; }
+    .mobile-menu{ display:none; }
+
+    @media (max-width:768px){
+      nav.menu{ display:none; }                /* hide desktop nav on phones */
+      .mobile-menu-toggle{
+        display:inline-flex; flex-direction:column; justify-content:center; gap:4px;
+        width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span{
+        display:block; height:3px; width:100%; background:var(--text); border-radius:2px;
+      }
+      .mobile-menu{
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px; background:#fff;
+        border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a{ padding:12px 16px; font-size:15px; color:var(--muted); }
+      .mobile-menu a:hover{ background: var(--bg); color: var(--text); }
+
+      /* stop ad iframes from forcing side-scroll on small screens */
+      .ad-card, .ad-slot{ width:100%; }
+      .ad-slot ins{ max-width:100% !important; width:100% !important; height:auto !important; display:block !important; }
+    }
+    .mobile-menu.open{ display:flex !important; }
   </style>
 </head>
 <body>
@@ -144,12 +173,26 @@
         <a href="/" aria-label="TechFinserv home">
           <img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
         </a>
+
+        <!-- desktop menu (unchanged) -->
         <nav class="menu" aria-label="Primary">
           <a href="/">Home</a>
           <a href="/blogs/">Blog</a>
           <a class="cta" href="coming-soon.html">Apply Now</a>
         </nav>
+
+        <!-- MOBILE: hamburger (added) -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
       </header>
+
+      <!-- MOBILE: dropdown menu (added) -->
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
+        <a href="/">Home</a>
+        <a href="/blogs/">Blog</a>
+        <a href="coming-soon.html">Apply Now</a>
+      </nav>
     </div>
   </div>
 
@@ -269,17 +312,17 @@
           <div class="ad-note">Ads render only in these boxes. Non-sticky for policy safety.</div>
         </aside>
       </div>
-      
-    <section id="learn-emi" class="glass" style="margin-top:20px; padding:18px;">
-    <section class="inline-ad glass" aria-label="Inline Ad">
-	    <div class="inline-ad-inner">
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:728px;height:90px"
-             data-ad-client="ca-pub-4180233192929131"
-             data-ad-slot="3731030557"></ins>
+
+      <!-- Inline banner above article -->
+      <section class="glass" style="margin-top:20px; padding:18px;">
+        <div style="display:grid; place-items:center;">
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:728px;height:90px;max-width:100%"
+               data-ad-client="ca-pub-4180233192929131"
+               data-ad-slot="3731030557"></ins>
+        </div>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
-    </section>
+      </section>
 
       <!-- ===== Learn About EMI (Article) ===== -->
       <section id="learn-emi" class="glass" style="margin-top:20px; padding:18px;">
@@ -470,6 +513,33 @@
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Mobile menu toggle (same behavior as Home) =====
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      });
+
+      // Close menu when a link is clicked
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      });
+
+      // Reset on resize to desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
+    })();
 
     // =============================
     // LOGIC — same as old site (tenure/emi modes + part-payments)
@@ -707,7 +777,7 @@
       y += cardH + 18;
 
       const head = hasPart ? [['Month','EMI','Principal','Interest','Part Payment','Outstanding']] : [['Month','EMI','Principal','Interest','Outstanding']];
-      const body = schedule.map(r => hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]);
+      const body = schedule.map(r => hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]);
 
       doc.autoTable({
         startY: y,
