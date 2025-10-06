@@ -9,9 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- AdSense loader: include ONCE -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
           crossorigin="anonymous"></script>
-
 
   <!-- Third-party libs for export -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
@@ -64,10 +65,6 @@
     nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
     .cta { background: var(--gradient-solid); color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600; }
 
-    /* Mobile header */
-    .mobile-menu-toggle { display:none; }
-    .mobile-menu { display:none; }
-
     /* Page shell */
     main { padding: 24px 0 60px; }
     .page-title { margin: 16px 0 8px; font-size: 22px; }
@@ -101,22 +98,17 @@
 
     .table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow: auto; max-height: 480px; background: rgba(255,255,255,0.5); }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    thead th { position: sticky; top: 0; z-index: 10; /* keep above rows */
-  /* Use solid background so text doesn't merge with scrolling rows */
-  background: var(--surface-strong); /* was var(--table-head) */
-  color: var(--muted); text-align: right; font-weight: 700;
-  /* subtle divider so header separates from first row */
-  box-shadow: 0 1px 0 rgba(2,6,23,0.12) inset, 0 2px 8px rgba(2,6,23,0.06);
-}
-
-/* Ensure the scroll container creates a stacking context for the sticky header */
-.table-wrap { position: relative; }
+    thead th { position: sticky; top: 0; z-index: 10; background: var(--surface-strong); color: var(--muted); text-align: right; font-weight: 700;
+      box-shadow: 0 1px 0 rgba(2,6,23,0.12) inset, 0 2px 8px rgba(2,6,23,0.06);
+    }
+    .table-wrap { position: relative; }
     th, td { padding: 10px 10px; border-bottom: 1px solid rgba(2,6,23,0.06); text-align: right; }
     th:first-child, td:first-child { text-align: left; }
     tbody tr:nth-child(odd) { background: var(--table-stripe); }
 
-    /* Right column ad card */
-    .ad-card { position: sticky; top: 84px; padding: 16px; display: grid; gap: 12px; }
+    /* Right column ad card
+       NOTE: non-sticky for manual display ads (policy-safe) */
+    .ad-card { position: static; top: 84px; padding: 16px; display: grid; gap: 12px; }
     .ad-slot { border: 1px dashed var(--border); border-radius: 14px; min-height: 250px; display: grid; place-items: center; color: var(--muted); background: var(--surface-strong); }
     .ad-note { font-size: 12px; color: var(--muted); text-align:center; }
 
@@ -257,16 +249,32 @@
 
         <!-- Right: Ad space -->
         <aside class="ad-card glass" aria-label="Ad">
+          <!-- Your RightRail_300x600 responsive unit -->
           <div class="ad-slot" style="min-height:300px;">
             <ins class="adsbygoogle"
-                 style="display:block"
+                 style="display:block; width:300px; min-height:250px; margin:auto"
                  data-ad-client="ca-pub-4180233192929131"
                  data-ad-slot="9154021274"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
-          <div class="ad-note">Place your AdSense code here. The card is sticky on desktop.</div>
+
+          <!-- Second slot (placeholder) — share slot ID and we’ll wire it -->
+          <div class="ad-slot" style="min-height:100px; display:grid; place-items:center;">
+            <!-- Example once you have the slot:
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="YOUR_SECOND_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+            <span class="small-muted">Add your second ad unit here</span>
+          </div>
+
+          <div class="ad-note">Ads render only in these boxes. Non-sticky for policy safety.</div>
         </aside>
       </div>
     </div>
@@ -446,9 +454,9 @@
       });
 
       // Totals: avoid rounding drift by using original principal for Total Payment
-const totalInterest = schedule.reduce((s,r)=>s+r.interestPaid, 0);
-const principalInput = Math.max(1, Math.round(Number(loanEl.value) || 1));
-const totalPayment = totalInterest + principalInput;
+      const totalInterest = schedule.reduce((s,r)=>s+r.interestPaid, 0);
+      const principalInput = Math.max(1, Math.round(Number(loanEl.value) || 1));
+      const totalPayment = totalInterest + principalInput;
 
       initialEmiEl.textContent = fmt(initialEmi);
       newMonthsEl.textContent = schedule.length;
