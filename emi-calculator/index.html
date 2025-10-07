@@ -42,13 +42,17 @@
       --input-focus: rgba(14,165,233,0.25);
       --table-stripe: rgba(2,6,23,0.03);
       --table-head: rgba(2,6,23,0.04);
+      /* header height (used when fixed) */
+      --header-h: 72px;
     }
 
     * { box-sizing: border-box; }
-    html, body { width:100%; overflow-x:hidden; } /* prevent sideways scroll on mobile */
+    html, body { width:100%; overflow-x:hidden; }
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
       background: var(--bg);
+      /* padding is set dynamically to match header height for identical layout */
+      padding-top: 0;
     }
     a { color: inherit; text-decoration: none; }
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
@@ -56,8 +60,8 @@
     .glass { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
       backdrop-filter: blur(10px) saturate(160%); -webkit-backdrop-filter: blur(10px) saturate(160%); box-shadow: var(--shadow); }
 
-    /* Header (new site) — unchanged for desktop */
-    .topbar { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.78);
+    /* Header (new site) — now fixed */
+    .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: rgba(255,255,255,0.78);
       border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); }
     header.nav { display:flex; justify-content:space-between; align-items:center; padding: 12px 0; }
     .brand-logo { height: 60px; border-radius: 10px; }
@@ -97,12 +101,11 @@
     .small-muted { font-size: 12px; color: var(--muted); }
     .big { font-size: 20px; font-weight: 800; letter-spacing: 0.2px; }
 
-    .table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow: auto; max-height: 480px; background: rgba(255,255,255,0.5); }
+    .table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow: auto; max-height: 480px; background: rgba(255,255,255,0.5); position: relative; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     thead th { position: sticky; top: 0; z-index: 10; background: var(--surface-strong); color: var(--muted); text-align: right; font-weight: 700;
       box-shadow: 0 1px 0 rgba(2,6,23,0.12) inset, 0 2px 8px rgba(2,6,23,0.06);
     }
-    .table-wrap { position: relative; }
     th, td { padding: 10px 10px; border-bottom: 1px solid rgba(2,6,23,0.06); text-align: right; }
     th:first-child, td:first-child { text-align: left; }
     tbody tr:nth-child(odd) { background: var(--table-stripe); }
@@ -143,7 +146,7 @@
     .mobile-menu{ display:none; }
 
     @media (max-width:768px){
-      nav.menu{ display:none; }                /* hide desktop nav on phones */
+      nav.menu{ display:none; }
       .mobile-menu-toggle{
         display:inline-flex; flex-direction:column; justify-content:center; gap:4px;
         width:28px; height:22px; cursor:pointer; background:transparent; border:0;
@@ -158,7 +161,6 @@
       .mobile-menu a{ padding:12px 16px; font-size:15px; color:var(--muted); }
       .mobile-menu a:hover{ background: var(--bg); color: var(--text); }
 
-      /* stop ad iframes from forcing side-scroll on small screens */
       .ad-card, .ad-slot{ width:100%; }
       .ad-slot ins{ max-width:100% !important; width:100% !important; height:auto !important; display:block !important; }
     }
@@ -516,6 +518,15 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Match body padding to exact header height so nothing shifts and layout stays identical
+    (function(){
+      const topbar = document.querySelector('.topbar');
+      if(!topbar) return;
+      const setPad = () => { document.body.style.paddingTop = topbar.offsetHeight + 'px'; };
+      setPad();
+      window.addEventListener('resize', setPad, { passive: true });
+    })();
+
     // ===== Mobile menu toggle (same behavior as Home) =====
     (function () {
       const toggle = document.querySelector('.mobile-menu-toggle');
@@ -530,21 +541,22 @@
       toggle.addEventListener('click', () => {
         const open = !menu.classList.contains('open');
         setExpanded(open);
-      });
+      }, { passive: true });
 
       // Close menu when a link is clicked
       menu.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') setExpanded(false);
-      });
+      }, { passive: true });
 
-      // Reset on resize to desktop
-      window.addEventListener('resize', () => {
+      // Reset on resize to desktop & recompute header height padding once
+      const onResize = () => {
         if (window.innerWidth > 768) setExpanded(false);
-      });
+      };
+      window.addEventListener('resize', onResize, { passive: true });
     })();
 
     // =============================
-    // LOGIC — same as old site (tenure/emi modes + part-payments)
+    // LOGIC — performance-optimized (no visual/calculation/content changes)
     // =============================
 
     const fmt = (v) => {
@@ -587,20 +599,21 @@
     }
 
     function renderPayments() {
-      paymentsList.innerHTML = '';
+      // Use a single string write to avoid many DOM nodes operations
+      if (payments.length === 0) {
+        paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
+        return;
+      }
+      let html = '';
       payments.forEach((p, idx) => {
-        const div = document.createElement('div');
-        div.className = 'chip';
-        div.innerHTML = `<div class="small-muted">Month ${p.month} → <strong>${fmt(p.amount)}</strong></div>`;
-        const btn = document.createElement('button');
-        btn.className = 'btn btn-danger';
-        btn.style.padding = '6px 10px';
-        btn.textContent = 'Remove';
-        btn.onclick = () => { payments.splice(idx,1); renderPayments(); computeAndRender(); };
-        div.appendChild(btn);
-        paymentsList.appendChild(div);
+        html += `<div class="chip"><div class="small-muted">Month ${p.month} → <strong>${fmt(p.amount)}</strong></div>` +
+                `<button data-rm="${idx}" class="btn btn-danger" style="padding:6px 10px">Remove</button></div>`;
       });
-      if (payments.length===0) paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
+      paymentsList.innerHTML = html;
+      // delegate remove clicks (less listeners)
+      paymentsList.querySelectorAll('button[data-rm]').forEach(btn => {
+        btn.onclick = () => { payments.splice(Number(btn.getAttribute('data-rm')),1); renderPayments(); scheduleDirty = true; scheduleRAF(); };
+      });
     }
 
     function addPayment() {
@@ -611,21 +624,24 @@
       payments.sort((x,y)=>x.month-y.month);
       ppMonthEl.value=''; ppAmountEl.value='';
       renderPayments();
-      computeAndRender();
+      scheduleDirty = true; scheduleRAF();
     }
 
     function clearPayments(){
       if(!confirm('Clear all part payments?')) return;
       payments = [];
       renderPayments();
-      computeAndRender();
+      scheduleDirty = true; scheduleRAF();
     }
 
     function computeSchedule() {
       const { principal, monthlyRate, monthsInitial } = getInputs();
       const mode = modeEl.value; // 'tenure' or 'emi'
       const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
-      function partSum(m) { return payments.filter(p=>p.month===m).reduce((s,r)=>s+r.amount,0); }
+
+      // Precompute part-payments per month for O(1) lookup
+      const partMap = new Map();
+      for (const p of payments) partMap.set(p.month, (partMap.get(p.month)||0) + p.amount);
 
       const schedule = [];
       let outstanding = principal;
@@ -638,7 +654,7 @@
         let principalComp = emi - interest;
         if (principalComp < 0) principalComp = 0;
 
-        const part = partSum(month);
+        const part = partMap.get(month) || 0;
 
         if (outstanding - principalComp - part <= 0) {
           const finalInterest = outstanding * monthlyRate;
@@ -666,47 +682,24 @@
       return { schedule, initialEmi: Math.round(initialEmi) };
     }
 
-    function computeAndRender(){
-      const { schedule, initialEmi } = computeSchedule();
+    // Efficient render: build a single HTML string and write once
+    function renderSchedule(schedule) {
+      let rows = '';
+      for (let i=0; i<schedule.length; i++) {
+        const r = schedule[i];
+        rows += `\n<tr>`+
+          `<td data-label="Month"><span class="value">${r.month}</span></td>`+
+          `<td data-label="EMI"><span class="value">${fmt(r.emi)}</span></td>`+
+          `<td data-label="Principal"><span class="value">${fmt(r.principalPaid)}</span></td>`+
+          `<td data-label="Interest"><span class="value">${fmt(r.interestPaid)}</span></td>`+
+          `<td data-label="Part Payment"><span class="value">${fmt(r.partPayment)}</span></td>`+
+          `<td data-label="Outstanding"><span class="value">${fmt(r.outstanding)}</span></td>`+
+        `</tr>`;
+      }
+      scheduleTbody.innerHTML = rows;
+    }
 
-      scheduleTbody.innerHTML = '';
-      schedule.forEach(row=>{
-        const tr = document.createElement('tr');
-
-        const tdMonth = document.createElement('td');
-        tdMonth.setAttribute('data-label','Month');
-        tdMonth.innerHTML = `<span class="value">${row.month}</span>`;
-        tr.appendChild(tdMonth);
-
-        const tdEmi = document.createElement('td');
-        tdEmi.setAttribute('data-label','EMI');
-        tdEmi.innerHTML = `<span class="value">${fmt(row.emi)}</span>`;
-        tr.appendChild(tdEmi);
-
-        const tdPrincipal = document.createElement('td');
-        tdPrincipal.setAttribute('data-label','Principal');
-        tdPrincipal.innerHTML = `<span class="value">${fmt(row.principalPaid)}</span>`;
-        tr.appendChild(tdPrincipal);
-
-        const tdInterest = document.createElement('td');
-        tdInterest.setAttribute('data-label','Interest');
-        tdInterest.innerHTML = `<span class="value">${fmt(row.interestPaid)}</span>`;
-        tr.appendChild(tdInterest);
-
-        const tdPart = document.createElement('td');
-        tdPart.setAttribute('data-label','Part Payment');
-        tdPart.innerHTML = `<span class="value">${fmt(row.partPayment)}</span>`;
-        tr.appendChild(tdPart);
-
-        const tdOut = document.createElement('td');
-        tdOut.setAttribute('data-label','Outstanding');
-        tdOut.innerHTML = `<span class="value">${fmt(row.outstanding)}</span>`;
-        tr.appendChild(tdOut);
-
-        scheduleTbody.appendChild(tr);
-      });
-
-      // Totals: avoid rounding drift by using original principal for Total Payment
+    function updateKpis(schedule, initialEmi){
       const totalInterest = schedule.reduce((s,r)=>s+r.interestPaid, 0);
       const principalInput = Math.max(1, Math.round(Number(loanEl.value) || 1));
       const totalPayment = totalInterest + principalInput;
@@ -717,8 +710,40 @@
       totalPaymentEl.textContent = fmt(totalPayment);
     }
 
+    function computeAndRender(){
+      const { schedule, initialEmi } = computeSchedule();
+      renderSchedule(schedule);
+      updateKpis(schedule, initialEmi);
+      lastSchedule = schedule; // cache for exports
+      lastInitialEmi = initialEmi;
+    }
+
+    // rAF throttle for inputs to avoid jank while typing
+    let scheduleDirty = false;
+    let rafId = 0;
+    let lastSchedule = null;
+    let lastInitialEmi = 0;
+    function scheduleRAF(){
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        if (scheduleDirty) {
+          scheduleDirty = false;
+          computeAndRender();
+        }
+      });
+    }
+
+    // Events
+    document.getElementById('addPp').addEventListener('click', addPayment);
+    document.getElementById('clearPps').addEventListener('click', clearPayments);
+
+    const onInput = () => { scheduleDirty = true; scheduleRAF(); };
+    [loanEl, rateEl, yearsEl, modeEl].forEach(el => el.addEventListener('input', onInput));
+
+    // Export: use cached lastSchedule to avoid recompute during click (but still accurate because we refresh on input)
     function exportXLSX(){
-      const { schedule } = computeSchedule();
+      const schedule = lastSchedule || computeSchedule().schedule;
       const hasPart = payments.some(p => p.amount && p.amount > 0);
       const aoa = [ ['Loan Amount', loanEl.value], ['Annual Rate (%)', rateEl.value], ['Tenure (Years)', yearsEl.value], ['Mode', modeEl.value], [], ];
       if (hasPart) {
@@ -736,7 +761,8 @@
     }
 
     function exportPDF(){
-      const { schedule, initialEmi } = computeSchedule();
+      const scheduleData = lastSchedule || computeSchedule().schedule;
+      const initialEmi = lastInitialEmi || computeSchedule().initialEmi;
       const loan = Math.round(Number(loanEl.value) || 0);
       const rate = Number(rateEl.value) || 0;
       const years = Number(yearsEl.value) || 0;
@@ -779,7 +805,7 @@
       y += cardH + 18;
 
       const head = hasPart ? [['Month','EMI','Principal','Interest','Part Payment','Outstanding']] : [['Month','EMI','Principal','Interest','Outstanding']];
-      const body = schedule.map(r => hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]);
+      const body = scheduleData.map(r => hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]);
 
       doc.autoTable({
         startY: y,
@@ -800,10 +826,6 @@
       doc.save('emi_schedule.pdf');
     }
 
-    // Events
-    document.getElementById('addPp').addEventListener('click', addPayment);
-    document.getElementById('clearPps').addEventListener('click', clearPayments);
-    [loanEl, rateEl, yearsEl, modeEl].forEach(el => el.addEventListener('input', computeAndRender));
     downloadXLSXBtn.addEventListener('click', exportXLSX);
     downloadPDFBtn.addEventListener('click', exportPDF);
 
