@@ -51,8 +51,8 @@
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
       background: var(--bg);
-      /* ensure content isn't hidden under fixed header */
-      padding-top: var(--header-h);
+      /* padding is set dynamically to match header height for identical layout */
+      padding-top: 0;
     }
     a { color: inherit; text-decoration: none; }
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
@@ -62,7 +62,7 @@
 
     /* Header (new site) — now fixed */
     .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: rgba(255,255,255,0.78);
-      border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); height: var(--header-h); display:flex; align-items:center; }
+      border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); }
     header.nav { display:flex; justify-content:space-between; align-items:center; padding: 12px 0; }
     .brand-logo { height: 60px; border-radius: 10px; }
     nav.menu { display:flex; gap:14px; }
@@ -517,6 +517,15 @@
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Match body padding to exact header height so nothing shifts and layout stays identical
+    (function(){
+      const topbar = document.querySelector('.topbar');
+      if(!topbar) return;
+      const setPad = () => { document.body.style.paddingTop = topbar.offsetHeight + 'px'; };
+      setPad();
+      window.addEventListener('resize', setPad, { passive: true });
+    })();
 
     // ===== Mobile menu toggle (same behavior as Home) =====
     (function () {
