@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EMI Calculator — TechFinserv</title>
-  <meta name="description" content="Glassy, fast EMI calculator with part-payment options — styled like the new TechFinserv site. Left: calculator. Right: ad slot." />
-  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="description" content="Smart EMI calculator for home/personal/car loans. Add part-payments to save interest, get a detailed schedule, and download results as PDF/Excel." />
+  <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,20 +14,20 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
           crossorigin="anonymous"></script>
 
-  <!-- Third-party libs for export -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <!-- Third-party libs for export (deferred to avoid blocking) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
   <style>
-    /* === New site theme (light glass) === */
+    /* === New site theme (light glass) — performance-friendly === */
     :root {
       --bg: #f6f9ff;
       --bg-accent1: rgba(14,165,233,0.20);
       --bg-accent2: rgba(16,185,129,0.18);
-      --surface: rgba(255,255,255,0.78);
-      --surface-strong: rgba(255,255,255,0.92);
+      --surface: rgba(255,255,255,0.92);
+      --surface-strong: rgba(255,255,255,0.98);
       --text: #0f172a;
       --muted: #475569;
       --border: rgba(2,6,23,0.12);
@@ -35,17 +35,18 @@
       --accent-2: #10b981;
       --gradient-solid: linear-gradient(135deg, #10a7e6, #10b981);
       --radius: 16px;
-      --shadow: 0 6px 16px rgba(2,6,23,0.08), 0 2px 8px rgba(2,6,23,0.06);
+      /* Lighter shadow for cheaper paints */
+      --shadow: 0 2px 8px rgba(2,6,23,0.06);
       --maxw: 1200px;
 
-      --input-bg: rgba(255,255,255,0.92);
+      --input-bg: rgba(255,255,255,0.98);
       --input-focus: rgba(14,165,233,0.25);
       --table-stripe: rgba(2,6,23,0.03);
       --table-head: rgba(2,6,23,0.04);
     }
 
     * { box-sizing: border-box; }
-    html, body { width:100%; overflow-x:hidden; } /* prevent sideways scroll on mobile */
+    html, body { width:100%; overflow-x:hidden; }
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
       background: var(--bg);
@@ -53,12 +54,16 @@
     a { color: inherit; text-decoration: none; }
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
-    .glass { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      backdrop-filter: blur(10px) saturate(160%); -webkit-backdrop-filter: blur(10px) saturate(160%); box-shadow: var(--shadow); }
+    /* Remove heavy backdrop blur on big containers */
+    .glass { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
 
-    /* Header (new site) — unchanged for desktop */
-    .topbar { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.78);
-      border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); }
+    /* Header (perf-tuned) */
+    .topbar { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92);
+      border-bottom: 1px solid var(--border); box-shadow: var(--shadow);
+      /* very light blur (or comment these 2 lines out to remove) */
+      backdrop-filter: blur(4px) saturate(120%);
+      -webkit-backdrop-filter: blur(4px) saturate(120%);
+    }
     header.nav { display:flex; justify-content:space-between; align-items:center; padding: 12px 0; }
     .brand-logo { height: 60px; border-radius: 10px; }
     nav.menu { display:flex; gap:14px; }
@@ -112,7 +117,7 @@
     .ad-slot { border: 1px dashed var(--border); border-radius: 14px; min-height: 250px; display: grid; place-items: center; color: var(--muted); background: var(--surface-strong); }
     .ad-note { font-size: 12px; color: var(--muted); text-align:center; }
 
-    footer { border-top: 1px solid var(--border); padding: 30px 0 80px; color: var(--muted); background: rgba(255,255,255,0.75); }
+    footer { border-top: 1px solid var(--border); padding: 30px 0 80px; color: var(--muted); background: rgba(255,255,255,0.95); }
 
     /* Responsive */
     @media (max-width: 1000px) {
@@ -126,24 +131,18 @@
       .big { font-size: 18px; }
     }
 
-    /* Mobile table -> cards */
+    /* Mobile: keep table, allow horizontal scroll; avoid heavy card transform */
     @media (max-width: 600px) {
-      table thead { display: none; }
-      table, tbody, tr, td { display: block; width: 100%; }
-      tr { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 10px; background: var(--surface); }
-      td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border: none; text-align: left; font-size: 13px; color: var(--text); }
-      td[data-label]:before { content: attr(data-label) ":"; font-weight: 600; margin-right: 10px; color: var(--muted); width: 40%; max-width: 160px; }
-      td .value { width: 60%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .table-wrap { overflow-x: auto; }
+      table, thead, tbody, tr, td, th { display: table; width: auto; }
     }
 
-    /* =========================
-       MOBILE-ONLY header menu (copied style from Home)
-       ========================= */
+    /* MOBILE-ONLY header menu */
     .mobile-menu-toggle{ display:none; }
     .mobile-menu{ display:none; }
 
     @media (max-width:768px){
-      nav.menu{ display:none; }                /* hide desktop nav on phones */
+      nav.menu{ display:none; }
       .mobile-menu-toggle{
         display:inline-flex; flex-direction:column; justify-content:center; gap:4px;
         width:28px; height:22px; cursor:pointer; background:transparent; border:0;
@@ -158,11 +157,13 @@
       .mobile-menu a{ padding:12px 16px; font-size:15px; color:var(--muted); }
       .mobile-menu a:hover{ background: var(--bg); color: var(--text); }
 
-      /* stop ad iframes from forcing side-scroll on small screens */
       .ad-card, .ad-slot{ width:100%; }
       .ad-slot ins{ max-width:100% !important; width:100% !important; height:auto !important; display:block !important; }
     }
     .mobile-menu.open{ display:flex !important; }
+
+    /* Utility */
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 1, 1); white-space: nowrap; border: 0; }
   </style>
 </head>
 <body>
@@ -171,27 +172,28 @@
     <div class="container">
       <header class="nav" role="banner">
         <a href="/" aria-label="TechFinserv home">
-          <img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
+          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo" loading="lazy">
         </a>
 
-        <!-- desktop menu (unchanged) -->
+        <!-- desktop menu -->
         <nav class="menu" aria-label="Primary">
           <a href="/">Home</a>
-          <a href="/blogs/">Blog</a>
-          <a class="cta" href="coming-soon.html">Apply Now</a>
+          <a href="/blogs.html">Blog</a>
+          <a href="/coming-soon.html">About</a>
+          <a class="cta" href="/coming-soon.html">Apply Now</a>
         </nav>
 
-        <!-- MOBILE: hamburger (added) -->
+        <!-- MOBILE: hamburger -->
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
       </header>
 
-      <!-- MOBILE: dropdown menu (added) -->
+      <!-- MOBILE: dropdown menu -->
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
         <a href="/">Home</a>
-        <a href="/blogs/">Blog</a>
-        <a href="coming-soon.html">Apply Now</a>
+        <a href="/blogs.html">Blog</a>
+        <a href="/coming-soon.html">Apply Now</a>
       </nav>
     </div>
   </div>
@@ -199,7 +201,7 @@
   <main>
     <div class="container">
       <h1 class="page-title">EMI Calculator with Part-Payment</h1>
-      <p class="subtitle">Left: calculator. Right: ad space. Same logic as your old tool, styled to match your new site.</p>
+      <p class="subtitle">EMI calculator for home, personal and car loans with part-payment support, instant amortization schedule, and one-click PDF/Excel export.</p>
 
       <div class="layout">
         <!-- Left: Calculator -->
@@ -207,22 +209,22 @@
           <!-- Inputs -->
           <div class="grid" style="margin-bottom:12px;">
             <div>
-              <label>Loan Amount (Principal)</label>
+              <label for="loan">Loan Amount (Principal)</label>
               <input id="loan" type="number" min="1" value="100000" />
             </div>
             <div>
-              <label>Annual Interest Rate (%)</label>
+              <label for="rate">Annual Interest Rate (%)</label>
               <input id="rate" type="number" step="0.01" min="0" value="12.50" />
             </div>
             <div>
-              <label>Tenure (Years)</label>
+              <label for="years">Tenure (Years)</label>
               <input id="years" type="number" step="0.25" min="0.1" value="5" />
             </div>
           </div>
 
           <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap; margin-bottom:10px;">
             <div style="min-width:220px;">
-              <label>Mode</label>
+              <label for="mode">Mode</label>
               <select id="mode">
                 <option value="tenure">Reduce Tenure (EMI fixed)</option>
                 <option value="emi">Reduce EMI (Tenure fixed)</option>
@@ -271,18 +273,20 @@
           <div class="glass" style="padding:14px; margin-top:12px;">
             <div class="row" style="justify-content: space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
               <strong>Repayment Schedule</strong>
-              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <div class="row" style="gap:8px; flex-wrap:wrap;">
+                <button id="toggleRows" class="btn" type="button">Show all rows</button>
                 <button id="downloadXLSX" class="btn btn-success" type="button">Download Excel</button>
                 <button id="downloadPDF" class="btn" type="button">Download PDF</button>
               </div>
             </div>
             <div class="table-wrap">
-              <table id="scheduleTable">
+              <table id="scheduleTable" aria-describedby="scheduleHelp">
                 <thead>
                   <tr><th>Month</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Part Payment</th><th>Outstanding</th></tr>
                 </thead>
                 <tbody></tbody>
               </table>
+              <p id="scheduleHelp" class="visually-hidden">Scroll to view the amortization schedule. Use the button to show all rows.</p>
             </div>
           </div>
 
@@ -291,37 +295,39 @@
 
         <!-- Right: Ad space -->
         <aside class="ad-card glass" aria-label="Ad">
-          <!-- first ad RightRail_300x600 (Fixed) -->
+          <!-- first ad RightRail_300x600 (lazy) -->
           <div class="ad-slot" style="min-height:600px;">
             <ins class="adsbygoogle"
                  style="display:inline-block;width:300px;height:600px"
                  data-ad-client="ca-pub-4180233192929131"
-                 data-ad-slot="9154021274"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                 data-ad-slot="9154021274"
+                 data-loading-strategy="prefer-viewability"></ins>
           </div>
 
-          <!-- second ad TopBanner_300x250 (Fixed) -->
+          <!-- second ad TopBanner_300x250 (lazy) -->
           <div class="ad-slot" style="min-height:250px;">
             <ins class="adsbygoogle"
                  style="display:inline-block;width:300px;height:250px"
                  data-ad-client="ca-pub-4180233192929131"
-                 data-ad-slot="2241854911"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                 data-ad-slot="2241854911"
+                 data-loading-strategy="prefer-viewability"></ins>
           </div>
 
-          <div class="ad-note">Ads render only in these boxes. Non-sticky for policy safety.</div>
+          <div class="ad-note">Support ❤️ Us By Clicking Ads</div>
         </aside>
       </div>
 
       <!-- Inline banner above article -->
       <section class="glass" style="margin-top:20px; padding:18px;">
-        <div style="display:grid; place-items:center;">
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:728px;height:90px;max-width:100%"
-               data-ad-client="ca-pub-4180233192929131"
-               data-ad-slot="3731030557"></ins>
-        </div>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <aside class="ad-card glass" aria-label="Ad">
+          <div style="display:grid; place-items:center;">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px;max-width:100%"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="3731030557"
+                 data-loading-strategy="prefer-viewability"></ins>
+          </div>
+        </aside>
       </section>
 
       <!-- ===== Learn About EMI (Article) ===== -->
@@ -514,7 +520,7 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ===== Mobile menu toggle (same behavior as Home) =====
+    // ===== Mobile menu toggle =====
     (function () {
       const toggle = document.querySelector('.mobile-menu-toggle');
       const menu = document.getElementById('mobileMenu');
@@ -530,25 +536,17 @@
         setExpanded(open);
       });
 
-      // Close menu when a link is clicked
-      menu.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') setExpanded(false);
-      });
-
-      // Reset on resize to desktop
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) setExpanded(false);
-      });
+      menu.addEventListener('click', (e) => { if (e.target.tagName === 'A') setExpanded(false); });
+      window.addEventListener('resize', () => { if (window.innerWidth > 768) setExpanded(false); });
     })();
 
     // =============================
-    // LOGIC — same as old site (tenure/emi modes + part-payments)
+    // LOGIC — optimized: debounced input, cached formatter, fast table render, lazy ads
     // =============================
 
-    const fmt = (v) => {
-      const n = Math.round(Number(v) || 0);
-      return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0, minimumFractionDigits: 0 }).format(n);
-    };
+    // Cached number formatter
+    const nf = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0, minimumFractionDigits: 0 });
+    const fmt = (v) => nf.format(Math.round(Number(v) || 0));
 
     function pmt(rate, nper, pv) {
       if (nper === 0) return 0;
@@ -574,8 +572,11 @@
     const scheduleTbody = document.querySelector('#scheduleTable tbody');
     const downloadXLSXBtn = document.getElementById('downloadXLSX');
     const downloadPDFBtn = document.getElementById('downloadPDF');
+    const toggleRowsBtn = document.getElementById('toggleRows');
 
     let payments = []; // {month, amount}
+    let paymentsDirty = false;
+    let showAllRows = false; // for initial fast render
 
     function getInputs() {
       const principal = Math.max(1, Math.round(Number(loanEl.value) || 1));
@@ -585,20 +586,28 @@
     }
 
     function renderPayments() {
-      paymentsList.innerHTML = '';
-      payments.forEach((p, idx) => {
-        const div = document.createElement('div');
-        div.className = 'chip';
-        div.innerHTML = `<div class="small-muted">Month ${p.month} → <strong>${fmt(p.amount)}</strong></div>`;
-        const btn = document.createElement('button');
-        btn.className = 'btn btn-danger';
-        btn.style.padding = '6px 10px';
-        btn.textContent = 'Remove';
-        btn.onclick = () => { payments.splice(idx,1); renderPayments(); computeAndRender(); };
-        div.appendChild(btn);
-        paymentsList.appendChild(div);
+      if (!payments.length) {
+        paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
+        return;
+      }
+      const html = payments.map((p, idx) => `
+        <div class="chip">
+          <div class="small-muted">Month ${p.month} → <strong>${fmt(p.amount)}</strong></div>
+          <button class="btn btn-danger" style="padding:6px 10px" data-idx="${idx}">Remove</button>
+        </div>
+      `).join('');
+      paymentsList.innerHTML = html;
+
+      // Delegate remove clicks
+      paymentsList.querySelectorAll('button[data-idx]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = Number(e.currentTarget.getAttribute('data-idx'));
+          payments.splice(idx,1);
+          paymentsDirty = true;
+          renderPayments();
+          computeAndRender();
+        });
       });
-      if (payments.length===0) paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
     }
 
     function addPayment() {
@@ -606,7 +615,7 @@
       const a = Math.max(0, Math.round(Number(ppAmountEl.value) || 0));
       if (!a) { alert('Please enter a part payment amount > 0'); return; }
       payments.push({month:m, amount:a});
-      payments.sort((x,y)=>x.month-y.month);
+      paymentsDirty = true;
       ppMonthEl.value=''; ppAmountEl.value='';
       renderPayments();
       computeAndRender();
@@ -615,22 +624,37 @@
     function clearPayments(){
       if(!confirm('Clear all part payments?')) return;
       payments = [];
+      paymentsDirty = false;
       renderPayments();
       computeAndRender();
+    }
+
+    function partSumFactory(){
+      // Ensure sorted once when needed
+      if (paymentsDirty) {
+        payments.sort((a,b)=>a.month-b.month);
+        paymentsDirty = false;
+      }
+      // Build a quick lookup map for O(1) sum per month (handles multiple entries)
+      const map = Object.create(null);
+      for (const p of payments) {
+        map[p.month] = (map[p.month]||0) + p.amount;
+      }
+      return (m) => map[m] || 0;
     }
 
     function computeSchedule() {
       const { principal, monthlyRate, monthsInitial } = getInputs();
       const mode = modeEl.value; // 'tenure' or 'emi'
       const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
-      function partSum(m) { return payments.filter(p=>p.month===m).reduce((s,r)=>s+r.amount,0); }
+      const partSum = partSumFactory();
 
       const schedule = [];
       let outstanding = principal;
       let emi = initialEmi;
       let remainingMonths = monthsInitial;
 
-      for (let month=1; month<=1200; month++) {
+      for (let month=1; month<=monthsInitial+600; month++) {
         if (outstanding <= 0.0001) break;
         const interest = outstanding * monthlyRate;
         let principalComp = emi - interest;
@@ -643,7 +667,6 @@
           const finalPrincipal = outstanding;
           const finalEmi = finalPrincipal + finalInterest;
           schedule.push({ month, emi: Math.round(finalEmi), principalPaid: Math.round(finalPrincipal), interestPaid: Math.round(finalInterest), partPayment: Math.round(part), outstanding: 0 });
-          outstanding = 0;
           break;
         }
 
@@ -657,54 +680,39 @@
         }
 
         schedule.push({ month, emi: Math.round(emi), principalPaid: Math.round(principalComp), interestPaid: Math.round(interest), partPayment: Math.round(part), outstanding: Math.round(Math.max(0, outstanding)) });
-
-        if (month > monthsInitial + 600) break;
       }
 
       return { schedule, initialEmi: Math.round(initialEmi) };
     }
 
+    function renderTable(schedule){
+      // Fast string render. Limit rows initially for perf; allow toggling.
+      const ROW_LIMIT = 240; // ~20 years of monthly rows is 240; adjust as you like
+      const rows = showAllRows ? schedule : schedule.slice(0, ROW_LIMIT);
+      const truncated = schedule.length > rows.length;
+
+      const rowsHtml = rows.map(r => `
+        <tr>
+          <td data-label="Month"><span class="value">${r.month}</span></td>
+          <td data-label="EMI"><span class="value">${fmt(r.emi)}</span></td>
+          <td data-label="Principal"><span class="value">${fmt(r.principalPaid)}</span></td>
+          <td data-label="Interest"><span class="value">${fmt(r.interestPaid)}</span></td>
+          <td data-label="Part Payment"><span class="value">${fmt(r.partPayment)}</span></td>
+          <td data-label="Outstanding"><span class="value">${fmt(r.outstanding)}</span></td>
+        </tr>`).join('');
+      scheduleTbody.innerHTML = rowsHtml;
+
+      // Toggle button state
+      toggleRowsBtn.style.display = truncated || showAllRows ? 'inline-flex' : 'none';
+      toggleRowsBtn.textContent = showAllRows ? 'Show fewer rows' : 'Show all rows';
+    }
+
     function computeAndRender(){
       const { schedule, initialEmi } = computeSchedule();
 
-      scheduleTbody.innerHTML = '';
-      schedule.forEach(row=>{
-        const tr = document.createElement('tr');
+      renderTable(schedule);
 
-        const tdMonth = document.createElement('td');
-        tdMonth.setAttribute('data-label','Month');
-        tdMonth.innerHTML = `<span class="value">${row.month}</span>`;
-        tr.appendChild(tdMonth);
-
-        const tdEmi = document.createElement('td');
-        tdEmi.setAttribute('data-label','EMI');
-        tdEmi.innerHTML = `<span class="value">${fmt(row.emi)}</span>`;
-        tr.appendChild(tdEmi);
-
-        const tdPrincipal = document.createElement('td');
-        tdPrincipal.setAttribute('data-label','Principal');
-        tdPrincipal.innerHTML = `<span class="value">${fmt(row.principalPaid)}</span>`;
-        tr.appendChild(tdPrincipal);
-
-        const tdInterest = document.createElement('td');
-        tdInterest.setAttribute('data-label','Interest');
-        tdInterest.innerHTML = `<span class="value">${fmt(row.interestPaid)}</span>`;
-        tr.appendChild(tdInterest);
-
-        const tdPart = document.createElement('td');
-        tdPart.setAttribute('data-label','Part Payment');
-        tdPart.innerHTML = `<span class="value">${fmt(row.partPayment)}</span>`;
-        tr.appendChild(tdPart);
-
-        const tdOut = document.createElement('td');
-        tdOut.setAttribute('data-label','Outstanding');
-        tdOut.innerHTML = `<span class="value">${fmt(row.outstanding)}</span>`;
-        tr.appendChild(tdOut);
-
-        scheduleTbody.appendChild(tr);
-      });
-
-      // Totals: avoid rounding drift by using original principal for Total Payment
+      // Totals
       const totalInterest = schedule.reduce((s,r)=>s+r.interestPaid, 0);
       const principalInput = Math.max(1, Math.round(Number(loanEl.value) || 1));
       const totalPayment = totalInterest + principalInput;
@@ -719,18 +727,13 @@
       const { schedule } = computeSchedule();
       const hasPart = payments.some(p => p.amount && p.amount > 0);
       const aoa = [ ['Loan Amount', loanEl.value], ['Annual Rate (%)', rateEl.value], ['Tenure (Years)', yearsEl.value], ['Mode', modeEl.value], [], ];
-      if (hasPart) {
-        aoa.push(['Month','EMI','Principal Paid','Interest Paid','Part Payment','Outstanding']);
-        schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding]));
-      } else {
-        aoa.push(['Month','EMI','Principal Paid','Interest Paid','Outstanding']);
-        schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]));
-      }
+      aoa.push(hasPart ? ['Month','EMI','Principal Paid','Interest Paid','Part Payment','Outstanding'] : ['Month','EMI','Principal Paid','Interest Paid','Outstanding']);
+      schedule.forEach(r => aoa.push(hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]));
       const ws = XLSX.utils.aoa_to_sheet(aoa);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Schedule');
       const wbout = XLSX.write(wb, {bookType:'xlsx', type:'array'});
-      try { saveAs(new Blob([wbout],{type:"application/octet-stream"}), 'emi_schedule.xlsx'); } catch(e) { alert('Excel export failed: ' + e.message); }
+      try { saveAs(new Blob([wbout],{type:"application/octet-stream"), 'emi_schedule.xlsx')); } catch(e) { alert('Excel export failed: ' + e.message); }
     }
 
     function exportPDF(){
@@ -743,8 +746,7 @@
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ unit: 'pt', format: 'a4' });
       const pageWidth = doc.internal.pageSize.getWidth();
-      const margin = 40;
-      let y = 40;
+      const margin = 40; let y = 40;
 
       doc.setFillColor(246, 249, 255);
       doc.rect(0,0,pageWidth,60,'F');
@@ -798,16 +800,38 @@
       doc.save('emi_schedule.pdf');
     }
 
+    // Debounce helper
+    function debounce(fn, delay=200){ let t; return (...args)=>{ clearTimeout(t); t = setTimeout(()=>fn(...args), delay); }; }
+    const debouncedCompute = debounce(computeAndRender, 200);
+
     // Events
     document.getElementById('addPp').addEventListener('click', addPayment);
     document.getElementById('clearPps').addEventListener('click', clearPayments);
-    [loanEl, rateEl, yearsEl, modeEl].forEach(el => el.addEventListener('input', computeAndRender));
+
+    // Debounced for numeric inputs
+    [loanEl, rateEl, yearsEl].forEach(el => el.addEventListener('input', debouncedCompute));
+    // Immediate for select
+    modeEl.addEventListener('change', computeAndRender);
+
     downloadXLSXBtn.addEventListener('click', exportXLSX);
     downloadPDFBtn.addEventListener('click', exportPDF);
+
+    toggleRowsBtn.addEventListener('click', () => { showAllRows = !showAllRows; computeAndRender(); });
 
     // First render
     renderPayments();
     computeAndRender();
+
+    // ===== Lazy-load ads after main work is done =====
+    function loadAds(){ try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
+      // For multiple slots, call push for each visible slot
+      document.querySelectorAll('ins.adsbygoogle').forEach(()=>{ try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){} });
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadAds, {timeout: 2000});
+    } else {
+      setTimeout(loadAds, 400);
+    }
   </script>
 </body>
 </html>
