@@ -15,7 +15,9 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9DHT9T8GZB');
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9DHT9T8GZB');
   </script>
 
   <!-- Fonts (Inter + Merriweather) -->
@@ -28,43 +30,103 @@
       --bg:#f6f9ff; --surface:#ffffff; --text:#0f172a; --muted:#475569; --border:rgba(2,6,23,0.12);
       --accent-1:#0ea5e9; --accent-2:#10b981; --radius:16px; --shadow:0 12px 34px rgba(2,6,23,0.10), 0 4px 14px rgba(2,6,23,0.06);
       --maxw:1200px; /* keep site width */
+      --surface-strong: rgba(255,255,255,0.92);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial}
+    html,body{margin:0;background:var(--bg);color:var(--text);}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
     .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
 
-    /* ====== HEADER & FOOTER: UNCHANGED STRUCTURE ====== */
-    .topbar {position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.68); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); isolation: isolate; box-shadow: 0 6px 16px rgba(2,6,23,0.06)}
-    .topbar::before {content: ""; position: absolute; inset: 0; pointer-events:none; background: rgba(255,255,255,0.7); opacity:0.28; border-bottom: 1px solid var(--border)}
-    .topbar::after {content: ""; position: absolute; inset: -20% -10%; pointer-events:none; background: radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%), radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%)}
-    header.nav {position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; padding: 12px 0}
-    .brand-logo {height: 65px; border-radius: 10px; display:block; width:auto; object-fit:contain}
-    nav.menu {display: flex; gap: 14px}
-    nav.menu a {padding: 8px 12px; border-radius: 10px; color: var(--muted); transition: background 200ms ease; font-size: 15px}
-    nav.menu a:hover {background: #ffffffeb; color: var(--text)}
-    .cta {background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600}
-
-    /* Mobile nav (add-only for mobile) */
-    .mobile-menu-toggle {display:none; background:none; border:0; padding:8px; border-radius:10px}
-    .mobile-menu-toggle span{display:block; width:22px; height:2px; background:#334155; margin:4px 0; border-radius:2px}
-    .mobile-menu {display:none}
-    .mobile-menu a {padding:10px 0; border-bottom:1px solid var(--border); color:#0f172a}
-
-    @media (max-width: 768px){
-      nav.menu { display:none; }
-      .mobile-menu-toggle { display:inline-block; }
-      .mobile-menu { display:none; padding:8px 0; }
-      .mobile-menu.open { display:block; }
-      .container { padding: 0 14px; }
-      .article h1 { font-size: 24px; }
-      .article p { font-size: 15px; }
+    /* ===== HEADER (EXACTLY like your reference) ===== */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar::after {
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+    }
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+    }
+    .brand-logo {
+      height: 65px; border-radius: 10px;
+      display:block; width:auto; object-fit:contain;
+      filter:none; mix-blend-mode:normal;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: var(--muted); transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
+    .cta {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
     }
 
-    footer.glass {position: relative; overflow: hidden; background: rgba(255,255,255,0.85); border-top: 1px solid var(--border); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset; padding: 30px 0 80px; color: var(--muted)}
+    /* ===== FOOTER (EXACTLY like your reference) ===== */
+    footer.glass {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: var(--muted);
+    }
+    footer.glass::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      opacity:0.8; pointer-events:none;
+    }
 
-    /* ====== CONTENT AREA ONLY ====== */
+    /* ===== Mobile (EXACTLY like your reference) ===== */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:var(--text); border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:var(--muted); text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: var(--text); }
+      footer.glass { padding:22px 0 56px; }
+      .container { padding: 0 16px; }
+    }
+    .mobile-menu.open { display:flex !important; }
+
+    /* ====== CONTENT AREA (unchanged) ====== */
     .hero{border-bottom:1px solid var(--border); background:linear-gradient(180deg,rgba(14,165,233,0.12),rgba(16,185,129,0.08) 40%,transparent 90%)}
     .hero-inner{padding: clamp(12px,2.4vw,18px) 0}
     .crumbs{display:flex; gap:6px; align-items:center; color:var(--muted); font-size:13px}
@@ -83,7 +145,7 @@
     .note{background:#ecfeff; border:1px solid #bae6fd; color:#0c4a6e; border-radius:8px; padding:10px}
     .keytake{background:#f0f9ff; border:1px solid #dbeafe; border-radius:12px; padding:12px; margin:12px 0}
 
-    /* ADS: Only 2 ad slots kept (in-article & bottom). Keep borders, but make ads responsive/centered */
+    /* ADS */
     .ad-slot{display:block; width:100%; border:1px dashed rgba(2,6,23,0.18); border-radius:12px; background:rgba(14,165,233,0.04); color:var(--muted); padding:8px}
     .ad-slot ins.adsbygoogle{display:block !important; margin:0 auto; min-height:60px}
     .ad-note{font-size:11px; color:var(--muted); text-align:center; margin-top:6px}
@@ -109,7 +171,7 @@
     .tool .icon{width:38px; height:38px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(135deg,var(--accent-1),var(--accent-2)); color:#fff; font-weight:700}
     .tool a{font-weight:700; color:#0e7490}
 
-    /* Read Next grid (clickable cards) */
+    /* Read Next grid */
     .readnext-grid { display: grid; grid-template-columns: repeat(1,1fr); gap: 14px; }
     @media(min-width:600px){ .readnext-grid { grid-template-columns: repeat(2,1fr); } }
     @media(min-width:900px){ .readnext-grid { grid-template-columns: repeat(4,1fr); } }
@@ -121,21 +183,24 @@
 
     .other-posts-wrap { margin-top: 40px; } 
 
-    /* Font pairing (as set earlier) */
+    /* Font pairing */
     body, .article p, .article li, .article blockquote, details p { font-family: "Merriweather", Georgia, serif; }
     h1, h2, h3, h4, h5, h6, nav.menu a, .cta, .tool a, .post-card h4 { font-family: "Inter", system-ui, sans-serif; }
   </style>
 </head>
 <body>
-  <!-- ===== HEADER (unchanged markup) ===== -->
+  <!-- ===== HEADER (exact as reference) ===== -->
   <div class="topbar">
     <div class="container">
       <header class="nav">
-        <a href="/" aria-label="TechFinserv home"><img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo"></a>
+        <a href="/" aria-label="TechFinserv home">
+          <!-- reference uses relative path "images/..." -->
+          <img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
+        </a>
         <nav class="menu" aria-label="Primary">
           <a href="/">Home</a>
-          <a href="/blogs/">Blog</a>
-          <a href="/emi-calculator.html">EMI calculator</a>
+          <a href="blogs/">Blog</a>
+          <a href="emi-calculator.html">EMI calculator</a>
           <a href="#contact" class="cta">Contact</a>
         </nav>
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -144,8 +209,8 @@
       </header>
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
         <a href="/">Home</a>
-        <a href="/blogs/">Blog</a>
-        <a href="/emi-calculator.html">EMI calculator</a>
+        <a href="blogs/">Blog</a>
+        <a href="emi-calculator.html">EMI calculator</a>
         <a href="#contact" style="font-weight:600;color:var(--accent-1)">Contact</a>
       </nav>
     </div>
@@ -230,6 +295,25 @@
           <li><strong>Balance transfer</strong> to a lower rate if the spread is meaningful after fees.</li>
           <li><strong>Reduce tenure</strong> instead of EMI after part-payment to maximize savings.</li>
         </ul>
+
+        <!-- ===== FAQ ===== -->
+        <h2 id="faq">FAQ</h2>
+        <details>
+          <summary>What is EMI in simple words? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#154a7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p>It’s a fixed monthly payment that includes both principal and interest used to repay a loan.</p>
+        </details>
+        <details>
+          <summary>Which is better—fixed or floating rate? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#154a7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p>Choose <em>fixed</em> for stable budgets; choose <em>floating</em> if you can tolerate changes and aim for potentially lower long-term cost.</p>
+        </details>
+        <details>
+          <summary>Does part payment reduce EMI or tenure? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#154a7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p>It reduces principal. You can opt to lower EMI or keep EMI same and shorten the tenure.</p>
+        </details>
+        <details>
+          <summary>Is foreclosure always worth it? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="#154a7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p>Often early in the tenure, yes—but confirm fees and compare against remaining interest.</p>
+        </details>
 
         <!-- ===== Popular Tools (moved after FAQ) ===== -->
         <section class="panel" aria-label="Popular tools">
@@ -322,7 +406,7 @@
     </div>
   </main>
 
-  <!-- ===== FOOTER (unchanged) ===== -->
+  <!-- ===== FOOTER (exact as reference) ===== -->
   <footer id="contact" class="glass">
     <div class="container">
       <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
@@ -333,18 +417,28 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle (uses your existing markup)
-    (function(){
+    /* Mobile menu script (EXACTLY like your reference) */
+    (function () {
       const toggle = document.querySelector('.mobile-menu-toggle');
       const menu = document.getElementById('mobileMenu');
-      if(!toggle || !menu) return;
-      const setExpanded = (open)=>{ toggle.setAttribute('aria-expanded', String(open)); menu.classList.toggle('open', open); };
-      toggle.addEventListener('click', ()=> setExpanded(!menu.classList.contains('open')));
-      menu.addEventListener('click', (e)=>{ if(e.target.tagName==='A') setExpanded(false); });
-      window.addEventListener('resize', ()=>{ if(window.innerWidth>768) setExpanded(false); });
+      if (!toggle || !menu) return;
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
     })();
 
-    // Carousel controls (kept; no-op since not used now)
+    /* (Kept your old carousel stub; harmless if not present) */
     (function(){
       const track = document.getElementById('carouselTrack');
       const prev = document.getElementById('prevBtn');
