@@ -3,1049 +3,410 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EMI Calculator — TechFinserv</title>
-  <meta name="description" content="Smart EMI calculator for home/personal/car loans. Add part-payments to save interest, get a detailed schedule, and download results as PDF/Excel." />
+  <title>What is EMI? A Complete Guide for Beginners — TechFinserv</title>
   <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />  
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-    gtag("config", "G-9DHT9T8GZB");
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9DHT9T8GZB');
   </script>
-
   <!-- AdSense loader: include ONCE -->
-  <script
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
-    crossorigin="anonymous"
-  ></script>
-
-  <!-- Third-party libs for export -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
+          crossorigin="anonymous"></script>
   <style>
-    /* === Your original CSS styles (unchanged from your code) === */
     :root {
       --bg: #f6f9ff;
-      --bg-accent1: rgba(14, 165, 233, 0.2);
-      --bg-accent2: rgba(16, 185, 129, 0.18);
-      --surface: rgba(255, 255, 255, 0.78);
-      --surface-strong: rgba(255, 255, 255, 0.92);
-      --text: #0f172a;
-      --muted: #475569;
-      --border: rgba(2, 6, 23, 0.12);
+      --surface: rgba(255,255,255,0.97);
+      --border: rgba(2,6,23,0.09);
       --accent-1: #0ea5e9;
       --accent-2: #10b981;
-      --gradient-solid: linear-gradient(135deg, #10a7e6, #10b981);
-      --radius: 16px;
-      --shadow: 0 6px 16px rgba(2, 6, 23, 0.08), 0 2px 8px rgba(2, 6, 23, 0.06);
-      --maxw: 1200px;
-
-      --input-bg: rgba(255, 255, 255, 0.92);
-      --input-focus: rgba(14, 165, 233, 0.25);
-      --table-stripe: rgba(2, 6, 23, 0.03);
-      --table-head: rgba(2, 6, 23, 0.04);
-      /* header height (used when fixed) */
-      --header-h: 72px;
+      --radius: 18px;
+      --shadow: 0 8px 28px rgba(14,165,233,0.08), 0 4px 14px rgba(16,185,129,0.06);
+      --maxw: 900px;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-    html,
-    body {
-      width: 100%;
-      overflow-x: hidden;
-    }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      color: var(--text);
+    html, body {
+      height: 100%;
       background: var(--bg);
-      /* padding is set dynamically to match header height for identical layout */
-      padding-top: 0;
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: #232d3b;
+      line-height: 1.6;
     }
-    a {
-      color: inherit;
-      text-decoration: none;
+    body {
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
     }
-    .container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0 20px;
+    .page-wrapper {
+      display: grid;
+      grid-template-columns: 180px minmax(0, var(--maxw)) 180px;
+      gap: 24px;
+      width: 100%;
+      max-width: calc(var(--maxw) + 180px*2 + 48px);
+      margin: 40px auto;
     }
-
-    .glass {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    .side-ad {
+      border: 2px dashed var(--accent-1);
       border-radius: var(--radius);
-      backdrop-filter: blur(10px) saturate(160%);
-      -webkit-backdrop-filter: blur(10px) saturate(160%);
+      background: white;
       box-shadow: var(--shadow);
-    }
-
-    /* Header (new site) — now fixed */
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 40;
-      background: rgba(255, 255, 255, 0.78);
-      border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px) saturate(170%);
-      -webkit-backdrop-filter: blur(12px) saturate(170%);
-    }
-    header.nav {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      padding: 12px 0;
-    }
-    .brand-logo {
-      height: 60px;
-      border-radius: 10px;
-    }
-    nav.menu {
-      display: flex;
-      gap: 14px;
-    }
-    nav.menu a {
-      padding: 8px 12px;
-      border-radius: 10px;
-      color: var(--muted);
-    }
-    nav.menu a:hover {
-      background: var(--surface-strong);
-      color: var(--text);
-    }
-    .cta {
-      background: var(--gradient-solid);
-      color: #fff;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    /* Page shell */
-    main {
-      padding: 24px 0 60px;
-    }
-    .page-title {
-      margin: 16px 0 8px;
-      font-size: 22px;
-    }
-    .subtitle {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* Two-column layout */
-    .layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    /* Calculator card */
-    .calc {
-      padding: 18px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .grid-1 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    label {
-      font-size: 12px;
-      color: var(--muted);
-      display: block;
-      margin: 0 0 6px;
-    }
-    input,
-    select {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--input-bg);
-      color: var(--text);
-      outline: none;
-    }
-    input:focus,
-    select:focus {
-      box-shadow: 0 0 0 3px var(--input-focus);
-      border-color: transparent;
-    }
-
-    .row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .chip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: var(--surface-strong);
-      border: 1px solid var(--border);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: var(--surface-strong);
-      color: var(--text);
-    }
-    .btn:hover {
-      background: rgba(2, 6, 23, 0.04);
-    }
-    .btn-primary {
-      background: var(--gradient-solid);
-      border: 0;
-      color: #fff;
-    }
-    .btn-danger {
-      background: rgba(239, 68, 68, 0.1);
-      color: #b91c1c;
-      border-color: rgba(239, 68, 68, 0.35);
-    }
-    .btn-success {
-      background: rgba(16, 185, 129, 0.12);
-      color: #065f46;
-      border-color: rgba(16, 185, 129, 0.35);
-    }
-
-    .summary {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin: 12px 0;
-    }
-    .card {
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-    }
-    .small-muted {
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .big {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-    }
-
-    .table-wrap {
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      overflow: auto;
-      max-height: 480px;
-      background: rgba(255, 255, 255, 0.5);
-      position: relative;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    thead th {
       position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--surface-strong);
-      color: var(--muted);
-      text-align: right;
+      top: 24px;
+      height: fit-content;
+      width: 100%;
+      min-height: 300px;
+      padding: 0 0 24px 0;
+    }
+    .ad-label {
+      font-size: 1em;
+      color: var(--accent-2);
+      margin: 18px 0 0 0;
       font-weight: 700;
-      box-shadow: 0 1px 0 rgba(2, 6, 23, 0.12) inset, 0 2px 8px rgba(2, 6, 23, 0.06);
-    }
-    th,
-    td {
-      padding: 10px 10px;
-      border-bottom: 1px solid rgba(2, 6, 23, 0.06);
-      text-align: right;
-    }
-    th:first-child,
-    td:first-child {
-      text-align: left;
-    }
-    tbody tr:nth-child(odd) {
-      background: var(--table-stripe);
-    }
-
-    /* Right column ad card — non-sticky for manual display ads (policy-safe) */
-    .ad-card {
-      position: static;
-      top: 84px;
-      padding: 16px;
-      display: grid;
-      gap: 12px;
-    }
-    .ad-slot {
-      border: 1px dashed var(--border);
-      border-radius: 14px;
-      min-height: 250px;
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      background: var(--surface-strong);
-    }
-    .ad-note {
-      font-size: 12px;
-      color: var(--muted);
       text-align: center;
     }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 30px 0 80px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.75);
+    .side-ad-content {
+      margin: 18px 0 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 160px;
+      height: 600px;
     }
-
-    /* Responsive */
-    @media (max-width: 1000px) {
-      .layout {
+    @media (max-width: 1200px) {
+      .page-wrapper {
         grid-template-columns: 1fr;
+        max-width: 100%;
+        gap: 0;
+        margin: 8px;
       }
-      .summary {
-        grid-template-columns: 1fr 1fr;
-      }
-      .ad-card {
-        position: static;
-      }
-    }
-    @media (max-width: 640px) {
-      .summary {
-        grid-template-columns: 1fr;
-      }
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .big {
-        font-size: 18px;
-      }
-    }
-
-    /* Mobile table -> cards */
-    @media (max-width: 600px) {
-      table thead {
+      .side-ad {
         display: none;
       }
-      table,
-      tbody,
-      tr,
-      td {
-        display: block;
-        width: 100%;
-      }
-      tr {
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        margin-bottom: 10px;
-        padding: 10px;
-        background: var(--surface);
-      }
-      td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 0;
-        border: none;
-        text-align: left;
-        font-size: 13px;
-        color: var(--text);
-      }
-      td[data-label]:before {
-        content: attr(data-label) ":";
-        font-weight: 600;
-        margin-right: 10px;
-        color: var(--muted);
-        width: 40%;
-        max-width: 160px;
-      }
-      td .value {
-        width: 60%;
-        text-align: right;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
     }
-
-    /* =========================
-       MOBILE-ONLY header menu (copied style from Home)
-       ========================= */
-    .mobile-menu-toggle {
+    main.container {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 30px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      overflow-wrap: break-word;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 38px);
+      color: var(--accent-1);
+      margin-bottom: 8px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .post-meta {
+      color: #5c6a7d;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+    article {
+      font-size: 17px;
+      color: #475569;
+      max-width: 760px;
+      margin: 0 auto 50px;
+      padding: 0 8px;
+    }
+    h2, h3 {
+      color: var(--accent-2);
+      margin-top: 38px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    p, ul {
+      margin-bottom: 1.6em;
+    }
+    ul {
+      padding-left: 22px;
+    }
+    ul li {
+      margin-bottom: 8px;
+    }
+    em {
+      font-style: italic;
+      color: #333;
+      background: #f0f8ff;
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+    strong {
+      font-weight: 600;
+    }
+    a {
+      color: var(--accent-1);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .ad-slot {
+      max-width: 700px;
+      margin: 40px auto;
+      border: 2px dashed var(--accent-1);
+      border-radius: var(--radius);
+      background: white;
+      padding: 15px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .ad-label-inline {
+      font-size: 1em;
+      color: var(--accent-2);
+      margin-bottom: 14px;
+      display: block;
+      font-weight: 700;
+      text-align: center;
+    }
+    /* FAQ accordion style */
+    .faq-section {
+      max-width: 700px;
+      margin: 48px auto;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+    }
+    .faq-title {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--accent-1);
+      font-weight: 700;
+      margin-bottom: 22px;
+      letter-spacing: 0.03em;
+    }
+    .faq-item {
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      cursor: pointer;
+      padding: 14px 8px;
+      background: none;
+      color: var(--accent-2);
+      font-weight: 700;
+      font-size: 1.09em;
+      outline: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      transition: background 0.18s;
+      border-radius: 8px;
+      position: relative;
+    }
+    .faq-question:hover, .faq-question:focus { background: #f0f8ff; }
+    .faq-answer {
+      padding: 0 8px 14px 8px;
+      color: #475569;
+      font-size: 1em;
       display: none;
+      animation: fadeIn 0.3s;
     }
-    .mobile-menu {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      nav.menu {
-        display: none;
-      }
-      .mobile-menu-toggle {
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 4px;
-        width: 28px;
-        height: 22px;
-        cursor: pointer;
-        background: transparent;
-        border: 0;
-      }
-      .mobile-menu-toggle span {
-        display: block;
-        height: 3px;
-        width: 100%;
-        background: var(--text);
-        border-radius: 2px;
-      }
-      .mobile-menu {
-        display: none;
-        flex-direction: column;
-        gap: 6px;
-        padding: 10px 0 14px;
-        background: #fff;
-        border-bottom: 1px solid var(--border);
-      }
-      .mobile-menu a {
-        padding: 12px 16px;
-        font-size: 15px;
-        color: var(--muted);
-      }
-      .mobile-menu a:hover {
-        background: var(--bg);
-        color: var(--text);
-      }
-
-      .ad-card,
-      .ad-slot {
-        width: 100%;
-      }
-      .ad-slot ins {
-        max-width: 100% !important;
-        width: 100% !important;
-        height: auto !important;
-        display: block !important;
-      }
-    }
-    .mobile-menu.open {
-      display: flex !important;
+    .faq-item.active .faq-answer { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <!-- Header (new site) -->
-  <div class="topbar">
-    <div class="container">
-      <header class="nav" role="banner">
-        <a href="/" aria-label="TechFinserv home">
-          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo" />
-        </a>
-
-        <!-- desktop menu (unchanged) -->
-        <nav class="menu" aria-label="Primary">
-          <a href="/">Home</a>
-          <a href="/blogs.html">Blog</a>
-          <a href="/coming-soon.html">About</a>
-          <a class="cta" href="/coming-soon.html">Apply Now</a>
-        </nav>
-
-        <!-- MOBILE: hamburger (added) -->
-        <button
-          class="mobile-menu-toggle"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-          aria-controls="mobileMenu"
-        >
-          <span></span><span></span><span></span>
-        </button>
-      </header>
-
-      <!-- MOBILE: dropdown menu (added) -->
-      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
-        <a href="/">Home</a>
-        <a href="/blogs.html">Blog</a>
-        <a href="/coming-soon.html">Apply Now</a>
-      </nav>
-    </div>
-  </div>
-
-  <main>
-    <div class="container">
-      <h1 class="page-title">EMI Calculator with Part-Payment</h1>
-      <p class="subtitle">
-        EMI calculator for home, personal and car loans with part-payment
-        support, instant amortization schedule, and one-click PDF/Excel
-        export.
-      </p>
-
-      <div class="layout">
-        <!-- Left: Calculator -->
-        <section id="calculator" class="calc glass" role="region" aria-label="EMI Calculator">
-          <!-- Inputs -->
-          <div class="grid" style="margin-bottom: 12px;">
-            <div>
-              <label>Loan Amount (Principal)</label>
-              <input id="loan" type="number" min="1" value="100000" />
-            </div>
-            <div>
-              <label>Annual Interest Rate (%)</label>
-              <input id="rate" type="number" step="0.01" min="0" value="12.50" />
-            </div>
-            <div>
-              <label>Tenure (Years)</label>
-              <input id="years" type="number" step="0.25" min="0.1" value="5" />
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 10px;">
-            <div style="min-width: 220px;">
-              <label>Mode</label>
-              <select id="mode">
-                <option value="tenure">Reduce Tenure (EMI fixed)</option>
-                <option value="emi">Reduce EMI (Tenure fixed)</option>
-              </select>
-            </div>
-
-            <div style="flex: 1; min-width: 260px;">
-              <label>Add Part Payment (Month & Amount)</label>
-              <div class="row">
-                <input id="ppMonth" type="number" min="1" placeholder="Month (e.g. 12)" style="max-width: 140px" />
-                <input id="ppAmount" type="number" min="0" placeholder="Amount (e.g. 100000)" />
-                <button id="addPp" class="btn btn-primary" type="button">Add</button>
-                <button id="clearPps" class="btn btn-danger" type="button">Clear</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Part payments list -->
-          <div style="margin: 10px 0 6px;">
-            <div class="small-muted">Part Payments (click remove to delete):</div>
-            <div id="paymentsList" class="chips" style="margin-top: 8px;"></div>
-          </div>
-
-          <!-- KPI cards -->
-          <div class="summary" id="dashboard">
-            <div class="card">
-              <div class="small-muted">Initial EMI</div>
-              <div id="initialEmi" class="big">0</div>
-              <div class="small-muted">before prepayment</div>
-            </div>
-            <div class="card">
-              <div class="small-muted">New Tenure (months)</div>
-              <div id="newMonths" class="big">0</div>
-            </div>
-            <div class="card">
-              <div class="small-muted">Total Interest Paid</div>
-              <div id="totalInterest" class="big">0</div>
-            </div>
-            <div class="card">
-              <div class="small-muted">Total Payment</div>
-              <div id="totalPayment" class="big">0</div>
-            </div>
-          </div>
-
-          <!-- Schedule + exports -->
-          <div class="glass" style="padding: 14px; margin-top: 12px;">
-            <div
-              class="row"
-              style="justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap"
-            >
-              <strong>Repayment Schedule</strong>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap">
-                <button id="downloadXLSX" class="btn btn-success" type="button">Download Excel</button>
-                <button id="downloadPDF" class="btn" type="button">Download PDF</button>
-              </div>
-            </div>
-            <div class="table-wrap">
-              <table id="scheduleTable">
-                <thead>
-                  <tr>
-                    <th>Month</th>
-                    <th>EMI</th>
-                    <th>Principal</th>
-                    <th>Interest</th>
-                    <th>Part Payment</th>
-                    <th>Outstanding</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-          <p class="small-muted" style="margin-top: 10px">
-            Tip: add one or more part payments (month number & amount).
-            Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes
-            earlier), or <em>Reduce EMI</em> to keep tenure same and reduce
-            monthly payment. Save the file to keep your data.
-          </p>
-        </section>
-
-        <!-- Right column with ads -->
-        <aside class="ad-card glass" aria-label="Ad">
-          <div class="ad-slot" style="min-height: 600px">
-            <ins
-              class="adsbygoogle"
-              style="display:inline-block;width:300px;height:600px"
-              data-ad-client="ca-pub-4180233192929131"
-              data-ad-slot="9154021274"
-            ></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
-
-          <div class="ad-slot" style="min-height: 250px">
-            <ins
-              class="adsbygoogle"
-              style="display:inline-block;width:300px;height:250px"
-              data-ad-client="ca-pub-4180233192929131"
-              data-ad-slot="2241854911"
-            ></ins>
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
-
-          <div class="ad-note">Support ❤️ Us By Clicking Ads</div>
-        </aside>
+  <div class="page-wrapper">
+    <!-- Left Sticky Ad -->
+    <aside class="side-ad" aria-label="Left vertical advertisement">
+      <span class="ad-label">Sponsored</span>
+      <div class="side-ad-content">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-4180233192929131"
+             data-ad-slot="9391632919"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
+    </aside>
 
-      <!-- Informative EMI article - unchanged -->
-      <section id="learn-emi" class="glass" style="margin-top: 20px; padding: 18px">
-        <h2 style="margin: 0 0 8px">What is EMI?</h2>
-        <p>
-          <strong>EMI (Equated Monthly Installment)</strong> is the fixed amount you pay every month until your loan is fully repaid.
-          Each EMI has two parts—<em>interest</em> on the outstanding balance and a portion of the <em>principal</em>. Early in the
-          loan, the interest share is higher; as the balance reduces, more of each EMI goes toward principal. While your EMI amount
-          usually remains constant, the <em>split</em> between interest and principal changes over time.
-        </p>
+    <!-- Main Blog Content (No change in structure) -->
+    <main class="container" role="main" aria-label="Blog content">
+      <h1>What is EMI? A Complete Guide for Beginners.</h1>
+      <div class="post-meta">Published on October 10, 2025 · By TechFinserv Team</div>
+      <article>
+        <p>In the modern financial system, the concept of EMI has become central to personal borrowing. Whether purchasing a house, buying a car, or financing higher education, most borrowers depend on the convenience of paying through EMIs rather than making lump-sum payments.</p>
+        <p>This article provides a comprehensive guide to EMI (Equated Monthly Installments), explaining its meaning, calculation, real-life applications, benefits, limitations, and methods of effective management.</p>
 
-        <!-- ... your extensive EMI explanation, formulas, FAQs, glossary, disclaimers ... omitted here for brevity but keep as in your original code ... -->
+        <h2>What is EMI and Why Does it Exist?</h2>
+        <p><strong>Quick tip:</strong> Prefer reducing-balance loans over flat-rate loans—they usually cost less over time.</p>
+        <p>EMI stands for Equated Monthly Installment. It is the fixed amount that you, as a borrower, pay to your lender every month until your loan is fully repaid. Each EMI contains two elements: principal, which is the original loan amount, and interest, which is the cost of borrowing.</p>
+        <p>Imagine you take a loan of ₹1,20,000 at 12% annual interest for one year. Without EMI, you would need to return the full amount along with interest in one lump sum at the end of the year. This is not practical for most people, because arranging such a large sum all at once is difficult. EMI makes life easier by dividing this repayment into 12 equal installments that you pay every month.</p>
+        <p>This system benefits both the borrower and the lender. For you, the borrower, it means affordable payments and better financial planning. For the lender, it ensures a steady flow of money and reduces the risk of default. In short, EMI exists because it makes credit more practical and accessible.</p>
 
-      </section>
-    </div>
-  </main>
+        <h2>How is EMI Calculated?</h2>
+        <p>The standard EMI formula for reducing-balance loans:</p>
+        <p><em>EMI = P × r × (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> − 1)</em></p>
+        <ul>
+          <li><strong>P</strong> = Principal (loan amount)</li>
+          <li><strong>r</strong> = Monthly interest rate (Annual rate ÷ 12)</li>
+          <li><strong>n</strong> = Total number of EMIs (months)</li>
+        </ul>
+        <p>Example: P = ₹10,00,000; annual rate = 10% ⇒ r = 0.10/12; n = 120 months (10 years). Plug into the formula to compute EMI. Or use our <a href="/emi-calculator/">EMI Calculator</a> instantly.</p>
+        <p>This shows that EMIs are not just about convenience; they also come with a cost. The longer the tenure, the higher the total interest you pay, even if the EMI feels affordable.</p>
+        <p>Many people wonder why the EMI remains fixed even though the loan amount decreases every month. The answer lies in the amortization schedule. In the beginning, most of your EMI goes towards paying interest, while only a small part reduces the principal. As time passes, the interest portion gets smaller and the principal portion gets bigger. By the end of the loan, almost your entire EMI goes into reducing the principal.</p>
+        <p>This hidden structure is why lenders encourage long tenures—they earn more interest in the early years. And it’s also why financial experts recommend prepaying loans as early as possible to save money.</p>
 
-  <footer class="glass" style="margin-top: 24px">
-    <div class="container">
-      Designed & Maintained by Kiran Rathva • © <span id="year"></span> TechFinserv.com
-    </div>
-  </footer>
+        <div class="ad-slot" aria-label="Advertisement">
+          <span class="ad-label-inline">Sponsored</span>
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:700px;height:50px"
+               data-ad-client="ca-pub-4180233192929131"
+               data-ad-slot="9391632919"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
 
+        <h2>Types of Interest Rates</h2>
+        <p>When a borrower takes a loan, the way interest is charged plays a decisive role in shaping both the EMI and the total repayment. Broadly, there are two primary categories of interest rates: fixed and floating. While variations such as hybrid rates, concessional rates, or teaser offers also exist, almost all lending arrangements fall under these core structures.</p>
+
+        <h3>Fixed interest rate</h3>
+        <p>A fixed interest rate remains unchanged for the entire tenure of the loan. This means that the EMI stays constant from the first month until the last, regardless of how market conditions shift. For borrowers, the main advantage of this system is predictability. Since the payment amount is the same every month, it becomes easier to plan household budgets and long-term financial commitments. Fixed rates are particularly useful in an environment where market rates are expected to rise, as the borrower remains protected from those increases. However, the trade-off is that when interest rates decline, the borrower continues paying at the higher locked-in rate. Moreover, fixed-rate loans often start at a slightly higher percentage compared to floating loans because lenders factor in the risk of future rate fluctuations.</p>
+
+        <h3>Floating interest rate</h3>
+        <p>By contrast, a floating interest rate changes with market movements. In India, floating rates are generally linked to benchmarks such as the RBI (Reserve Bank of India) repo rate or the Repo Linked Lending Rate (RLLR). Whenever the central bank adjusts its policy rates, borrowers with floating rate loans see corresponding changes in their EMIs. This system is considered more transparent because benefits of falling interest rates are usually passed on to borrowers within a few months. The challenge, however, is uncertainty. A borrower may begin with lower EMIs, but if rates rise during the loan tenure, the monthly burden increases. For long-term loans such as housing finance, this unpredictability can affect financial planning, though it can also result in significant savings if rates remain stable or decline.</p>
+
+        <h3>Reducing balance interest rate (Reducing Rate)</h3>
+        <p>Apart from these, many consumer and housing loans operate on a reducing balance interest rate system. In this method, interest is calculated not on the original loan amount but on the outstanding balance after each EMI payment. Since the principal reduces month by month, the interest charged also decreases gradually. This system is fairer to the borrower because payments are applied directly toward lowering the balance, and it is the standard practice in most home, car, and personal loans. Compared to flat-rate loans, where interest is always charged on the full original principal, the reducing balance method results in a lower effective cost.</p>
+
+        <h2>The Role of EMI in Real Life</h2>
+        <p>EMI is not just a banking term—it touches almost every part of our financial lives. Let’s consider a few practical examples.</p>
+
+        <h3>Home Loans:</h3>
+        <p>A typical home loan in India can be anywhere between ₹20 lakh and ₹1 crore, with tenures as long as 20 to 30 years. Without EMI, buying a house would remain a dream for most middle-class families. Even a small difference in interest rate can have a huge impact here. For instance, on a ₹50 lakh home loan over 20 years, a 0.5% difference in interest rate can mean savings of several lakhs.</p>
+
+        <h3>Personal Loans:</h3>
+        <p>Personal loans usually have shorter tenures (1–5 years) but higher interest rates, since they are unsecured. EMIs here are higher compared to home loans, but people take them because they provide quick funds for emergencies, weddings, medical needs, or even travel.</p>
+
+        <h3>Car Loans:</h3>
+        <p>Car loans are usually repaid over 3 to 7 years. Here, the EMI allows people to buy cars much earlier in life instead of waiting to save the full cost. However, cars are depreciating assets, which means you are paying EMI and interest on something that loses value over time.</p>
+
+        <h3>Education Loans:</h3>
+        <p>For students, education loans are a lifeline. Many banks offer a moratorium period where repayment (EMI) starts only after graduation, giving students breathing room to finish their studies and get a job.</p>
+
+        <h3>Credit Card EMIs:</h3>
+        <p>Even for gadgets, mobiles, or big-ticket purchases, credit cards now offer the option to convert the payment into EMIs. These are convenient, but the interest rates can be extremely high compared to regular loans.</p>
+
+        <div class="ad-slot" aria-label="Advertisement">
+          <span class="ad-label-inline">Sponsored</span>
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:700px;height:50px"
+               data-ad-client="ca-pub-4180233192929131"
+               data-ad-slot="9391632919"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>Consumer and Credit Card EMIs</h2>
+        <p>Retail purchases such as electronics and appliances are frequently converted into EMIs through credit card schemes or store financing. Although the tenure is shorter, interest rates are often higher than traditional loans. Some sellers advertise “No Cost EMI” offers, where the interest cost is offset by reducing discounts or increasing product pricing.</p>
+
+        <h2>Benefits and Drawbacks of EMI</h2>
+        <h3>Advantages:</h3>
+        <ul>
+          <li>The biggest benefit is affordability. EMI allows you to enjoy goods and services today while paying for them gradually.</li>
+          <li>Instead of waiting ten years to save enough for a home, you can buy it now and repay over time.</li>
+          <li>EMI also brings predictability because the amount is fixed—you know exactly what to pay every month, which helps in budgeting.</li>
+          <li>For many people, EMIs are a disciplined way of saving because they are forced to set aside money regularly.</li>
+        </ul>
+        <h3>Drawbacks:</h3>
+        <ul>
+          <li>On the flip side, EMI is not free. The interest component means you always pay more than the borrowed amount.</li>
+          <li>Another drawback is commitment—once you take an EMI, you are tied to it for years, which can reduce flexibility in your financial life.</li>
+          <li>Missing even a single EMI can attract penalties and reduce your credit score, making it harder to borrow in the future.</li>
+          <li>If you take too many EMIs at once, you may fall into a debt trap where most of your income goes into repayments.</li>
+        </ul>
+
+        <h2>How to Use EMI Wisely</h2>
+        <ul>
+          <li>First, always calculate your repayment capacity. Financial advisors suggest that your total EMI burden should not exceed 30–40% of your monthly income. For example, if you earn ₹50,000 per month, all your EMIs together should not exceed ₹15,000–₹20,000.</li>
+          <li>Second, compare lenders. A small difference in interest rate or processing fee can mean huge savings over the life of the loan. Don’t just accept the first offer—shop around.</li>
+          <li>Third, choose the tenure carefully. A longer tenure will reduce your EMI, but it will also increase the total interest you pay. A shorter tenure may feel heavy month-to-month, but you’ll save a lot in the long run.</li>
+          <li>Fourth, make part-prepayments whenever possible. For instance, if you receive a bonus or extra income, use it to reduce your loan balance. Since interest is calculated on the outstanding principal, even small prepayments can cut years off your loan.</li>
+          <li>Finally, maintain a good credit score. Lenders offer better interest rates and flexible EMI plans to borrowers with high CIBIL scores (750+). Paying EMIs on time is the simplest way to keep your score healthy.</li>
+        </ul>
+
+        <h2>What is Part Payment?</h2>
+        <p>Part payment in a loan means paying an extra lump sum, over and above the regular EMI, directly towards the outstanding principal without fully closing the loan. By reducing the principal, it lowers the interest charged in future EMIs and helps borrowers either shorten the loan tenure or reduce the monthly EMI amount.</p>
+
+        <h2>What is Foreclosure?</h2>
+        <p>Foreclosure means the complete repayment of a loan before the end of its scheduled tenure. In simple terms, when a borrower pays the entire outstanding principal along with any remaining interest and closes the loan account early, it is called foreclosure. For example, if you have a home or personal loan with five years remaining and you decide to pay off the total balance in one lump sum, the lender will mark the loan as “foreclosed.” Foreclosure helps borrowers save a large amount of interest because they stop paying future EMIs, but some lenders may charge a small foreclosure fee to compensate for the loss of expected interest income. It is considered a smart financial move when a borrower has sufficient funds and wants to become debt-free sooner.</p>
+
+        <h2>How to Save Interest (Actionable)</h2>
+        <ul>
+          <li>Increase EMI when income rises—small increases reduce tenure notably.</li>
+          <li>Early part-payments have the biggest impact (more interest saved).</li>
+          <li>Balance transfer to a lower rate if the spread is meaningful after fees.</li>
+          <li>Reduce tenure instead of EMI after part-payment to maximize savings.</li>
+        </ul>
+
+        <div class="ad-slot" aria-label="Advertisement">
+          <span class="ad-label-inline">Sponsored</span>
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:700px;height:50px"
+               data-ad-client="ca-pub-4180233192929131"
+               data-ad-slot="9391632919"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <h2>Conclusion</h2>
+        <p>However, EMI is not without risks. It can easily become a burden if you over-borrow or fail to manage it carefully. The key is to treat EMI as a financial tool, not as free money. Borrow only what you need, keep your EMI burden within your capacity, and repay on time. Use prepayments and smart tenure choices to reduce costs.</p>
+        <p>If managed wisely, EMI can be your friend—it allows you to live a better life today without compromising your future. But if misused, it can quickly turn into your biggest financial headache.</p>
+
+        <section class="faq-section" id="faq">
+          <div class="faq-title">FAQ</div>
+          <div class="faq-item">
+            <button class="faq-question">What is EMI in simple words?</button>
+            <div class="faq-answer">It’s a fixed monthly payment that includes both principal and interest used to repay a loan.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Which is better—fixed or floating rate?</button>
+            <div class="faq-answer">Choose fixed for stable budgets; choose floating if you can tolerate changes and aim for potentially lower long-term cost.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Does part payment reduce EMI or tenure?</button>
+            <div class="faq-answer">It reduces principal. You can opt to lower EMI or keep EMI same and shorten the tenure.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Is foreclosure always worth it?</button>
+            <div class="faq-answer">Often early in the tenure, yes—but confirm fees and compare against remaining interest.</div>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <!-- Right Sticky Ad -->
+    <aside class="side-ad" aria-label="Right vertical advertisement">
+      <span class="ad-label">Sponsored</span>
+      <div class="side-ad-content">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-4180233192929131"
+             data-ad-slot="9391632919"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    </aside>
+  </div>
   <script>
-    // Year update
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Header padding fix
-    (function () {
-      const topbar = document.querySelector(".topbar");
-      if (!topbar) return;
-      const setPad = () => {
-        document.body.style.paddingTop = topbar.offsetHeight + "px";
+    // FAQ Accordion JS
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.onclick = function() {
+        let parent = btn.parentElement;
+        parent.classList.toggle('active');
       };
-      setPad();
-      window.addEventListener("resize", setPad, { passive: true });
-    })();
-
-    // Mobile menu toggle logic
-    (function () {
-      const toggle = document.querySelector(".mobile-menu-toggle");
-      const menu = document.getElementById("mobileMenu");
-      if (!toggle || !menu) return;
-
-      const setExpanded = (open) => {
-        toggle.setAttribute("aria-expanded", String(open));
-        menu.classList.toggle("open", open);
-      };
-
-      toggle.addEventListener(
-        "click",
-        () => {
-          const open = !menu.classList.contains("open");
-          setExpanded(open);
-        },
-        { passive: true }
-      );
-
-      menu.addEventListener(
-        "click",
-        (e) => {
-          if (e.target.tagName === "A") setExpanded(false);
-        },
-        { passive: true }
-      );
-
-      const onResize = () => {
-        if (window.innerWidth > 768) setExpanded(false);
-      };
-      window.addEventListener("resize", onResize, { passive: true });
-    })();
-
-    // EMI Calculation and rendering optimized for performance
-    const fmt = (v) => {
-      const n = Math.round(Number(v) || 0);
-      return new Intl.NumberFormat("en-IN", {
-        maximumFractionDigits: 0,
-        minimumFractionDigits: 0,
-      }).format(n);
-    };
-
-    function pmt(rate, nper, pv) {
-      if (nper === 0) return 0;
-      if (Math.abs(rate) < 1e-12) return pv / nper;
-      return (pv * rate) / (1 - Math.pow(1 + rate, -nper));
-    }
-
-    const loanEl = document.getElementById("loan");
-    const rateEl = document.getElementById("rate");
-    const yearsEl = document.getElementById("years");
-    const modeEl = document.getElementById("mode");
-    const ppMonthEl = document.getElementById("ppMonth");
-    const ppAmountEl = document.getElementById("ppAmount");
-    const paymentsList = document.getElementById("paymentsList");
-    const initialEmiEl = document.getElementById("initialEmi");
-    const newMonthsEl = document.getElementById("newMonths");
-    const totalInterestEl = document.getElementById("totalInterest");
-    const totalPaymentEl = document.getElementById("totalPayment");
-    const scheduleTbody = document.querySelector("#scheduleTable tbody");
-    const downloadXLSXBtn = document.getElementById("downloadXLSX");
-    const downloadPDFBtn = document.getElementById("downloadPDF");
-
-    let payments = [];
-    let lastSchedule = null;
-    let lastInitialEmi = 0;
-
-    // Pagination parameters
-    const PAGE_SIZE = 250;
-    let currentPage = 1;
-    function resetPage() {
-      currentPage = 1;
-    }
-
-    function getInputs() {
-      const principal = Math.max(1, Math.round(Number(loanEl.value) || 1));
-      const annualRate = Math.max(0, Number(rateEl.value) || 0);
-      const tenureYears = Math.max(0.1, Number(yearsEl.value) || 0.1);
-      return {
-        principal,
-        annualRate,
-        tenureYears,
-        monthlyRate: annualRate / 12 / 100,
-        monthsInitial: Math.round(Math.max(1, tenureYears * 12)),
-      };
-    }
-
-    function renderPayments() {
-      if (payments.length === 0) {
-        paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
-        return;
-      }
-      let html = "";
-      payments.forEach((p, idx) => {
-        html += `<div class="chip"><div class="small-muted">Month ${p.month} → <strong>${fmt(
-          p.amount
-        )}</strong></div><button data-rm="${idx}" class="btn btn-danger" style="padding:6px 10px">Remove</button></div>`;
-      });
-      paymentsList.innerHTML = html;
-      paymentsList.querySelectorAll("button[data-rm]").forEach((btn) => {
-        btn.onclick = () => {
-          payments.splice(Number(btn.getAttribute("data-rm")), 1);
-          renderPayments();
-          resetPage();
-          computeAndRender();
-        };
-      });
-    }
-
-    function addPayment() {
-      const m = Math.max(1, Math.round(Number(ppMonthEl.value) || 0));
-      const a = Math.max(0, Math.round(Number(ppAmountEl.value) || 0));
-      if (!a) {
-        alert("Please enter a part payment amount > 0");
-        return;
-      }
-      payments.push({ month: m, amount: a });
-      payments.sort((x, y) => x.month - y.month);
-      ppMonthEl.value = "";
-      ppAmountEl.value = "";
-      renderPayments();
-      resetPage();
-      computeAndRender();
-    }
-
-    function clearPayments() {
-      if (!confirm("Clear all part payments?")) return;
-      payments = [];
-      renderPayments();
-      resetPage();
-      computeAndRender();
-    }
-
-    function computeSchedule() {
-      const { principal, monthlyRate, monthsInitial } = getInputs();
-      const mode = modeEl.value;
-      const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
-      const partMap = new Map();
-      for (const p of payments) partMap.set(p.month, (partMap.get(p.month) || 0) + p.amount);
-
-      const schedule = [];
-      let outstanding = principal;
-      let emi = initialEmi;
-      let remainingMonths = monthsInitial;
-
-      for (let month = 1; month <= 1200; month++) {
-        if (outstanding <= 0.0001) break;
-        const interest = outstanding * monthlyRate;
-        let principalComp = emi - interest;
-        if (principalComp < 0) principalComp = 0;
-        const part = partMap.get(month) || 0;
-        if (outstanding - principalComp - part <= 0) {
-          const finalInterest = outstanding * monthlyRate;
-          const finalPrincipal = outstanding;
-          const finalEmi = finalPrincipal + finalInterest;
-          schedule.push({
-            month,
-            emi: Math.round(finalEmi),
-            principalPaid: Math.round(finalPrincipal),
-            interestPaid: Math.round(finalInterest),
-            partPayment: Math.round(part),
-            outstanding: 0,
-          });
-          outstanding = 0;
-          break;
-        }
-        outstanding = outstanding - principalComp - part;
-        if (mode === "emi" && part > 0) {
-          remainingMonths = Math.max(1, monthsInitial - month);
-          if (outstanding > 0) {
-            emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
-          }
-        }
-        schedule.push({
-          month,
-          emi: Math.round(emi),
-          principalPaid: Math.round(principalComp),
-          interestPaid: Math.round(interest),
-          partPayment: Math.round(part),
-          outstanding: Math.round(Math.max(0, outstanding)),
-        });
-        if (month > monthsInitial + 600) break;
-      }
-      return { schedule, initialEmi: Math.round(initialEmi) };
-    }
-
-    function renderSchedule(schedule) {
-      const end = Math.min(schedule.length, PAGE_SIZE * currentPage);
-      let rows = "";
-      for (let i = 0; i < end; i++) {
-        const r = schedule[i];
-        rows += `<tr>
-          <td data-label="Month"><span class="value">${r.month}</span></td>
-          <td data-label="EMI"><span class="value">${fmt(r.emi)}</span></td>
-          <td data-label="Principal"><span class="value">${fmt(r.principalPaid)}</span></td>
-          <td data-label="Interest"><span class="value">${fmt(r.interestPaid)}</span></td>
-          <td data-label="Part Payment"><span class="value">${fmt(r.partPayment)}</span></td>
-          <td data-label="Outstanding"><span class="value">${fmt(r.outstanding)}</span></td>
-        </tr>`;
-      }
-      scheduleTbody.innerHTML = rows;
-      if (end < schedule.length) {
-        scheduleTbody.innerHTML += `<tr><td colspan="6" style="text-align:center">
-        <button class="btn btn-primary" id="showMoreRows">Show More</button>
-      </td></tr>`;
-        document.getElementById("showMoreRows").onclick = function () {
-          currentPage++;
-          renderSchedule(schedule);
-        };
-      }
-    }
-
-    function updateKpis(schedule, initialEmi) {
-      const totalInterest = schedule.reduce((s, r) => s + r.interestPaid, 0);
-      const principalInput = Math.max(1, Math.round(Number(loanEl.value) || 1));
-      const totalPayment = totalInterest + principalInput;
-      initialEmiEl.textContent = fmt(initialEmi);
-      newMonthsEl.textContent = schedule.length;
-      totalInterestEl.textContent = fmt(totalInterest);
-      totalPaymentEl.textContent = fmt(totalPayment);
-    }
-
-    function computeAndRender() {
-      const { schedule, initialEmi } = computeSchedule();
-      lastSchedule = schedule;
-      lastInitialEmi = initialEmi;
-      renderSchedule(schedule);
-      updateKpis(schedule, initialEmi);
-    }
-
-    // Debounce helper
-    function debounce(func, delay) {
-      let timer = null;
-      return function (...args) {
-        clearTimeout(timer);
-        timer = setTimeout(() => func.apply(this, args), delay);
-      };
-    }
-
-    const debouncedUpdate = debounce(() => {
-      resetPage();
-      computeAndRender();
-    }, 120);
-
-    [loanEl, rateEl, yearsEl, modeEl].forEach((el) =>
-      el.addEventListener("input", debouncedUpdate)
-    );
-    document.getElementById("addPp").addEventListener("click", addPayment);
-    document.getElementById("clearPps").addEventListener("click", clearPayments);
-
-    function exportXLSX() {
-      const schedule = lastSchedule || computeSchedule().schedule;
-      const hasPart = payments.some((p) => p.amount && p.amount > 0);
-      const aoa = [
-        ["Loan Amount", loanEl.value],
-        ["Annual Rate (%)", rateEl.value],
-        ["Tenure (Years)", yearsEl.value],
-        ["Mode", modeEl.value],
-        [],
-      ];
-      if (hasPart) {
-        aoa.push(["Month", "EMI", "Principal Paid", "Interest Paid", "Part Payment", "Outstanding"]);
-        schedule.forEach((r) => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding]));
-      } else {
-        aoa.push(["Month", "EMI", "Principal Paid", "Interest Paid", "Outstanding"]);
-        schedule.forEach((r) => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]));
-      }
-      const ws = XLSX.utils.aoa_to_sheet(aoa);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Schedule");
-      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-      try {
-        saveAs(new Blob([wbout], { type: "application/octet-stream" }), "emi_schedule.xlsx");
-      } catch (e) {
-        alert("Excel export failed: " + e.message);
-      }
-    }
-
-    function exportPDF() {
-      const scheduleData = lastSchedule || computeSchedule().schedule;
-      const initialEmi = lastInitialEmi || computeSchedule().initialEmi;
-      const loan = Math.round(Number(loanEl.value) || 0);
-      const rate = Number(rateEl.value) || 0;
-      const years = Number(yearsEl.value) || 0;
-      const hasPart = payments.some((p) => p.amount && p.amount > 0);
-
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit: "pt", format: "a4" });
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const margin = 40;
-      let y = 40;
-
-      doc.setFillColor(246, 249, 255);
-      doc.rect(0, 0, pageWidth, 60, "F");
-      doc.setFontSize(18);
-      doc.setTextColor(15, 23, 42);
-      doc.text("EMI Repayment Schedule", margin, 40);
-
-      y = 80;
-      const cardW = 140;
-      const cardH = 40;
-      const gap = 12;
-      const cards = [
-        { label: "Loan Amount", value: fmt(loan), color: [14, 165, 233] },
-        { label: "Rate (%)", value: String(rate), color: [16, 185, 129] },
-        { label: "Tenure (yrs)", value: String(years), color: [234, 179, 8] },
-        { label: "Initial EMI", value: fmt(initialEmi), color: [99, 102, 241] },
-      ];
-      let x = margin;
-      cards.forEach((c) => {
-        doc.setFillColor(c.color[0], c.color[1], c.color[2]);
-        doc.roundedRect(x, y, cardW, cardH, 6, 6, "F");
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(10);
-        doc.text(c.label, x + 10, y + 14);
-        doc.setFontSize(13);
-        doc.setFont(undefined, "bold");
-        doc.text(c.value, x + 10, y + 30);
-        doc.setFont(undefined, "normal");
-        x += cardW + gap;
-      });
-
-      y += cardH + 18;
-
-      const head = hasPart
-        ? [["Month", "EMI", "Principal", "Interest", "Part Payment", "Outstanding"]]
-        : [["Month", "EMI", "Principal", "Interest", "Outstanding"]];
-      const body = scheduleData.map((r) =>
-        hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]
-      );
-
-      doc.autoTable({
-        startY: y,
-        head: head,
-        body: body,
-        styles: { fontSize: 9 },
-        headStyles: { fillColor: [245, 245, 245], textColor: 20 },
-        margin: { left: margin, right: margin },
-        didDrawPage: function (data) {
-          const page = doc.internal.getNumberOfPages();
-          doc.setFontSize(9);
-          doc.setTextColor(120);
-          doc.text("Page " + page, data.settings.margin.left, doc.internal.pageSize.height - 10);
-        },
-        theme: "grid",
-      });
-
-      doc.save("emi_schedule.pdf");
-    }
-
-    downloadXLSXBtn.addEventListener("click", exportXLSX);
-    downloadPDFBtn.addEventListener("click", exportPDF);
-
-    // First render and setup
-    renderPayments();
-    computeAndRender();
+    });
   </script>
 </body>
 </html>
