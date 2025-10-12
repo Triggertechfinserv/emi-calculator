@@ -5,22 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EMI Calculator — TechFinserv</title>
   <meta name="description" content="Smart EMI calculator for home/personal/car loans. Add part-payments to save interest, get a detailed schedule, and download results as PDF/Excel." />
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9DHT9T8GZB');
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-9DHT9T8GZB");
   </script>
+
   <!-- AdSense loader: include ONCE -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
-          crossorigin="anonymous"></script>
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
+    crossorigin="anonymous"
+  ></script>
+
   <!-- Third-party libs for export -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
@@ -28,141 +35,474 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
   <style>
-    /* === Your original CSS, all unchanged === */
+    /* === Your original CSS styles (unchanged from your code) === */
     :root {
       --bg: #f6f9ff;
-      --bg-accent1: rgba(14,165,233,0.20);
-      --bg-accent2: rgba(16,185,129,0.18);
-      --surface: rgba(255,255,255,0.78);
-      --surface-strong: rgba(255,255,255,0.92);
+      --bg-accent1: rgba(14, 165, 233, 0.2);
+      --bg-accent2: rgba(16, 185, 129, 0.18);
+      --surface: rgba(255, 255, 255, 0.78);
+      --surface-strong: rgba(255, 255, 255, 0.92);
       --text: #0f172a;
       --muted: #475569;
-      --border: rgba(2,6,23,0.12);
+      --border: rgba(2, 6, 23, 0.12);
       --accent-1: #0ea5e9;
       --accent-2: #10b981;
       --gradient-solid: linear-gradient(135deg, #10a7e6, #10b981);
       --radius: 16px;
-      --shadow: 0 6px 16px rgba(2,6,23,0.08), 0 2px 8px rgba(2,6,23,0.06);
+      --shadow: 0 6px 16px rgba(2, 6, 23, 0.08), 0 2px 8px rgba(2, 6, 23, 0.06);
       --maxw: 1200px;
-      --input-bg: rgba(255,255,255,0.92);
-      --input-focus: rgba(14,165,233,0.25);
-      --table-stripe: rgba(2,6,23,0.03);
-      --table-head: rgba(2,6,23,0.04);
+
+      --input-bg: rgba(255, 255, 255, 0.92);
+      --input-focus: rgba(14, 165, 233, 0.25);
+      --table-stripe: rgba(2, 6, 23, 0.03);
+      --table-head: rgba(2, 6, 23, 0.04);
+      /* header height (used when fixed) */
       --header-h: 72px;
     }
-    * { box-sizing: border-box; }
-    html, body { width:100%; overflow-x:hidden; }
+
+    * {
+      box-sizing: border-box;
+    }
+    html,
     body {
-      margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
+      width: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
       background: var(--bg);
+      /* padding is set dynamically to match header height for identical layout */
       padding-top: 0;
     }
-    a { color: inherit; text-decoration: none; }
-    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
-    .glass { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      backdrop-filter: blur(10px) saturate(160%); -webkit-backdrop-filter: blur(10px) saturate(160%); box-shadow: var(--shadow); }
-    .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: rgba(255,255,255,0.78);
-      border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); }
-    header.nav { display:flex; justify-content:space-between; align-items:center; padding: 12px 0; }
-    .brand-logo { height: 60px; border-radius: 10px; }
-    nav.menu { display:flex; gap:14px; }
-    nav.menu a { padding: 8px 12px; border-radius: 10px; color: var(--muted); }
-    nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
-    .cta { background: var(--gradient-solid); color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600; }
-    main { padding: 24px 0 60px; }
-    .page-title { margin: 16px 0 8px; font-size: 22px; }
-    .subtitle { color: var(--muted); font-size: 14px; }
-    .layout { display:grid; grid-template-columns: 2fr 1fr; gap: 18px; align-items:start; }
-    .calc { padding: 18px; }
-    .grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-    .grid-1 { display:grid; grid-template-columns: 1fr; gap: 10px; }
-    label { font-size: 12px; color: var(--muted); display:block; margin:0 0 6px; }
-    input, select { width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background: var(--input-bg); color: var(--text); outline:none; }
-    input:focus, select:focus { box-shadow: 0 0 0 3px var(--input-focus); border-color: transparent; }
-    .row { display:flex; gap:10px; align-items:center; }
-    .chips { display:flex; gap:8px; flex-wrap:wrap; }
-    .chip { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:12px; background: var(--surface-strong); border:1px solid var(--border); }
-    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:700; font-size:13px; cursor:pointer; border:1px solid var(--border); background: var(--surface-strong); color: var(--text); }
-    .btn:hover { background: rgba(2,6,23,0.04); }
-    .btn-primary { background: var(--gradient-solid); border: 0; color: #fff; }
-    .btn-danger { background: rgba(239,68,68,0.10); color: #b91c1c; border-color: rgba(239,68,68,0.35); }
-    .btn-success { background: rgba(16,185,129,0.12); color: #065f46; border-color: rgba(16,185,129,0.35); }
-    .summary { display:grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 12px 0; }
-    .card { padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
-    .small-muted { font-size: 12px; color: var(--muted); }
-    .big { font-size: 20px; font-weight: 800; letter-spacing: 0.2px; }
-    .table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow: auto; max-height: 480px; background: rgba(255,255,255,0.5); position: relative; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    thead th { position: sticky; top: 0; z-index: 10; background: var(--surface-strong); color: var(--muted); text-align: right; font-weight: 700;
-      box-shadow: 0 1px 0 rgba(2,6,23,0.12) inset, 0 2px 8px rgba(2,6,23,0.06);
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    th, td { padding: 10px 10px; border-bottom: 1px solid rgba(2,6,23,0.06); text-align: right; }
-    th:first-child, td:first-child { text-align: left; }
-    tbody tr:nth-child(odd) { background: var(--table-stripe); }
-    .ad-card { position: static; top: 84px; padding: 16px; display: grid; gap: 12px; }
-    .ad-slot { border: 1px dashed var(--border); border-radius: 14px; min-height: 250px; display: grid; place-items: center; color: var(--muted); background: var(--surface-strong); }
-    .ad-note { font-size: 12px; color: var(--muted); text-align:center; }
-    footer { border-top: 1px solid var(--border); padding: 30px 0 80px; color: var(--muted); background: rgba(255,255,255,0.75); }
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px) saturate(160%);
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
+      box-shadow: var(--shadow);
+    }
+
+    /* Header (new site) — now fixed */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+    }
+    header.nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+    }
+    .brand-logo {
+      height: 60px;
+      border-radius: 10px;
+    }
+    nav.menu {
+      display: flex;
+      gap: 14px;
+    }
+    nav.menu a {
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+    }
+    nav.menu a:hover {
+      background: var(--surface-strong);
+      color: var(--text);
+    }
+    .cta {
+      background: var(--gradient-solid);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    /* Page shell */
+    main {
+      padding: 24px 0 60px;
+    }
+    .page-title {
+      margin: 16px 0 8px;
+      font-size: 22px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Two-column layout */
+    .layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* Calculator card */
+    .calc {
+      padding: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .grid-1 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    label {
+      font-size: 12px;
+      color: var(--muted);
+      display: block;
+      margin: 0 0 6px;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--input-bg);
+      color: var(--text);
+      outline: none;
+    }
+    input:focus,
+    select:focus {
+      box-shadow: 0 0 0 3px var(--input-focus);
+      border-color: transparent;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      color: var(--text);
+    }
+    .btn:hover {
+      background: rgba(2, 6, 23, 0.04);
+    }
+    .btn-primary {
+      background: var(--gradient-solid);
+      border: 0;
+      color: #fff;
+    }
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.1);
+      color: #b91c1c;
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+    .btn-success {
+      background: rgba(16, 185, 129, 0.12);
+      color: #065f46;
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .card {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .small-muted {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .big {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .table-wrap {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: auto;
+      max-height: 480px;
+      background: rgba(255, 255, 255, 0.5);
+      position: relative;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--surface-strong);
+      color: var(--muted);
+      text-align: right;
+      font-weight: 700;
+      box-shadow: 0 1px 0 rgba(2, 6, 23, 0.12) inset, 0 2px 8px rgba(2, 6, 23, 0.06);
+    }
+    th,
+    td {
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(2, 6, 23, 0.06);
+      text-align: right;
+    }
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+    tbody tr:nth-child(odd) {
+      background: var(--table-stripe);
+    }
+
+    /* Right column ad card — non-sticky for manual display ads (policy-safe) */
+    .ad-card {
+      position: static;
+      top: 84px;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+    .ad-slot {
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      background: var(--surface-strong);
+    }
+    .ad-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0 80px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    /* Responsive */
     @media (max-width: 1000px) {
-      .layout { grid-template-columns: 1fr; }
-      .summary { grid-template-columns: 1fr 1fr; }
-      .ad-card { position: static; }
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .summary {
+        grid-template-columns: 1fr 1fr;
+      }
+      .ad-card {
+        position: static;
+      }
     }
     @media (max-width: 640px) {
-      .summary { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      .big { font-size: 18px; }
+      .summary {
+        grid-template-columns: 1fr;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .big {
+        font-size: 18px;
+      }
     }
+
+    /* Mobile table -> cards */
     @media (max-width: 600px) {
-      table thead { display: none; }
-      table, tbody, tr, td { display: block; width: 100%; }
-      tr { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 10px; background: var(--surface); }
-      td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border: none; text-align: left; font-size: 13px; color: var(--text); }
-      td[data-label]:before { content: attr(data-label) ":"; font-weight: 600; margin-right: 10px; color: var(--muted); width: 40%; max-width: 160px; }
-      td .value { width: 60%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      table thead {
+        display: none;
+      }
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+      }
+      tr {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background: var(--surface);
+      }
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        border: none;
+        text-align: left;
+        font-size: 13px;
+        color: var(--text);
+      }
+      td[data-label]:before {
+        content: attr(data-label) ":";
+        font-weight: 600;
+        margin-right: 10px;
+        color: var(--muted);
+        width: 40%;
+        max-width: 160px;
+      }
+      td .value {
+        width: 60%;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
-    .mobile-menu-toggle{ display:none; }
-    .mobile-menu{ display:none; }
-    @media (max-width:768px){
-      nav.menu{ display:none; }
-      .mobile-menu-toggle{
-        display:inline-flex; flex-direction:column; justify-content:center; gap:4px;
-        width:28px; height:22px; cursor:pointer; background:transparent; border:0;
-      }
-      .mobile-menu-toggle span{
-        display:block; height:3px; width:100%; background:var(--text); border-radius:2px;
-      }
-      .mobile-menu{
-        display:none; flex-direction:column; gap:6px; padding:10px 0 14px; background:#fff;
-        border-bottom:1px solid var(--border);
-      }
-      .mobile-menu a{ padding:12px 16px; font-size:15px; color:var(--muted); }
-      .mobile-menu a:hover{ background: var(--bg); color: var(--text); }
-      .ad-card, .ad-slot{ width:100%; }
-      .ad-slot ins{ max-width:100% !important; width:100% !important; height:auto !important; display:block !important; }
+
+    /* =========================
+       MOBILE-ONLY header menu (copied style from Home)
+       ========================= */
+    .mobile-menu-toggle {
+      display: none;
     }
-    .mobile-menu.open{ display:flex !important; }
+    .mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      nav.menu {
+        display: none;
+      }
+      .mobile-menu-toggle {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        width: 28px;
+        height: 22px;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+      }
+      .mobile-menu-toggle span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: var(--text);
+        border-radius: 2px;
+      }
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        padding: 10px 0 14px;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+      }
+      .mobile-menu a {
+        padding: 12px 16px;
+        font-size: 15px;
+        color: var(--muted);
+      }
+      .mobile-menu a:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .ad-card,
+      .ad-slot {
+        width: 100%;
+      }
+      .ad-slot ins {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+      }
+    }
+    .mobile-menu.open {
+      display: flex !important;
+    }
   </style>
 </head>
 <body>
-
-<!-- === Header, Menu, Ad, and Content unaltered... === -->
+  <!-- Header (new site) -->
   <div class="topbar">
     <div class="container">
       <header class="nav" role="banner">
         <a href="/" aria-label="TechFinserv home">
-          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo">
+          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo" />
         </a>
+
+        <!-- desktop menu (unchanged) -->
         <nav class="menu" aria-label="Primary">
           <a href="/">Home</a>
           <a href="/blogs.html">Blog</a>
           <a href="/coming-soon.html">About</a>
           <a class="cta" href="/coming-soon.html">Apply Now</a>
         </nav>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+
+        <!-- MOBILE: hamburger (added) -->
+        <button
+          class="mobile-menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
           <span></span><span></span><span></span>
         </button>
       </header>
+
+      <!-- MOBILE: dropdown menu (added) -->
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
         <a href="/">Home</a>
         <a href="/blogs.html">Blog</a>
@@ -170,15 +510,21 @@
       </nav>
     </div>
   </div>
+
   <main>
     <div class="container">
-      <!-- === Inputs, Ads and Article content unchanged... === -->
       <h1 class="page-title">EMI Calculator with Part-Payment</h1>
-      <p class="subtitle">EMI calculator for home, personal and car loans with part-payment support, instant amortization schedule, and one-click PDF/Excel export.</p>
+      <p class="subtitle">
+        EMI calculator for home, personal and car loans with part-payment
+        support, instant amortization schedule, and one-click PDF/Excel
+        export.
+      </p>
+
       <div class="layout">
+        <!-- Left: Calculator -->
         <section id="calculator" class="calc glass" role="region" aria-label="EMI Calculator">
-          <!-- Inputs unchanged... -->
-          <div class="grid" style="margin-bottom:12px;">
+          <!-- Inputs -->
+          <div class="grid" style="margin-bottom: 12px;">
             <div>
               <label>Loan Amount (Principal)</label>
               <input id="loan" type="number" min="1" value="100000" />
@@ -192,28 +538,34 @@
               <input id="years" type="number" step="0.25" min="0.1" value="5" />
             </div>
           </div>
-          <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap; margin-bottom:10px;">
-            <div style="min-width:220px;">
+
+          <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 10px;">
+            <div style="min-width: 220px;">
               <label>Mode</label>
               <select id="mode">
                 <option value="tenure">Reduce Tenure (EMI fixed)</option>
                 <option value="emi">Reduce EMI (Tenure fixed)</option>
               </select>
             </div>
-            <div style="flex:1; min-width:260px;">
+
+            <div style="flex: 1; min-width: 260px;">
               <label>Add Part Payment (Month & Amount)</label>
               <div class="row">
-                <input id="ppMonth" type="number" min="1" placeholder="Month (e.g. 12)" style="max-width:140px" />
+                <input id="ppMonth" type="number" min="1" placeholder="Month (e.g. 12)" style="max-width: 140px" />
                 <input id="ppAmount" type="number" min="0" placeholder="Amount (e.g. 100000)" />
                 <button id="addPp" class="btn btn-primary" type="button">Add</button>
                 <button id="clearPps" class="btn btn-danger" type="button">Clear</button>
               </div>
             </div>
           </div>
-          <div style="margin:10px 0 6px;">
+
+          <!-- Part payments list -->
+          <div style="margin: 10px 0 6px;">
             <div class="small-muted">Part Payments (click remove to delete):</div>
-            <div id="paymentsList" class="chips" style="margin-top:8px;"></div>
+            <div id="paymentsList" class="chips" style="margin-top: 8px;"></div>
           </div>
+
+          <!-- KPI cards -->
           <div class="summary" id="dashboard">
             <div class="card">
               <div class="small-muted">Initial EMI</div>
@@ -233,10 +585,15 @@
               <div id="totalPayment" class="big">0</div>
             </div>
           </div>
-          <div class="glass" style="padding:14px; margin-top:12px;">
-            <div class="row" style="justify-content: space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
+
+          <!-- Schedule + exports -->
+          <div class="glass" style="padding: 14px; margin-top: 12px;">
+            <div
+              class="row"
+              style="justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap"
+            >
               <strong>Repayment Schedule</strong>
-              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <div style="display: flex; gap: 8px; flex-wrap: wrap">
                 <button id="downloadXLSX" class="btn btn-success" type="button">Download Excel</button>
                 <button id="downloadPDF" class="btn" type="button">Download PDF</button>
               </div>
@@ -244,93 +601,152 @@
             <div class="table-wrap">
               <table id="scheduleTable">
                 <thead>
-                  <tr><th>Month</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Part Payment</th><th>Outstanding</th></tr>
+                  <tr>
+                    <th>Month</th>
+                    <th>EMI</th>
+                    <th>Principal</th>
+                    <th>Interest</th>
+                    <th>Part Payment</th>
+                    <th>Outstanding</th>
+                  </tr>
                 </thead>
                 <tbody></tbody>
               </table>
             </div>
           </div>
-          <p class="small-muted" style="margin-top:10px;">Tip: add one or more part payments (month number & amount). Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes earlier), or <em>Reduce EMI</em> to keep tenure same and reduce monthly payment. Save the file to keep your data.</p>
+          <p class="small-muted" style="margin-top: 10px">
+            Tip: add one or more part payments (month number & amount).
+            Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes
+            earlier), or <em>Reduce EMI</em> to keep tenure same and reduce
+            monthly payment. Save the file to keep your data.
+          </p>
         </section>
+
+        <!-- Right column with ads -->
         <aside class="ad-card glass" aria-label="Ad">
-          <div class="ad-slot" style="min-height:600px;">
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:300px;height:600px"
-                 data-ad-client="ca-pub-4180233192929131"
-                 data-ad-slot="9154021274"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          <div class="ad-slot" style="min-height: 600px">
+            <ins
+              class="adsbygoogle"
+              style="display:inline-block;width:300px;height:600px"
+              data-ad-client="ca-pub-4180233192929131"
+              data-ad-slot="9154021274"
+            ></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
           </div>
-          <div class="ad-slot" style="min-height:250px;">
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:300px;height:250px"
-                 data-ad-client="ca-pub-4180233192929131"
-                 data-ad-slot="2241854911"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+          <div class="ad-slot" style="min-height: 250px">
+            <ins
+              class="adsbygoogle"
+              style="display:inline-block;width:300px;height:250px"
+              data-ad-client="ca-pub-4180233192929131"
+              data-ad-slot="2241854911"
+            ></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
           </div>
+
           <div class="ad-note">Support ❤️ Us By Clicking Ads</div>
         </aside>
       </div>
-      <section class="glass" style="margin-top:20px; padding:18px;">
-       <aside class="ad-card glass" aria-label="Ad"> 
-        <div style="display:grid; place-items:center;">
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:728px;height:90px;max-width:100%"
-               data-ad-client="ca-pub-4180233192929131"
-               data-ad-slot="3731030557"></ins>
-        </div>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+      <!-- Inline banner ad -->
+      <section class="glass" style="margin-top: 20px; padding: 18px">
+        <aside class="ad-card glass" aria-label="Ad">
+          <div style="display: grid; place-items: center">
+            <ins
+              class="adsbygoogle"
+              style="display:inline-block;width:728px;height:90px;max-width:100%"
+              data-ad-client="ca-pub-4180233192929131"
+              data-ad-slot="3731030557"
+            ></ins>
+          </div>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </aside>
       </section>
-      <!-- === Info article about EMI unchanged === -->
-      <!-- ...all your article HTML as before... -->
+
+      <!-- Informative EMI article - unchanged -->
+      <section id="learn-emi" class="glass" style="margin-top: 20px; padding: 18px">
+        <h2 style="margin: 0 0 8px">What is EMI?</h2>
+        <p>
+          <strong>EMI (Equated Monthly Installment)</strong> is the fixed amount you pay every month until your loan is fully repaid.
+          Each EMI has two parts—<em>interest</em> on the outstanding balance and a portion of the <em>principal</em>. Early in the
+          loan, the interest share is higher; as the balance reduces, more of each EMI goes toward principal. While your EMI amount
+          usually remains constant, the <em>split</em> between interest and principal changes over time.
+        </p>
+
+        <!-- ... your extensive EMI explanation, formulas, FAQs, glossary, disclaimers ... omitted here for brevity but keep as in your original code ... -->
+
+      </section>
     </div>
   </main>
-  <footer class="glass" style="margin-top:24px;">
+
+  <footer class="glass" style="margin-top: 24px">
     <div class="container">
       Designed & Maintained by Kiran Rathva • © <span id="year"></span> TechFinserv.com
     </div>
   </footer>
+
   <script>
     // Year update
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Header padding adjustment
-    (function(){
-      const topbar = document.querySelector('.topbar');
-      if(!topbar) return;
-      const setPad = () => { document.body.style.paddingTop = topbar.offsetHeight + 'px'; };
+    // Header padding fix
+    (function () {
+      const topbar = document.querySelector(".topbar");
+      if (!topbar) return;
+      const setPad = () => {
+        document.body.style.paddingTop = topbar.offsetHeight + "px";
+      };
       setPad();
-      window.addEventListener('resize', setPad, { passive: true });
+      window.addEventListener("resize", setPad, { passive: true });
     })();
 
-    // Mobile menu logic
+    // Mobile menu toggle logic
     (function () {
-      const toggle = document.querySelector('.mobile-menu-toggle');
-      const menu = document.getElementById('mobileMenu');
+      const toggle = document.querySelector(".mobile-menu-toggle");
+      const menu = document.getElementById("mobileMenu");
       if (!toggle || !menu) return;
+
       const setExpanded = (open) => {
-        toggle.setAttribute('aria-expanded', String(open));
-        menu.classList.toggle('open', open);
+        toggle.setAttribute("aria-expanded", String(open));
+        menu.classList.toggle("open", open);
       };
-      toggle.addEventListener('click', () => {
-        const open = !menu.classList.contains('open');
-        setExpanded(open);
-      }, { passive: true });
-      menu.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') setExpanded(false);
-      }, { passive: true });
+
+      toggle.addEventListener(
+        "click",
+        () => {
+          const open = !menu.classList.contains("open");
+          setExpanded(open);
+        },
+        { passive: true }
+      );
+
+      menu.addEventListener(
+        "click",
+        (e) => {
+          if (e.target.tagName === "A") setExpanded(false);
+        },
+        { passive: true }
+      );
+
       const onResize = () => {
         if (window.innerWidth > 768) setExpanded(false);
       };
-      window.addEventListener('resize', onResize, { passive: true });
+      window.addEventListener("resize", onResize, { passive: true });
     })();
 
-    // =============================
-    // LOGIC — ONLY THE CODE BELOW IS UPGRADED FOR PERFORMANCE!
-    // =============================
-
+    // EMI Calculation and rendering optimized for performance
     const fmt = (v) => {
       const n = Math.round(Number(v) || 0);
-      return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0, minimumFractionDigits: 0 }).format(n);
+      return new Intl.NumberFormat("en-IN", {
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+      }).format(n);
     };
 
     function pmt(rate, nper, pv) {
@@ -339,35 +755,43 @@
       return (pv * rate) / (1 - Math.pow(1 + rate, -nper));
     }
 
-    const loanEl = document.getElementById('loan');
-    const rateEl = document.getElementById('rate');
-    const yearsEl = document.getElementById('years');
-    const modeEl = document.getElementById('mode');
-    const ppMonthEl = document.getElementById('ppMonth');
-    const ppAmountEl = document.getElementById('ppAmount');
-    const paymentsList = document.getElementById('paymentsList');
-    const initialEmiEl = document.getElementById('initialEmi');
-    const newMonthsEl = document.getElementById('newMonths');
-    const totalInterestEl = document.getElementById('totalInterest');
-    const totalPaymentEl = document.getElementById('totalPayment');
-    const scheduleTbody = document.querySelector('#scheduleTable tbody');
-    const downloadXLSXBtn = document.getElementById('downloadXLSX');
-    const downloadPDFBtn = document.getElementById('downloadPDF');
+    const loanEl = document.getElementById("loan");
+    const rateEl = document.getElementById("rate");
+    const yearsEl = document.getElementById("years");
+    const modeEl = document.getElementById("mode");
+    const ppMonthEl = document.getElementById("ppMonth");
+    const ppAmountEl = document.getElementById("ppAmount");
+    const paymentsList = document.getElementById("paymentsList");
+    const initialEmiEl = document.getElementById("initialEmi");
+    const newMonthsEl = document.getElementById("newMonths");
+    const totalInterestEl = document.getElementById("totalInterest");
+    const totalPaymentEl = document.getElementById("totalPayment");
+    const scheduleTbody = document.querySelector("#scheduleTable tbody");
+    const downloadXLSXBtn = document.getElementById("downloadXLSX");
+    const downloadPDFBtn = document.getElementById("downloadPDF");
 
     let payments = [];
     let lastSchedule = null;
     let lastInitialEmi = 0;
 
-    // Pagination
-    const PAGE_SIZE = 200;
+    // Pagination parameters
+    const PAGE_SIZE = 250;
     let currentPage = 1;
-    function resetPage() { currentPage = 1; }
+    function resetPage() {
+      currentPage = 1;
+    }
 
     function getInputs() {
       const principal = Math.max(1, Math.round(Number(loanEl.value) || 1));
       const annualRate = Math.max(0, Number(rateEl.value) || 0);
       const tenureYears = Math.max(0.1, Number(yearsEl.value) || 0.1);
-      return { principal, annualRate, tenureYears, monthlyRate: annualRate/12/100, monthsInitial: Math.round(Math.max(1, tenureYears*12)) };
+      return {
+        principal,
+        annualRate,
+        tenureYears,
+        monthlyRate: annualRate / 12 / 100,
+        monthsInitial: Math.round(Math.max(1, tenureYears * 12)),
+      };
     }
 
     function renderPayments() {
@@ -375,33 +799,45 @@
         paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
         return;
       }
-      let html = '';
+      let html = "";
       payments.forEach((p, idx) => {
-        html += `<div class="chip"><div class="small-muted">Month ${p.month} → <strong>${fmt(p.amount)}</strong></div>
-                <button data-rm="${idx}" class="btn btn-danger" style="padding:6px 10px">Remove</button></div>`;
+        html += `<div class="chip"><div class="small-muted">Month ${p.month} → <strong>${fmt(
+          p.amount
+        )}</strong></div><button data-rm="${idx}" class="btn btn-danger" style="padding:6px 10px">Remove</button></div>`;
       });
       paymentsList.innerHTML = html;
-      paymentsList.querySelectorAll('button[data-rm]').forEach(btn => {
-        btn.onclick = () => { payments.splice(Number(btn.getAttribute('data-rm')),1); renderPayments(); resetPage(); computeAndRender();};
+      paymentsList.querySelectorAll("button[data-rm]").forEach((btn) => {
+        btn.onclick = () => {
+          payments.splice(Number(btn.getAttribute("data-rm")), 1);
+          renderPayments();
+          resetPage();
+          computeAndRender();
+        };
       });
     }
 
     function addPayment() {
       const m = Math.max(1, Math.round(Number(ppMonthEl.value) || 0));
       const a = Math.max(0, Math.round(Number(ppAmountEl.value) || 0));
-      if (!a) { alert('Please enter a part payment amount > 0'); return; }
-      payments.push({month:m, amount:a});
-      payments.sort((x,y)=>x.month-y.month);
-      ppMonthEl.value=''; ppAmountEl.value='';
+      if (!a) {
+        alert("Please enter a part payment amount > 0");
+        return;
+      }
+      payments.push({ month: m, amount: a });
+      payments.sort((x, y) => x.month - y.month);
+      ppMonthEl.value = "";
+      ppAmountEl.value = "";
       renderPayments();
-      resetPage(); computeAndRender();
+      resetPage();
+      computeAndRender();
     }
 
-    function clearPayments(){
-      if(!confirm('Clear all part payments?')) return;
+    function clearPayments() {
+      if (!confirm("Clear all part payments?")) return;
       payments = [];
       renderPayments();
-      resetPage(); computeAndRender();
+      resetPage();
+      computeAndRender();
     }
 
     function computeSchedule() {
@@ -409,14 +845,14 @@
       const mode = modeEl.value;
       const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
       const partMap = new Map();
-      for (const p of payments) partMap.set(p.month, (partMap.get(p.month)||0) + p.amount);
+      for (const p of payments) partMap.set(p.month, (partMap.get(p.month) || 0) + p.amount);
 
       const schedule = [];
       let outstanding = principal;
       let emi = initialEmi;
       let remainingMonths = monthsInitial;
 
-      for (let month=1; month<=1200; month++) {
+      for (let month = 1; month <= 1200; month++) {
         if (outstanding <= 0.0001) break;
         const interest = outstanding * monthlyRate;
         let principalComp = emi - interest;
@@ -426,18 +862,32 @@
           const finalInterest = outstanding * monthlyRate;
           const finalPrincipal = outstanding;
           const finalEmi = finalPrincipal + finalInterest;
-          schedule.push({ month, emi: Math.round(finalEmi), principalPaid: Math.round(finalPrincipal), interestPaid: Math.round(finalInterest), partPayment: Math.round(part), outstanding: 0 });
+          schedule.push({
+            month,
+            emi: Math.round(finalEmi),
+            principalPaid: Math.round(finalPrincipal),
+            interestPaid: Math.round(finalInterest),
+            partPayment: Math.round(part),
+            outstanding: 0,
+          });
           outstanding = 0;
           break;
         }
         outstanding = outstanding - principalComp - part;
-        if (mode === 'emi' && part > 0) {
+        if (mode === "emi" && part > 0) {
           remainingMonths = Math.max(1, monthsInitial - month);
           if (outstanding > 0) {
             emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
           }
         }
-        schedule.push({ month, emi: Math.round(emi), principalPaid: Math.round(principalComp), interestPaid: Math.round(interest), partPayment: Math.round(part), outstanding: Math.round(Math.max(0, outstanding)) });
+        schedule.push({
+          month,
+          emi: Math.round(emi),
+          principalPaid: Math.round(principalComp),
+          interestPaid: Math.round(interest),
+          partPayment: Math.round(part),
+          outstanding: Math.round(Math.max(0, outstanding)),
+        });
         if (month > monthsInitial + 600) break;
       }
       return { schedule, initialEmi: Math.round(initialEmi) };
@@ -445,7 +895,7 @@
 
     function renderSchedule(schedule) {
       const end = Math.min(schedule.length, PAGE_SIZE * currentPage);
-      let rows = '';
+      let rows = "";
       for (let i = 0; i < end; i++) {
         const r = schedule[i];
         rows += `<tr>
@@ -460,16 +910,17 @@
       scheduleTbody.innerHTML = rows;
       if (end < schedule.length) {
         scheduleTbody.innerHTML += `<tr><td colspan="6" style="text-align:center">
-          <button class="btn btn-primary" id="showMoreRows">Show More</button>
-        </td></tr>`;
-        document.getElementById('showMoreRows').onclick = function() {
-          currentPage++; renderSchedule(schedule);
+        <button class="btn btn-primary" id="showMoreRows">Show More</button>
+      </td></tr>`;
+        document.getElementById("showMoreRows").onclick = function () {
+          currentPage++;
+          renderSchedule(schedule);
         };
       }
     }
 
-    function updateKpis(schedule, initialEmi){
-      const totalInterest = schedule.reduce((s,r)=>s+r.interestPaid, 0);
+    function updateKpis(schedule, initialEmi) {
+      const totalInterest = schedule.reduce((s, r) => s + r.interestPaid, 0);
       const principalInput = Math.max(1, Math.round(Number(loanEl.value) || 1));
       const totalPayment = totalInterest + principalInput;
       initialEmiEl.textContent = fmt(initialEmi);
@@ -478,7 +929,7 @@
       totalPaymentEl.textContent = fmt(totalPayment);
     }
 
-    function computeAndRender(){
+    function computeAndRender() {
       const { schedule, initialEmi } = computeSchedule();
       lastSchedule = schedule;
       lastInitialEmi = initialEmi;
@@ -486,104 +937,130 @@
       updateKpis(schedule, initialEmi);
     }
 
-    // Debounce utility for inputs
+    // Debounce helper
     function debounce(func, delay) {
       let timer = null;
-      return function(...args) {
+      return function (...args) {
         clearTimeout(timer);
         timer = setTimeout(() => func.apply(this, args), delay);
       };
     }
 
-    // Inputs: debounce for smoothness
-    const debouncedUpdate = debounce(() => { resetPage(); computeAndRender(); }, 120);
-    [loanEl, rateEl, yearsEl, modeEl].forEach(el =>
-      el.addEventListener('input', debouncedUpdate)
+    const debouncedUpdate = debounce(() => {
+      resetPage();
+      computeAndRender();
+    }, 120);
+
+    [loanEl, rateEl, yearsEl, modeEl].forEach((el) =>
+      el.addEventListener("input", debouncedUpdate)
     );
+    document.getElementById("addPp").addEventListener("click", addPayment);
+    document.getElementById("clearPps").addEventListener("click", clearPayments);
 
-    document.getElementById('addPp').addEventListener('click', addPayment);
-    document.getElementById('clearPps').addEventListener('click', clearPayments);
-
-    function exportXLSX(){
+    function exportXLSX() {
       const schedule = lastSchedule || computeSchedule().schedule;
-      const hasPart = payments.some(p => p.amount && p.amount > 0);
-      const aoa = [ ['Loan Amount', loanEl.value], ['Annual Rate (%)', rateEl.value], ['Tenure (Years)', yearsEl.value], ['Mode', modeEl.value], [], ];
+      const hasPart = payments.some((p) => p.amount && p.amount > 0);
+      const aoa = [
+        ["Loan Amount", loanEl.value],
+        ["Annual Rate (%)", rateEl.value],
+        ["Tenure (Years)", yearsEl.value],
+        ["Mode", modeEl.value],
+        [],
+      ];
       if (hasPart) {
-        aoa.push(['Month','EMI','Principal Paid','Interest Paid','Part Payment','Outstanding']);
-        schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding]));
+        aoa.push(["Month", "EMI", "Principal Paid", "Interest Paid", "Part Payment", "Outstanding"]);
+        schedule.forEach((r) => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding]));
       } else {
-        aoa.push(['Month','EMI','Principal Paid','Interest Paid','Outstanding']);
-        schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]));
+        aoa.push(["Month", "EMI", "Principal Paid", "Interest Paid", "Outstanding"]);
+        schedule.forEach((r) => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]));
       }
       const ws = XLSX.utils.aoa_to_sheet(aoa);
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Schedule');
-      const wbout = XLSX.write(wb, {bookType:'xlsx', type:'array'});
-      try { saveAs(new Blob([wbout],{type:"application/octet-stream"}), 'emi_schedule.xlsx'); } catch(e) { alert('Excel export failed: ' + e.message); }
+      XLSX.utils.book_append_sheet(wb, ws, "Schedule");
+      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      try {
+        saveAs(new Blob([wbout], { type: "application/octet-stream" }), "emi_schedule.xlsx");
+      } catch (e) {
+        alert("Excel export failed: " + e.message);
+      }
     }
 
-    function exportPDF(){
+    function exportPDF() {
       const scheduleData = lastSchedule || computeSchedule().schedule;
       const initialEmi = lastInitialEmi || computeSchedule().initialEmi;
       const loan = Math.round(Number(loanEl.value) || 0);
       const rate = Number(rateEl.value) || 0;
       const years = Number(yearsEl.value) || 0;
-      const hasPart = payments.some(p => p.amount && p.amount > 0);
+      const hasPart = payments.some((p) => p.amount && p.amount > 0);
+
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
       const pageWidth = doc.internal.pageSize.getWidth();
       const margin = 40;
       let y = 40;
+
       doc.setFillColor(246, 249, 255);
-      doc.rect(0,0,pageWidth,60,'F');
+      doc.rect(0, 0, pageWidth, 60, "F");
       doc.setFontSize(18);
-      doc.setTextColor(15,23,42);
-      doc.text('EMI Repayment Schedule', margin, 40);
+      doc.setTextColor(15, 23, 42);
+      doc.text("EMI Repayment Schedule", margin, 40);
+
       y = 80;
-      const cardW = 140; const cardH = 40; const gap = 12;
+      const cardW = 140;
+      const cardH = 40;
+      const gap = 12;
       const cards = [
-        {label:'Loan Amount', value: fmt(loan), color: [14,165,233]},
-        {label:'Rate (%)', value: String(rate), color: [16,185,129]},
-        {label:'Tenure (yrs)', value: String(years), color: [234,179,8]},
-        {label:'Initial EMI', value: fmt(initialEmi), color: [99,102,241]}
+        { label: "Loan Amount", value: fmt(loan), color: [14, 165, 233] },
+        { label: "Rate (%)", value: String(rate), color: [16, 185, 129] },
+        { label: "Tenure (yrs)", value: String(years), color: [234, 179, 8] },
+        { label: "Initial EMI", value: fmt(initialEmi), color: [99, 102, 241] },
       ];
       let x = margin;
-      cards.forEach(c=>{
+      cards.forEach((c) => {
         doc.setFillColor(c.color[0], c.color[1], c.color[2]);
-        doc.roundedRect(x, y, cardW, cardH, 6, 6, 'F');
-        doc.setTextColor(255,255,255);
+        doc.roundedRect(x, y, cardW, cardH, 6, 6, "F");
+        doc.setTextColor(255, 255, 255);
         doc.setFontSize(10);
         doc.text(c.label, x + 10, y + 14);
         doc.setFontSize(13);
-        doc.setFont(undefined, 'bold');
+        doc.setFont(undefined, "bold");
         doc.text(c.value, x + 10, y + 30);
-        doc.setFont(undefined, 'normal');
+        doc.setFont(undefined, "normal");
         x += cardW + gap;
       });
+
       y += cardH + 18;
-      const head = hasPart ? [['Month','EMI','Principal','Interest','Part Payment','Outstanding']] : [['Month','EMI','Principal','Interest','Outstanding']];
-      const body = scheduleData.map(r => hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]);
+
+      const head = hasPart
+        ? [["Month", "EMI", "Principal", "Interest", "Part Payment", "Outstanding"]]
+        : [["Month", "EMI", "Principal", "Interest", "Outstanding"]];
+      const body = scheduleData.map((r) =>
+        hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]
+      );
+
       doc.autoTable({
         startY: y,
         head: head,
         body: body,
         styles: { fontSize: 9 },
-        headStyles: { fillColor: [245,245,245], textColor: 20 },
+        headStyles: { fillColor: [245, 245, 245], textColor: 20 },
         margin: { left: margin, right: margin },
         didDrawPage: function (data) {
           const page = doc.internal.getNumberOfPages();
           doc.setFontSize(9);
           doc.setTextColor(120);
-          doc.text('Page ' + page, data.settings.margin.left, doc.internal.pageSize.height - 10);
+          doc.text("Page " + page, data.settings.margin.left, doc.internal.pageSize.height - 10);
         },
-        theme: 'grid'
+        theme: "grid",
       });
-      doc.save('emi_schedule.pdf');
+
+      doc.save("emi_schedule.pdf");
     }
 
-    downloadXLSXBtn.addEventListener('click', exportXLSX);
-    downloadPDFBtn.addEventListener('click', exportPDF);
+    downloadXLSXBtn.addEventListener("click", exportXLSX);
+    downloadPDFBtn.addEventListener("click", exportPDF);
 
+    // First render and setup
     renderPayments();
     computeAndRender();
   </script>
