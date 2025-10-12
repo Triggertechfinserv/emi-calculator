@@ -1,29 +1,238 @@
-<!-- Full HTML code with upgraded JS for lag-free experience -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ... Unchanged metadata, styles, fonts, ads, scripts ... -->
-  <!-- Copy all your original <head> content here, including ads and fonts -->
-  <!-- ... -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EMI Calculator — TechFinserv</title>
+  <meta name="description" content="Smart EMI calculator for home/personal/car loans. Add part-payments to save interest, get a detailed schedule, and download results as PDF/Excel." />
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9DHT9T8GZB');
+  </script>
+  <!-- AdSense loader: include ONCE -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
+          crossorigin="anonymous"></script>
+  <!-- Third-party libs for export -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+    /* === Your original CSS, all unchanged === */
+    :root {
+      --bg: #f6f9ff;
+      --bg-accent1: rgba(14,165,233,0.20);
+      --bg-accent2: rgba(16,185,129,0.18);
+      --surface: rgba(255,255,255,0.78);
+      --surface-strong: rgba(255,255,255,0.92);
+      --text: #0f172a;
+      --muted: #475569;
+      --border: rgba(2,6,23,0.12);
+      --accent-1: #0ea5e9;
+      --accent-2: #10b981;
+      --gradient-solid: linear-gradient(135deg, #10a7e6, #10b981);
+      --radius: 16px;
+      --shadow: 0 6px 16px rgba(2,6,23,0.08), 0 2px 8px rgba(2,6,23,0.06);
+      --maxw: 1200px;
+      --input-bg: rgba(255,255,255,0.92);
+      --input-focus: rgba(14,165,233,0.25);
+      --table-stripe: rgba(2,6,23,0.03);
+      --table-head: rgba(2,6,23,0.04);
+      --header-h: 72px;
+    }
+    * { box-sizing: border-box; }
+    html, body { width:100%; overflow-x:hidden; }
+    body {
+      margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
+      background: var(--bg);
+      padding-top: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    .glass { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      backdrop-filter: blur(10px) saturate(160%); -webkit-backdrop-filter: blur(10px) saturate(160%); box-shadow: var(--shadow); }
+    .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: rgba(255,255,255,0.78);
+      border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); }
+    header.nav { display:flex; justify-content:space-between; align-items:center; padding: 12px 0; }
+    .brand-logo { height: 60px; border-radius: 10px; }
+    nav.menu { display:flex; gap:14px; }
+    nav.menu a { padding: 8px 12px; border-radius: 10px; color: var(--muted); }
+    nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
+    .cta { background: var(--gradient-solid); color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600; }
+    main { padding: 24px 0 60px; }
+    .page-title { margin: 16px 0 8px; font-size: 22px; }
+    .subtitle { color: var(--muted); font-size: 14px; }
+    .layout { display:grid; grid-template-columns: 2fr 1fr; gap: 18px; align-items:start; }
+    .calc { padding: 18px; }
+    .grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .grid-1 { display:grid; grid-template-columns: 1fr; gap: 10px; }
+    label { font-size: 12px; color: var(--muted); display:block; margin:0 0 6px; }
+    input, select { width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background: var(--input-bg); color: var(--text); outline:none; }
+    input:focus, select:focus { box-shadow: 0 0 0 3px var(--input-focus); border-color: transparent; }
+    .row { display:flex; gap:10px; align-items:center; }
+    .chips { display:flex; gap:8px; flex-wrap:wrap; }
+    .chip { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:12px; background: var(--surface-strong); border:1px solid var(--border); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:700; font-size:13px; cursor:pointer; border:1px solid var(--border); background: var(--surface-strong); color: var(--text); }
+    .btn:hover { background: rgba(2,6,23,0.04); }
+    .btn-primary { background: var(--gradient-solid); border: 0; color: #fff; }
+    .btn-danger { background: rgba(239,68,68,0.10); color: #b91c1c; border-color: rgba(239,68,68,0.35); }
+    .btn-success { background: rgba(16,185,129,0.12); color: #065f46; border-color: rgba(16,185,129,0.35); }
+    .summary { display:grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 12px 0; }
+    .card { padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+    .small-muted { font-size: 12px; color: var(--muted); }
+    .big { font-size: 20px; font-weight: 800; letter-spacing: 0.2px; }
+    .table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow: auto; max-height: 480px; background: rgba(255,255,255,0.5); position: relative; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th { position: sticky; top: 0; z-index: 10; background: var(--surface-strong); color: var(--muted); text-align: right; font-weight: 700;
+      box-shadow: 0 1px 0 rgba(2,6,23,0.12) inset, 0 2px 8px rgba(2,6,23,0.06);
+    }
+    th, td { padding: 10px 10px; border-bottom: 1px solid rgba(2,6,23,0.06); text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    tbody tr:nth-child(odd) { background: var(--table-stripe); }
+    .ad-card { position: static; top: 84px; padding: 16px; display: grid; gap: 12px; }
+    .ad-slot { border: 1px dashed var(--border); border-radius: 14px; min-height: 250px; display: grid; place-items: center; color: var(--muted); background: var(--surface-strong); }
+    .ad-note { font-size: 12px; color: var(--muted); text-align:center; }
+    footer { border-top: 1px solid var(--border); padding: 30px 0 80px; color: var(--muted); background: rgba(255,255,255,0.75); }
+    @media (max-width: 1000px) {
+      .layout { grid-template-columns: 1fr; }
+      .summary { grid-template-columns: 1fr 1fr; }
+      .ad-card { position: static; }
+    }
+    @media (max-width: 640px) {
+      .summary { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .big { font-size: 18px; }
+    }
+    @media (max-width: 600px) {
+      table thead { display: none; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      tr { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 10px; background: var(--surface); }
+      td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border: none; text-align: left; font-size: 13px; color: var(--text); }
+      td[data-label]:before { content: attr(data-label) ":"; font-weight: 600; margin-right: 10px; color: var(--muted); width: 40%; max-width: 160px; }
+      td .value { width: 60%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    }
+    .mobile-menu-toggle{ display:none; }
+    .mobile-menu{ display:none; }
+    @media (max-width:768px){
+      nav.menu{ display:none; }
+      .mobile-menu-toggle{
+        display:inline-flex; flex-direction:column; justify-content:center; gap:4px;
+        width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span{
+        display:block; height:3px; width:100%; background:var(--text); border-radius:2px;
+      }
+      .mobile-menu{
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px; background:#fff;
+        border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a{ padding:12px 16px; font-size:15px; color:var(--muted); }
+      .mobile-menu a:hover{ background: var(--bg); color: var(--text); }
+      .ad-card, .ad-slot{ width:100%; }
+      .ad-slot ins{ max-width:100% !important; width:100% !important; height:auto !important; display:block !important; }
+    }
+    .mobile-menu.open{ display:flex !important; }
+  </style>
 </head>
 <body>
-  <!-- Header, ads, navigation, etc. --- All unchanged; copy from your original code -->
-  <!-- ... -->
 
+<!-- === Header, Menu, Ad, and Content unaltered... === -->
+  <div class="topbar">
+    <div class="container">
+      <header class="nav" role="banner">
+        <a href="/" aria-label="TechFinserv home">
+          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo">
+        </a>
+        <nav class="menu" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/blogs.html">Blog</a>
+          <a href="/coming-soon.html">About</a>
+          <a class="cta" href="/coming-soon.html">Apply Now</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
+        <a href="/">Home</a>
+        <a href="/blogs.html">Blog</a>
+        <a href="/coming-soon.html">Apply Now</a>
+      </nav>
+    </div>
+  </div>
   <main>
     <div class="container">
-      <!-- Your full page content, forms, ads, and article sections as before -->
-      <!-- ... -->
-
+      <!-- === Inputs, Ads and Article content unchanged... === -->
+      <h1 class="page-title">EMI Calculator with Part-Payment</h1>
+      <p class="subtitle">EMI calculator for home, personal and car loans with part-payment support, instant amortization schedule, and one-click PDF/Excel export.</p>
       <div class="layout">
-        <!-- Calculator, inputs, dashboard, schedule table (unchanged markup) -->
-        <!-- ... -->
         <section id="calculator" class="calc glass" role="region" aria-label="EMI Calculator">
-          <!-- Inputs -->
-          <!-- ... Same as your current HTML ... -->
-
-          <!-- KPI cards and schedule table ... unchanged markup ... -->
-
+          <!-- Inputs unchanged... -->
+          <div class="grid" style="margin-bottom:12px;">
+            <div>
+              <label>Loan Amount (Principal)</label>
+              <input id="loan" type="number" min="1" value="100000" />
+            </div>
+            <div>
+              <label>Annual Interest Rate (%)</label>
+              <input id="rate" type="number" step="0.01" min="0" value="12.50" />
+            </div>
+            <div>
+              <label>Tenure (Years)</label>
+              <input id="years" type="number" step="0.25" min="0.1" value="5" />
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap; margin-bottom:10px;">
+            <div style="min-width:220px;">
+              <label>Mode</label>
+              <select id="mode">
+                <option value="tenure">Reduce Tenure (EMI fixed)</option>
+                <option value="emi">Reduce EMI (Tenure fixed)</option>
+              </select>
+            </div>
+            <div style="flex:1; min-width:260px;">
+              <label>Add Part Payment (Month & Amount)</label>
+              <div class="row">
+                <input id="ppMonth" type="number" min="1" placeholder="Month (e.g. 12)" style="max-width:140px" />
+                <input id="ppAmount" type="number" min="0" placeholder="Amount (e.g. 100000)" />
+                <button id="addPp" class="btn btn-primary" type="button">Add</button>
+                <button id="clearPps" class="btn btn-danger" type="button">Clear</button>
+              </div>
+            </div>
+          </div>
+          <div style="margin:10px 0 6px;">
+            <div class="small-muted">Part Payments (click remove to delete):</div>
+            <div id="paymentsList" class="chips" style="margin-top:8px;"></div>
+          </div>
+          <div class="summary" id="dashboard">
+            <div class="card">
+              <div class="small-muted">Initial EMI</div>
+              <div id="initialEmi" class="big">0</div>
+              <div class="small-muted">before prepayment</div>
+            </div>
+            <div class="card">
+              <div class="small-muted">New Tenure (months)</div>
+              <div id="newMonths" class="big">0</div>
+            </div>
+            <div class="card">
+              <div class="small-muted">Total Interest Paid</div>
+              <div id="totalInterest" class="big">0</div>
+            </div>
+            <div class="card">
+              <div class="small-muted">Total Payment</div>
+              <div id="totalPayment" class="big">0</div>
+            </div>
+          </div>
           <div class="glass" style="padding:14px; margin-top:12px;">
             <div class="row" style="justify-content: space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
               <strong>Repayment Schedule</strong>
@@ -41,42 +250,95 @@
               </table>
             </div>
           </div>
-
-          <!-- ... rest unchanged ... -->
+          <p class="small-muted" style="margin-top:10px;">Tip: add one or more part payments (month number & amount). Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes earlier), or <em>Reduce EMI</em> to keep tenure same and reduce monthly payment. Save the file to keep your data.</p>
         </section>
-
-        <!-- Right ad column, and article/news sections, as before -->
-        <!-- ... -->
+        <aside class="ad-card glass" aria-label="Ad">
+          <div class="ad-slot" style="min-height:600px;">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:600px"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="9154021274"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+          <div class="ad-slot" style="min-height:250px;">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="2241854911"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+          <div class="ad-note">Support ❤️ Us By Clicking Ads</div>
+        </aside>
       </div>
+      <section class="glass" style="margin-top:20px; padding:18px;">
+       <aside class="ad-card glass" aria-label="Ad"> 
+        <div style="display:grid; place-items:center;">
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:728px;height:90px;max-width:100%"
+               data-ad-client="ca-pub-4180233192929131"
+               data-ad-slot="3731030557"></ins>
+        </div>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </section>
+      <!-- === Info article about EMI unchanged === -->
+      <!-- ...all your article HTML as before... -->
     </div>
   </main>
-
   <footer class="glass" style="margin-top:24px;">
     <div class="container">
       Designed & Maintained by Kiran Rathva • © <span id="year"></span> TechFinserv.com
     </div>
   </footer>
-
-  <!-- FINAL: Replace only the JS below --- -->
   <script>
     // Year update
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile/header logic unchanged
-    // ... (your original header/mobile JS)
+    // Header padding adjustment
+    (function(){
+      const topbar = document.querySelector('.topbar');
+      if(!topbar) return;
+      const setPad = () => { document.body.style.paddingTop = topbar.offsetHeight + 'px'; };
+      setPad();
+      window.addEventListener('resize', setPad, { passive: true });
+    })();
 
-    // === PERFORMANCE OPTIMIZED EMI JS ===
+    // Mobile menu logic
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      }, { passive: true });
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      }, { passive: true });
+      const onResize = () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      };
+      window.addEventListener('resize', onResize, { passive: true });
+    })();
+
+    // =============================
+    // LOGIC — ONLY THE CODE BELOW IS UPGRADED FOR PERFORMANCE!
+    // =============================
+
     const fmt = (v) => {
       const n = Math.round(Number(v) || 0);
       return new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0, minimumFractionDigits: 0 }).format(n);
     };
+
     function pmt(rate, nper, pv) {
       if (nper === 0) return 0;
       if (Math.abs(rate) < 1e-12) return pv / nper;
       return (pv * rate) / (1 - Math.pow(1 + rate, -nper));
     }
 
-    // DOM elements: unchanged
     const loanEl = document.getElementById('loan');
     const rateEl = document.getElementById('rate');
     const yearsEl = document.getElementById('years');
@@ -116,7 +378,7 @@
       let html = '';
       payments.forEach((p, idx) => {
         html += `<div class="chip"><div class="small-muted">Month ${p.month} → <strong>${fmt(p.amount)}</strong></div>
-            <button data-rm="${idx}" class="btn btn-danger" style="padding:6px 10px">Remove</button></div>`;
+                <button data-rm="${idx}" class="btn btn-danger" style="padding:6px 10px">Remove</button></div>`;
       });
       paymentsList.innerHTML = html;
       paymentsList.querySelectorAll('button[data-rm]').forEach(btn => {
@@ -224,6 +486,7 @@
       updateKpis(schedule, initialEmi);
     }
 
+    // Debounce utility for inputs
     function debounce(func, delay) {
       let timer = null;
       return function(...args) {
@@ -231,10 +494,13 @@
         timer = setTimeout(() => func.apply(this, args), delay);
       };
     }
+
+    // Inputs: debounce for smoothness
     const debouncedUpdate = debounce(() => { resetPage(); computeAndRender(); }, 120);
     [loanEl, rateEl, yearsEl, modeEl].forEach(el =>
       el.addEventListener('input', debouncedUpdate)
     );
+
     document.getElementById('addPp').addEventListener('click', addPayment);
     document.getElementById('clearPps').addEventListener('click', clearPayments);
 
@@ -255,6 +521,7 @@
       const wbout = XLSX.write(wb, {bookType:'xlsx', type:'array'});
       try { saveAs(new Blob([wbout],{type:"application/octet-stream"}), 'emi_schedule.xlsx'); } catch(e) { alert('Excel export failed: ' + e.message); }
     }
+
     function exportPDF(){
       const scheduleData = lastSchedule || computeSchedule().schedule;
       const initialEmi = lastInitialEmi || computeSchedule().initialEmi;
