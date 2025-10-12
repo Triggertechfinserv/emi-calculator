@@ -14,7 +14,7 @@
     gtag('js', new Date());
     gtag('config', 'G-9DHT9T8GZB');
   </script>
-  <!-- AdSense loader: include ONCE -->
+  <!-- AdSense loader -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
           crossorigin="anonymous"></script>
   <style>
@@ -41,13 +41,88 @@
       width: 100%;
       margin: 0;
     }
+    /* Header exactly from Coming Soon page */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid rgba(2,6,23,0.12);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
+      border-bottom: 1px solid rgba(2,6,23,0.12);
+    }
+    .topbar::after {
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+    }
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .brand-logo {
+      height: 65px; border-radius: 10px;
+      display:block; width:auto; object-fit:contain;
+      filter:none; mix-blend-mode:normal;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: #475569;
+      transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: rgba(255,255,255,0.92); color: #0f172a; }
+    .cta {
+      background: linear-gradient(135deg, #0ea5e9, #10b981);
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
+      cursor: pointer;
+    }
+    /* Mobile Header */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding: 8px 20px; }
+      .brand-logo { height: 48px; border-radius: 8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:#232d3b; border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction: column; gap: 6px; padding: 10px 0 14px;
+        background:#fff; border-bottom:1px solid rgba(2,6,23,0.12);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:#475569; text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: #232d3b; }
+      .mobile-menu.open { display:flex !important; }
+    }
+    /* Page Wrapper */
     .page-wrapper {
       display: grid;
       grid-template-columns: 180px minmax(0, var(--maxw)) 180px;
       gap: 24px;
       width: 100%;
       max-width: calc(var(--maxw) + 180px*2 + 48px);
-      margin: 40px auto;
+      margin: 40px auto 100px;
+      box-sizing: border-box;
     }
     .side-ad {
       border: 2px dashed var(--accent-1);
@@ -63,13 +138,7 @@
       width: 100%;
       min-height: 300px;
       padding: 0 0 24px 0;
-    }
-    .ad-label {
-      font-size: 1em;
-      color: var(--accent-2);
-      margin: 18px 0 0 0;
-      font-weight: 700;
-      text-align: center;
+      box-sizing: border-box;
     }
     .side-ad-content {
       margin: 18px 0 0 0;
@@ -81,10 +150,9 @@
     }
     @media (max-width: 1200px) {
       .page-wrapper {
-        grid-template-columns: 1fr;
+        display: block;
         max-width: 100%;
-        gap: 0;
-        margin: 8px;
+        margin: 8px 10px;
       }
       .side-ad {
         display: none;
@@ -98,6 +166,7 @@
       max-width: var(--maxw);
       margin: 0 auto;
       overflow-wrap: break-word;
+      box-sizing: border-box;
     }
     h1 {
       font-size: clamp(28px, 4vw, 38px);
@@ -117,7 +186,7 @@
       font-size: 17px;
       color: #475569;
       max-width: 760px;
-      margin: 0 auto 50px;
+      margin: 0 auto 40px;
       padding: 0 8px;
     }
     h2, h3 {
@@ -154,26 +223,26 @@
     }
     .ad-slot {
       max-width: 700px;
-      width: 100%;         /* Make width responsive */
-      height: 100px;
       box-sizing: border-box;
       margin: 40px auto;
       border: 2px dashed var(--accent-1);
       border-radius: var(--radius);
       background: white;
-      padding: 0px;
+      padding: 0;
       text-align: center;
       box-shadow: var(--shadow);
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
     }
-    .ad-label-inline {
-      font-size: 1em;
-      color: var(--accent-2);
-      margin-bottom: 14px;
-      display: block;
-      font-weight: 700;
-      text-align: center;
+    @media (max-width: 768px) {
+      .ad-slot ins.adsbygoogle {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 90px !important;
+      }
     }
-    /* FAQ accordion style */
     .faq-section {
       max-width: 700px;
       margin: 48px auto;
@@ -181,6 +250,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 28px 32px;
+      box-sizing: border-box;
     }
     .faq-title {
       text-align: center;
@@ -222,10 +292,141 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    /* Other Posts Section - 3 cards */
+    .other-posts-section {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 16px;
+      box-sizing: border-box;
+    }
+    .other-posts-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1024px) {
+      .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .posts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .post-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: box-shadow 0.25s ease;
+    }
+    .post-card:hover {
+      box-shadow: 0 12px 28px rgba(14,165,233,0.12), 0 8px 20px rgba(16,185,129,0.1);
+    }
+    .post-image {
+      width: 100%;
+      height: 140px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+    .post-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--accent-1);
+      margin: 0 0 8px 0;
+      flex: 1;
+      text-decoration: none;
+    }
+    .post-excerpt {
+      font-size: 0.9rem;
+      color: #575f6a;
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+    .read-more {
+      font-weight: 600;
+      color: var(--accent-2);
+      text-decoration: none;
+      align-self: flex-start;
+    }
+    .read-more:hover {
+      text-decoration: underline;
+    }
+    /* Footer - full width */
+    footer.glass {
+      position: relative;
+      left: 0;
+      right: 0;
+      width: 100vw;
+      overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid rgba(2,6,23,0.12);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: #475569;
+      margin: 0;
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    footer.glass::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, #0ea5e9, #10b981);
+      opacity:0.8; pointer-events:none;
+    }
+    footer.glass p { margin: 0; font-weight: 400; font-size: 14px; }
+    footer.glass .subtitle { font-size: 13px; margin-top: 6px; }
+    footer.glass a {
+      color: #0ea5e9; text-decoration: none;
+    }
+    footer.glass a:hover {
+      text-decoration: underline;
+    }
+    /* Inner .container remains for footer content spacing */
   </style>
 </head>
 <body>
-  <div class="page-wrapper">
+  <div class="topbar">
+    <div class="container">
+      <header class="nav">
+        <a href="/" aria-label="TechFinserv home">
+          <img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
+        </a>
+        <nav class="menu" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="blogs/">Blog</a>
+          <a href="emi-calculator.html">EMI calculator</a>
+          <a href="#contact" class="cta">Contact</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
+        <a href="/">Home</a>
+        <a href="blogs/">Blog</a>
+        <a href="emi-calculator.html">EMI calculator</a>
+        <a href="#contact" style="font-weight:600;color:#0ea5e9">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <div class="page-wrapper" role="main" aria-label="Blog content">
+
     <!-- Left Sticky Ad -->
     <aside class="side-ad" aria-label="Left vertical advertisement">
       <div class="side-ad-content">
@@ -237,8 +438,7 @@
       </div>
     </aside>
 
-    <!-- Main Blog Content (No change in structure) -->
-    <main class="container" role="main" aria-label="Blog content">
+     <main class="container" role="main" aria-label="Blog content">
       <h1>What is EMI? A Complete Guide for Beginners.</h1>
       <div class="post-meta">Published on October 10, 2025 · By TechFinserv Team</div>
       <article>
@@ -362,8 +562,8 @@
 
         <h2>Conclusion</h2>
         <p>However, EMI is not without risks. It can easily become a burden if you over-borrow or fail to manage it carefully. The key is to treat EMI as a financial tool, not as free money. Borrow only what you need, keep your EMI burden within your capacity, and repay on time. Use prepayments and smart tenure choices to reduce costs.</p>
-        <p>If managed wisely, EMI can be your friend—it allows you to live a better life today without compromising your future. But if misused, it can quickly turn into your biggest financial headache.</p>
-
+        <p>If managed wisely, EMI can be your friend—it allows you to live a better life today without compromising your future. But if misused, it can quickly turn into your biggest financial headache.</p>  
+      
         <section class="faq-section" id="faq">
           <div class="faq-title">FAQ</div>
           <div class="faq-item">
@@ -383,6 +583,31 @@
             <div class="faq-answer">Often early in the tenure, yes—but confirm fees and compare against remaining interest.</div>
           </div>
         </section>
+
+        <!-- Other Posts Section with 3 cards -->
+        <section class="other-posts-section" aria-label="Other posts">
+          <div class="other-posts-title">Other Posts</div>
+          <div class="posts-grid">
+            <article class="post-card">
+              <img src="images/blog1.jpg" alt="Understanding Loan Tenure" class="post-image" />
+              <a href="blogs/loan-tenure-guide.html" class="post-title">Understanding Loan Tenure</a>
+              <p class="post-excerpt">A detailed look at how loan tenure impacts your EMI and overall repayment. Learn to choose wisely.</p>
+              <a href="blogs/loan-tenure-guide.html" class="read-more" aria-label="Read more about Understanding Loan Tenure">Read More →</a>
+            </article>
+            <article class="post-card">
+              <img src="images/blog2.jpg" alt="Tips to Improve Credit Score" class="post-image" />
+              <a href="blogs/improve-credit-score.html" class="post-title">Tips to Improve Credit Score</a>
+              <p class="post-excerpt">Boost your credit score efficiently with our simple and effective tips for better loan offers.</p>
+              <a href="blogs/improve-credit-score.html" class="read-more" aria-label="Read more about Tips to Improve Credit Score">Read More →</a>
+            </article>
+            <article class="post-card">
+              <img src="images/blog3.jpg" alt="Fixed vs Floating Interest Rates" class="post-image" />
+              <a href="blogs/fixed-vs-floating-rates.html" class="post-title">Fixed vs Floating Interest Rates</a>
+              <p class="post-excerpt">Understand the pros and cons of fixed and floating rates to make smarter borrowing choices.</p>
+              <a href="blogs/fixed-vs-floating-rates.html" class="read-more" aria-label="Read more about Fixed vs Floating Interest Rates">Read More →</a>
+            </article>
+          </div>
+        </section>
       </article>
     </main>
 
@@ -397,7 +622,35 @@
       </div>
     </aside>
   </div>
+  <!-- Footer full width -->
+  <footer id="contact" class="glass" role="contentinfo">
+    <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+      <p>Designed &amp; Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+      <p class="subtitle" style="font-size:13px">Need something urgently? <a href="mailto:hello@techfinserv.com">hello@techfinserv.com</a></p>
+    </div>
+  </footer>
   <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu toggle from coming soon
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
+    })();
     // FAQ Accordion JS
     document.querySelectorAll('.faq-question').forEach(function(btn) {
       btn.onclick = function() {
