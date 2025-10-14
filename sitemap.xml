@@ -16,13 +16,6 @@
   </url>
 
   <url>
-    <loc>https://www.techfinserv.com/services.html</loc>
-    <lastmod>2025-10-08</lastmod>
-    <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <url>
     <loc>https://www.techfinserv.com/emi-calculator/</loc>
     <lastmod>2025-10-08</lastmod>
     <priority>0.9</priority>
@@ -30,7 +23,7 @@
   </url>
 
   <url>
-    <loc>https://www.techfinserv.com/loan-eligibility.html</loc>
+    <loc>https://www.techfinserv.com/pl-eligibility.html</loc>
     <lastmod>2025-10-08</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
@@ -40,13 +33,6 @@
     <loc>https://www.techfinserv.com/sip-calculator.html</loc>
     <lastmod>2025-10-08</lastmod>
     <priority>0.9</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.techfinserv.com/contact.html</loc>
-    <lastmod>2025-10-08</lastmod>
-    <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
 
