@@ -373,6 +373,37 @@
     tbody tr:nth-child(even){background:#fafafa}
     tbody tr:hover{background:#f1f8ff}
     td strong{color:var(--accent-2)}
+
+    /* Responsive Table CSS Example */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .table-responsive table {
+      min-width: 520px; /* Ensures columns don’t squeeze on small screens */
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table-responsive table th,
+    .table-responsive table td {
+      padding: 12px 16px;
+      text-align: left;
+      vertical-align: top;
+    }
+    
+    /* For mobile - make font smaller and squeeze columns */
+    @media (max-width: 600px) {
+      .table-responsive table th,
+      .table-responsive table td {
+        padding: 10px 7px;
+        font-size: 13px;
+        word-break: break-word;
+      }
+    }
+
     /* Footer - full width */
     footer.glass {
       position: relative;
