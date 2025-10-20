@@ -268,6 +268,7 @@
     a:hover {
       text-decoration: underline;
     }
+     /* In-article ad-slot */
     .ad-slot {
       max-width: 700px;
       box-sizing: border-box;
@@ -281,23 +282,41 @@
       width: 100%;
       height: 100px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    /* Keep side ads unchanged on all viewports */
+    .side-ad ins.adsbygoogle {
+      width: 160px !important;
+      height: 600px !important;
+    }
+    /* On small screens, style mobile ad (square) and hide desktop leaderboard */
+    @media (max-width: 768px) {
+      .ad-desktop { display: none; }
+      .ad-mobile { display: block; }
+
+      .ad-mobile ins.adsbygoogle {
+        display:inline-block !important;
+        width:250px !important;
+        height:250px !important;
+        max-width:100% !important;
+        margin:0 auto;
+        box-sizing:border-box !important;
+      }
+
+      .ad-slot { min-height: 250px; height: auto; padding: 20px 0; display:flex; align-items:center; justify-content:center; }
+    }
+
+    /* Default: show desktop ad, hide mobile ad */
+    .ad-desktop { display:block; }
+    .ad-mobile { display:none; }
+
     @media (max-width: 768px) {
       .ad-slot ins.adsbygoogle {
-        display: block !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: 130px !important;
+        /* Make sure no other ins breaks layout */
+        max-width: 100%;
       }
-    }
-    .faq-section {
-      max-width: 700px;
-      margin: 48px auto;
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 32px;
-      box-sizing: border-box;
     }
     .faq-title {
       text-align: center;
