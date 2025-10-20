@@ -63,4 +63,12 @@
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
+
+  <url>
+    <loc>https://www.techfinserv.com/blogs/blog-rbi-1/</loc>
+    <lastmod>2025-10-18</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  
 </urlset>
