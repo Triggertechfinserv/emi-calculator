@@ -47,6 +47,7 @@
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link rel="canonical" href="https://www.techfinserv.com/blogs/flexi-hybrid-loan/" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />  
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
   <script>
@@ -55,9 +56,11 @@
     gtag('js', new Date());
     gtag('config', 'G-9DHT9T8GZB');
   </script>
-  <!-- AdSense loader -->
+
+  <!-- AdSense loader (keep this once per page) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
           crossorigin="anonymous"></script>
+
   <style>
     :root {
       --bg: #f6f9ff;
@@ -82,7 +85,7 @@
       width: 100%;
       margin: 0;
     }
-    /* Header exactly from Coming Soon page */
+    /* Header */
     .topbar {
       position: sticky; top: 0; z-index: 40;
       background: rgba(255,255,255,0.68);
@@ -262,6 +265,7 @@
     a:hover {
       text-decoration: underline;
     }
+    /* In-article ad-slot */
     .ad-slot {
       max-width: 700px;
       box-sizing: border-box;
@@ -275,24 +279,41 @@
       width: 100%;
       height: 100px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    /* Keep side ads unchanged on all viewports */
+    .side-ad ins.adsbygoogle {
+      width: 160px !important;
+      height: 600px !important;
+    }
+    /* On small screens, style mobile ad (square) and hide desktop leaderboard */
+    @media (max-width: 768px) {
+      .ad-desktop { display: none; }
+      .ad-mobile { display: block; }
+
+      .ad-mobile ins.adsbygoogle {
+        display:block !important;
+        width:250px !important;
+        height:250px !important;
+        max-width:100% !important;
+        margin:0 auto;
+        box-sizing:border-box !important;
+      }
+
+      .ad-slot { min-height: 250px; height: auto; padding: 20px 0; }
+    }
+
+    /* Default: show desktop ad, hide mobile ad */
+    .ad-desktop { display:block; }
+    .ad-mobile { display:none; }
+
     @media (max-width: 768px) {
       .ad-slot ins.adsbygoogle {
-        display: block !important;
-        width: 100% !important;
-        height: 100% !important;
-        min-height: 130px !important;
+        /* Make sure no other ins breaks layout */
+        max-width: 100%;
       }
-    }
-    /* default: show desktop ad, hide mobile */
-    .ad-desktop { display:block; }
-    .ad-mobile  { display:none; }
-
-    /* on small screens: hide desktop, show mobile */
-    @media (max-width: 768px) {
-      .ad-desktop { display:none; }
-      .ad-mobile  { display:block; }
-      .ad-mobile ins.adsbygoogle { display:block !important; width:100% !important; min-height:130px !important; }
     }
 
     .faq-section {
@@ -344,6 +365,7 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
     /* Other Posts Section - 3 cards */
     .other-posts-section {
       max-width: 900px;
@@ -417,7 +439,8 @@
     .read-more:hover {
       text-decoration: underline;
     }
-     /* ====== TABLE (polished) ====== */
+
+    /* TABLE (polished) */
     table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
     thead{background:#f1f5f9}
     th{padding:12px 20px;text-align:left;font-weight:700;color:#0f172a;border-bottom:2px solid var(--soft)}
@@ -432,20 +455,20 @@
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
-    
+
     .table-responsive table {
       min-width: 520px; /* Ensures columns don’t squeeze on small screens */
       width: 100%;
       border-collapse: collapse;
     }
-    
+
     .table-responsive table th,
     .table-responsive table td {
       padding: 12px 16px;
       text-align: left;
       vertical-align: top;
     }
-    
+
     /* For mobile - make font smaller and squeeze columns */
     @media (max-width: 600px) {
       .table-responsive table th,
@@ -488,7 +511,6 @@
     footer.glass a:hover {
       text-decoration: underline;
     }
-    /* Inner .container remains for footer content spacing */
   </style>
 </head>
 <body>
@@ -516,9 +538,10 @@
       </nav>
     </div>
   </div>
+
   <div class="page-wrapper" aria-label="Blog content">
 
-    <!-- Left Sticky Ad -->
+    <!-- Left Sticky Ad (unchanged) -->
     <aside class="side-ad" aria-label="Left vertical advertisement">
       <div class="side-ad-content">
         <ins class="adsbygoogle"
@@ -545,7 +568,7 @@
         
         <h2>🔍 Example: How It Works</h2>
         <p>Let’s say you are sanctioned a <strong>₹20 lakh Flexi Hybrid Loan.</strong></p>
-        <h3>( 1 ) Interest‑Only Period</h3>
+        <h3>( 1 ) Interest-Only Period</h3>
         <ul>
         <li>You withdraw ₹10 lakh initially → you pay interest only on ₹10 lakh.</li>
         <li>Later, you repay ₹3 lakh → interest automatically reduces to ₹7 lakh.</li>
@@ -556,7 +579,7 @@
         <li>Your <strong>sanctioned limit reduces</strong> every month till the end of tenure.</li>
         <li><strong>No usage</strong> → no EMI, no interest.</li>
         <li><strong>Full usage</strong> → regular EMIs (Principal + Interest).</li>
-        <li><strong>Partial usage</strong> → pay interest‑only until dropline equals outstanding; then EMIs start.</li>
+        <li><strong>Partial usage</strong> → pay interest-only until dropline equals outstanding; then EMIs start.</li>
         </ul>   
         <p>This system provides maximum liquidity while ensuring interest savings</p>
         
@@ -569,7 +592,31 @@
         <li><strong>Flexible Repayments:</strong> You can prepay or re-withdraw anytime during the loan tenure.</li>
         <li><strong>Hybrid Repayment:</strong> For the first few years, only interest is paid; later, principal + interest EMIs start.</li>
         </ul>
-       
+
+        <!-- In-article ad-slot: desktop leaderboard + mobile square -->
+        <div class="ad-slot" aria-label="Advertisement">
+          <!-- Desktop ad (visible on desktop/tablet) -->
+          <div class="ad-desktop">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:700px;height:100px"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="9391632919"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+
+          <!-- Mobile square ad (visible only on mobile) -->
+          <!-- Recommended: create a separate mobile ad unit in AdSense and replace the data-ad-slot value below.
+               If you do not have a separate mobile slot, set data-ad-slot to the same slot ID (9391632919) -->
+          <div class="ad-mobile" aria-hidden="true">
+            <ins class="adsbygoogle"
+                 style="display:block;max-width:250px;margin:0 auto"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="9391632919"
+                 data-ad-format="auto"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+        </div>
+
         <section>
         <h2>📊 Flexi Hybrid Loan vs Personal Loan</h2>
         <div class="table-responsive">
@@ -614,21 +661,22 @@
             </tr>
           </tbody>
         </table>
+        </div>
         </section>
           
          <h2>💰Why Borrowers Prefer Flexi Hybrid</h2>
         <ul>
         <li><strong>Interest Savings:</strong> Interest applies only on the withdrawn amount — not the full sanction — significantly reducing your interest burden.</li>
-        <li><strong>Lower outflow early:</strong> interest‑only period keeps EMIs away initially.</li>
+        <li><strong>Lower outflow early:</strong> interest-only period keeps EMIs away initially.</li>
         <li><strong>Withdraw Anytime, Repay Anytime:</strong>Enjoy full control — withdraw when you need funds and repay whenever you have surplus cash, without extra charges.</li>
-        <li><strong>Part‑payments anytime:</strong>reduce principal when you have surplus; often zero charges.</li>
+        <li><strong>Part-payments anytime:</strong>reduce principal when you have surplus; often zero charges.</li>
         <li><strong>No Re-approval Needed</strong>Once the facility is active, you can borrow multiple times within your limit — no need to reapply or go through documentation again.</li>
         <li><strong>No usage = no cost:</strong> if you don’t draw, you don’t pay.</li>
         <li><strong>Auto closure at tenure end:</strong>no lingering balances.</li>
         </ul>         
-        
+
+        <!-- Another in-article ad-slot later in page -->
         <div class="ad-slot" aria-label="Advertisement">
-          <!-- Desktop ad (visible on desktop/tablet) -->
           <div class="ad-desktop">
             <ins class="adsbygoogle"
                  style="display:inline-block;width:700px;height:100px"
@@ -636,19 +684,16 @@
                  data-ad-slot="9391632919"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
-
-          <!-- Mobile ad (visible only on mobile) - NO inline width/height -->
-          <div class="ad-mobile" aria-hidden="true" style="display:none">
+          <div class="ad-mobile" aria-hidden="true">
             <ins class="adsbygoogle"
-                 style="display:block"
+                 style="display:block;max-width:250px;margin:0 auto"
                  data-ad-client="ca-pub-4180233192929131"
                  data-ad-slot="9391632919"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+                 data-ad-format="auto"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
         </div>
-        
+
         <section>
         <h2>🏦 Top Banks and NBFCs Offering Flexi Hybrid Loans in India</h2>
         <div class="table-responsive">
@@ -657,7 +702,7 @@
             <tr>
               <th>Provider</th>
               <th>Total Tenure</th>
-              <th>Interest‑Only Period</th>
+              <th>Interest-Only Period</th>
               <th>Dropline Period</th>
               <th>Rate Of Interest</th>
             </tr>
@@ -693,6 +738,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
         </section>
         
         <p class="meta">Note: Eligibility, fees, and exact terms vary by lender. Always verify current policy.</p>
@@ -700,49 +746,18 @@
         <h2>⚖️ When Should You Choose a Flexi Hybrid Loan?</h2>
         <p>Opt for a Flexi Hybrid Loan if you:</p>
         <ul>
-        <p>✅ Have <strong>irregular or seasonal income.</strong></p>
-        <p>✅ Need funds <strong>in stages</strong> (home construction, business expansion).</p>
-        <p>✅ Want to <strong>minimize interest payments</strong></p>
-        <p>✅ Prefer <strong>lower EMIs initially</strong> for better cash flow.</p>
+        <li>✅ Have <strong>irregular or seasonal income.</strong></li>
+        <li>✅ Need funds <strong>in stages</strong> (home construction, business expansion).</li>
+        <li>✅ Want to <strong>minimize interest payments</strong></li>
+        <li>✅ Prefer <strong>lower EMIs initially</strong> for better cash flow.</li>
         </ul>
         <p>Avoid it if:</p>
         <ul>
-        <p>🚫 You prefer fixed EMIs and predictability.</p>
-        <p>🚫 You might overspend due to easy access to funds.</p>
-        <p>🚫 You only need a <strong>one-time lump sum,</strong></p>
+        <li>🚫 You prefer fixed EMIs and predictability.</li>
+        <li>🚫 You might overspend due to easy access to funds.</li>
+        <li>🚫 You only need a <strong>one-time lump sum,</strong></li>
         </ul>
         
-        <div class="ad-slot" aria-label="Advertisement">
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:700px;height:100px"
-               data-ad-client="ca-pub-4180233192929131"
-               data-ad-slot="9391632919"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-        
-        <h2>💬 Expert Tip</h2>
-        <p>If you’re a <strong>Salaried employee, business owner or self-employed professional,</strong> choose a <strong>Flexi Hybrid Loan/Flexi Business Loan</strong> — it aligns perfectly with your cash inflows and outflows.</p>
-        <p>If you’re a <strong>homebuyer,</strong> a <strong>Flexi Hybrid Home Loan</strong> helps reduce EMIs in the early years, freeing up cash for interiors or family expenses.</p>
-        
-        <h2>🌟 The Future of Flexible Borrowing</h2>
-        <p>As digital banking and fintech innovations rise, <strong>flexible credit models</strong> like Flexi Hybrid Loans are gaining popularity.</p>
-        <p>AI-based credit tracking, instant online withdrawals, and real-time account linking have made these loans more accessible and transparent.</p>
-        <p>This marks a shift from <strong>fixed EMI loans</strong> to <strong>usage-based borrowing</strong>, much like the way subscription-based models replaced upfront payments in the tech world.</p>
-        
-        <h2>✅ Conclusion</h2>
-        <p>A <strong>Flexi Hybrid Loan</strong> is not just a financing product — it’s a <strong>smarter borrowing strategy</strong> for a modern financial lifestyle.</p>
-        <p>By letting you <strong>pay interest only on what you use</strong> and <strong>manage your repayments your way</strong>, it offers a level of flexibility that traditional loans simply can’t match.</p>
-        <p>However, responsible use is key. Track your withdrawals, maintain discipline, and you can save lakhs in interest while keeping your financial plan stress-free.</p>
-        <p></p>
-
-        <div class="ad-slot" aria-label="Advertisement">
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:700px;height:100px"
-               data-ad-client="ca-pub-4180233192929131"
-               data-ad-slot="9391632919"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-      
         <section class="faq-section" id="faq">
           <div class="faq-title">FAQ</div>
           <div class="faq-item">
@@ -790,7 +805,7 @@
       </article>
     </main>
 
-    <!-- Right Sticky Ad -->
+    <!-- Right Sticky Ad (unchanged) -->
     <aside class="side-ad" aria-label="Right vertical advertisement">
       <div class="side-ad-content">
         <ins class="adsbygoogle"
@@ -801,6 +816,7 @@
       </div>
     </aside>
   </div>
+
   <!-- Footer full width -->
   <footer id="contact" class="glass" role="contentinfo">
     <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
@@ -808,9 +824,12 @@
       <p class="subtitle" style="font-size:13px">Need something urgently? <a href="mailto:hello@techfinserv.com">hello@techfinserv.com</a></p>
     </div>
   </footer>
+
   <script>
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-    // Mobile menu toggle from coming soon
+
+    // Mobile menu toggle
     (function () {
       const toggle = document.querySelector('.mobile-menu-toggle');
       const menu = document.getElementById('mobileMenu');
@@ -830,6 +849,7 @@
         if (window.innerWidth > 768) setExpanded(false);
       });
     })();
+
     // FAQ Accordion JS
     document.querySelectorAll('.faq-question').forEach(function(btn) {
       btn.onclick = function() {
