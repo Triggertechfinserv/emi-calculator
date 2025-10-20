@@ -284,6 +284,17 @@
         min-height: 130px !important;
       }
     }
+    /* default: show desktop ad, hide mobile */
+    .ad-desktop { display:block; }
+    .ad-mobile  { display:none; }
+
+    /* on small screens: hide desktop, show mobile */
+    @media (max-width: 768px) {
+      .ad-desktop { display:none; }
+      .ad-mobile  { display:block; }
+      .ad-mobile ins.adsbygoogle { display:block !important; width:100% !important; min-height:130px !important; }
+    }
+
     .faq-section {
       max-width: 700px;
       margin: 48px auto;
@@ -617,11 +628,25 @@
         </ul>         
         
         <div class="ad-slot" aria-label="Advertisement">
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:700px;height:100px"
-               data-ad-client="ca-pub-4180233192929131"
-               data-ad-slot="9391632919"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          <!-- Desktop ad (visible on desktop/tablet) -->
+          <div class="ad-desktop">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:700px;height:100px"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="9391632919"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+
+          <!-- Mobile ad (visible only on mobile) - NO inline width/height -->
+          <div class="ad-mobile" aria-hidden="true" style="display:none">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="9391632919"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
         </div>
         
         <section>
