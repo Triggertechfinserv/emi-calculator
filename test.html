@@ -294,7 +294,7 @@
       .ad-mobile { display: block; }
 
       .ad-mobile ins.adsbygoogle {
-        display:block !important;
+        display:inline-block !important;
         width:250px !important;
         height:250px !important;
         max-width:100% !important;
@@ -302,7 +302,7 @@
         box-sizing:border-box !important;
       }
 
-      .ad-slot { min-height: 250px; height: auto; padding: 20px 0; }
+      .ad-slot { min-height: 250px; height: auto; padding: 20px 0; display:flex; align-items:center; justify-content:center; }
     }
 
     /* Default: show desktop ad, hide mobile ad */
@@ -609,7 +609,7 @@
                If you do not have a separate mobile slot, set data-ad-slot to the same slot ID (9391632919) -->
           <div class="ad-mobile" aria-hidden="true">
             <ins class="adsbygoogle"
-                 style="display:block;max-width:250px;margin:0 auto"
+                 style="display:inline-block;width:250px;height:250px;max-width:100%;margin:0 auto"
                  data-ad-client="ca-pub-4180233192929131"
                  data-ad-slot="7231382121"
                  data-ad-format="auto"></ins>
@@ -686,7 +686,7 @@
           </div>
           <div class="ad-mobile" aria-hidden="true">
             <ins class="adsbygoogle"
-                 style="display:block;max-width:250px;margin:0 auto"
+                 style="display:inline-block;width:250px;height:250px;max-width:100%;margin:0 auto"
                  data-ad-client="ca-pub-4180233192929131"
                  data-ad-slot="7231382121"
                  data-ad-format="auto"></ins>
