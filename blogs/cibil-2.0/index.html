@@ -777,12 +777,17 @@
         if (window.innerWidth > 768) setExpanded(false);
       });
     })();
-    // FAQ Accordion JS
+    // Accessible FAQ accordion
     document.querySelectorAll('.faq-question').forEach(function(btn) {
-      btn.onclick = function() {
-        let parent = btn.parentElement;
-        parent.classList.toggle('active');
-      };
+      btn.addEventListener('click', function() {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        // Toggle aria-expanded and visibility
+        btn.setAttribute('aria-expanded', String(!expanded));
+        answer.setAttribute('aria-hidden', String(expanded));
+        item.classList.toggle('active', !expanded);
+      });
     });
   </script>
 </body>
