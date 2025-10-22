@@ -36,6 +36,10 @@
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 0px; }
     /* HEADER */
     .topbar { position:sticky;top:0;z-index:40;background:rgba(255,255,255,0.68);border-bottom:1px solid var(--border);backdrop-filter:blur(12px) saturate(170%);-webkit-backdrop-filter:blur(12px) saturate(170%);box-shadow:0 6px 16px rgba(2,6,23,0.06);}
+    /* Add breathing space between header and featured blog card */
+    main {
+      margin-top: 40px; /* Adjust between 30–60px depending on your preference */
+    }
     header.nav {display:flex;justify-content:space-between;align-items:center;padding:16px 0;}
     .brand-logo {height:50px;border-radius:10px;display:block;object-fit:contain;}
     nav.menu { display: flex; gap: 18px;}
