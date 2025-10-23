@@ -91,38 +91,63 @@
   }
   </script>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is the PPF interest rate for 2025?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "As of October 2025, the Government of India has maintained the PPF interest rate at 7.1% per annum, compounded annually."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long is the PPF lock-in period?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The PPF account has a 15-year lock-in period, after which it can be extended in blocks of 5 years."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is PPF a good investment in 2025?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, PPF remains a top choice for safe, long-term, tax-saving investment backed by the Government of India."
-        }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Public Provident Fund (PPF)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Public Provident Fund (PPF) is a government-backed, long-term savings scheme in India that offers guaranteed returns and tax benefits under Section 80C. It is best suited for investors seeking low-risk, tax-efficient, long-horizon savings."
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "Question",
+      "name": "What is the PPF interest rate in 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of October 23, 2025, the PPF interest rate is 7.1% per annum (compounded annually). Rates are reviewed quarterly by the Government — always confirm the current rate with your bank or the official notifications before making decisions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long is the PPF lock-in period and can it be extended?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The PPF account has a compulsory lock-in period of 15 years. After maturity, you can extend the account in blocks of 5 years (with or without additional contributions)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I withdraw money from PPF before maturity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Partial withdrawals are allowed from the 7th financial year onwards subject to limits. A loan facility is available between the 3rd and 6th financial years. Premature closure is permitted only in specified circumstances (e.g., higher education, medical), and often requires meeting eligibility conditions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I open a PPF account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can open a PPF account at authorized post offices and banks. Typically you need to fill Form A, submit identity (PAN/Aadhaar) and address proof, passport photos, and deposit the minimum amount (₹500). Many banks also support online PPF account opening via netbanking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum yearly contribution and are PPF returns taxable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The maximum contribution allowed per financial year is ₹1.5 lakh, and the minimum is ₹500. PPF follows an EEE (Exempt-Exempt-Exempt) tax treatment — contributions (under 80C), interest earned, and maturity proceeds are tax-exempt (subject to current law)."
+      }
+    }
+  ]
+}
+</script>
+  
 
   <!-- Optional: Social preview / link rel=image_src (legacy) -->
   <link rel="image_src" href="https://www.techfinserv.com/images/ppf-1-socialcard.webp" />
@@ -918,18 +943,52 @@
         if (window.innerWidth > 768) setExpanded(false);
       });
     })();
-    // Accessible FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const item = btn.parentElement;
-        const answer = item.querySelector('.faq-answer');
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        // Toggle aria-expanded and visibility
-        btn.setAttribute('aria-expanded', String(!expanded));
-        answer.setAttribute('aria-hidden', String(expanded));
-        item.classList.toggle('active', !expanded);
-      });
+// Accessible FAQ accordion — single, robust implementation
+(function () {
+  const buttons = document.querySelectorAll('.faq-question');
+  if (!buttons || buttons.length === 0) return;
+
+  buttons.forEach(btn => {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+
+    // Ensure ARIA initial state is explicit
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    if (answer) {
+      answer.setAttribute('aria-hidden', isExpanded ? 'false' : 'true');
+      answer.setAttribute('tabindex', '-1'); // make focusable for SRs
+    }
+
+    const toggle = () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (answer) answer.setAttribute('aria-hidden', String(expanded));
+      item.classList.toggle('active', !expanded);
+
+      if (!expanded && answer) {
+        // small delay so screen readers detect the change
+        setTimeout(() => {
+          try { answer.focus({ preventScroll: true }); } catch (e) {}
+        }, 50);
+      }
+    };
+
+    // Click handler
+    btn.addEventListener('click', toggle);
+
+    // Keyboard support: Enter and Space
+    btn.addEventListener('keydown', (e) => {
+      const key = e.key || e.keyCode;
+      if (key === 'Enter' || key === ' ' || key === 'Spacebar' || key === 13 || key === 32) {
+        e.preventDefault(); // prevent page scroll on Space
+        toggle();
+      }
     });
+  });
+})();
+    
   </script>
 </body>
 </html>
+
