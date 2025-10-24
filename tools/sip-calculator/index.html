@@ -85,10 +85,12 @@
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    /* ===== Header (from coming soon) ===== */
+    /* ===== Header (from coming soon) - NOT STICKY NOW ===== */
     .container { max-width:1200px; margin:0 auto; padding:0 20px; }
     .topbar {
-      position: sticky; top: 0; z-index: 40;
+      /* removed position: sticky; header will scroll with the page */
+      position: relative;
+      z-index: 40;
       background: rgba(255,255,255,0.68);
       border-bottom: 1px solid rgba(2,6,23,0.12);
       backdrop-filter: blur(12px) saturate(170%);
@@ -114,7 +116,8 @@
 
     .ad-vertical {
       display:block;
-      position: sticky; top: 78px;
+      /* top positioning adjusted because header is not sticky */
+      position: sticky; top: 140px;
       width:138px; min-width:138px; max-width:138px; height:600px;
       background: rgba(224,242,254,0.9);
       border-radius:20px;
@@ -177,8 +180,32 @@
     .chart-box {
       min-width:300px; max-width:380px; margin:auto; flex: 0 0 360px;
     }
-    .chart-legend { display:flex; gap:10px; margin-top:10px; justify-content:center; font-size:14px; }
-    .dot { width:13px; height:13px; display:inline-block; border-radius:12px; }
+
+    /* ===== Legend fix: ensure dots do not merge with text ===== */
+    .chart-legend {
+      display:flex;
+      gap:12px;
+      margin-top:10px;
+      justify-content:center;
+      font-size:14px;
+      flex-wrap:wrap;
+    }
+    .chart-legend div {
+      display:flex;
+      align-items:center;
+      gap:8px;                /* space between dot and text */
+      padding:4px 6px;
+      background:transparent;
+      border-radius:6px;
+      white-space:nowrap;     /* prevent wraps that cause overlap */
+    }
+    .dot {
+      width:14px;
+      height:14px;
+      display:inline-block;
+      border-radius:50%;
+      flex:0 0 14px;
+    }
     .dot-blue { background:#2563eb; }
     .dot-green { background:#10b981; }
 
@@ -238,7 +265,7 @@
     <div class="container">
       <header class="nav">
         <a href="/" aria-label="TechFinserv home">
-          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo">
+          <img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
         </a>
         <nav class="menu" aria-label="Primary">
           <a href="/">Home</a>
@@ -333,9 +360,9 @@
         <!-- Chart & summary box -->
         <div class="chart-box" aria-hidden="false">
           <canvas id="sipChart" height="210" aria-label="SIP breakdown chart"></canvas>
-          <div class="chart-legend">
-            <div><span class="dot dot-blue"></span>Invested amount</div>
-            <div><span class="dot dot-green"></span>Est. returns</div>
+          <div class="chart-legend" role="list">
+            <div role="listitem"><span class="dot dot-blue" aria-hidden="true"></span><span>Invested amount</span></div>
+            <div role="listitem"><span class="dot dot-green" aria-hidden="true"></span><span>Est. returns</span></div>
           </div>
           <div class="results-row" role="status" aria-live="polite">
             <div class="results-group">
