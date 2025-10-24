@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIP Calculator — TechFinserv</title>
+  <meta name="description" content="TechFinserv's SIP Calculator lets you estimate returns for SIP and Step Up SIP with XIRR and Absolute Return.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: #f6f9ff;
+      color: #0f172a;
+    }
+    .calc-main {display: flex; justify-content: center;}
+    .calc-content {width:100%; max-width:930px; margin:38px 16px 0 16px;}
+    .ad-vertical {
+      display: block;
+      position: sticky;
+      top: 38px;
+      margin:34px 10px 0 10px;
+      width:138px; min-width:138px; max-width:138px; height:600px;
+      background: #e0f2fe;
+      border-radius:20px;
+      border:1.3px solid #bae6fd;
+      box-shadow: 0 6px 32px rgba(2,6,23,0.08);
+      text-align: center;
+      z-index:1;
+    }
+    .ad-vertical > .ad-label {
+      color:#0ea5e9; font-size:15px;font-weight:600;text-align:center; margin-top:22px;
+    }
+    @media (max-width:1200px) {.ad-vertical {display:none;}}
+    .card {
+      background: rgba(255,255,255,0.79);
+      border-radius: 22px;
+      border: 1px solid rgba(2,6,23,0.12);
+      box-shadow: 0 12px 34px rgba(2,6,23,0.1);
+      padding: 34px 24px 32px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap:38px;
+      justify-content:space-between;
+    }
+    .calcform {
+      flex:1 1 270px;
+      min-width:260px;
+      max-width:350px;
+      display: flex;
+      flex-direction:column;
+      gap:24px;
+    }
+    .toggle-row {
+      display: flex; gap:8px; margin-bottom:15px;
+    }
+    .toggle-btn {
+      flex:1;
+      border:1px solid #d1d5db;
+      background: #f1f5f9;
+      color: #0ea5e9;
+      font-weight:600;
+      font-size:15px;
+      border-radius: 10px;
+      padding:9px 10px;
+      cursor:pointer;
+      transition: background 0.18s;
+    }
+    .toggle-btn.active {
+      background: linear-gradient(90deg, #0ea5e9, #10b981);
+      color:#fff;
+      border:none;
+    }
+    .input-label { font-size: 15px; margin-bottom:8px; color:#475569;}
+    .input-wrap {
+      display: flex; align-items: center; gap:13px;
+      margin-bottom: 12px;
+    }
+    .input-addon-group {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 136px;
+      height: 38px;
+    }
+    .input-addon-group input[type=number] {
+      background: #e0f2fe;
+      color: #0ea5e9;
+      border-radius: 10px;
+      border: 1.8px solid #bae6fd;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 7px 34px 7px 32px;
+      text-align: center;
+      width: 136px;
+      outline: none;
+      transition: border 0.2s;
+      letter-spacing:0.5px;
+    }
+    .input-addon-group input[type=number]:focus {
+      border: 1.8px solid #10b981;
+      background: #ccfbf1;
+    }
+    .input-addon-start, .input-addon-end {
+      position: absolute;
+      color:#0ea5e9;
+      font-weight:700;
+      font-size: 16px;
+      top:50%;
+      transform:translateY(-50%);
+      pointer-events: none;
+      user-select: none;
+      z-index:2;
+    }
+    .input-addon-start { left: 12px;}
+    .input-addon-end   { right: 11px;}
+    input[type=range] {
+      flex: 1;
+      accent-color: #10b981;
+      height: 2.5px;
+      margin: 0 0 0 0;
+    }
+    .stepup-wrap { display: none; }
+    .stepup-wrap.active { display: flex; }
+    .invest-btn {
+      background: linear-gradient(90deg, #0ea5e9, #10b981);
+      color:#fff; padding:12px 28px;
+      border-radius:11px; border:none;
+      font-weight:600; margin-top:7px;
+      cursor:pointer; font-size:15px;
+      margin-bottom:4px;
+    }
+    .chart-box {
+      min-width: 300px; max-width: 350px;
+      margin:auto;
+    }
+    .chart-legend {
+      display: flex; gap:10px; margin-top:10px;justify-content:center;
+      font-size:14px;
+    }
+    .chart-legend div { display:flex;align-items:center;gap:4px; }
+    .dot { width: 13px; height: 13px; display: inline-block; border-radius: 12px; }
+    .dot-blue { background: #2563eb; }
+    .dot-green { background: #10b981; }
+    .results-row { margin-top:22px; margin-bottom:9px; display:flex; gap:18px; align-items:center; flex-wrap:wrap;}
+    .results-group { min-width:145px; flex:1;}
+    .results-label { color:#475569; font-size:14px;}
+    .results-value {
+      font-size:18px; font-weight:600; margin-bottom:6px;
+      color: #0ea5e9;
+    }
+    .extra-returns-row {
+      display:flex; flex-wrap:wrap; gap:22px; margin:23px 3px 0 3px; justify-content:center;
+    }
+    .extra-col {
+      flex:1 1 120px;
+      min-width:120px; text-align:center;
+      background: #f1f5f9;
+      padding:7px 0 9px 0;
+      border-radius:8px;
+      margin-bottom:6px;
+    }
+    .extra-label {color:#475569; font-size: 13px;}
+    .extra-value {font-size:17px; font-weight:600; color:#0ea5e9;}
+    @media (max-width:1200px) {
+      .calc-main {flex-direction:column;}
+      .ad-vertical {display:none;}
+      .calc-content {margin: 32px 6px 0 6px;}
+    }
+    @media (max-width:900px) {
+      .card { flex-direction: column; gap:24px;}
+      .chart-box { margin-top:20px; }
+    }
+    @media (max-width:560px) {
+      .card {padding: 15px 3px 15px 3px;}
+      .chart-box {min-width:100%; max-width:100%;}
+      .input-addon-group {width:90px;}
+      .input-addon-group input[type=number] {width:90px; font-size:15px;}
+      .input-addon-end, .input-addon-start {font-size:14px;}
+    }
+    .seo-section {
+      background:#fff;
+      border-radius:14px;
+      padding:24px 18px;
+      margin-top:38px;
+      box-shadow: 0 3px 18px rgba(2,6,23,0.06);
+      color: #0f172a;
+      max-width:930px;
+      margin-left:auto;margin-right:auto;
+    }
+    .seo-section h2 {color: #0ea5e9;font-size:1.31rem;}
+  </style>
+</head>
+<body>
+<div class="calc-main">
+  <div class="ad-vertical" id="adSlotLeft">
+    <div class="ad-label">Ad Slot</div>
+  </div>
+  <div class="calc-content">
+    <div class="card">
+      <form class="calcform" oninput="syncFields(); calculateSIP(); return false;">
+        <div class="toggle-row">
+          <button type="button" id="modeSIP" class="toggle-btn active" onclick="switchMode('sip')">SIP</button>
+          <button type="button" id="modeStepUp" class="toggle-btn" onclick="switchMode('stepup')">Step Up SIP</button>
+        </div>
+        <!-- Amount -->
+        <div>
+          <div class="input-label">Monthly investment</div>
+          <div class="input-wrap">
+            <input type="range" min="500" max="200000" step="100" value="500" id="monthlyInvestmentSlider" />
+            <span class="input-addon-group">
+              <span class="input-addon-start">₹</span>
+              <input type="number" min="500" max="200000" step="100" value="500" id="monthlyInvestment" />
+            </span>
+          </div>
+        </div>
+        <!-- Rate -->
+        <div>
+          <div class="input-label">Expected return rate (p.a)</div>
+          <div class="input-wrap">
+            <input type="range" min="4" max="25" step="0.1" value="12" id="returnRateSlider" />
+            <span class="input-addon-group">
+              <input type="number" min="4" max="25" step="0.1" value="12" id="returnRate" />
+              <span class="input-addon-end">%</span>
+            </span>
+          </div>
+        </div>
+        <!-- Years -->
+        <div>
+          <div class="input-label">Time period</div>
+          <div class="input-wrap">
+            <input type="range" min="1" max="40" step="1" value="10" id="yearsSlider" />
+            <span class="input-addon-group">
+              <input type="number" min="1" max="40" step="1" value="10" id="years" />
+              <span class="input-addon-end">Y</span>
+            </span>
+          </div>
+        </div>
+        <!-- Step Up SIP Only (%) -->
+        <div class="stepup-wrap" id="stepupWrap">
+          <div class="input-label">Annual Step Up Rate</div>
+          <div class="input-wrap">
+            <input type="range" min="0" max="30" step="1" value="10" id="stepupRateSlider" />
+            <span class="input-addon-group">
+              <input type="number" min="0" max="30" step="1" value="10" id="stepupRate" />
+              <span class="input-addon-end">%</span>
+            </span>
+          </div>
+        </div>
+        <button type="submit" class="invest-btn">INVEST NOW</button>
+      </form>
+      <div class="chart-box">
+        <canvas id="sipChart" height="210"></canvas>
+        <div class="chart-legend">
+          <div><span class="dot dot-blue"></span>Invested amount</div>
+          <div><span class="dot dot-green"></span>Est. returns</div>
+        </div>
+        <div class="results-row">
+          <div class="results-group">
+            <div class="results-label">Invested amount</div>
+            <div class="results-value" id="resultInvested">₹0</div>
+          </div>
+          <div class="results-group">
+            <div class="results-label">Est. returns</div>
+            <div class="results-value" id="resultReturns">₹0</div>
+          </div>
+          <div class="results-group">
+            <div class="results-label">Total value</div>
+            <div class="results-value" id="resultTotal">₹0</div>
+          </div>
+        </div>
+        <div class="extra-returns-row">
+          <div class="extra-col">
+            <div class="extra-label">Absolute Return (%)</div>
+            <div class="extra-value" id="resultAbs">0%</div>
+          </div>
+          <div class="extra-col">
+            <div class="extra-label">XIRR (%)</div>
+            <div class="extra-value" id="resultXIRR">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SEO Section -->
+    <section class="seo-section">
+      <h2>TechFinserv SIP & Step-Up SIP Calculator</h2>
+      <p>
+        Use our advanced SIP Calculator to estimate your mutual fund investment growth with Standard and Step-Up SIP. Just enter your monthly investment, expected return rate, investment period, and (for step-up SIP) your annual increment percentage, and view mature value, returns, absolute and XIRR percent instantly.
+      </p>
+      <p>
+        <b>Features:</b>
+      </p>
+      <ul>
+        <li>Clean slider+input UI, only one input box per parameter with symbol IN the box</li>
+        <li>Step Up, XIRR, Absolute Return, Ad slots, SEO, fully responsive</li>
+      </ul>
+      <p>
+        <b>Keywords:</b> SIP calculator, step up SIP calculator, XIRR calculator India, SIP absolute return, mutual fund SIP tools, TechFinserv SIP, best SIP calculator, investment planning tools.
+      </p>
+    </section>
+  </div>
+  <div class="ad-vertical" id="adSlotRight">
+    <div class="ad-label">Ad Slot</div>
+  </div>
+</div>
+<script>
+  function syncFields() {
+    let fields = [
+      ['monthlyInvestmentSlider','monthlyInvestment'],
+      ['returnRateSlider','returnRate'],
+      ['yearsSlider','years'],
+      ['stepupRateSlider','stepupRate']
+    ];
+    fields.forEach(([slider, box]) => {
+      let s=document.getElementById(slider),b=document.getElementById(box);
+      if(document.activeElement === s) b.value = s.value;
+      else if(document.activeElement === b) s.value = b.value;
+    });
+  }
+  function switchMode(mode) {
+    document.getElementById('modeSIP').classList.toggle('active', mode==='sip');
+    document.getElementById('modeStepUp').classList.toggle('active', mode==='stepup');
+    document.getElementById('stepupWrap').classList.toggle('active', mode==='stepup');
+    calculateSIP();
+  }
+  function inrFormat(num) {
+    return '₹' + Math.round(num).toLocaleString('en-IN');
+  }
+  function calculateXIRR(cashflows, dates, guess) {
+    let x0 = guess || 0.1, tol = 1e-6, iter = 80;
+    function daysBetween(d1,d2){return (d1-d2)/(1000*3600*24);}
+    function f(rate) {
+      let res = 0, d0 = dates[0];
+      for(let i=0; i<cashflows.length; ++i)
+        res += cashflows[i] / Math.pow(1+rate, daysBetween(dates[i],d0)/365);
+      return res;
+    }
+    let r = x0;
+    for(let i=0; i<iter; ++i) {
+      let fr = f(r);
+      let delta = 1e-6;
+      let fpr = (f(r+delta)-fr)/delta;
+      if(Math.abs(fpr) < tol) break;
+      let r1 = r - fr/fpr;
+      if(Math.abs(r1-r) < tol) return r1;
+      r = r1;
+    }
+    return r;
+  }
+  let chart;
+  function calculateSIP() {
+    const P = parseFloat(document.getElementById('monthlyInvestment').value);
+    const r = parseFloat(document.getElementById('returnRate').value)/100/12;
+    const years = parseInt(document.getElementById('years').value);
+    const N = years * 12;
+    let invested = 0, maturity = 0, absReturn = 0, xirrOut = 0;
+
+    let modeStepUp = document.getElementById('modeStepUp').classList.contains('active');
+    let cashflows = [], dates = [];
+    let today = new Date();
+    let stepup_rate = parseFloat(document.getElementById('stepupRate').value)/100;
+
+    if (!modeStepUp) {
+      invested = P * N;
+      maturity = P * ( (Math.pow(1+r,N) - 1) / r ) * (1 + r);
+      for (let i = 0; i < N; ++i) {
+        cashflows.push(-P);
+        let d = new Date(today.getFullYear(), today.getMonth() + i, today.getDate());
+        dates.push(d);
+      }
+    } else {
+      invested = 0;
+      maturity = 0;
+      let curr = P;
+      for (let y = 0; y < years; ++y) {
+        for (let m = 0; m < 12; ++m) {
+          invested += curr;
+          let d = new Date(today.getFullYear(), today.getMonth() + y*12 + m, today.getDate());
+          dates.push(d);
+          cashflows.push(-curr);
+          let n = (years*12)-(y*12+m);
+          maturity += curr * Math.pow(1+r, n);
+        }
+        curr *= (1+stepup_rate);
+      }
+    }
+    cashflows.push(maturity);
+    let finaldate = new Date(today.getFullYear(), today.getMonth() + N, today.getDate());
+    dates.push(finaldate);
+
+    absReturn = invested ? ((maturity - invested) / invested) * 100 : 0;
+    xirrOut = calculateXIRR(cashflows, dates, 0.11);
+
+    let returns = maturity - invested;
+    document.getElementById('resultInvested').textContent = inrFormat(invested);
+    document.getElementById('resultReturns').textContent = inrFormat(returns);
+    document.getElementById('resultTotal').textContent = inrFormat(maturity);
+    document.getElementById('resultAbs').textContent = absReturn ? absReturn.toFixed(2) + '%' : '0%';
+    document.getElementById('resultXIRR').textContent = xirrOut ? (xirrOut*100).toFixed(2) + '%' : '0%';
+
+    // Chart
+    const ctx = document.getElementById('sipChart').getContext('2d');
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ["Invested amount", "Est. returns"],
+        datasets: [{ data: [invested, returns], backgroundColor: ["#2563eb", "#10b981"] }]
+      },
+      options: {
+        cutout: '70%',
+        plugins: { legend: { display: false } }
+      }
+    });
+  }
+  window.onload = function () {
+    let fields = [
+      ['monthlyInvestmentSlider','monthlyInvestment'],
+      ['returnRateSlider','returnRate'],
+      ['yearsSlider','years'],
+      ['stepupRateSlider','stepupRate']
+    ];
+    fields.forEach(([slider, box]) => {
+      let s = document.getElementById(slider), b = document.getElementById(box);
+      s.addEventListener('input', function() { b.value = this.value; calculateSIP(); });
+      b.addEventListener('input', function() { s.value = this.value; calculateSIP(); });
+    });
+    calculateSIP();
+  }
+</script>
+</body>
+</html>
