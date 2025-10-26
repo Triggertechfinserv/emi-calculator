@@ -1,0 +1,66 @@
+name: IndexNow Auto Submit
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    env:
+      HOST: "www.techfinserv.com"
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: List changed blog files
+        id: changed
+        run: |
+          if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            git ls-files 'blogs/**' > changed_files.txt || true
+          else
+            git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'blogs/**' > changed_files.txt || true
+          fi
+          grep -E '\.(html|htm|md|markdown)$' changed_files.txt || true
+          echo "::set-output name=files::$(cat changed_files.txt | tr '\n' ' ' )"
+
+      - name: Build URL list and submit to IndexNow
+        run: |
+          FILES="${{ steps.changed.outputs.files }}"
+          if [ -z "$FILES" ]; then
+            FILES=$(git ls-files 'blogs/**')
+          fi
+
+          urls=()
+          for f in $FILES; do
+            [ -z "$f" ] && continue
+            if [ ! -f "$f" ]; then
+              continue
+            fi
+            slug=$(echo "$f" | sed -E 's/^blogs\///')
+            slug=$(echo "$slug" | sed -E 's/(\.html|\.htm|\.md|\.markdown)$//I')
+            url="https://${HOST}/blogs/${slug}"
+            urls+=("$url")
+          done
+
+          if [ ${#urls[@]} -eq 0 ]; then
+            echo "No URLs to submit."
+            exit 0
+          fi
+
+          jq -n --arg host "$HOST" --arg key "$INDEXNOW_KEY" --argjson list "$(printf '%s\n' "${urls[@]}" | jq -R -s -c 'split("\n")[:-1]')" \
+            '{host:$host, key:$key, urlList:$list}' > /tmp/indexnow.json
+
+          echo "Payload:"
+          cat /tmp/indexnow.json
+
+          curl -s -X POST "https://www.bing.com/indexnow" \
+            -H "Content-Type: application/json" \
+            -d @/tmp/indexnow.json -o /tmp/indexnow_response.txt -w "\nHTTP_STATUS:%{http_code}\n"
+
+          echo "Response:"
+          cat /tmp/indexnow_response.txt
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
