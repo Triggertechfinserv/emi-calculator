@@ -9,26 +9,36 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HOST: "www.techfinserv.com"
+
     steps:
+      # Step 1 — Checkout the repository
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: List changed blog files
+      # Step 2 — Detect changed or new blog files
+      - name: Detect blog files
         id: changed
         run: |
+          # If this is the first run, list all files in blogs/
           if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
             git ls-files 'blogs/**' > changed_files.txt || true
           else
             git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'blogs/**' > changed_files.txt || true
           fi
+
+          # Keep only HTML and Markdown files
           grep -E '\.(html|htm|md|markdown)$' changed_files.txt || true
+
           echo "::set-output name=files::$(cat changed_files.txt | tr '\n' ' ' )"
 
+      # Step 3 — Build URL list and submit to Bing IndexNow
       - name: Build URL list and submit to IndexNow
         run: |
           FILES="${{ steps.changed.outputs.files }}"
+          
+          # If no changed files detected, include all blogs (first run)
           if [ -z "$FILES" ]; then
             FILES=$(git ls-files 'blogs/**')
           fi
@@ -39,28 +49,49 @@ jobs:
             if [ ! -f "$f" ]; then
               continue
             fi
+
+            # Remove "blogs/" prefix
             slug=$(echo "$f" | sed -E 's/^blogs\///')
+
+            # Remove file extensions
             slug=$(echo "$slug" | sed -E 's/(\.html|\.htm|\.md|\.markdown)$//I')
-            url="https://${HOST}/blogs/${slug}"
+
+            # If file ends with /index, remove it
+            if echo "$slug" | grep -E '/index$' >/dev/null; then
+              slug=$(echo "$slug" | sed -E 's/\/index$//')
+            fi
+
+            # Build clean URL (folder-style)
+            url="https://${HOST}/blogs/${slug}/"
+
+            # Clean up any double slashes
+            url=$(echo "$url" | sed -E 's#([^:])//+#\1/#g')
+
             urls+=("$url")
+            echo "Prepared: $url"
           done
 
+          # If no URLs found, exit quietly
           if [ ${#urls[@]} -eq 0 ]; then
-            echo "No URLs to submit."
+            echo "No blog URLs to submit."
             exit 0
           fi
 
+          # Create JSON payload for Bing IndexNow
           jq -n --arg host "$HOST" --arg key "$INDEXNOW_KEY" --argjson list "$(printf '%s\n' "${urls[@]}" | jq -R -s -c 'split("\n")[:-1]')" \
             '{host:$host, key:$key, urlList:$list}' > /tmp/indexnow.json
 
-          echo "Payload:"
+          echo "Payload created:"
           cat /tmp/indexnow.json
 
+          # Submit to Bing IndexNow API
           curl -s -X POST "https://www.bing.com/indexnow" \
             -H "Content-Type: application/json" \
-            -d @/tmp/indexnow.json -o /tmp/indexnow_response.txt -w "\nHTTP_STATUS:%{http_code}\n"
+            -d @/tmp/indexnow.json \
+            -o /tmp/indexnow_response.txt -w "\nHTTP_STATUS:%{http_code}\n"
 
-          echo "Response:"
+          echo "Response from Bing:"
           cat /tmp/indexnow_response.txt
         env:
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+
