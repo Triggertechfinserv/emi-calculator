@@ -24,39 +24,7 @@
       background: #f6f9ff;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(255,255,255,0.85);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-    }
-
-    header.nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 20px;
-    }
-
-    .brand-logo { height: 60px; border-radius: 10px; }
-
-    nav.menu { display: flex; gap: 16px; }
-    nav.menu a {
-      text-decoration: none;
-      color: #334155;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: 0.2s ease;
-    }
-    nav.menu a:hover { background: var(--accent-1); color: #fff; }
-    .cta {
-      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-      color: #fff; font-weight: 600; padding: 8px 16px; border-radius: 8px;
-    }
-
-    /* ===== HERO SECTION ===== */
+    /* ===== HERO SECTION (unchanged) ===== */
     .hero-carousel {
       position: relative;
       height: 80vh;
@@ -170,86 +138,205 @@
       .carousel-btn { width: 34px; height: 34px; }
     }
 
-    footer {
-      background: #fff;
-      text-align: center;
-      padding: 30px 0;
-      color: #475569;
-      border-top: 1px solid #e5e7eb;
-    }
-    
+    /* ===== Calculator cards (unchanged) ===== */
     body {
-    font-family: 'Inter', Arial, sans-serif; margin: 0; background: #f6fafd; color: #152032;
-  }
-  h2 {
-    text-align: center; margin: 2.5rem 1rem 1.7rem 1rem; font-size: 2.2rem; font-weight: 600;
-  }
-  .calc-list {
-    display: flex; flex-wrap: wrap; gap: 1.3rem; justify-content: center; padding: 0 1rem;
-  }
-  .calc-card {
-    background: #fff; box-shadow: 0 2.5px 19px rgba(17,186,146,.09);
-    border-radius: 15px; flex: 1 1 210px; max-width: 305px; min-width: 180px;
-    display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem 1.3rem 1rem;
-    transition: transform .13s; text-align: center;
-  }
-  .calc-card:hover {
-    transform: translateY(-5px) scale(1.045);
-  }
-  .calc-card img {
-    width: 40px; margin-bottom: 0.7rem;
-  }
-  .calc-card h4 {
-    margin-top: 0.1rem; margin-bottom: 0.4rem; font-size: 1.15rem; font-weight: 600;
-  }
-  .calc-card p {
-    font-size: 0.94rem; margin-bottom: 0.9rem; line-height: 1.4;
-  }
-  .calc-card a {
-    margin-top: 0.9rem; background: #00c58a; color: #fff; padding: .8rem 1.5rem; border-radius: 100px;
-    text-decoration: none; font-weight: 600; font-size: 0.96rem; display: inline-block; transition: background .2s;
-  }
-  .calc-card a:hover {
-    background: #2490d6;
-  }
+      font-family: 'Inter', Arial, sans-serif; margin: 0; background: #f6fafd; color: #152032;
+    }
+    h2 {
+      text-align: center; margin: 2.5rem 1rem 1.7rem 1rem; font-size: 2.2rem; font-weight: 600;
+    }
+    .calc-list {
+      display: flex; flex-wrap: wrap; gap: 1.3rem; justify-content: center; padding: 0 1rem;
+    }
+    .calc-card {
+      background: #fff; box-shadow: 0 2.5px 19px rgba(17,186,146,.09);
+      border-radius: 15px; flex: 1 1 210px; max-width: 305px; min-width: 180px;
+      display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem 1.3rem 1rem;
+      transition: transform .13s; text-align: center;
+    }
+    .calc-card:hover {
+      transform: translateY(-5px) scale(1.045);
+    }
+    .calc-card img {
+      width: 40px; margin-bottom: 0.7rem;
+    }
+    .calc-card h4 {
+      margin-top: 0.1rem; margin-bottom: 0.4rem; font-size: 1.15rem; font-weight: 600;
+    }
+    .calc-card p {
+      font-size: 0.94rem; margin-bottom: 0.9rem; line-height: 1.4;
+    }
+    .calc-card a {
+      margin-top: 0.9rem; background: #00c58a; color: #fff; padding: .8rem 1.5rem; border-radius: 100px;
+      text-decoration: none; font-weight: 600; font-size: 0.96rem; display: inline-block; transition: background .2s;
+    }
+    .calc-card a:hover {
+      background: #2490d6;
+    }
+
+    /* ========================
+       HEADER & FOOTER STYLES
+       (from Coming Soon page)
+       ======================== */
+    :root {
+      --bg: #f6f9ff;
+      --bg-accent1: rgba(14,165,233,0.20);
+      --bg-accent2: rgba(16,185,129,0.18);
+      --surface: rgba(255,255,255,0.78);
+      --surface-strong: rgba(255,255,255,0.92);
+      --border: rgba(2,6,23,0.12);
+      --radius: 16px;
+      --shadow: 0 12px 34px rgba(2,6,23,0.10), 0 4px 14px rgba(2,6,23,0.06);
+      --maxw: 1200px;
+    }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar::after {
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+    }
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+    }
+    .brand-logo {
+      height: 65px; border-radius: 10px;
+      display:block; width:auto; object-fit:contain;
+      filter:none; mix-blend-mode:normal;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: #475569; transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: var(--surface-strong); color: #0f172a; }
+    .cta {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
+    }
+    /* Footer (glass) */
+    footer.glass {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: #475569;
+    }
+    footer.glass::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      opacity:0.8; pointer-events:none;
+    }
+    /* Mobile nav */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:#0f172a; border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:#475569; text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: #0f172a; }
+    }
+    .mobile-menu.open { display:flex !important; }
   </style>
 </head> 
 
 <body>
-  <!-- HEADER -->
+  <!-- ====== HEADER (replaced with Coming Soon header) ====== -->
   <div class="topbar">
-    <header class="nav container">
-      <a href="/">
-        <img class="brand-logo" src="techfinserv-logo.png" alt="TechFinserv Logo" />
-      </a>
-      <nav class="menu">
+    <div class="container">
+      <header class="nav">
+        <a href="/" aria-label="TechFinserv home">
+          <img class="brand-logo" src="techfinserv-logo.png" alt="TechFinserv logo">
+        </a>
+        <nav class="menu" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="blogs/">Blog</a>
+          <a href="emi-calculator.html">EMI calculator</a>
+          <a href="#contact" class="cta">Contact</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
         <a href="/">Home</a>
         <a href="blogs/">Blog</a>
-        <a href="emi-calculator/">EMI Calculator</a>
-        <a href="#about">About</a>
-        <a class="cta" href="apply-now.html">Apply Now</a>
+        <a href="emi-calculator.html">EMI calculator</a>
+        <a href="#contact" style="font-weight:600;color:var(--accent-1)">Contact</a>
       </nav>
-    </header>
+    </div>
   </div>
 
-  <!-- HERO SLIDER -->
+  <!-- ===== HERO SLIDER (unchanged) ===== -->
   <section class="hero-carousel">
     <div class="carousel-slide active" style="background-image:url('blog-rbi-cover-1.webp');">
       <div class="carousel-content">
-        <h1>All-in-One Finance Tools</h1>
-        <p>Plan, calculate, and compare loans & investments easily with TechFinserv's smart calculator suite.</p>
-        <a href="emi-calculator/">Explore Now</a>
+        <h1>Check Loan Eligibility Without Impacting CIBIL</h1>
+        <p>Simulate your loan eligibility using real bank & NBFC rules — private, accurate, and with zero CIBIL enquiry.</p>
+        <a href="emi-calculator/">Check My Eligibility</a>
       </div>
     </div>
 
     <div class="carousel-slide" style="background-image:url('cibil2.0-social-card.webp');">
       <div class="carousel-content">
-        <h1>Make Smarter Investments</h1>
-        <p>Use our SIP and savings calculators to plan your goals and grow wealth intelligently.</p>
-        <a href="sip-calculator.html">Start Planning</a>
+        <h1>Plan Better with Smart Financial Tools</h1>
+        <p>Use our free EMI, SIP, FD, and Loan Eligibility calculators to make better decisions based on real-world numbers.</p>
+        <a href="sip-calculator.html">Explore Calculators</a>
+      </div>
+    </div>
+    
+    <div class="carousel-slide" style="background-image:url('images/hero3.jpg');">
+      <div class="carousel-content">
+        <h1>Paying High EMIs? Switch to a Better Loan</h1>
+        <p>We compare Balance Transfer options — move high-cost loans and credit card debt to lower-rate lenders and reduce EMI by up to 40%.</p>
+        <a href="blogs/what-is-cibil/">Reduce My EMI</a>
+        <a href="blogs/what-is-cibil/">Learn How</a>
       </div>
     </div>
 
+    <div class="carousel-slide" style="background-image:url('images/hero3.jpg');">
+      <div class="carousel-content">
+        <h1>Learn Smarter Finance with Our Blog</h1>
+        <p>Easy-to-understand financial guides — we simplify loans, credit scores, interest rates, and policies so you can make confident decisions.</p>
+        <a href="blogs/what-is-cibil/">Read Our Blogs</a>
+      </div>
+    </div>
+    
     <div class="carousel-slide" style="background-image:url('images/hero3.jpg');">
       <div class="carousel-content">
         <h1>Boost Your Credit Score</h1>
@@ -267,8 +354,522 @@
       <span class="carousel-dot active"></span>
       <span class="carousel-dot"></span>
       <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
     </div>
   </section>
+  
+  <!-- START Why Choose TechFinserv - Overlapping Gradient Grid Modern Style -->
+<section style="background:linear-gradient(110deg,#f2fcff 60%,#e3ebfd 100%);padding:3rem 0 3.3rem 0;">
+  <div style="max-width:1150px;margin:0 auto;padding:0 1.5rem;">
+    <h2 style="text-align:center;font-size:2.45rem;font-weight:700;color:#093399;margin-bottom:2.1rem;letter-spacing:-2px;">
+      Why Choose TechFinserv?
+    </h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:2.1rem; position:relative; ">
+      <!-- Card 1 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg,#c7edff 0%,#defafe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(80,220,220,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#5cd6f6,#9bebeb); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #27e4f939;
+        ">
+          <img src="icons/trusted_readers.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#22cbe0;font-size:1.16rem;font-weight:700;">🔒 No CIBIL Impact</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          We evaluate eligibility without triggering an enquiry.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(115deg,#fff9d0 20%,#ffe6ea 80%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(255,200,80,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#f8cc3b,#ffb7a0); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #ffae3c34;
+        ">
+          <img src="icons/always_updated.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#f1b700;font-size:1.16rem;font-weight:700;">💸 Accurate Loan Simulation</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Know your real approval chances, Rate of interest & Charges
+        </p>
+      </div>
+      
+      <!-- Card 3 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg, #85ffe1 0%, #e4fbfe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(40,175,245,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#01c7a3,#2fd2fa); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #01c7a325;
+        ">
+          <img src="icons/free_tools.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#01ba99;font-size:1.16rem;font-weight:700;">📃 Transparent Charges</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Understand every cost before you apply.
+        </p>
+      </div>
+      <!-- Card 4 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(115deg,#b1cafe 0%,#ebf1fe 80%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(54,140,255,.12);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#1682f8,#7dd0fa); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #1682f870;
+        ">
+          <img src="icons/easy_understand.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#1682f8;font-size:1.16rem;font-weight:700;">⚡ Quick Processing</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          From eligibility check to disbursal — simplified.
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg, #85ffe1 0%, #e4fbfe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(40,175,245,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#01c7a3,#2fd2fa); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #01c7a325;
+        ">
+          <img src="icons/free_tools.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#01ba99;font-size:1.16rem;font-weight:700;">Free Tools</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Access EMI, SIP, and loan eligibility calculators anytime — 100% free, no signup needed.
+        </p>
+      </div>
+      
+      <!-- Card 6 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg,#ffd7c3 5%,#f2f6fb 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(255,130,110,.09);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#ff9d66,#ffd7c3); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #ff925225;
+        ">
+          <img src="icons/smart_choices.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#ff914d;font-size:1.16rem;font-weight:700;">Smart Money Choices</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          From SIP strategy to boosting your credit score, we help you decide with confidence.
+        </p>
+      </div>
+      <!-- Card 7 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg,#c7edff 0%,#defafe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(80,220,220,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#5cd6f6,#9bebeb); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #27e4f939;
+        ">
+          <img src="icons/trusted_readers.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#22cbe0;font-size:1.16rem;font-weight:700;">Easy to Understand</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Our blogs explain loans, investments, tax, and credit in simple words — no jargon, no confusion.
+        </p>
+      </div>
+      
+      
+     <!-- Card 8 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(115deg,#fff9d0 20%,#ffe6ea 80%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(255,200,80,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#f8cc3b,#ffb7a0); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #ffae3c34;
+        ">
+          <img src="icons/always_updated.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#f1b700;font-size:1.16rem;font-weight:700;">Always Updated</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          We keep calculators and articles updated with the latest rules, rates, and market changes.
+        </p>
+      </div>      
+    </div>
+  </div>
+</section>
+<!-- END Why Choose TechFinserv - Overlapping Gradient Grid Modern Style -->
+
+
+<!-- =====================START Explore Loan Options We Offer TFS Products Carousel ===================== -->
+<section id="tfs-products" aria-labelledby="tfs-products-title">
+  <style>
+    /* ===== scoped styles (won't bleed out) ===== */
+    #tfs-products{font-family:Inter,system-ui,Arial,sans-serif;padding:40px 16px;background:linear-gradient(180deg,#f7fbff,#ffffff)}
+    #tfs-products .wrap{max-width:1160px;margin:0 auto}
+    #tfs-products h2{margin:0 0 6px 0;font-size:28px;letter-spacing:-0.5px;color:#0a2540}
+    #tfs-products p.sub{margin:0 0 16px 0;color:#475569}
+    #tfs-products .rail{position:relative;margin-top:12px}
+    #tfs-products .viewport{overflow:hidden}
+    #tfs-products .track{display:flex;gap:12px;will-change:transform}
+    #tfs-products .card{
+      min-width:260px; max-width:260px; flex:0 0 260px;
+      background:linear-gradient(180deg,#fff,#f8fbff); border:1px solid #e7eef9;
+      border-radius:14px; padding:16px; box-shadow:0 8px 24px rgba(2,6,23,.06)
+    }
+    #tfs-products .card h3{margin:0 0 6px 0;font-size:17px;color:#0b63d6}
+    #tfs-products .card p{margin:0 0 10px 0;font-size:14px;color:#475569}
+    #tfs-products .card a{display:inline-block;background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px}
+    #tfs-products .controls{display:flex;align-items:center;gap:10px;margin-top:10px}
+    #tfs-products .arrows{display:flex;gap:8px}
+    #tfs-products button.arrow{
+      width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;
+      background:#fff; box-shadow:0 6px 16px rgba(2,6,23,.12)
+    }
+    #tfs-products .dots{display:flex;gap:6px;margin-left:auto}
+    #tfs-products .dot{width:9px;height:9px;border-radius:999px;background:#dbe7f7;border:1px solid #cfe0f7}
+    #tfs-products .dot.active{background:#10b981}
+    #tfs-products .progress{position:relative;height:6px;background:#e8f1fb;border-radius:999px;overflow:hidden;flex:1}
+    #tfs-products .progress i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#0ea5e9,#10b981)}
+    @media (max-width:720px){
+      #tfs-products .card{min-width:80vw;max-width:80vw;flex-basis:80vw}
+    }
+  </style>
+
+  <div class="wrap">
+    <header>
+      <h2 id="tfs-products-title">💰 Explore Loan Options We Offer</h2>
+      <p class="sub"></p>
+    </header>
+
+    <div class="rail" role="region" aria-roledescription="carousel" aria-label="Loan products">
+      <div class="viewport">
+        <div class="track" id="tfs-products-track">
+          <!-- cards (the script will clone for looping) -->
+          <article class="card">
+            <h3>Personal Loan</h3>
+            <p>Instant approval, minimal documents, and flexible EMIs.</p>
+            <a href="/personal-loan">Check Offers →</a>
+          </article>
+          <article class="card">
+            <h3>Flexi Loan</h3>
+            <p>Revolving credit with EMI option — ideal for variable cashflow.</p>
+            <a href="/flexi-loan">Compare →</a>
+          </article>
+          <article class="card">
+            <h3>Flexi Hybrid Loan</h3>
+            <p>Overdraft + EMI combo — pay only for what you use.</p>
+            <a href="/flexi-hybrid">Learn More →</a>
+          </article>
+          <article class="card">
+            <h3>Home Loan</h3>
+            <p>Competitive rates & longer tenures for your dream home.</p>
+            <a href="/home-loan">See Options →</a>
+          </article>
+          <article class="card">
+            <h3>Business Loan</h3>
+            <p>Working capital & expansion finance tailored for SMEs.</p>
+            <a href="/business-loan">Explore →</a>
+          </article>
+          <article class="card">
+            <h3>Loan Against Property</h3>
+            <p>Lower rates by leveraging your residential or commercial property.</p>
+            <a href="/lap">Apply →</a>
+          </article>
+        </div>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <div class="arrows">
+          <button class="arrow" id="tfs-prod-prev" aria-label="Previous">‹</button>
+          <button class="arrow" id="tfs-prod-next" aria-label="Next">›</button>
+        </div>
+        <div class="progress" aria-hidden="true"><i id="tfs-prod-progress"></i></div>
+        <div class="dots" id="tfs-prod-dots" role="tablist" aria-label="Slide navigation"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.getElementById('tfs-products');
+      const track = root.querySelector('#tfs-products-track');
+      const prevBtn = root.querySelector('#tfs-prod-prev');
+      const nextBtn = root.querySelector('#tfs-prod-next');
+      const dotsWrap = root.querySelector('#tfs-prod-dots');
+      const prog = root.querySelector('#tfs-prod-progress');
+      const AUTO_MS = 4000; // 4s
+      let cards = Array.from(track.children);
+      const CLONES = 2; // how many to clone at each end
+      let index = CLONES; // start after prepended clones
+      let timer = null;
+      let cardW = 0;
+
+      // clone for infinite loop
+      function cloneEnds(){
+        const first = cards.slice(0, CLONES).map(n=>n.cloneNode(true));
+        const last = cards.slice(-CLONES).map(n=>n.cloneNode(true));
+        last.forEach(n=>track.insertBefore(n, track.firstChild));
+        first.forEach(n=>track.appendChild(n));
+        cards = Array.from(track.children);
+      }
+
+      function measure(){
+        cardW = cards[0].getBoundingClientRect().width + 12; // +gap
+      }
+
+      function setPosition(noAnimate){
+        if(noAnimate){ track.style.transition = 'none'; }
+        track.style.transform = `translateX(${-index * cardW}px)`;
+        if(noAnimate){ requestAnimationFrame(()=>track.style.transition='transform .5s ease'); }
+        updateDots();
+      }
+
+      function buildDots(){
+        dotsWrap.innerHTML='';
+        const visibleCount = cards.length - (CLONES*2);
+        for(let i=0;i<visibleCount;i++){
+          const b = document.createElement('button');
+          b.className='dot';
+          b.setAttribute('role','tab');
+          b.setAttribute('aria-label', `Show slide ${i+1}`);
+          b.addEventListener('click', ()=>{ index = i + CLONES; setPosition(); restart(); });
+          dotsWrap.appendChild(b);
+        }
+      }
+
+      function updateDots(){
+        const dots = Array.from(dotsWrap.children);
+        const visibleCount = cards.length - (CLONES*2);
+        let active = (index - CLONES) % visibleCount;
+        if(active<0) active += visibleCount;
+        dots.forEach((d,i)=>d.classList.toggle('active', i===active));
+        // progress bar
+        prog.style.transition = 'none'; prog.style.width = '0%';
+        requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ prog.style.transition=`width ${AUTO_MS}ms linear`; prog.style.width='100%'; }); });
+      }
+
+      function next(){
+        index++;
+        setPosition();
+        // snap when we hit the cloned tail
+        if(index === cards.length - CLONES){
+          setTimeout(()=>{ index = CLONES; setPosition(true); }, 520);
+        }
+      }
+      function prev(){
+        index--;
+        setPosition();
+        if(index === CLONES - 1){
+          setTimeout(()=>{ index = cards.length - CLONES - 1; setPosition(true); }, 520);
+        }
+      }
+
+      function start(){ stop(); timer = setInterval(next, AUTO_MS); }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+      function restart(){ stop(); setTimeout(start, 250); }
+
+      // init
+      cloneEnds();
+      measure();
+      buildDots();
+      track.style.transition = 'transform .5s ease';
+      setPosition(true);
+      start();
+
+      // events
+      nextBtn.addEventListener('click', ()=>{ next(); restart(); });
+      prevBtn.addEventListener('click', ()=>{ prev(); restart(); });
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      window.addEventListener('resize', ()=>{ measure(); setPosition(true); });
+
+      // keyboard support
+      window.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight'){ next(); restart(); } if(e.key==='ArrowLeft'){ prev(); restart(); } });
+    })();
+  </script>
+</section>
+<!-- =====================START Explore Loan Options We Offer TFS Products Carousel ===================== -->
+  
+<!-- ===================== TFS How We Work ===================== -->
+<section id="tfs-process" aria-labelledby="tfs-process-title">
+  <style>
+    #tfs-process{font-family:Inter,system-ui,Arial,sans-serif;padding:44px 16px;background:linear-gradient(180deg,#ffffff,#f9fdfc)}
+    #tfs-process .wrap{max-width:1160px;margin:0 auto}
+    #tfs-process h2{margin:0 0 6px 0;font-size:28px;letter-spacing:-.5px;color:#0a2540}
+    #tfs-process p.sub{margin:0 0 24px 0;color:#475569}
+    /* timeline */
+    #tfs-process .timeline{position:relative;display:grid;grid-template-columns:1fr;gap:16px}
+    #tfs-process .line{position:absolute;left:18px;top:0;bottom:0;width:3px;background:#e7f4ef;border-radius:999px;overflow:hidden}
+    #tfs-process .line i{position:absolute;left:0;top:0;bottom:auto;width:100%;height:0%;background:linear-gradient(180deg,#10b981,#0ea5e9)}
+    #tfs-process .step{
+      position:relative;display:grid;grid-template-columns:44px auto;gap:14px;align-items:start;
+      background:#fff;border:1px solid #e9f1fb;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(2,6,23,.06);opacity:0;transform:translateY(14px);
+      transition:opacity .5s ease, transform .5s ease;
+    }
+    #tfs-process .step.in{opacity:1;transform:none}
+    #tfs-process .dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;font-weight:800}
+    #tfs-process .s-title{margin:0 0 6px 0;font-size:16px;color:#0b63d6}
+    #tfs-process .s-text{margin:0;color:#475569;font-size:14px}
+    #tfs-process .tagline{margin-top:16px;padding:14px 16px;background:#f0fff7;border:1px solid #d9f6ea;border-radius:12px;color:#125c47}
+    @media (min-width:860px){
+      #tfs-process .timeline{grid-template-columns:1fr 1fr}
+      #tfs-process .line{left:50%;transform:translateX(-50%)}
+      #tfs-process .step{grid-template-columns:44px auto; }
+    }
+  </style>
+
+  <div class="wrap">
+    <header>
+      <h2 id="tfs-process-title">🔄 Simple, Smart, Transparent Loan Process</h2>
+      <p class="sub">We bring transparency to every step of your loan journey.</p>
+    </header>
+
+    <div class="timeline" id="tfs-process-timeline">
+      <span class="line" aria-hidden="true"><i id="tfs-line-fill"></i></span>
+
+      <!-- 1 -->
+      <article class="step" data-step="1">
+        <div class="dot">1</div>
+        <div>
+          <h3 class="s-title">Profile Review (No CIBIL Enquiry)</h3>
+          <p class="s-text">Share salary, employer type, and obligations. We run a private simulation — your credit file stays untouched.</p>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="step" data-step="2">
+        <div class="dot">2</div>
+        <div>
+          <h3 class="s-title">Eligibility Simulation & Comparison</h3>
+          <p class="s-text">We model lender policies and compare offers across banks & NBFCs with itemised costs.</p>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="step" data-step="3">
+        <div class="dot">3</div>
+        <div>
+          <h3 class="s-title">Best Offer Selection</h3>
+          <p class="s-text">Choose the most suitable lender based on rate, EMI, tenure, processing fee, and prepayment rules.</p>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="step" data-step="4">
+        <div class="dot">4</div>
+        <div>
+          <h3 class="s-title">Documentation & Processing</h3>
+          <p class="s-text">We prepare and submit your file, coordinate with the lender, and handle follow-ups.</p>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="step" data-step="5">
+        <div class="dot">5</div>
+        <div>
+          <h3 class="s-title">Bank/NBFC Disbursal</h3>
+          <p class="s-text">On approval, the lender disburses funds. We guide final steps and clarify any charges.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="tagline">“We bring transparency to every step of your loan journey.”</div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.getElementById('tfs-process');
+      const steps = Array.from(root.querySelectorAll('.step'));
+      const fill = root.querySelector('#tfs-line-fill');
+
+      // reveal on scroll
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('in');
+            // update vertical progress fill based on how many steps are visible
+            const visible = steps.filter(s=>s.classList.contains('in')).length;
+            const pct = Math.max(0, Math.min(100, (visible/steps.length)*100));
+            fill.style.height = pct + '%';
+          }
+        });
+      }, {root:null, threshold:0.2});
+      steps.forEach(s=>io.observe(s));
+    })();
+  </script>
+</section>
+<!-- =================== /TFS How We Work =================== -->
   
   <h2>Popular Finance Calculators</h2>
 <div class="calc-list">
@@ -354,137 +955,6 @@
   </div>
 </section>
    
-<!-- Why Choose TechFinserv - Overlapping Gradient Grid Modern Style -->
-<section style="background:linear-gradient(110deg,#f2fcff 60%,#e3ebfd 100%);padding:3rem 0 3.3rem 0;">
-  <div style="max-width:1150px;margin:0 auto;padding:0 1.5rem;">
-    <h2 style="text-align:center;font-size:2.45rem;font-weight:700;color:#093399;margin-bottom:2.1rem;letter-spacing:-2px;">
-      Why Choose TechFinserv?
-    </h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:2.1rem; position:relative; ">
-      <!-- Card 1 -->
-      <div style="
-        position:relative;
-        background: linear-gradient(120deg, #85ffe1 0%, #e4fbfe 100%);
-        border-radius:21px;
-        box-shadow:0 8px 28px rgba(40,175,245,.10);
-        padding:2.1rem 1.2rem 1.6rem 1.2rem;
-        overflow:hidden;
-      ">
-        <span style="
-          position:absolute; right:22px; top:-24px; 
-          background:linear-gradient(60deg,#01c7a3,#2fd2fa); 
-          border-radius:18px; 
-          width:52px;height:52px; 
-          display:flex;align-items:center;justify-content:center;
-          box-shadow:0 4px 14px #01c7a325;
-        ">
-          <img src="icons/free_tools.svg" alt="" style="width:26px;">
-        </span>
-        <h3 style="margin:0 0 1rem 0;color:#01ba99;font-size:1.16rem;font-weight:700;">Free Tools</h3>
-        <p style="margin:0;color:#1c2a38;opacity:.91;">
-          Access EMI, SIP, and loan eligibility calculators anytime — 100% free, no signup needed.
-        </p>
-      </div>
-      <!-- Card 2 -->
-      <div style="
-        position:relative;
-        background: linear-gradient(115deg,#b1cafe 0%,#ebf1fe 80%);
-        border-radius:21px;
-        box-shadow:0 8px 28px rgba(54,140,255,.12);
-        padding:2.1rem 1.2rem 1.6rem 1.2rem;
-        overflow:hidden;
-      ">
-        <span style="
-          position:absolute; right:22px; top:-24px; 
-          background:linear-gradient(60deg,#1682f8,#7dd0fa); 
-          border-radius:18px; 
-          width:52px;height:52px; 
-          display:flex;align-items:center;justify-content:center;
-          box-shadow:0 4px 14px #1682f870;
-        ">
-          <img src="icons/easy_understand.svg" alt="" style="width:26px;">
-        </span>
-        <h3 style="margin:0 0 1rem 0;color:#1682f8;font-size:1.16rem;font-weight:700;">Easy to Understand</h3>
-        <p style="margin:0;color:#1c2a38;opacity:.91;">
-          Our blogs explain loans, investments, tax, and credit in simple words — no jargon, no confusion.
-        </p>
-      </div>
-      <!-- Card 3 -->
-      <div style="
-        position:relative;
-        background: linear-gradient(115deg,#fff9d0 20%,#ffe6ea 80%);
-        border-radius:21px;
-        box-shadow:0 8px 28px rgba(255,200,80,.10);
-        padding:2.1rem 1.2rem 1.6rem 1.2rem;
-        overflow:hidden;
-      ">
-        <span style="
-          position:absolute; right:22px; top:-24px; 
-          background:linear-gradient(60deg,#f8cc3b,#ffb7a0); 
-          border-radius:18px; 
-          width:52px;height:52px; 
-          display:flex;align-items:center;justify-content:center;
-          box-shadow:0 4px 14px #ffae3c34;
-        ">
-          <img src="icons/always_updated.svg" alt="" style="width:26px;">
-        </span>
-        <h3 style="margin:0 0 1rem 0;color:#f1b700;font-size:1.16rem;font-weight:700;">Always Updated</h3>
-        <p style="margin:0;color:#1c2a38;opacity:.91;">
-          We keep calculators and articles updated with the latest rules, rates, and market changes.
-        </p>
-      </div>
-      <!-- Card 4 -->
-      <div style="
-        position:relative;
-        background: linear-gradient(120deg,#c7edff 0%,#defafe 100%);
-        border-radius:21px;
-        box-shadow:0 8px 28px rgba(80,220,220,.10);
-        padding:2.1rem 1.2rem 1.6rem 1.2rem;
-        overflow:hidden;
-      ">
-        <span style="
-          position:absolute; right:22px; top:-24px; 
-          background:linear-gradient(60deg,#5cd6f6,#9bebeb); 
-          border-radius:18px; 
-          width:52px;height:52px; 
-          display:flex;align-items:center;justify-content:center;
-          box-shadow:0 4px 14px #27e4f939;
-        ">
-          <img src="icons/trusted_readers.svg" alt="" style="width:26px;">
-        </span>
-        <h3 style="margin:0 0 1rem 0;color:#22cbe0;font-size:1.16rem;font-weight:700;">Trusted by Readers</h3>
-        <p style="margin:0;color:#1c2a38;opacity:.91;">
-          Thousands rely on TechFinserv for accurate tools and practical financial advice every month.
-        </p>
-      </div>
-      <!-- Card 5 -->
-      <div style="
-        position:relative;
-        background: linear-gradient(120deg,#ffd7c3 5%,#f2f6fb 100%);
-        border-radius:21px;
-        box-shadow:0 8px 28px rgba(255,130,110,.09);
-        padding:2.1rem 1.2rem 1.6rem 1.2rem;
-        overflow:hidden;
-      ">
-        <span style="
-          position:absolute; right:22px; top:-24px; 
-          background:linear-gradient(60deg,#ff9d66,#ffd7c3); 
-          border-radius:18px; 
-          width:52px;height:52px; 
-          display:flex;align-items:center;justify-content:center;
-          box-shadow:0 4px 14px #ff925225;
-        ">
-          <img src="icons/smart_choices.svg" alt="" style="width:26px;">
-        </span>
-        <h3 style="margin:0 0 1rem 0;color:#ff914d;font-size:1.16rem;font-weight:700;">Smart Money Choices</h3>
-        <p style="margin:0;color:#1c2a38;opacity:.91;">
-          From SIP strategy to boosting your credit score, we help you decide with confidence.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>   
-
 <!-- START STACKED BLOG-CARD CAROUSEL (AUTO + MANUAL + PROGRESS BAR + DOTS) -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 0 1.2rem;">
     <h2 style="text-align: center; font-size: 2.45rem; font-weight: 700; color: #183dc5; margin-bottom: 0.7rem;">
@@ -493,10 +963,9 @@
     <p style="text-align: center; color: #3d609d; font-size: 1.12rem; margin-bottom: 2.4rem;">
       Our finance blog breaks down complex money topics into simple, actionable steps.
     </p>
-<!-- STACKED BLOG-CARD CAROUSEL (AUTO + MANUAL + PROGRESS BAR + DOTS) -->
 <section class="stacked-carousel-wrap" aria-label="Featured blog cards">
   <div class="stacked-carousel" id="stackedCarousel" aria-live="polite">
-    <!-- Blog cards (duplicate for each article) -->
+    <!-- Blog cards -->
     <article class="stack-card">
       <a href="blogs/understanding-sips.html" class="card-link">
         <div class="card-media" style="background-image:url('cibil-2.0-cover.webp')"></div>
@@ -566,8 +1035,6 @@
         </div>
       </a>
     </article>
-
-    <!-- add more .stack-card elements as needed -->
   </div>
 
   <!-- Manual Buttons -->
@@ -776,7 +1243,6 @@
   const AUTO_MS = 4000; // 4 seconds per slide
   let centerIndex = 0;
   let timer = null;
-  let progressStart = null;
 
   // create dots
   const dots = [];
@@ -803,16 +1269,9 @@
   function render(){
     const total = cards.length;
     cards.forEach((card, i) => {
-      // calculate shortest offset in circular loop
       let raw = i - centerIndex;
-      // normalize to range [-floor(total/2), ceil(total/2)]
-      // But our visual supports only -2..2, so we compute circular offset and clamp to nearest representation.
-      // We'll compute circular distance:
-      const alt = raw;
       const wrapped = ((raw + total + Math.floor(total/2)) % total) - Math.floor(total/2);
-      // choose the wrapped (shortest) offset
       let offset = wrapped;
-      // clamp visuals to [-2..2] else hide
       if (Math.abs(offset) > 2) {
         card.dataset.hidden = "true";
         card.removeAttribute('data-pos');
@@ -822,7 +1281,6 @@
       }
     });
 
-    // update dots active
     dots.forEach((d, idx) => {
       const isActive = idx === centerIndex;
       d.classList.toggle('active', isActive);
@@ -844,54 +1302,38 @@
     render();
   }
 
-  // progress bar animation using requestAnimationFrame for smoothness & accurate reset
   function startProgress(){
     cancelProgress();
-    progressStart = performance.now();
     progressEl.style.transition = 'none';
     progressEl.style.width = '0%';
-    // small timeout to allow reset before transition
     requestAnimationFrame(()=> {
       requestAnimationFrame(()=> {
         progressEl.style.transition = `width ${AUTO_MS}ms linear`;
         progressEl.style.width = '100%';
       });
     });
-    // also set timer to auto-advance
     timer = setTimeout(()=> {
       nextSlide();
-      startProgress(); // restart progress for next slide
+      startProgress();
     }, AUTO_MS);
   }
   function cancelProgress(){
     if (timer) { clearTimeout(timer); timer = null; }
-    // reset progress bar quickly
     progressEl.style.transition = 'none';
     progressEl.style.width = '0%';
   }
   function restartAuto(){
     cancelProgress();
-    // small delay so transition reset is visible before starting again
     setTimeout(startProgress, 60);
   }
 
-  // attach controls
   nextBtn.addEventListener('click', ()=> { nextSlide(); restartAuto(); });
   prevBtn.addEventListener('click', ()=> { prevSlide(); restartAuto(); });
 
-  // initialize
   buildDots();
   render();
   startProgress();
 
-  // keep responsive: if number of cards changes, rebuild dots (if you dynamically modify DOM)
-  // Optional: observe carousel childList changes and rebuild - left commented
-  /*
-  const obs = new MutationObserver(()=>{ dots.length = 0; buildDots(); render(); restartAuto(); });
-  obs.observe(carousel, { childList: true });
-  */
-
-  // Accessibility: allow left/right arrow navigation for keyboard users but still keep autoplay running
   window.addEventListener('keydown', (e)=>{
     if (e.key === 'ArrowLeft'){ prevSlide(); restartAuto(); }
     if (e.key === 'ArrowRight'){ nextSlide(); restartAuto(); }
@@ -904,13 +1346,19 @@
       
     </div>
 </main>
-  <footer id="about">
-    <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+
+  <!-- ====== FOOTER (replaced with Coming Soon footer) ====== -->
+  <footer id="contact" class="glass">
+    <div class="container">
+      <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+      <p class="subtitle" style="font-size:13px">Need something urgently? <a href="mailto:hello@techfinserv.com">hello@techfinserv.com</a></p>
+    </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Hero slider (unchanged)
     const slides = document.querySelectorAll('.carousel-slide');
     const dots = document.querySelectorAll('.carousel-dot');
     const nextBtn = document.getElementById('next');
@@ -933,6 +1381,27 @@
     dots.forEach((dot,index)=> dot.onclick = ()=>{ showSlide(index); reset(); });
 
     showSlide(0); auto();
+
+    // Mobile menu (from Coming Soon header)
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
+    })();
   </script>
 </body>
 </html>
