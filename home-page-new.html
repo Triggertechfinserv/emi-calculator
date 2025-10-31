@@ -1053,6 +1053,99 @@
 </section>
 
 <style>
+
+
+
+/* --- MOBILE-ONLY ENHANCEMENTS (no desktop changes) --- */
+@media (max-width: 640px) {
+
+  /* Make the wrapper resist side scroll-jank */
+  .stacked-carousel-wrap {
+    overflow: hidden;
+    padding: 14px;
+  }
+
+  /* Friendlier card size on phones */
+  :root{
+    --card-w: 86vw;
+    --card-h: clamp(300px, 72vw, 420px);
+    --gap: 14px;
+    --dot-size: 12px;
+    --dot-gap: 10px;
+  }
+
+  /* Softer perspective on small screens */
+  .stacked-carousel{
+    perspective: 900px;
+    height: var(--card-h);
+  }
+
+  /* Tweak positions for neighbors (flatter, more readable) */
+  .stack-card[data-pos="0"]{ transform: translateX(-50%) translateZ(0) scale(1); }
+  .stack-card[data-pos="1"]{ transform: translateX(calc(-50% + 64%)) translateZ(-40px) scale(.92) rotateY(-4deg); opacity:.94; }
+  .stack-card[data-pos="2"]{ transform: translateX(calc(-50% + 128%)) translateZ(-70px) scale(.86) rotateY(0deg); opacity:.70; }
+  .stack-card[data-pos="-1"]{ transform: translateX(calc(-50% - 64%)) translateZ(-40px) scale(.92) rotateY(4deg);  opacity:.94; }
+  .stack-card[data-pos="-2"]{ transform: translateX(calc(-50% - 128%)) translateZ(-70px) scale(.86) rotateY(0deg); opacity:.70; }
+
+  /* Slightly bigger media area feels richer on mobile */
+  .card-media{ height: 56%; }
+  .card-body{ padding: 14px; gap: 6px; }
+  .card-body h3{ font-size: 1rem; line-height: 1.25; }
+  .card-body p{ font-size: 0.94rem; }
+
+  /* Larger, thumb-friendly controls pinned near bottom center */
+  .stack-controls{
+    position: absolute;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 72px;
+    gap: 10px;
+    z-index: 99;
+  }
+  .stack-btn{
+    width: 54px; height: 54px;
+    font-size: 26px;
+    box-shadow: 0 10px 24px rgba(2,6,23,.16);
+    touch-action: manipulation;
+  }
+
+  /* Progress bar slimmer & centered */
+  .stack-progress-wrap{
+    width: 64vw;
+    bottom: 46px;
+    height: 5px;
+  }
+
+  /* Bigger dots for easier taps */
+  .stack-dots{
+    bottom: 16px;
+    gap: var(--dot-gap);
+  }
+  .stack-dot{
+    width: var(--dot-size);
+    height: var(--dot-size);
+  }
+  .stack-dot.active{ transform: scale(1.35); }
+
+  /* Avoid accidental text selection while swiping */
+  .stacked-carousel, .stack-card, .stack-dots, .stack-controls{
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce){
+  .stack-card,
+  .stack-progress{
+    transition: none !important;
+  }
+}
+/* --- MOBILE-ONLY ENHANCEMENTS (no desktop changes) --- */
+
+    
+  
   :root{
     --card-w: 320px;
     --card-h: 420px;
@@ -1340,6 +1433,80 @@
   });
 
 })();
+
+
+
+  
+/* --- MOBILE SWIPE (no changes to your existing code) --- */
+(function(){
+  const wrap = document.querySelector('.stacked-carousel-wrap');
+  const area = document.getElementById('stackedCarousel');
+  const prev = document.getElementById('prevStack');
+  const next = document.getElementById('nextStack');
+
+  if (!wrap || !area || !prev || !next) return;
+
+  let startX = 0, startY = 0, isSwiping = false, moved = false;
+  const THRESHOLD = 28;      // min horizontal px to trigger
+  const ANGLE_GUARD = 0.58;  // disallow if mostly vertical (tan ~ 30deg)
+
+  const onStart = (x, y) => { startX = x; startY = y; isSwiping = true; moved = false; };
+  const onMove = (x, y) => {
+    if(!isSwiping) return;
+    const dx = x - startX, dy = y - startY;
+    if (Math.abs(dy) > Math.abs(dx) * ANGLE_GUARD) return; // vertical scroll -> ignore
+    if (Math.abs(dx) > 8) moved = true; // minor movement detected
+  };
+  const onEnd = (x, y) => {
+    if(!isSwiping) return;
+    const dx = x - startX, dy = y - startY;
+    isSwiping = false;
+    if (!moved) return;
+
+    // Only act on mostly-horizontal swipes
+    if (Math.abs(dy) > Math.abs(dx) * ANGLE_GUARD) return;
+
+    if (dx <= -THRESHOLD) {
+      // swipe left -> next
+      next.click();
+    } else if (dx >= THRESHOLD) {
+      // swipe right -> prev
+      prev.click();
+    }
+  };
+
+  // Touch (mobile)
+  area.addEventListener('touchstart', (e)=>{
+    const t = e.changedTouches[0];
+    onStart(t.clientX, t.clientY);
+  }, {passive:true});
+
+  area.addEventListener('touchmove', (e)=>{
+    const t = e.changedTouches[0];
+    onMove(t.clientX, t.clientY);
+  }, {passive:true});
+
+  area.addEventListener('touchend', (e)=>{
+    const t = e.changedTouches[0];
+    onEnd(t.clientX, t.clientY);
+  }, {passive:true});
+
+  // Pointer (fallback for some devices)
+  area.addEventListener('pointerdown', (e)=>{
+    if (e.pointerType !== 'touch') return;
+    onStart(e.clientX, e.clientY);
+  });
+  area.addEventListener('pointermove', (e)=>{
+    if (e.pointerType !== 'touch') return;
+    onMove(e.clientX, e.clientY);
+  });
+  area.addEventListener('pointerup', (e)=>{
+    if (e.pointerType !== 'touch') return;
+    onEnd(e.clientX, e.clientY);
+  });
+})();
+/* --- MOBILE SWIPE (no changes to your existing code) --- */
+
 </script>
 <!-- END STACKED BLOG-CARD CAROUSEL (AUTO + MANUAL + PROGRESS BAR + DOTS) -->         
       
