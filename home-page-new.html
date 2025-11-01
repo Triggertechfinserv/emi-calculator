@@ -1347,32 +1347,6 @@
   .stack-dots{ bottom: -44px !important; }
 }
 
-/* --- FIX: show arrows below the card without clipping on mobile --- */
-@media (max-width: 640px){
-  /* 1) Let content extend outside */
-  .stacked-carousel-wrap{
-    overflow: visible !important;   /* override previous hidden */
-    padding-bottom: 110px !important; /* room for progress + dots + arrows */
-  }
-
-  /* 2) Keep arrows below card, and above other elements */
-  .stack-controls{
-    bottom: -38px !important;        /* place just below card */
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%);
-    z-index: 200 !important;         /* ensure visible */
-  }
-  .stack-btn{
-    width: 46px !important;
-    height: 46px !important;
-    font-size: 22px !important;
-  }
-
-  /* 3) Align progress + dots to match the new space */
-  .stack-progress-wrap{ bottom: -8px !important; }
-  .stack-dots{ bottom: -62px !important; }
-}
 
   
 </style>
