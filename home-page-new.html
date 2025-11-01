@@ -1096,13 +1096,13 @@
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    bottom: -26px;
+    bottom: 72px;
     gap: 10px;
-    z-index: 50;
+    z-index: 99;
   }
   .stack-btn{
-    width: 46px; height: 46px;
-    font-size: 22px;
+    width: 54px; height: 54px;
+    font-size: 26px;
     box-shadow: 0 10px 24px rgba(2,6,23,.16);
     touch-action: manipulation;
   }
@@ -1124,10 +1124,6 @@
     height: var(--dot-size);
   }
   .stack-dot.active{ transform: scale(1.35); }
-  .stacked-carousel-wrap{ padding-bottom: 90px; }
-  .stack-progress-wrap{ bottom: -6px; }
-  .stack-dots{ bottom: -44px; }
-
 
   /* Avoid accidental text selection while swiping */
   .stacked-carousel, .stack-card, .stack-dots, .stack-controls{
@@ -1321,6 +1317,37 @@
   }
   /* accessibility focus */
   .stack-dot:focus{ outline: 3px solid rgba(14,165,233,0.2); outline-offset: 3px; }
+
+
+/* === MOBILE FIX OVERRIDES: move arrows below the card, make room === */
+@media (max-width: 640px){
+  .stack-controls{
+    bottom: -26px !important;       /* puts buttons under the card */
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    z-index: 50;                     /* below the card; not over text */
+    gap: 10px;
+  }
+
+  /* Slightly smaller buttons on phones */
+  .stack-btn{
+    width: 46px !important;
+    height: 46px !important;
+    font-size: 22px !important;
+  }
+
+  /* Space so buttons/progress/dots don't overlap your content */
+  .stacked-carousel-wrap{
+    padding-bottom: 90px !important; /* extra room at bottom of section */
+  }
+
+  /* Shift progress + dots down accordingly */
+  .stack-progress-wrap{ bottom: -6px !important; }
+  .stack-dots{ bottom: -44px !important; }
+}
+
+
   
 </style>
 
