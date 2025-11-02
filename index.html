@@ -4,699 +4,1597 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Home - TechFinserv</title>
-  <meta name="description" content="TechFinserv, EMI calculator, SIP calculator, personal loan, home loan, low interest loan, loan eligibility, save interest with part payment, CIBIL score, low CIBIL, CIBIL report, tax saving, investments, credit score, money management" />
-    <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <meta name="description" content="TechFinserv: EMI, SIP, and Loan Calculators, finance insights, and smart money solutions." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
 
-    gtag('config', 'G-9DHT9T8GZB');
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --accent-1: #0ea5e9; 
+      --accent-2: #10b981;
+      --accent-3: #fff;
+      --text: #fff;
+      --muted: #e2e8f0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: #f6f9ff;
+    }
+
+    /* ===== HERO SECTION (unchanged) ===== */
+    .hero-carousel {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .carousel-slide.active { opacity: 1; z-index: 2; }
+
+    /* Overlay gradient for better text visibility */
+    .carousel-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.25));
+      z-index: 1;
+    }
+
+    .carousel-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .carousel-content h1 {
+      font-size: 2.8rem;
+      line-height: 1.2;
+      margin: 0 0 16px;
+      background: linear-gradient(135deg, var(--accent-3), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .carousel-content p {
+      font-size: 1.2rem;
+      margin: 10px auto 24px;
+      color: var(--muted);
+      max-width: 90%;
+    }
+
+    .carousel-content a {
+      background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      border: none; padding: 12px 26px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #fff; text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 6px 16px rgba(14,165,233,0.2);
+      transition: transform 0.2s;
+    }
+    .carousel-content a:hover { transform: translateY(-3px); }
+
+    /* Controls */
+    .carousel-controls {
+      position: absolute;
+      bottom: 30px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      gap: 20px;
+      z-index: 5;
+    }
+    .carousel-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      color: var(--accent-1);
+      border: none; cursor: pointer;
+      font-size: 1.4rem;
+      transition: 0.2s ease;
+    }
+    .carousel-btn:hover {
+      background: var(--accent-1);
+      color: #fff;
+    }
+
+    .carousel-dots {
+      display: flex; gap: 8px; align-items:center;
+      position: absolute; bottom: 30px; right: 30px;
+      z-index: 6;
+    }
+    .carousel-dot {
+      width: 11px; height: 11px; border-radius: 50%;
+      background: #fff7;
+      border: 1.5px solid var(--accent-1);
+      cursor: pointer;
+      transition: 0.2s all;
+    }
+    .carousel-dot.active {
+      background: var(--accent-1);
+    }
+
+    @media (max-width: 768px) {
+      .carousel-content h1 { font-size: 2rem; }
+      .carousel-content p { font-size: 1rem; }
+      .carousel-btn { width: 34px; height: 34px; }
+    }
+
+    /* ===== Calculator cards (unchanged) ===== */
+    body {
+      font-family: 'Inter', Arial, sans-serif; margin: 0; background: #f6fafd; color: #152032;
+    }
+    h2 {
+      text-align: center; margin: 2.5rem 1rem 1.7rem 1rem; font-size: 2.2rem; font-weight: 600;
+    }
+    .calc-list {
+      display: flex; flex-wrap: wrap; gap: 1.3rem; justify-content: center; padding: 0 1rem;
+    }
+    .calc-card {
+      background: #fff; box-shadow: 0 2.5px 19px rgba(17,186,146,.09);
+      border-radius: 15px; flex: 1 1 210px; max-width: 305px; min-width: 180px;
+      display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem 1.3rem 1rem;
+      transition: transform .13s; text-align: center;
+    }
+    .calc-card:hover {
+      transform: translateY(-5px) scale(1.045);
+    }
+    .calc-card img {
+      width: 40px; margin-bottom: 0.7rem;
+    }
+    .calc-card h4 {
+      margin-top: 0.1rem; margin-bottom: 0.4rem; font-size: 1.15rem; font-weight: 600;
+    }
+    .calc-card p {
+      font-size: 0.94rem; margin-bottom: 0.9rem; line-height: 1.4;
+    }
+    .calc-card a {
+      margin-top: 0.9rem; background: #00c58a; color: #fff; padding: .8rem 1.5rem; border-radius: 100px;
+      text-decoration: none; font-weight: 600; font-size: 0.96rem; display: inline-block; transition: background .2s;
+    }
+    .calc-card a:hover {
+      background: #2490d6;
+    }
+
+    /* ========================
+       HEADER & FOOTER STYLES
+       (from Coming Soon page)
+       ======================== */
     :root {
       --bg: #f6f9ff;
       --bg-accent1: rgba(14,165,233,0.20);
       --bg-accent2: rgba(16,185,129,0.18);
-      --surface: rgba(255,255,255,0.78);     /* slightly more solid for medium blur */
+      --surface: rgba(255,255,255,0.78);
       --surface-strong: rgba(255,255,255,0.92);
-      --text: #0f172a;
-      --muted: #475569;
       --border: rgba(2,6,23,0.12);
-      --accent-1: #0ea5e9;
-      --accent-2: #10b981;
-      --gradient-solid: linear-gradient(135deg, #10a7e6, #10b981);
       --radius: 16px;
       --shadow: 0 12px 34px rgba(2,6,23,0.10), 0 4px 14px rgba(2,6,23,0.06);
       --maxw: 1200px;
     }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(900px 500px at 10% -10%, var(--bg-accent1), transparent 60%),
-        radial-gradient(900px 500px at 110% 10%, var(--bg-accent2), transparent 60%),
-        var(--bg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
-
-    .glass {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      /* MEDIUM blur for cards only when overlapping content; keeps look consistent */
-      backdrop-filter: blur(10px) saturate(160%);
-      -webkit-backdrop-filter: blur(10px) saturate(160%);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-    }
-
-    /* ========== HEADER: Medium blur with better visibility ========== */
     .topbar {
       position: sticky; top: 0; z-index: 40;
-      background: rgba(255,255,255,0.68);  /* less transparent so blur feels stronger */
+      background: rgba(255,255,255,0.68);
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px) saturate(170%);   /* MEDIUM blur */
+      backdrop-filter: blur(12px) saturate(170%);
       -webkit-backdrop-filter: blur(12px) saturate(170%);
       isolation: isolate;
-      box-shadow: 0 6px 16px rgba(2,6,23,0.06);     /* subtle lift to separate from content */
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
     }
     .topbar::before {
-      content: "";
-      position: absolute; inset: 0;
-      pointer-events: none;
-      background: rgba(255,255,255,0.7);  /* soft frost veil */
-      opacity: 0.28;                      /* slight increase to avoid “too transparent” */
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
       border-bottom: 1px solid var(--border);
     }
-
-    header.nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 0;
-    }
-    .brand-logo { height: 65px; border-radius: 10px; }
-    nav.menu { display: flex; gap: 14px; }
-    nav.menu a { padding: 8px 12px; border-radius: 10px; color: var(--muted); transition: background 200ms ease; font-size: 15px; }
-    nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
-    .cta { background: var(--gradient-solid); color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600; }
-
-    /* Mobile navbar additions (hidden on desktop) */
-    .mobile-menu-toggle { display: none; }
-    .mobile-menu { display: none; }
-
-    /* ========== PAGE CONTENT (unchanged) ========== */
-    .hero { padding: 48px 0 28px; position: relative; }
-    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; }
-    .hero-card { padding: 28px; }
-    .hero h2 { margin: 0 0 12px; font-size: 20px; }
-    .subtitle { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
-
-    .main { display: grid; grid-template-columns: 1fr; padding: 18px 0 60px; }
-
-    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .post.glass { overflow: hidden; display: flex; flex-direction: column; cursor: pointer; text-decoration: none; color: inherit; }
-    .post img { height: 170px; object-fit: cover; width: 100%; }
-    .post .content { padding: 16px; }
-    .post h4 { margin: 0 0 8px; font-size: 18px; }
-    .post .meta { color: var(--muted); font-size: 12px; margin-bottom: 8px; }
-
-    .toolbox { display: grid; gap: 12px; padding: 20px; }
-    .toolbox button { border: 0; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; background: var(--gradient-solid); color: #fff; box-shadow: var(--shadow); width: 100%; }
-
-    footer { border-top: 1px solid var(--border); padding: 30px 0 80px; color: var(--muted); background: rgba(255,255,255,0.7); }
-
-    @media (max-width: 1000px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .blog-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ===== Mobile Header + Performance (no blur on mobile to avoid lag) ===== */
-    @media (max-width: 768px) {
-      :root {
-        --radius: 14px;
-        --shadow: 0 6px 18px rgba(2,6,23,0.08), 0 2px 8px rgba(2,6,23,0.06);
-      }
-
-      .topbar {
-        background: #ffffffee;
-        border-bottom: 1px solid var(--border);
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: 0 6px 16px rgba(2,6,23,0.06);
-      }
-      .topbar::before { display: none; }
-
-      .glass {
-        background: rgba(255,255,255,0.92);
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: var(--shadow);
-      }
-
-      header.nav { padding: 8px 0; }
-      .brand-logo { height: 48px; border-radius: 8px; }
-
-      nav.menu { display: none; }
-      .mobile-menu-toggle {
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 4px;
-        width: 28px;
-        height: 22px;
-        cursor: pointer;
-        background: transparent;
-        border: 0;
-      }
-      .mobile-menu-toggle span {
-        display: block;
-        height: 3px;
-        width: 100%;
-        background: var(--text);
-        border-radius: 2px;
-      }
-
-      .mobile-menu {
-        display: none;
-        flex-direction: column;
-        gap: 6px;
-        padding: 10px 0 14px;
-        background: #fff;
-        border-bottom: 1px solid var(--border);
-      }
-      .mobile-menu a {
-        padding: 12px 16px;
-        font-size: 15px;
-        color: var(--muted);
-      }
-      .mobile-menu a:hover {
-        background: var(--bg);
-        color: var(--text);
-      }
-
-      body { line-height: 1.55; }
-      .hero { padding: 28px 0 16px; }
-      .hero h2 { font-size: clamp(18px, 5.2vw, 22px); margin-bottom: 8px; }
-      .subtitle { font-size: 14px; margin-bottom: 14px; }
-
-      .hero-grid { grid-template-columns: 1fr !important; gap: 16px; }
-      .main { padding: 12px 0 40px; }
-      .blog-grid { grid-template-columns: 1fr !important; gap: 14px; }
-
-      .hero-card { padding: 18px; }
-      .post.glass { border-radius: 14px; }
-      .post img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-      }
-      .post .content { padding: 14px; }
-      .post h4 { font-size: 16px; margin-bottom: 6px; }
-      .post .meta { font-size: 12px; }
-
-      .toolbox { gap: 10px; padding: 16px; }
-      .toolbox button {
-        min-height: 48px;
-        font-size: 16px;
-        border-radius: 12px;
-        box-shadow: 0 6px 18px rgba(2,6,23,0.08);
-      }
-
-      footer { padding: 22px 0 56px; }
-    }
-
-    .mobile-menu.open { display: flex !important; }
-
-    @media (prefers-reduced-transparency: reduce) {
-      .topbar, .glass {
-        background: #ffffff !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-      }
-    }
-
-    /* Defer off-screen work for smoother scroll */
-    section, .post.glass {
-      content-visibility: auto;
-      contain-intrinsic-size: 600px 800px;
-    }
-
-    /* === Blue+Green Glassy Header & Footer (non-intrusive overrides) === */
-    /* Header bar: glass + subtle blue→green blend */
-    .topbar {
-      position: sticky; top: 0; z-index: 40;
-      background: rgba(255,255,255,0.60);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(14px) saturate(180%);
-      -webkit-backdrop-filter: blur(14px) saturate(180%);
-      box-shadow: 0 8px 20px rgba(2,6,23,0.08);
-      isolation: isolate;
-      overflow: hidden; /* contain gradient layers */
-    }
-
-    /* Frost veil (kept soft) */
-    .topbar::before {
-      content: "";
-      position: absolute; inset: 0;
-      pointer-events: none;
-      background: rgba(255,255,255,0.55);
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* Blue+Green blend layer */
     .topbar::after {
-      content: "";
-      position: absolute; inset: -20% -10%;
-      pointer-events: none;
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
       background:
         radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
         radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
-      mix-blend-mode: normal; /* keeps it subtle on white */
-      opacity: 1;
     }
-
-    /* Keep your existing header content spacing/behavior */
-    header.nav { padding: 12px 0; }
-
-    /* Footer: glass + blue→green ribbon blend */
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+    }
+    .brand-logo {
+      height: 60px; border-radius: 0px;
+      display:block; width:auto; object-fit:contain;
+      filter:none; mix-blend-mode:normal;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: #475569; transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: var(--surface-strong); color: #0f172a; }
+    .cta {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
+    }
+    /* Footer (glass) */
     footer.glass {
-      position: relative;
-      overflow: hidden;
-      background: rgba(255,255,255,0.75);
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.85);
       border-top: 1px solid var(--border);
       backdrop-filter: blur(12px) saturate(170%);
       -webkit-backdrop-filter: blur(12px) saturate(170%);
       box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: #475569;
     }
-
-    /* Footer gradient wash */
-    footer.glass::before {
-      content: "";
-      position: absolute; inset: -10% -10% -40% -10%;
-      pointer-events: none;
-      background:
-        radial-gradient(900px 400px at 10% 0%, rgba(14,165,233,0.20), transparent 60%),
-        radial-gradient(900px 400px at 90% 0%, rgba(16,185,129,0.20), transparent 60%);
-      opacity: 1;
-    }
-
-    /* Thin gradient top border accent for footer */
     footer.glass::after {
-      content: "";
-      position: absolute; left: 0; right: 0; top: 0; height: 2px;
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
       background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-      opacity: 0.8;
+      opacity:0.8; pointer-events:none;
     }
-
-    /* Desktop/Tablet hover polish for menu links against the glass */
-    nav.menu a:hover {
-      background: rgba(255,255,255,0.9);
-      color: var(--text);
-      box-shadow: 0 6px 14px rgba(2,6,23,0.06);
-    }
-
-    /* Mobile: keep performance high (no blur/gradients) */
+    /* Mobile nav */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
     @media (max-width: 768px) {
-      .topbar {
-        background: #ffffffee;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
       }
-      .topbar::before,
-      .topbar::after {
-        display: none !important;
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:#0f172a; border-radius:2px;
       }
-
-      footer.glass {
-        background: #ffffff;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
       }
-      footer.glass::before,
-      footer.glass::after {
-        display: none !important;
-      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:#475569; text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: #0f172a; }
     }
-
-    /* Accessibility: respect reduced transparency preferences */
-    @media (prefers-reduced-transparency: reduce) {
-      .topbar,
-      footer.glass {
-        background: #ffffff !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-      }
-      .topbar::before,
-      .topbar::after,
-      footer.glass::before,
-      footer.glass::after {
-        display: none !important;
-      }
-    }
-  
-    /* === ULTRA-SMOOTH MODE (no expensive blur while scrolling) === */
-    :root {
-      --shadow-smooth: 0 4px 12px rgba(2,6,23,0.06), 0 1px 4px rgba(2,6,23,0.04);
-    }
-
-    /* Header + footer emulate glass without backdrop-filter */
-    .topbar {
-      background: rgba(255,255,255,0.78) !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      box-shadow: var(--shadow-smooth) !important;
-      overflow: hidden;
-    }
-    .topbar::before { background: rgba(255,255,255,0.55) !important; }
-    .topbar::after {
-      background:
-        radial-gradient(900px 360px at 0% 0%, rgba(14,165,233,0.16), transparent 60%),
-        radial-gradient(900px 360px at 100% 30%, rgba(16,185,129,0.16), transparent 60%) !important;
-    }
-
-    /* Footer keeps same vibe, cheaper to paint */
-    footer.glass {
-      background: rgba(255,255,255,0.85) !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      box-shadow: inset 0 -6px 14px rgba(2,6,23,0.04) !important;
-    }
-    footer.glass::before {
-      background:
-        radial-gradient(700px 280px at 10% 0%, rgba(14,165,233,0.14), transparent 60%),
-        radial-gradient(700px 280px at 90% 0%, rgba(16,185,129,0.14), transparent 60%) !important;
-    }
-
-    /* Card polish but cheaper */
-    .glass { box-shadow: var(--shadow-smooth) !important; }
-
-    /* Containment hints reduce reflow/repaint work */
-    .post.glass, .hero-card, section, footer.glass {
-      contain: layout paint style;
-    }
-
-    /* Hover state without costly re-blur */
-    nav.menu a:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 12px rgba(2,6,23,0.06);
-      background: rgba(255,255,255,0.92);
-      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-    }
-
-    /* Mobile strict: no blur anywhere */
-    @media (max-width: 768px) {
-      .glass, .topbar, footer.glass {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-      }
-    }
-  
-    /* === Scroll-Simplify Mode: disable heavy paint while user is scrolling === */
-    .topbar { will-change: transform; transform: translateZ(0); }
-    main { will-change: contents; }
-
-    /* When body has .scrolling, use cheaper paints */
-    body.scrolling {
-      background: var(--bg) !important; /* drop radial gradients during scroll */
-    }
-    body.scrolling .topbar::after,
-    body.scrolling footer.glass::before {
-      opacity: 0 !important; /* hide blue+green wash while moving */
-    }
-    body.scrolling .glass,
-    body.scrolling .post.glass,
-    body.scrolling .hero-card {
-      box-shadow: none !important; /* drop shadows while moving */
-      border: 1px solid var(--border) !important; /* keep structure */
-    }
-
-    /* Reduce shadow cost always (already lighter earlier, keep here as safety) */
-    :root { --shadow: 0 6px 16px rgba(2,6,23,0.08), 0 2px 8px rgba(2,6,23,0.06); }
-  
-    /* === NUCLEAR PERF MODE for Chrome: raster background + simpler paint === */
-    /* 1) Replace multi-radial CSS background with a single rasterized SVG (data URI).
-          This is composited once and scrolls stutter-free. */
-    body { background: var(--bg) !important; }
-    body::before {
-      content: "";
-      position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="none"><defs><radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(120 40) rotate(0) scale(900 500)"><stop offset="0" stop-color="%230ea5e9" stop-opacity="0.20"/><stop offset="0.6" stop-color="%230ea5e9" stop-opacity="0"/></radialGradient><radialGradient id="g" cx="1" cy="0.3" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1080 240) rotate(0) scale(900 500)"><stop offset="0" stop-color="%2310b981" stop-opacity="0.18"/><stop offset="0.6" stop-color="%2310b981" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="800" fill="%23f6f9ff"/><rect width="1200" height="800" fill="url(%23b)"/><rect width="1200" height="800" fill="url(%23g)"/></svg>');
-      background-size: cover; background-repeat: no-repeat; background-position: center;
-      will-change: opacity; transform: translateZ(0);
-    }
-
-    /* 2) Turn off content-visibility auto (can cause jank in Chrome on complex grids). */
-    section, .post.glass { content-visibility: visible !important; contain-intrinsic-size: auto !important; }
-
-    /* 3) Ensure header/footer are on their own layers; drop any hidden heavy effects while moving */
-    .topbar, footer.glass { backface-visibility: hidden; transform: translateZ(0); will-change: transform; }
-
-    /* Keep scroll-simplify behavior, but it now fades a single image (cheap) */
-    body.scrolling::before { opacity: 0.9; }
-
-    /* 4) Safer sticky behavior hint */
-    .topbar { contain: paint; }
-  
-    /* Disable auto on/off color blend while scrolling */
-    body.scrolling::before,
-    body.scrolling .topbar::after,
-    body.scrolling footer.glass::before { opacity: 1 !important; }
-    body.scrolling .glass,
-    body.scrolling .post.glass,
-    body.scrolling .hero-card { box-shadow: var(--shadow) !important; }
-  
-    /* Re-enable blur effect for header/footer */
-    .topbar {
-      backdrop-filter: blur(14px) saturate(180%) !important;
-      -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
-    }
-    footer.glass {
-      backdrop-filter: blur(12px) saturate(170%) !important;
-      -webkit-backdrop-filter: blur(12px) saturate(170%) !important;
-    }
+    .mobile-menu.open { display:flex !important; }
+    
   </style>
-</head>
+</head> 
+
 <body>
-  <!-- Header -->
+  <!-- ====== HEADER (replaced with Coming Soon header) ====== -->
   <div class="topbar">
     <div class="container">
       <header class="nav">
         <a href="/" aria-label="TechFinserv home">
           <img class="brand-logo" src="images/techfinserv-logo.webp" alt="TechFinserv logo">
         </a>
-
-        <!-- Desktop menu -->
         <nav class="menu" aria-label="Primary">
-          <a href="/" aria-label="TechFinserv home">Home</a>
-		  <a href="blogs/">Blog</a>
-		  <a href="emi-calculator/">EMI calculator</a>
-          <a href="#about">About</a>
-          <a class="cta" href="coming-soon.html">Apply Now</a>
+          <a href="/">Home</a>
+          <a href="blogs/">Blog</a>
+          <a href="/emi-calculator/">EMI calculator</a>
+          <a href="/" style="font-weight:600;color:var(--accent-1)">About Us</a>
+          <a href="/coming-soon.html" class="cta">Apply Now !</a>
         </nav>
-
-        <!-- Mobile hamburger -->
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
       </header>
-
-      <!-- Mobile dropdown -->
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
-        <a href="/" aria-label="TechFinserv home">Home</a>
-		<a href="blogs/">Blog</a>
-		<a href="emi-calculator/">EMI calculator</a>
-        <a href="#about">About</a>
-		<a href="coming-soon.html">Apply Now</a>
-        <a href="#tools" style="font-weight:600;color:var(--accent-1)"></a>
+        <a href="/">Home</a>
+        <a href="blogs/">Blog</a>
+        <a href="/emi-calculator/">EMI calculator</a>
+        <a href="/" style="font-weight:600;color:var(--accent-1)">Contact</a>
+        <a href="/" style="font-weight:600;color:var(--accent-1)">Apply Now !</a>
       </nav>
     </div>
   </div>
 
-  <!-- Main content (unchanged) -->
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-card glass">
-          <h2>TechFinserv: EMI, SIP & Loan Calculators + Smart Finance Blog</h2>
-          <p class="subtitle">With TechFinserv, you don’t just calculate — you understand, compare, and grow your money smarter</p>
-          <p class="subtitle">TechFinserv is your all-in-one finance hub — use calculators for EMIs, SIP returns, and loan eligibility, while learning from easy-to-read blogs on investments, tax hacks, savings tips, and credit improvement strategies.</p>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="cta" href="#tools">Explore Tools</a>
-            <a class="cta" style="background:transparent;border:1px solid var(--border);color:var(--text);" href="/blogs">Read the blogs</a>
-          </div>
-        </div>
-
-        <div id="tools" class="hero-card glass">
-          <h3 style="margin:0 0 16px;">Quick Tools</h3>
-          <p class="subtitle">Get instant answers with calculators and long-term wisdom from our blogs your all-in-one finance hub.</p>
-          <div class="toolbox">
-            <button onclick="location.href='emi-calculator/'">EMI Calculator</button>
-            <button onclick="location.href='sip-calculator.html'">SIP Calculator</button>
-            <button onclick="location.href='pl-eligibility.html'">Loan Eligibility Calculator</button>
-          </div>
-        </div>
+  <!-- ===== HERO SLIDER (unchanged) ===== -->
+  <section class="hero-carousel">
+    <div class="carousel-slide active" style="background-image:url('/images/home-page/hero-1.webp');">
+      <div class="carousel-content">
+        <h1>Check Loan Eligibility Without Impacting CIBIL</h1>
+        <p>Simulate your loan eligibility using real bank & NBFC rules — private, accurate, and with zero CIBIL enquiry.</p>
+        <a href="/coming-soon.html">Check My Eligibility</a>
       </div>
-    </section>
-	
-    <section class="container" style="margin:60px auto;">
-      <h2>Popular Finance Calculators</h2>
-      <div class="blog-grid">
-        <a href="emi-calculator/" class="post glass">
-          <img decoding="async" src="images/emi-calculator.png" alt="EMI Calculator">
-          <div class="content">
-            <h4>EMI Calculator</h4>
-            <p>Plan your monthly loan repayments quickly and compare options with our smart EMI calculator.</p>
-          </div>
-        </a>
-        <a href="sip-calculator.html" class="post glass">
-          <img decoding="async" src="images/sip-calculator.png" alt="SIP Calculator">
-          <div class="content">
-            <h4>SIP Calculator</h4>
-            <p>Estimate your returns from Systematic Investment Plans and see the power of compounding in action.</p>
-          </div>
-        </a>
-        <a href="pl-eligibility.html" class="post glass">
-          <img decoding="async" src="images/pl-loan.png" alt="Loan Eligibility Calculator">
-          <div class="content">
-            <h4>Loan Eligibility Calculator</h4>
-            <p>Check your loan eligibility instantly and understand how banks decide your borrowing capacity.</p>
-          </div>
-        </a>
-      </div>
-    </section>
-    
-    <section class="container" style="margin:60px auto;">
-      <h2>Finance Guides You Can Trust</h2>
-      <p class="subtitle">Our finance blog breaks down complex money topics into simple, actionable steps.</p>
-      <div class="blog-grid">
-        <div class="post glass">
-          <div class="content">
-            <h4>Investments</h4>
-            <p>Learn how SIPs, mutual funds, and stocks can help you grow wealth with lower risk.</p>
-          </div>
-        </div>
-        <div class="post glass">
-          <div class="content">
-            <h4>Loans</h4>
-            <p>Understand loan types, interest rates, and repayment strategies before you borrow.</p>
-          </div>
-        </div>
-        <div class="post glass">
-          <div class="content">
-            <h4>Tax Saving</h4>
-            <p>Explore Section 80C options, ELSS, PPF, and more to reduce tax liability smartly.</p>
-          </div>
-        </div>
-        <div class="post glass">
-          <div class="content">
-            <h4>Credit Score</h4>
-            <p>Get tips to boost your credit score and qualify for better loans at lower interest rates.</p>
-          </div>
-        </div>
-        <div class="post glass">
-          <div class="content">
-            <h4>Budgeting & Money Management</h4>
-            <p>Learn how to track expenses, build a budget, and set financial goals that help you save more every month.</p>
-          </div>
-        </div>
-        <div class="post glass">
-          <div class="content">
-            <h4>Insurance & Protection</h4>
-            <p>Understand life insurance, health cover, and term plans — essential tools to secure your family’s financial future.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="container" style="margin:60px auto;">
-      <h2>Why Choose TechFinserv?</h2>
-      <p class="subtitle">We make money management simple with trusted tools and guides designed for everyone.</p>
-      <div class="blog-grid">
-        <div class="post glass"><div class="content"><h4>✔ Free Tools</h4><p>Access EMI, SIP, and Loan Eligibility calculators anytime — 100% free, no signup needed.</p></div></div>
-        <div class="post glass"><div class="content"><h4>✔ Easy to Understand</h4><p>Our blogs explain loans, investments, tax, and credit in simple words — no jargon, no confusion.</p></div></div>
-        <div class="post glass"><div class="content"><h4>✔ Always Updated</h4><p>We keep our calculators and articles updated with the latest rules, rates, and market changes.</p></div></div>
-        <div class="post glass"><div class="content"><h4>✔ Trusted by Readers</h4><p>Thousands rely on TechFinserv for accurate tools and practical financial advice every month.</p></div></div>
-        <div class="post glass"><div class="content"><h4>✔ Smart Money Choices</h4><p>From choosing the right SIP strategy to boosting your credit score, we help you decide with confidence.</p></div></div>
-        <div class="post glass"><div class="content"><h4>✔ All-in-One Hub</h4><p>Calculators, blogs, guides — everything you need to plan, save, and grow your money in one place.</p></div></div>
-      </div>
-    </section>
-
-    <div class="container main">
-      <section id="blog">
-        <h2>Latest from the Blog</h2>
-        <div class="blog-grid">
-          <a href="blogs/what-is-emi" class="post glass">
-            <img decoding="async" src="images/what-is-emi.webp" alt="Coins with arrow" loading="lazy">
-            <div class="content">
-              <h4>What is EMI? Guide to Interest, Principal & Foreclosure</h4>
-              <div class="meta">By TechFinserv • Oct 2025 • 6 min read</div>
-              <p>EMI guide: principal vs interest, fixed & floating rates, reducing balance, part payment, foreclosure, and EMI calculator tips to save.</p>
-            </div>
-          </a>
-
-          <a href="/blogs/flexi-hybrid-loan/" class="post glass">
-            <img decoding="async" src="images/flexi-hybrid-loan.webp" alt="Calculator and notebook" loading="lazy">
-            <div class="content">
-              <h4>Flexi Hybrid Loan: Save Interest Smartly</h4>
-              <div class="meta">By TechFinserv • Sep 2025 • 5 min read</div>
-              <p>Pay interest only on what you use, enjoy unlimited part payments and withdrawals without charges, and save interest with every part payment.</p>
-            </div>
-          </a>
-
-          <a href="coming-soon.html" class="post glass">
-            <img decoding="async" src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1200&auto=format&fit=crop" alt="Piggy bank" loading="lazy">
-            <div class="content">
-              <h4>Top 7 Tax-Saving Investments Under Section 80C</h4>
-              <div class="meta">By TechFinserv • Aug 2025 • 7 min read</div>
-              <p>From ELSS to PPF, learn the allowances and typical returns before the financial year ends.</p>
-            </div>
-          </a>
-
-          <a href="/blogs/what-is-cibil/" class="post glass">
-            <img decoding="async" src="/images/what-is-cibil.webp" alt="Laptop charts" loading="lazy">
-            <div class="content">
-              <h4>Credit Score: 9 Practical Habits to Boost It</h4>
-              <div class="meta">By TechFinserv • Aug 2025 • 4 min read</div>
-              <p>Simple steps that move the needle without complex hacks — pay-on-time, utilization, and more.</p>
-            </div>
-          </a>
-        </div>
-      </section>
     </div>
-  </main>
 
-  <footer id="about" class="glass" style="margin-top:24px;">
+    <div class="carousel-slide" style="background-image:url('/images/home-page/hero-2.webp');">
+      <div class="carousel-content">
+        <h1>Plan Better with Smart Financial Tools</h1>
+        <p>Use our free EMI, SIP, FD, and Loan Eligibility calculators to make better decisions based on real-world numbers.</p>
+        <a href="/coming-soon.html">Explore Calculators</a>
+      </div>
+    </div>
+    
+    <div class="carousel-slide" style="background-image:url('/images/home-page/hero-3.webp');">
+      <div class="carousel-content">
+        <h1>Paying High EMIs? Switch to a Better Loan</h1>
+        <p>We compare Balance Transfer options — move high-cost loans and credit card debt to lower-rate lenders and reduce EMI by up to 40%.</p>
+        <a href="/coming-soon.html">Reduce My EMI</a>
+        <a href="/blogs/">Learn How</a>
+      </div>
+    </div>
+
+    <div class="carousel-slide" style="background-image:url('/images/home-page/hero-4.webp');">
+      <div class="carousel-content">
+        <h1>Learn Smarter Finance with Our Blog</h1>
+        <p>Easy-to-understand financial guides — we simplify loans, credit scores, interest rates, and policies so you can make confident decisions.</p>
+        <a href="/blogs/">Read Our Blogs</a>
+      </div>
+    </div>
+    
+    <div class="carousel-slide" style="background-image:url('/images/home-page/hero-5.webp');">
+      <div class="carousel-content">
+        <h1>Boost Your Credit Score</h1>
+        <p>Learn how consistent habits can help you qualify for better loans and lower interest rates.</p>
+        <a href="/blogs/what-is-cibil/">Learn More</a>
+      </div>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prev">&#10094;</button>
+      <button class="carousel-btn" id="next">&#10095;</button>
+    </div>
+
+    <div class="carousel-dots">
+      <span class="carousel-dot active"></span>
+      <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
+      <span class="carousel-dot"></span>
+    </div>
+  </section>
+  
+  <!-- START Why Choose TechFinserv - Overlapping Gradient Grid Modern Style -->
+<section style="background:linear-gradient(110deg,#f2fcff 60%,#e3ebfd 100%);padding:3rem 0 3.3rem 0;">
+  <div style="max-width:1150px;margin:0 auto;padding:0 1.5rem;">
+    <h2 style="text-align:center;font-size:2.45rem;font-weight:700;color:#093399;margin-bottom:2.1rem;letter-spacing:-2px;">
+      Why Choose TechFinserv?
+    </h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:2.1rem; position:relative; ">
+      <!-- Card 1 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg,#c7edff 0%,#defafe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(80,220,220,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#5cd6f6,#9bebeb); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #27e4f939;
+        ">
+          <img src="icons/trusted_readers.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#22cbe0;font-size:1.16rem;font-weight:700;">🔒 No CIBIL Impact</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          We evaluate eligibility without triggering an enquiry.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(115deg,#fff9d0 20%,#ffe6ea 80%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(255,200,80,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#f8cc3b,#ffb7a0); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #ffae3c34;
+        ">
+          <img src="icons/always_updated.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#f1b700;font-size:1.16rem;font-weight:700;">💸 Accurate Loan Simulation</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Know your real approval chances, Rate of interest & Charges
+        </p>
+      </div>
+      
+      <!-- Card 3 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg, #85ffe1 0%, #e4fbfe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(40,175,245,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#01c7a3,#2fd2fa); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #01c7a325;
+        ">
+          <img src="icons/free_tools.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#01ba99;font-size:1.16rem;font-weight:700;">📃 Transparent Charges</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Understand every cost before you apply.
+        </p>
+      </div>
+      <!-- Card 4 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(115deg,#b1cafe 0%,#ebf1fe 80%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(54,140,255,.12);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#1682f8,#7dd0fa); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #1682f870;
+        ">
+          <img src="icons/easy_understand.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#1682f8;font-size:1.16rem;font-weight:700;">⚡ Quick Processing</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          From eligibility check to disbursal — simplified.
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg, #85ffe1 0%, #e4fbfe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(40,175,245,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#01c7a3,#2fd2fa); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #01c7a325;
+        ">
+          <img src="icons/free_tools.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#01ba99;font-size:1.16rem;font-weight:700;">Free Tools</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Access EMI, SIP, and loan eligibility calculators anytime — 100% free, no signup needed.
+        </p>
+      </div>
+      
+      <!-- Card 6 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg,#ffd7c3 5%,#f2f6fb 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(255,130,110,.09);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#ff9d66,#ffd7c3); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #ff925225;
+        ">
+          <img src="icons/smart_choices.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#ff914d;font-size:1.16rem;font-weight:700;">Smart Money Choices</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          From SIP strategy to boosting your credit score, we help you decide with confidence.
+        </p>
+      </div>
+      <!-- Card 7 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(120deg,#c7edff 0%,#defafe 100%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(80,220,220,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#5cd6f6,#9bebeb); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #27e4f939;
+        ">
+          <img src="icons/trusted_readers.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#22cbe0;font-size:1.16rem;font-weight:700;">Easy to Understand</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          Our blogs explain loans, investments, tax, and credit in simple words — no jargon, no confusion.
+        </p>
+      </div>
+      
+      
+     <!-- Card 8 -->
+      <div style="
+        position:relative;
+        background: linear-gradient(115deg,#fff9d0 20%,#ffe6ea 80%);
+        border-radius:21px;
+        box-shadow:0 8px 28px rgba(255,200,80,.10);
+        padding:2.1rem 1.2rem 1.6rem 1.2rem;
+        overflow:hidden;
+      ">
+        <span style="
+          position:absolute; right:22px; top:-24px; 
+          background:linear-gradient(60deg,#f8cc3b,#ffb7a0); 
+          border-radius:18px; 
+          width:52px;height:52px; 
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 4px 14px #ffae3c34;
+        ">
+          <img src="icons/always_updated.svg" alt="" style="width:26px;">
+        </span>
+        <h3 style="margin:0 0 1rem 0;color:#f1b700;font-size:1.16rem;font-weight:700;">Always Updated</h3>
+        <p style="margin:0;color:#1c2a38;opacity:.91;">
+          We keep calculators and articles updated with the latest rules, rates, and market changes.
+        </p>
+      </div>      
+    </div>
+  </div>
+</section>
+<!-- END Why Choose TechFinserv - Overlapping Gradient Grid Modern Style -->
+
+
+<!-- =====================START Explore Loan Options We Offer TFS Products Carousel ===================== -->
+<section id="tfs-products" aria-labelledby="tfs-products-title">
+  <style>
+    /* ===== scoped styles (won't bleed out) ===== */
+    #tfs-products{font-family:Inter,system-ui,Arial,sans-serif;padding:40px 16px;background:linear-gradient(180deg,#f7fbff,#ffffff)}
+    #tfs-products .wrap{max-width:1160px;margin:0 auto}
+    #tfs-products h2{margin:0 0 6px 0;font-size:28px;letter-spacing:-0.5px;color:#0a2540}
+    #tfs-products p.sub{margin:0 0 16px 0;color:#475569}
+    #tfs-products .rail{position:relative;margin-top:12px}
+    #tfs-products .viewport{overflow:hidden}
+    #tfs-products .track{display:flex;gap:12px;will-change:transform}
+    #tfs-products .card{
+      min-width:260px; max-width:260px; flex:0 0 260px;
+      background:linear-gradient(180deg,#fff,#f8fbff); border:1px solid #e7eef9;
+      border-radius:14px; padding:16px; box-shadow:0 8px 24px rgba(2,6,23,.06)
+    }
+    #tfs-products .card h3{margin:0 0 6px 0;font-size:17px;color:#0b63d6}
+    #tfs-products .card p{margin:0 0 10px 0;font-size:14px;color:#475569}
+    #tfs-products .card a{display:inline-block;background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px}
+    #tfs-products .controls{display:flex;align-items:center;gap:10px;margin-top:10px}
+    #tfs-products .arrows{display:flex;gap:8px}
+    #tfs-products button.arrow{
+      width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;
+      background:#fff; box-shadow:0 6px 16px rgba(2,6,23,.12)
+    }
+    #tfs-products .dots{display:flex;gap:6px;margin-left:auto}
+    #tfs-products .dot{width:9px;height:9px;border-radius:999px;background:#dbe7f7;border:1px solid #cfe0f7}
+    #tfs-products .dot.active{background:#10b981}
+    #tfs-products .progress{position:relative;height:6px;background:#e8f1fb;border-radius:999px;overflow:hidden;flex:1}
+    #tfs-products .progress i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#0ea5e9,#10b981)}
+    @media (max-width:720px){
+      #tfs-products .card{min-width:80vw;max-width:80vw;flex-basis:80vw}
+    }
+  </style>
+
+  <div class="wrap">
+    <header>
+      <h2 id="tfs-products-title">💰 Explore Loan Options We Offer</h2>
+      <p class="sub"></p>
+    </header>
+
+    <div class="rail" role="region" aria-roledescription="carousel" aria-label="Loan products">
+      <div class="viewport">
+        <div class="track" id="tfs-products-track">
+          <!-- cards (the script will clone for looping) -->
+          <article class="card">
+            <h3>Personal Loan</h3>
+            <p>Instant approval, minimal documents, and flexible EMIs.</p>
+            <a href="/coming-soon.html">Check Offers →</a>
+          </article>
+          <article class="card">
+            <h3>Flexi Loan</h3>
+            <p>Revolving credit with EMI option — ideal for variable cashflow.</p>
+            <a href="/coming-soon.html">Compare →</a>
+          </article>
+          <article class="card">
+            <h3>Flexi Hybrid Loan</h3>
+            <p>Overdraft + EMI combo — pay only for what you use.</p>
+            <a href="/coming-soon.html">Learn More →</a>
+          </article>
+          <article class="card">
+            <h3>Home Loan</h3>
+            <p>Competitive rates & longer tenures for your dream home.</p>
+            <a href="/coming-soon.html">See Options →</a>
+          </article>
+          <article class="card">
+            <h3>Business Loan</h3>
+            <p>Working capital & expansion finance tailored for SMEs.</p>
+            <a href="/coming-soon.html">Explore →</a>
+          </article>
+          <article class="card">
+            <h3>Loan Against Property</h3>
+            <p>Lower rates by leveraging your residential or commercial property.</p>
+            <a href="/coming-soon.html">Apply →</a>
+          </article>
+        </div>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <div class="arrows">
+          <button class="arrow" id="tfs-prod-prev" aria-label="Previous">‹</button>
+          <button class="arrow" id="tfs-prod-next" aria-label="Next">›</button>
+        </div>
+        <div class="progress" aria-hidden="true"><i id="tfs-prod-progress"></i></div>
+        <div class="dots" id="tfs-prod-dots" role="tablist" aria-label="Slide navigation"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.getElementById('tfs-products');
+      const track = root.querySelector('#tfs-products-track');
+      const prevBtn = root.querySelector('#tfs-prod-prev');
+      const nextBtn = root.querySelector('#tfs-prod-next');
+      const dotsWrap = root.querySelector('#tfs-prod-dots');
+      const prog = root.querySelector('#tfs-prod-progress');
+      const AUTO_MS = 4000; // 4s
+      let cards = Array.from(track.children);
+      const CLONES = 2; // how many to clone at each end
+      let index = CLONES; // start after prepended clones
+      let timer = null;
+      let cardW = 0;
+
+      // clone for infinite loop
+      function cloneEnds(){
+        const first = cards.slice(0, CLONES).map(n=>n.cloneNode(true));
+        const last = cards.slice(-CLONES).map(n=>n.cloneNode(true));
+        last.forEach(n=>track.insertBefore(n, track.firstChild));
+        first.forEach(n=>track.appendChild(n));
+        cards = Array.from(track.children);
+      }
+
+      function measure(){
+        cardW = cards[0].getBoundingClientRect().width + 12; // +gap
+      }
+
+      function setPosition(noAnimate){
+        if(noAnimate){ track.style.transition = 'none'; }
+        track.style.transform = `translateX(${-index * cardW}px)`;
+        if(noAnimate){ requestAnimationFrame(()=>track.style.transition='transform .5s ease'); }
+        updateDots();
+      }
+
+      function buildDots(){
+        dotsWrap.innerHTML='';
+        const visibleCount = cards.length - (CLONES*2);
+        for(let i=0;i<visibleCount;i++){
+          const b = document.createElement('button');
+          b.className='dot';
+          b.setAttribute('role','tab');
+          b.setAttribute('aria-label', `Show slide ${i+1}`);
+          b.addEventListener('click', ()=>{ index = i + CLONES; setPosition(); restart(); });
+          dotsWrap.appendChild(b);
+        }
+      }
+
+      function updateDots(){
+        const dots = Array.from(dotsWrap.children);
+        const visibleCount = cards.length - (CLONES*2);
+        let active = (index - CLONES) % visibleCount;
+        if(active<0) active += visibleCount;
+        dots.forEach((d,i)=>d.classList.toggle('active', i===active));
+        // progress bar
+        prog.style.transition = 'none'; prog.style.width = '0%';
+        requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ prog.style.transition=`width ${AUTO_MS}ms linear`; prog.style.width='100%'; }); });
+      }
+
+      function next(){
+        index++;
+        setPosition();
+        // snap when we hit the cloned tail
+        if(index === cards.length - CLONES){
+          setTimeout(()=>{ index = CLONES; setPosition(true); }, 520);
+        }
+      }
+      function prev(){
+        index--;
+        setPosition();
+        if(index === CLONES - 1){
+          setTimeout(()=>{ index = cards.length - CLONES - 1; setPosition(true); }, 520);
+        }
+      }
+
+      function start(){ stop(); timer = setInterval(next, AUTO_MS); }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+      function restart(){ stop(); setTimeout(start, 250); }
+
+      // init
+      cloneEnds();
+      measure();
+      buildDots();
+      track.style.transition = 'transform .5s ease';
+      setPosition(true);
+      start();
+
+      // events
+      nextBtn.addEventListener('click', ()=>{ next(); restart(); });
+      prevBtn.addEventListener('click', ()=>{ prev(); restart(); });
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      window.addEventListener('resize', ()=>{ measure(); setPosition(true); });
+
+      // keyboard support
+      window.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight'){ next(); restart(); } if(e.key==='ArrowLeft'){ prev(); restart(); } });
+    })();
+  </script>
+</section>
+<!-- =====================START Explore Loan Options We Offer TFS Products Carousel ===================== -->
+  
+<!-- ===================== TFS How We Work ===================== -->
+<section id="tfs-process" aria-labelledby="tfs-process-title">
+  <style>
+    #tfs-process{font-family:Inter,system-ui,Arial,sans-serif;padding:44px 16px;background:linear-gradient(180deg,#ffffff,#f9fdfc)}
+    #tfs-process .wrap{max-width:1160px;margin:0 auto}
+    #tfs-process h2{margin:0 0 6px 0;font-size:28px;letter-spacing:-.5px;color:#0a2540}
+    #tfs-process p.sub{margin:0 0 24px 0;color:#475569}
+    /* timeline */
+    #tfs-process .timeline{position:relative;display:grid;grid-template-columns:1fr;gap:16px}
+    #tfs-process .line{position:absolute;left:18px;top:0;bottom:0;width:3px;background:#e7f4ef;border-radius:999px;overflow:hidden}
+    #tfs-process .line i{position:absolute;left:0;top:0;bottom:auto;width:100%;height:0%;background:linear-gradient(180deg,#10b981,#0ea5e9)}
+    #tfs-process .step{
+      position:relative;display:grid;grid-template-columns:44px auto;gap:14px;align-items:start;
+      background:#fff;border:1px solid #e9f1fb;border-radius:14px;padding:14px 16px;box-shadow:0 8px 24px rgba(2,6,23,.06);opacity:0;transform:translateY(14px);
+      transition:opacity .5s ease, transform .5s ease;
+    }
+    #tfs-process .step.in{opacity:1;transform:none}
+    #tfs-process .dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#0ea5e9,#10b981);color:#fff;font-weight:800}
+    #tfs-process .s-title{margin:0 0 6px 0;font-size:16px;color:#0b63d6}
+    #tfs-process .s-text{margin:0;color:#475569;font-size:14px}
+    #tfs-process .tagline{margin-top:16px;padding:14px 16px;background:#f0fff7;border:1px solid #d9f6ea;border-radius:12px;color:#125c47}
+    @media (min-width:860px){
+      #tfs-process .timeline{grid-template-columns:1fr 1fr}
+      #tfs-process .line{left:50%;transform:translateX(-50%)}
+      #tfs-process .step{grid-template-columns:44px auto; }
+    }
+  </style>
+
+  <div class="wrap">
+    <header>
+      <h2 id="tfs-process-title">🔄 Simple, Smart, Transparent Loan Process</h2>
+      <p class="sub"></p>
+    </header>
+
+    <div class="timeline" id="tfs-process-timeline">
+      <span class="line" aria-hidden="true"><i id="tfs-line-fill"></i></span>
+
+      <!-- 1 -->
+      <article class="step" data-step="1">
+        <div class="dot">1</div>
+        <div>
+          <h3 class="s-title">Profile Review (No CIBIL Enquiry)</h3>
+          <p class="s-text">Share salary, employer type, and obligations. We run a private simulation — your credit file stays untouched.</p>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="step" data-step="2">
+        <div class="dot">2</div>
+        <div>
+          <h3 class="s-title">Eligibility Simulation & Comparison</h3>
+          <p class="s-text">We model lender policies and compare offers across banks & NBFCs with itemised costs.</p>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="step" data-step="3">
+        <div class="dot">3</div>
+        <div>
+          <h3 class="s-title">Best Offer Selection</h3>
+          <p class="s-text">Choose the most suitable lender based on rate, EMI, tenure, processing fee, and prepayment rules.</p>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="step" data-step="4">
+        <div class="dot">4</div>
+        <div>
+          <h3 class="s-title">Documentation & Processing</h3>
+          <p class="s-text">We prepare and submit your file, coordinate with the lender, and handle follow-ups.</p>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="step" data-step="5">
+        <div class="dot">5</div>
+        <div>
+          <h3 class="s-title">Bank/NBFC Disbursal</h3>
+          <p class="s-text">On approval, the lender disburses funds. We guide final steps and clarify any charges.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="tagline">“We bring transparency to every step of your loan journey.”</div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.getElementById('tfs-process');
+      const steps = Array.from(root.querySelectorAll('.step'));
+      const fill = root.querySelector('#tfs-line-fill');
+
+      // reveal on scroll
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('in');
+            // update vertical progress fill based on how many steps are visible
+            const visible = steps.filter(s=>s.classList.contains('in')).length;
+            const pct = Math.max(0, Math.min(100, (visible/steps.length)*100));
+            fill.style.height = pct + '%';
+          }
+        });
+      }, {root:null, threshold:0.2});
+      steps.forEach(s=>io.observe(s));
+    })();
+  </script>
+</section>
+<!-- =================== /TFS How We Work =================== -->
+  
+  <h2>Popular Finance Calculators</h2>
+<div class="calc-list">
+  <div class="calc-card">
+    <img src="/images/home-page/icons/emi-calculator-icon.svg" alt="EMI Icon" />
+    <h4>EMI Calculator</h4>
+    <p>See exact monthly payments and better plan your loan.</p>
+    <a href="/emi-calculator/" target="_blank">Try Calculator</a>
+  </div>
+  <div class="calc-card">
+    <img src="/images/home-page/icons/loan-Comparison-icon.webp" alt="Compare Icon" />
+    <h4>Loan Comparison</h4>
+    <p>Quickly compare interest, tenure, and EMIs for best offers.</p>
+    <a href="/pl-eligibility.html" target="_blank">Compare Loans</a>
+  </div>
+  <div class="calc-card">
+    <img src="/images/home-page/icons/sip-calculator-icon.webp" alt="FD Icon" />
+    <h4>FD Calculator</h4>
+    <p>Estimate fixed deposit returns for smarter savings.</p>
+    <a href="/coming-soon.html" target="_blank">Check Returns</a>
+  </div>
+  <div class="calc-card">
+    <img src="/images/home-page/icons/budget-Planner-icon.webp" alt="Budget Icon" />
+    <h4>Budget Planner</h4>
+    <p>Set targets, manage money flows, and stick to goals.</p>
+    <a href="/coming-soon.html" target="_blank">Plan Budget</a>
+  </div>
+</div>
+
+  <!-- Finance Guides Section - Alternate Modern Style -->
+<section style="background: #f0f9ff; padding: 3rem 0;">
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 1.2rem;">
+    <h2 style="text-align: center; font-size: 2.45rem; font-weight: 700; color: #183dc5; margin-bottom: 0.7rem;">
+      Finance Guides You Can Trust
+    </h2>
+    <p style="text-align: center; color: #3d609d; font-size: 1.12rem; margin-bottom: 2.4rem;">
+      Our finance blog breaks down complex money topics into simple, actionable steps.
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: 1.7rem; justify-content: center;">
+      <div style="flex:1 1 275px; max-width: 340px; min-width: 210px; background: #fff; border-radius: 17px; box-shadow: 0 3px 22px rgba(24,61,197,0.10); border-left: 6px solid #22cc88; padding: 1.3rem 1.15rem 1.15rem 1.1rem; margin-bottom: 0.4rem;">
+        <img src="icons/investment.svg" alt="" style="width: 38px; margin-bottom: 0.6rem;">
+        <h3 style="margin-top: 0; color: #22cc88; font-size: 1.17rem;">Investments</h3>
+        <p style="margin: 0; color: #222;">
+          Learn how SIPs, mutual funds, and stocks can help you grow wealth with lower risk.
+        </p>
+      </div>
+      <div style="flex:1 1 275px; max-width: 340px; min-width: 210px; background: #fff; border-radius: 17px; box-shadow: 0 3px 22px rgba(24,61,197,0.10); border-left: 6px solid #1682f8; padding: 1.3rem 1.15rem 1.15rem 1.1rem; margin-bottom: 0.4rem;">
+        <img src="icons/loans.svg" alt="" style="width: 38px; margin-bottom: 0.6rem;">
+        <h3 style="margin-top: 0; color: #1682f8; font-size: 1.17rem;">Loans</h3>
+        <p style="margin: 0; color: #222;">
+          Understand loan types, interest rates, and repayment strategies before you borrow.
+        </p>
+      </div>
+      <div style="flex:1 1 275px; max-width: 340px; min-width: 210px; background: #fff; border-radius: 17px; box-shadow: 0 3px 22px rgba(24,61,197,0.10); border-left: 6px solid #ffc64c; padding: 1.3rem 1.15rem 1.15rem 1.1rem; margin-bottom: 0.4rem;">
+        <img src="icons/tax.svg" alt="" style="width: 38px; margin-bottom: 0.6rem;">
+        <h3 style="margin-top: 0; color: #ffc64c; font-size: 1.17rem;">Tax Saving</h3>
+        <p style="margin: 0; color: #222;">
+          Explore Section 80C options, ELSS, PPF, and more to reduce tax liability smartly.
+        </p>
+      </div>
+      <div style="flex:1 1 275px; max-width: 340px; min-width: 210px; background: #fff; border-radius: 17px; box-shadow: 0 3px 22px rgba(24,61,197,0.10); border-left: 6px solid #00b3b3; padding: 1.3rem 1.15rem 1.15rem 1.1rem; margin-bottom: 0.4rem;">
+        <img src="icons/credit.svg" alt="" style="width: 38px; margin-bottom: 0.6rem;">
+        <h3 style="margin-top: 0; color: #00b3b3; font-size: 1.17rem;">Credit Score</h3>
+        <p style="margin: 0; color: #222;">
+          Get tips to boost your credit score and qualify for better loans at lower interest rates.
+        </p>
+      </div>
+      <div style="flex:1 1 275px; max-width: 340px; min-width: 210px; background: #fff; border-radius: 17px; box-shadow: 0 3px 22px rgba(24,61,197,0.10); border-left: 6px solid #13cfab; padding: 1.3rem 1.15rem 1.15rem 1.1rem;">
+        <img src="icons/budget.svg" alt="" style="width: 38px; margin-bottom: 0.6rem;">
+        <h3 style="margin-top: 0; color: #13cfab; font-size: 1.17rem;">Budgeting & Money Management</h3>
+        <p style="margin: 0; color: #222;">
+          Learn how to track expenses, build a budget, and set financial goals that help you save more every month.
+        </p>
+      </div>
+      <div style="flex:1 1 275px; max-width: 340px; min-width: 210px; background: #fff; border-radius: 17px; box-shadow: 0 3px 22px rgba(24,61,197,0.10); border-left: 6px solid #db4f31; padding: 1.3rem 1.15rem 1.15rem 1.1rem;">
+        <img src="icons/insurance.svg" alt="" style="width: 38px; margin-bottom: 0.6rem;">
+        <h3 style="margin-top: 0; color: #db4f31; font-size: 1.17rem;">Insurance & Protection</h3>
+        <p style="margin: 0; color: #222;">
+          Understand life insurance, health cover, and term plans — essential tools to secure your family's financial future.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+   
+<!-- START STACKED BLOG-CARD CAROUSEL (AUTO + MANUAL + PROGRESS BAR + DOTS) -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 1.2rem;">
+    <h2 style="text-align: center; font-size: 2.45rem; font-weight: 700; color: #183dc5; margin-bottom: 0.7rem;">
+      Finance Guides You Can Trust
+    </h2>
+    <p style="text-align: center; color: #3d609d; font-size: 1.12rem; margin-bottom: 2.4rem;">
+      Our finance blog breaks down complex money topics into simple, actionable steps.
+    </p>
+<section class="stacked-carousel-wrap" aria-label="Featured blog cards">
+  <div class="stacked-carousel" id="stackedCarousel" aria-live="polite">
+    <!-- Blog cards -->
+    <article class="stack-card">
+      <a href="/blogs/cibil-2.0/" class="card-link">
+        <div class="card-media" style="background-image:url('/blogs/cibil-2.0/cibil-2.0-cover.webp')"></div>
+        <div class="card-body">
+          <h3>RBI's CIBIL 2.0 — What You Need to Know</h3>
+          <p>A quick guide to the 2025 upgrade to India’s credit scoring and its impact on borrowers.</p>
+        </div>
+      </a>
+    </article>
+
+    <article class="stack-card">
+      <a href="/blogs/what-is-emi/" class="card-link">
+        <div class="card-media" style="background-image:url('/images/what-is-emi.webp')"></div>
+        <div class="card-body">
+          <h3>What is EMI ? Complete Guide</h3>
+          <p>Your quick guide to EMIs for personal, home loans, etc in 2025.</p>
+        </div>
+      </a>
+    </article>
+
+    <article class="stack-card">
+      <a href="/blogs/what-is-cibil/" class="card-link">
+        <div class="card-media" style="background-image:url('/images/what-is-cibil.webp')"></div>
+        <div class="card-body">
+          <h3>Discover Proven Ways to Boost Your CIBIL Score Quickly</h3>
+          <p>Your score decides loan approval speed and interest rates..</p>
+        </div>
+      </a>
+    </article>
+    
+    <article class="stack-card">
+      <a href="/blogs/blog-rbi-1/" class="card-link">
+        <div class="card-media" style="background-image:url('/images/blog-rbi-cover-1.webp')"></div>
+        <div class="card-body">
+          <h3>🕒 RBI Cheque Clearing Rule 2026 – Faster, Same-Day Settlement</h3>
+          <p>Faster cheque clearing for instant fund access and smooth banking.</p>
+        </div>
+      </a>
+    </article>
+    
+    <article class="stack-card">
+      <a href="/blogs/flexi-hybrid-loan/" class="card-link">
+        <div class="card-media" style="background-image:url('/images/flexi-hybrid-loan.webp')"></div>
+        <div class="card-body">
+          <h3>Understand How a Flexi Hybrid Loan Works</h3>
+          <p>Pay interest only on the amount you use, not the full limit.</p>
+        </div>
+      </a>
+    </article>
+    
+    <article class="stack-card">
+      <a href="/blogs/ppf-1/" class="card-link">
+        <div class="card-media" style="background-image:url('https://images.unsplash.com/photo-1427751840561-9852520f8ce8?auto=format&fit=crop&w=600&q=80')"></div>
+        <div class="card-body">
+          <h3>Public Provident Fund — Why Choose PPF?</h3>
+          <p>Earn steady, tax-free returns with your trusted PPF investment.</p>
+        </div>
+      </a>
+    </article>
+  </div>
+
+  <!-- Manual Buttons -->
+  <div class="stack-controls" aria-hidden="false">
+    <button id="prevStack" class="stack-btn" aria-label="Previous">‹</button>
+    <button id="nextStack" class="stack-btn" aria-label="Next">›</button>
+  </div>
+
+  <!-- Progress bar (for center card) -->
+  <div class="stack-progress-wrap" aria-hidden="true">
+    <div class="stack-progress" id="stackProgress"></div>
+  </div>
+
+  <!-- Dots -->
+  <div class="stack-dots" id="stackDots" role="tablist" aria-label="Slide navigation"></div>
+</section>
+
+<style>
+/* --- MOBILE-ONLY ENHANCEMENTS (no desktop changes) --- */
+@media (max-width: 640px) {
+
+  /* Make the wrapper resist side scroll-jank */
+  .stacked-carousel-wrap {
+    overflow: hidden;
+    padding: 14px;
+  }
+
+  /* Friendlier card size on phones */
+  :root{
+    --card-w: 86vw;
+    --card-h: clamp(300px, 72vw, 420px);
+    --gap: 14px;
+    --dot-size: 12px;
+    --dot-gap: 10px;
+  }
+
+  /* Softer perspective on small screens */
+  .stacked-carousel{
+    perspective: 900px;
+    height: var(--card-h);
+  }
+
+  /* Tweak positions for neighbors (flatter, more readable) */
+  .stack-card[data-pos="0"]{ transform: translateX(-50%) translateZ(0) scale(1); }
+  .stack-card[data-pos="1"]{ transform: translateX(calc(-50% + 64%)) translateZ(-40px) scale(.92) rotateY(-4deg); opacity:.94; }
+  .stack-card[data-pos="2"]{ transform: translateX(calc(-50% + 128%)) translateZ(-70px) scale(.86) rotateY(0deg); opacity:.70; }
+  .stack-card[data-pos="-1"]{ transform: translateX(calc(-50% - 64%)) translateZ(-40px) scale(.92) rotateY(4deg);  opacity:.94; }
+  .stack-card[data-pos="-2"]{ transform: translateX(calc(-50% - 128%)) translateZ(-70px) scale(.86) rotateY(0deg); opacity:.70; }
+
+  /* Slightly bigger media area feels richer on mobile */
+  .card-media{ height: 56%; }
+  .card-body{ padding: 14px; gap: 6px; }
+  .card-body h3{ font-size: 1rem; line-height: 1.25; }
+  .card-body p{ font-size: 0.94rem; }
+
+  /* Larger, thumb-friendly controls pinned near bottom center */
+  .stack-controls{
+    position: absolute;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 72px;
+    gap: 10px;
+    z-index: 99;
+  }
+  .stack-btn{
+    width: 54px; height: 54px;
+    font-size: 26px;
+    box-shadow: 0 10px 24px rgba(2,6,23,.16);
+    touch-action: manipulation;
+  }
+
+  /* Progress bar slimmer & centered */
+  .stack-progress-wrap{
+    width: 64vw;
+    bottom: 46px;
+    height: 5px;
+  }
+
+  /* Bigger dots for easier taps */
+  .stack-dots{
+    bottom: 16px;
+    gap: var(--dot-gap);
+  }
+  .stack-dot{
+    width: var(--dot-size);
+    height: var(--dot-size);
+  }
+  .stack-dot.active{ transform: scale(1.35); }
+
+  /* Avoid accidental text selection while swiping */
+  .stacked-carousel, .stack-card, .stack-dots, .stack-controls{
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce){
+  .stack-card,
+  .stack-progress{
+    transition: none !important;
+  }
+}
+/* --- MOBILE-ONLY ENHANCEMENTS (no desktop changes) --- */
+
+    
+  
+  :root{
+    --card-w: 320px;
+    --card-h: 420px;
+    --gap: 18px;
+    --accent: #10b981;
+    --dot-size: 10px;
+    --dot-gap: 8px;
+  }
+
+  .stacked-carousel-wrap{
+    max-width: 1200px;
+    margin: 36px auto;
+    padding: 18px;
+    position: relative;
+  }
+
+  .stacked-carousel{
+    height: var(--card-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+    perspective: 1400px;
+  }
+
+  .stack-card{
+    width: var(--card-w);
+    height: var(--card-h);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform-origin: center center;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(16,24,40,0.18);
+    background: #fff;
+    transition: transform 420ms cubic-bezier(.2,.9,.2,1), opacity 320ms ease, filter 320ms ease;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+  .card-link{
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    color:inherit;
+    text-decoration:none;
+  }
+
+  .card-media{
+    height: 52%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-body{
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .card-body h3{
+    margin: 0;
+    font-size: 1.05rem;
+    color: #063353;
+    line-height: 1.25;
+  }
+
+  .card-body p{
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    flex: 1;
+  }
+
+  /* positions & depth */
+  .stack-card[data-pos="0"]{
+    transform: translateX(-50%) translateZ(0px) scale(1);
+    z-index:60; opacity:1;
+  }
+  .stack-card[data-pos="1"]{ transform: translateX(calc(-50% + (var(--card-w) * 0.7 + var(--gap)))) translateZ(-40px) scale(.92) rotateY(-9deg); z-index:50; opacity:.95; }
+  .stack-card[data-pos="2"]{ transform: translateX(calc(-50% + (var(--card-w) * 1.4 + var(--gap)*2))) translateZ(-80px) scale(.86) rotateY(-14deg); z-index:40; opacity:.78; }
+  .stack-card[data-pos="-1"]{ transform: translateX(calc(-50% - (var(--card-w) * 0.7 + var(--gap)))) translateZ(-40px) scale(.92) rotateY(9deg); z-index:50; opacity:.95; }
+  .stack-card[data-pos="-2"]{ transform: translateX(calc(-50% - (var(--card-w) * 1.4 + var(--gap)*2))) translateZ(-80px) scale(.86) rotateY(14deg); z-index:40; opacity:.78; }
+  .stack-card[data-hidden="true"]{ opacity:0; transform: translateX(-50%) translateZ(-160px) scale(.7); pointer-events:none; z-index:10; }
+
+  @media (max-width: 900px){
+    :root{ --card-w: 280px; --card-h: 360px; }
+    .stack-card[data-pos="2"], .stack-card[data-pos="-2"]{ transform: translateX(-50%) translateZ(-60px) scale(.84) rotateY(0deg); opacity:.7; }
+  }
+
+  /* Buttons */
+  .stack-controls{
+    position: absolute;
+    right: 14px;
+    bottom: 76px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .stack-btn{
+    background: #fff;
+    border: 0;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 6px 16px rgba(2,6,23,.12);
+    font-size: 22px;
+    cursor: pointer;
+    color: #0ea5e9;
+    transition: 0.18s;
+  }
+  .stack-btn:hover{ background: var(--accent); color: #fff; }
+
+  .stack-card[data-pos="0"] .card-body{
+    border-top: 3px solid var(--accent);
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Progress bar */
+  .stack-progress-wrap{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 48px;
+    width: calc(var(--card-w) * 0.68);
+    height: 6px;
+    background: rgba(2,6,23,0.06);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,0.06);
+    pointer-events: none;
+  }
+  .stack-progress{
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #0589d6);
+    border-radius: 999px;
+    transition: width linear;
+  }
+
+  @media (max-width:900px){
+    .stack-progress-wrap{ width: calc(var(--card-w) * 0.64); bottom: 42px; height: 5px; }
+  }
+
+  /* Dots */
+  .stack-dots{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 18px;
+    display:flex;
+    gap: var(--dot-gap);
+    align-items:center;
+  }
+  .stack-dot{
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 999px;
+    background: rgba(2,6,23,0.12);
+    border: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer;
+    transition: transform .18s, background .18s;
+  }
+  .stack-dot.active{
+    transform: scale(1.25);
+    background: var(--accent);
+  }
+  /* accessibility focus */
+  .stack-dot:focus{ outline: 3px solid rgba(14,165,233,0.2); outline-offset: 3px; }
+
+
+/* === MOBILE FIX OVERRIDES: move arrows below the card, make room === */
+@media (max-width: 640px){
+  .stack-controls{
+    bottom: -26px !important;       /* puts buttons under the card */
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    z-index: 50;                     /* below the card; not over text */
+    gap: 10px;
+  }
+
+  /* Slightly smaller buttons on phones */
+  .stack-btn{
+    width: 46px !important;
+    height: 46px !important;
+    font-size: 22px !important;
+  }
+
+  /* Space so buttons/progress/dots don't overlap your content */
+  .stacked-carousel-wrap{
+    padding-bottom: 90px !important; /* extra room at bottom of section */
+  }
+
+  /* Shift progress + dots down accordingly */
+  .stack-progress-wrap{ bottom: -6px !important; }
+  .stack-dots{ bottom: -44px !important; }
+}
+
+
+  
+</style>
+
+
+
+    
+<script>
+(function(){
+  const carousel = document.getElementById('stackedCarousel');
+  const cards = Array.from(carousel.querySelectorAll('.stack-card'));
+  const nextBtn = document.getElementById('nextStack');
+  const prevBtn = document.getElementById('prevStack');
+  const progressEl = document.getElementById('stackProgress');
+  const dotsWrap = document.getElementById('stackDots');
+
+  if (!cards.length) return;
+
+  const AUTO_MS = 4000; // 4 seconds per slide
+  let centerIndex = 0;
+  let timer = null;
+
+  // create dots
+  const dots = [];
+  function buildDots(){
+    dotsWrap.innerHTML = '';
+    cards.forEach((_, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'stack-dot';
+      btn.setAttribute('role','tab');
+      btn.setAttribute('aria-selected','false');
+      btn.setAttribute('aria-label', `Slide ${idx+1}`);
+      btn.dataset.index = idx;
+      btn.addEventListener('click', (e)=>{
+        const targetIndex = Number(e.currentTarget.dataset.index);
+        goTo(targetIndex);
+        restartAuto();
+      });
+      dotsWrap.appendChild(btn);
+      dots.push(btn);
+    });
+  }
+
+  // render positions and UI
+  function render(){
+    const total = cards.length;
+    cards.forEach((card, i) => {
+      let raw = i - centerIndex;
+      const wrapped = ((raw + total + Math.floor(total/2)) % total) - Math.floor(total/2);
+      let offset = wrapped;
+      if (Math.abs(offset) > 2) {
+        card.dataset.hidden = "true";
+        card.removeAttribute('data-pos');
+      } else {
+        delete card.dataset.hidden;
+        card.dataset.pos = String(offset);
+      }
+    });
+
+    dots.forEach((d, idx) => {
+      const isActive = idx === centerIndex;
+      d.classList.toggle('active', isActive);
+      d.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  }
+
+  // slide helpers
+  function nextSlide(){
+    centerIndex = (centerIndex + 1) % cards.length;
+    render();
+  }
+  function prevSlide(){
+    centerIndex = (centerIndex - 1 + cards.length) % cards.length;
+    render();
+  }
+  function goTo(idx){
+    centerIndex = ((idx % cards.length) + cards.length) % cards.length;
+    render();
+  }
+
+  function startProgress(){
+    cancelProgress();
+    progressEl.style.transition = 'none';
+    progressEl.style.width = '0%';
+    requestAnimationFrame(()=> {
+      requestAnimationFrame(()=> {
+        progressEl.style.transition = `width ${AUTO_MS}ms linear`;
+        progressEl.style.width = '100%';
+      });
+    });
+    timer = setTimeout(()=> {
+      nextSlide();
+      startProgress();
+    }, AUTO_MS);
+  }
+  function cancelProgress(){
+    if (timer) { clearTimeout(timer); timer = null; }
+    progressEl.style.transition = 'none';
+    progressEl.style.width = '0%';
+  }
+  function restartAuto(){
+    cancelProgress();
+    setTimeout(startProgress, 60);
+  }
+
+  nextBtn.addEventListener('click', ()=> { nextSlide(); restartAuto(); });
+  prevBtn.addEventListener('click', ()=> { prevSlide(); restartAuto(); });
+
+  buildDots();
+  render();
+  startProgress();
+
+  window.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowLeft'){ prevSlide(); restartAuto(); }
+    if (e.key === 'ArrowRight'){ nextSlide(); restartAuto(); }
+  });
+
+})();
+
+
+
+  
+/* --- MOBILE SWIPE (no changes to your existing code) --- */
+(function(){
+  const wrap = document.querySelector('.stacked-carousel-wrap');
+  const area = document.getElementById('stackedCarousel');
+  const prev = document.getElementById('prevStack');
+  const next = document.getElementById('nextStack');
+
+  if (!wrap || !area || !prev || !next) return;
+
+  let startX = 0, startY = 0, isSwiping = false, moved = false;
+  const THRESHOLD = 28;      // min horizontal px to trigger
+  const ANGLE_GUARD = 0.58;  // disallow if mostly vertical (tan ~ 30deg)
+
+  const onStart = (x, y) => { startX = x; startY = y; isSwiping = true; moved = false; };
+  const onMove = (x, y) => {
+    if(!isSwiping) return;
+    const dx = x - startX, dy = y - startY;
+    if (Math.abs(dy) > Math.abs(dx) * ANGLE_GUARD) return; // vertical scroll -> ignore
+    if (Math.abs(dx) > 8) moved = true; // minor movement detected
+  };
+  const onEnd = (x, y) => {
+    if(!isSwiping) return;
+    const dx = x - startX, dy = y - startY;
+    isSwiping = false;
+    if (!moved) return;
+
+    // Only act on mostly-horizontal swipes
+    if (Math.abs(dy) > Math.abs(dx) * ANGLE_GUARD) return;
+
+    if (dx <= -THRESHOLD) {
+      // swipe left -> next
+      next.click();
+    } else if (dx >= THRESHOLD) {
+      // swipe right -> prev
+      prev.click();
+    }
+  };
+
+  // Touch (mobile)
+  area.addEventListener('touchstart', (e)=>{
+    const t = e.changedTouches[0];
+    onStart(t.clientX, t.clientY);
+  }, {passive:true});
+
+  area.addEventListener('touchmove', (e)=>{
+    const t = e.changedTouches[0];
+    onMove(t.clientX, t.clientY);
+  }, {passive:true});
+
+  area.addEventListener('touchend', (e)=>{
+    const t = e.changedTouches[0];
+    onEnd(t.clientX, t.clientY);
+  }, {passive:true});
+
+  // Pointer (fallback for some devices)
+  area.addEventListener('pointerdown', (e)=>{
+    if (e.pointerType !== 'touch') return;
+    onStart(e.clientX, e.clientY);
+  });
+  area.addEventListener('pointermove', (e)=>{
+    if (e.pointerType !== 'touch') return;
+    onMove(e.clientX, e.clientY);
+  });
+  area.addEventListener('pointerup', (e)=>{
+    if (e.pointerType !== 'touch') return;
+    onEnd(e.clientX, e.clientY);
+  });
+})();
+/* --- MOBILE SWIPE (no changes to your existing code) --- */
+
+</script>
+ </div>
+<!-- END STACKED BLOG-CARD CAROUSEL (AUTO + MANUAL + PROGRESS BAR + DOTS) -->         
+      
+      
+   
+
+
+  <!-- ====== FOOTER (replaced with Coming Soon footer) ====== -->
+  <footer id="contact" class="glass">
     <div class="container">
       <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+      <p class="subtitle" style="font-size:13px">Need something urgently? <a href="mailto:hello@techfinserv.com">hello@techfinserv.com</a></p>
     </div>
   </footer>
 
   <script>
-    // year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle (lightweight)
+    // Hero slider (unchanged)
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const nextBtn = document.getElementById('next');
+    const prevBtn = document.getElementById('prev');
+    let i = 0;
+    let timer;
+
+    function showSlide(n) {
+      slides.forEach((s,index)=> s.classList.toggle('active', index===n));
+      dots.forEach((d,index)=> d.classList.toggle('active', index===n));
+      i = n;
+    }
+    function nextSlide(){ showSlide((i+1)%slides.length); }
+    function prevSlide(){ showSlide((i-1+slides.length)%slides.length); }
+    function auto(){ timer=setInterval(nextSlide,6000); }
+    function reset(){ clearInterval(timer); auto(); }
+
+    nextBtn.onclick = ()=>{ nextSlide(); reset(); };
+    prevBtn.onclick = ()=>{ prevSlide(); reset(); };
+    dots.forEach((dot,index)=> dot.onclick = ()=>{ showSlide(index); reset(); });
+
+    showSlide(0); auto();
+
+    // Mobile menu (from Coming Soon header)
     (function () {
       const toggle = document.querySelector('.mobile-menu-toggle');
       const menu = document.getElementById('mobileMenu');
       if (!toggle || !menu) return;
-
       const setExpanded = (open) => {
         toggle.setAttribute('aria-expanded', String(open));
         menu.classList.toggle('open', open);
       };
-
       toggle.addEventListener('click', () => {
         const open = !menu.classList.contains('open');
         setExpanded(open);
       });
-
-      // Close menu when a link is clicked
       menu.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') setExpanded(false);
       });
-
-      // Reset on resize to desktop
       window.addEventListener('resize', () => {
         if (window.innerWidth > 768) setExpanded(false);
       });
     })();
-  
   </script>
-  
 </body>
 </html>
