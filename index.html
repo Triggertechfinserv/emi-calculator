@@ -67,42 +67,44 @@
 <link rel="alternate" type="application/rss+xml" title="TechFinserv Blog RSS" href="https://www.techfinserv.com/blogs/feed.xml" />
 
 <!-- === JSON-LD: Organization === -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://www.techfinserv.com/#organization"
-    "name": "TechFinserv",
-    "url": "https://www.techfinserv.com/",
-    "logo": "https://www.techfinserv.com/images/techfinserv-logo.webp",
-    "description": "Free EMI, SIP, FD and loan eligibility calculators with transparent comparisons and easy finance guides for India.",
-    "contactPoint": [{
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.techfinserv.com/#organization",
+  "name": "TechFinserv",
+  "url": "https://www.techfinserv.com/",
+  "logo": "https://www.techfinserv.com/images/techfinserv-logo.webp",
+  "description": "Free EMI, SIP, FD and loan eligibility calculators with transparent comparisons and easy finance guides for India.",
+  "contactPoint": [
+    {
       "@type": "ContactPoint",
       "contactType": "customer support",
       "email": "hello@techfinserv.com",
       "areaServed": "IN",
       "availableLanguage": ["en"]
-    }],
-    "sameAs": [
-      "https://www.facebook.com/YourPage",          
-      "https://www.instagram.com/YourProfile",      
-      "https://www.linkedin.com/company/YourCompany",
-      "https://x.com/YourTwitterHandle"             
-    ]
-  }
-  </script>
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/YourPage",
+    "https://www.instagram.com/YourProfile",
+    "https://www.linkedin.com/company/YourCompany",
+    "https://x.com/YourTwitterHandle"
+  ]
+}
+</script>
 
-  <!-- === JSON-LD: WebSite (keep SearchAction ONLY if /search works) === -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://www.techfinserv.com/#website",
-    "name": "TechFinserv",
-    "url": "https://www.techfinserv.com/",
-    "publisher": { "@id": "https://www.techfinserv.com/#organization" },
-  }
-  </script>
+<!-- === JSON-LD: WebSite === -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.techfinserv.com/#website",
+  "name": "TechFinserv",
+  "url": "https://www.techfinserv.com/",
+  "publisher": { "@id": "https://www.techfinserv.com/#organization" }
+}
+</script>
 
 
   <style>
