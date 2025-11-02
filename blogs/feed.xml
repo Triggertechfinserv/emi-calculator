@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>TechFinserv Blog</title>
+    <link>https://www.techfinserv.com/blogs/</link>
+    <description>Finance guides, calculators, credit score tips, and loan insights for India.</description>
+    <language>en-IN</language>
+    <lastBuildDate>Sun, 02 Nov 2025 11:00:00 +0530</lastBuildDate>
+    <ttl>60</ttl>
+
+    <item>
+      <title>RBI's CIBIL 2.0 — What You Need to Know</title>
+      <link>https://www.techfinserv.com/blogs/cibil-2.0/</link>
+      <guid isPermaLink="true">https://www.techfinserv.com/blogs/cibil-2.0/</guid>
+      <pubDate>Sun, 26 Oct 2025 10:00:00 +0530</pubDate>
+      <description><![CDATA[A quick guide to the 2025 upgrade to India’s credit scoring and its impact on borrowers.]]></description>
+    </item>
+
+    <item>
+      <title>What is EMI? Complete Guide</title>
+      <link>https://www.techfinserv.com/blogs/what-is-emi/</link>
+      <guid isPermaLink="true">https://www.techfinserv.com/blogs/what-is-emi/</guid>
+      <pubDate>Tue, 21 Oct 2025 09:00:00 +0530</pubDate>
+      <description><![CDATA[Your quick guide to EMIs for personal, home loans, etc., in 2025.]]></description>
+    </item>
+
+    <item>
+      <title>Understand How a Flexi Hybrid Loan Works</title>
+      <link>https://www.techfinserv.com/blogs/flexi-hybrid-loan/</link>
+      <guid isPermaLink="true">https://www.techfinserv.com/blogs/flexi-hybrid-loan/</guid>
+      <pubDate>Mon, 20 Oct 2025 09:00:00 +0530</pubDate>
+      <description><![CDATA[Pay interest only on the amount you use, not the full limit.]]></description>
+    </item>
+
+    <item>
+      <title>Public Provident Fund — Why Choose PPF?</title>
+      <link>https://www.techfinserv.com/blogs/ppf-1/</link>
+      <guid isPermaLink="true">https://www.techfinserv.com/blogs/ppf-1/</guid>
+      <pubDate>Sat, 18 Oct 2025 09:00:00 +0530</pubDate>
+      <description><![CDATA[Earn steady, tax-free returns with your trusted PPF investment.]]></description>
+    </item>
+  </channel>
+</rss>
