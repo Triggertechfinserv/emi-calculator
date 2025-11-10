@@ -17,15 +17,15 @@
       <height>40</height>
     </image>
 
-    <!-- Existing / known items -->
+    <!-- Blog entries -->
     <item>
-      <title>RBI's CIBIL 2.0 — What You Need to Know</title>
+      <title>RBI's CIBIL 2.0 - What You Need to Know</title>
       <link>https://www.techfinserv.com/blogs/cibil-2.0/</link>
       <guid isPermaLink="true">https://www.techfinserv.com/blogs/cibil-2.0/</guid>
       <pubDate>Sun, 26 Oct 2025 10:00:00 +0530</pubDate>
       <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
       <category>Credit Score</category>
-      <description><![CDATA[A quick guide to the 2025 upgrade to India’s credit scoring and its impact on borrowers.]]></description>
+      <description><![CDATA[A quick guide to the 2025 upgrade to India's credit scoring and its impact on borrowers.]]></description>
     </item>
 
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Tue, 21 Oct 2025 09:00:00 +0530</pubDate>
       <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
       <category>Loans</category>
-      <description><![CDATA[Your quick guide to EMIs for personal, home loans, and more in 2025.]]></description>
+      <description><![CDATA[Your quick guide to EMIs for personal, home, and other loans in 2025.]]></description>
     </item>
 
     <item>
@@ -45,7 +45,7 @@
       <pubDate>Mon, 20 Oct 2025 09:00:00 +0530</pubDate>
       <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
       <category>Loans</category>
-      <description><![CDATA[Pay interest only on the amount you use, not the full limit — how flexi-hybrid loans work and when they help.]]></description>
+      <description><![CDATA[Pay interest only on the amount you use, not the full limit - how flexi hybrid loans work and when they help.]]></description>
     </item>
 
     <item>
@@ -65,11 +65,11 @@
       <pubDate>Thu, 30 Oct 2025 11:00:00 +0530</pubDate>
       <author>news@techfinserv.com (TechFinserv News)</author>
       <category>Banking</category>
-      <description><![CDATA[Explains the RBI’s faster cheque clearing initiative and how customers will see funds available sooner.]]></description>
+      <description><![CDATA[Explains the RBI's faster cheque clearing initiative and how customers will see funds available sooner.]]></description>
     </item>
 
     <item>
-      <title>Personal Loan — Rates, Eligibility & How to Apply</title>
+      <title>Personal Loan - Rates, Eligibility & How to Apply</title>
       <link>https://www.techfinserv.com/blogs/personal-loan/</link>
       <guid isPermaLink="true">https://www.techfinserv.com/blogs/personal-loan/</guid>
       <pubDate>Wed, 29 Oct 2025 14:00:00 +0530</pubDate>
@@ -79,7 +79,7 @@
     </item>
 
     <item>
-      <title>Public Provident Fund — Why Choose PPF?</title>
+      <title>Public Provident Fund - Why Choose PPF?</title>
       <link>https://www.techfinserv.com/blogs/ppf-1/</link>
       <guid isPermaLink="true">https://www.techfinserv.com/blogs/ppf-1/</guid>
       <pubDate>Sat, 18 Oct 2025 09:00:00 +0530</pubDate>
