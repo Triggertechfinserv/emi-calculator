@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TechFinserv Blog</title>
     <link>https://www.techfinserv.com/blogs/</link>
@@ -7,12 +7,24 @@
     <language>en-IN</language>
     <lastBuildDate>Sun, 02 Nov 2025 11:00:00 +0530</lastBuildDate>
     <ttl>60</ttl>
+    <atom:link href="https://www.techfinserv.com/blogs/feed.xml" rel="self" type="application/rss+xml" />
 
+    <image>
+      <url>https://www.techfinserv.com/images/techfinserv-logo.png</url>
+      <title>TechFinserv</title>
+      <link>https://www.techfinserv.com/</link>
+      <width>144</width>
+      <height>40</height>
+    </image>
+
+    <!-- Existing / known items -->
     <item>
       <title>RBI's CIBIL 2.0 — What You Need to Know</title>
       <link>https://www.techfinserv.com/blogs/cibil-2.0/</link>
       <guid isPermaLink="true">https://www.techfinserv.com/blogs/cibil-2.0/</guid>
       <pubDate>Sun, 26 Oct 2025 10:00:00 +0530</pubDate>
+      <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
+      <category>Credit Score</category>
       <description><![CDATA[A quick guide to the 2025 upgrade to India’s credit scoring and its impact on borrowers.]]></description>
     </item>
 
@@ -21,7 +33,9 @@
       <link>https://www.techfinserv.com/blogs/what-is-emi/</link>
       <guid isPermaLink="true">https://www.techfinserv.com/blogs/what-is-emi/</guid>
       <pubDate>Tue, 21 Oct 2025 09:00:00 +0530</pubDate>
-      <description><![CDATA[Your quick guide to EMIs for personal, home loans, etc., in 2025.]]></description>
+      <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
+      <category>Loans</category>
+      <description><![CDATA[Your quick guide to EMIs for personal, home loans, and more in 2025.]]></description>
     </item>
 
     <item>
@@ -29,7 +43,39 @@
       <link>https://www.techfinserv.com/blogs/flexi-hybrid-loan/</link>
       <guid isPermaLink="true">https://www.techfinserv.com/blogs/flexi-hybrid-loan/</guid>
       <pubDate>Mon, 20 Oct 2025 09:00:00 +0530</pubDate>
-      <description><![CDATA[Pay interest only on the amount you use, not the full limit.]]></description>
+      <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
+      <category>Loans</category>
+      <description><![CDATA[Pay interest only on the amount you use, not the full limit — how flexi-hybrid loans work and when they help.]]></description>
+    </item>
+
+    <item>
+      <title>What is CIBIL? Quick Guide</title>
+      <link>https://www.techfinserv.com/blogs/what-is-cibil/</link>
+      <guid isPermaLink="true">https://www.techfinserv.com/blogs/what-is-cibil/</guid>
+      <pubDate>Thu, 23 Oct 2025 10:00:00 +0530</pubDate>
+      <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
+      <category>Credit Score</category>
+      <description><![CDATA[What CIBIL is, how your credit score is calculated, and steps to improve it.]]></description>
+    </item>
+
+    <item>
+      <title>RBI Introduces Faster Clearing of Cheques: What It Means for You</title>
+      <link>https://www.techfinserv.com/blogs/blog-rbi-1/</link>
+      <guid isPermaLink="true">https://www.techfinserv.com/blogs/blog-rbi-1/</guid>
+      <pubDate>Thu, 30 Oct 2025 11:00:00 +0530</pubDate>
+      <author>news@techfinserv.com (TechFinserv News)</author>
+      <category>Banking</category>
+      <description><![CDATA[Explains the RBI’s faster cheque clearing initiative and how customers will see funds available sooner.]]></description>
+    </item>
+
+    <item>
+      <title>Personal Loan — Rates, Eligibility & How to Apply</title>
+      <link>https://www.techfinserv.com/blogs/personal-loan/</link>
+      <guid isPermaLink="true">https://www.techfinserv.com/blogs/personal-loan/</guid>
+      <pubDate>Wed, 29 Oct 2025 14:00:00 +0530</pubDate>
+      <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
+      <category>Loans</category>
+      <description><![CDATA[Compare personal loan interest rates, eligibility criteria, fees, and tips to get the best offer.]]></description>
     </item>
 
     <item>
@@ -37,7 +83,10 @@
       <link>https://www.techfinserv.com/blogs/ppf-1/</link>
       <guid isPermaLink="true">https://www.techfinserv.com/blogs/ppf-1/</guid>
       <pubDate>Sat, 18 Oct 2025 09:00:00 +0530</pubDate>
+      <author>editor@techfinserv.com (TechFinserv Editorial Team)</author>
+      <category>Investments</category>
       <description><![CDATA[Earn steady, tax-free returns with your trusted PPF investment.]]></description>
     </item>
+
   </channel>
 </rss>
