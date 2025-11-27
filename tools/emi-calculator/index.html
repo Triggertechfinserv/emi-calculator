@@ -403,13 +403,143 @@
             </div>
 
             <p class="small-muted" style="margin-top:10px;">Tip: add one or more part payments (month number & amount). Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes earlier), or <em>Reduce EMI</em> to keep tenure same and reduce monthly payment. Save the file to keep your data.</p>
+            <p class="small-muted" style="margin-top:14px;">
+          <strong>Disclaimer:</strong> This tool provides estimates for planning only. Actual EMIs/charges depend on lender policies and your loan agreement.
+        </p>         
           </section>
         </div>
 
+        <section>
         <!-- Short How-to / explanation area (keeps blog style) -->
         <h2 style="margin-top:18px;">How to use this calculator</h2>
-        <p>Enter loan amount, annual rate and tenure. Add part payments (month & amount) and choose whether prepayments should reduce tenure or reduce EMI. Export the schedule to Excel or PDF for record-keeping.</p>
+        <ol style="margin:0 0 0 18px; padding:0;">
+          <li>Enter <strong>Loan Amount</strong>, <strong>Annual Interest</strong>, and <strong>Tenure</strong>.</li>
+          <li>Choose a mode:
+            <ul style="margin:6px 0 0 16px;">
+              <li><strong>Reduce Tenure</strong> — EMI stays same; prepayments shorten the loan.</li>
+              <li><strong>Reduce EMI</strong> — Tenure stays same; prepayments lower the EMI.</li>
+            </ul>
+          </li>
+          <li>(Optional) Add <strong>Part Payments</strong> by month and amount. You can add multiple entries.</li>
+        </ol>
+        <p class="small-muted" style="margin-top:8px;">
+          The schedule table shows the month-wise split of principal and interest, any prepayments, and the updated outstanding balance.
+        </p>
 
+        <h3 style="margin:16px 0 8px;">Floating / Variable Rate Planning</h3>
+        <p>If your loan has a floating rate, test both directions to stay prepared:</p>
+        <ul style="margin:0 0 0 18px; padding:0;">
+          <li><strong>Optimistic case:</strong> Rate falls by 1–3%. EMI may drop (or you can keep EMI same and finish sooner).</li>
+          <li><strong>Pessimistic case:</strong> Rate rises by 1–3%. Check if your cash flow can still handle the EMI comfortably.</li>
+        </ul>
+        <p class="small-muted" style="margin-top:8px;">
+          Try a few “what-if” runs in the calculator to decide a safe EMI and sensible tenure for your situation.
+        </p>
+
+        <h3 style="margin:16px 0 8px;">FAQs</h3>
+        <details>
+          <summary><strong>Does EMI change every month?</strong></summary>
+          <p>For fixed-rate loans, the EMI amount stays constant, but the interest/principal split shifts over time. For floating-rate loans, the lender may change EMI or tenure when rates move.</p>
+        </details>
+        <details>
+          <summary><strong>Is it better to prepay early or late?</strong></summary>
+          <p>Earlier prepayments save more interest because they reduce the outstanding when interest is the largest share of EMI.</p>
+        </details>
+        <details>
+          <summary><strong>Which is better: reduce EMI or reduce tenure?</strong></summary>
+          <p>Reducing tenure usually cuts total interest more. Reducing EMI improves monthly cash flow—pick what suits your goals.</p>
+        </details>
+        <details>
+          <summary><strong>What fees should I check before prepaying?</strong></summary>
+          <p>Look for prepayment/foreclosure charges, minimum part-payment amounts, and how quickly the lender updates your schedule.</p>
+        </details>
+
+        <h3 style="margin:16px 0 8px;">Glossary</h3>
+        <ul style="margin:0 0 0 18px; padding:0;">
+          <li><strong>Principal:</strong> Original loan amount borrowed.</li>
+          <li><strong>Interest:</strong> Cost of borrowing, charged on the outstanding balance.</li>
+          <li><strong>Tenure:</strong> Total time to repay the loan, in months/years.</li>
+          <li><strong>Prepayment / Part-payment:</strong> Extra payments made to reduce the outstanding sooner.</li>
+          <li><strong>Amortization:</strong> Gradual repayment of principal over time through EMIs.</li>
+        </ul>        
+</section>
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<section style="max-width:900px;margin:auto;padding:20px;line-height:1.7;font-family:'Segoe UI',sans-serif;">
+
+    <h2><i class="fas fa-calculator"></i> What is EMI?</h2>
+    <p>
+        EMI (Equated Monthly Instalment) is the fixed amount you pay every month to repay your loan. 
+        Every EMI includes two parts — <strong>Principal</strong> and <strong>Interest</strong>. 
+        Most banks calculate EMI using the <strong>reducing balance method</strong>, where interest is charged 
+        only on the remaining loan amount. This helps borrowers plan their monthly budget easily.
+    </p>
+
+    <h2><i class="fas fa-percent"></i> Types of Interest Rates</h2>
+
+    <h3><i class="fas fa-lock"></i> Fixed Interest Rate</h3>
+    <p>
+        This rate remains constant throughout the loan tenure. Your EMI never changes, making it a stable 
+        and predictable option for loans like personal loans and car loans.
+    </p>
+
+    <h3><i class="fas fa-arrows-rotate"></i> Floating / Variable Interest Rate</h3>
+    <p>
+        Floating rates change based on market conditions and RBI repo rate. Your EMI may increase or decrease. 
+        This is common in <strong>home loans</strong>.
+    </p>
+
+    <h3><i class="fas fa-chart-line"></i> Reducing Balance Interest Rate</h3>
+    <p>
+        Interest is calculated on the outstanding principal each month. As the principal decreases, 
+        interest also reduces. This method is more cost-effective and widely used in home loans.
+    </p>
+
+    <h3><i class="fas fa-money-bill"></i> Flat Interest Rate</h3>
+    <p>
+        Interest is charged on the full loan amount for the entire tenure, even though the principal 
+        reduces over time. This increases the total interest cost and is common in small loans.
+    </p>
+
+    <hr style="margin:25px 0;">
+
+    <h2><i class="fas fa-house"></i> Home Loan EMI</h2>
+    <p>
+        Home loan EMIs are typically long-term and depend on loan amount, interest rate, and tenure. 
+        Banks mostly use the <strong>floating interest rate</strong> system for home loans. 
+        Calculating your home loan EMI helps you estimate affordability and plan repayment better.
+    </p>
+
+    <h2><i class="fas fa-car"></i> Car Loan EMI</h2>
+    <p>
+        Car loans usually come with <strong>fixed interest rates</strong>. This keeps your EMI the same 
+        every month, making it easier to manage vehicle purchase planning.
+    </p>
+
+    <h2><i class="fas fa-user"></i> Personal Loan EMI</h2>
+    <p>
+        Personal loans come with higher interest rates compared to home and car loans. EMI depends on 
+        credit score, income, and loan amount. The reducing balance method is normally used to calculate 
+        personal loan EMIs.
+    </p>
+
+    <hr style="margin:25px 0;">
+
+    <h2><i class="fas fa-lightbulb"></i> Why EMI Calculation is Important?</h2>
+    <ul>
+        <li>Helps plan monthly finances</li>
+        <li>Allows comparison of different loan offers</li>
+        <li>Shows total interest payable</li>
+        <li>Helps choose the right tenure</li>
+        <li>Reduces chances of financial stress</li>
+    </ul>
+
+        </section>
+      </article>
+    </main>        
+       
       </article>
     </main>
 
