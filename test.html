@@ -6,7 +6,7 @@
   
   <title>Online EMI Calculator with Part-Payment — TechFinserv</title>
   <meta name="description" content="Smart EMI calculator for home, car & personal loans. Use part-payments, see instant amortization, export to PDF/Excel, and get complete loan planning for 2025">
-  <link rel="canonical" href="https://www.techfinserv.com/test.html/">
+  <link rel="canonical" href="https://www.techfinserv.com/test.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
 
   <link rel="alternate" href="https://www.techfinserv.com/emi-calculator/" hreflang="en-IN">
@@ -271,12 +271,12 @@
     .ad-card {
       position: static;
       top: 84px;
-      padding: 16px;
+      padding: 8px;
       display: grid;
       gap: 12px;
     }
     .ad-slot {
-      border: 1px dashed var(--border);
+      border: 0px dashed var(--border);
       border-radius: 14px;
       min-height: 250px;
       display: grid;
@@ -376,23 +376,97 @@
     }
     .mobile-menu.open{ display:flex !important; }
 
-    footer.glass .social {
-      display:flex; gap:10px; align-items:center; margin:12px 0;
+    /* Footer (glass) */
+    footer.glass {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: #475569;
     }
-    footer.glass .social a{
-      width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
-      border-radius:10px;background:#fff;border:1px solid rgba(2,6,23,.10);
-      box-shadow:0 4px 10px rgba(2,6,23,.06);
-      text-decoration:none; transition:transform .15s ease,border-color .2s ease;
+    footer.glass::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      opacity:0.8; pointer-events:none;
     }
-    footer.glass .social a:hover{ transform:translateY(-2px); border-color:#0ea5e950; }
-    footer.glass .social svg{ width:18px;height:18px; display:block; }
-    footer.glass .social .fb svg{ fill:#1877F2; }
-    footer.glass .social .ig svg{ fill:#E1306C; }
-    footer.glass .social .ln svg{ fill:#0A66C2; }
-    footer.glass .social .x  svg{ fill:#111; }
-    footer.glass .social .yt svg{ fill:#FF0000; }
-    footer.glass .social .wa svg{ fill:#25D366; }
+    /* Mobile nav */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:#0f172a; border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:#475569; text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: #0f172a; }
+    }
+    .mobile-menu.open { display:flex !important; }
+
+    /* --- Blog-style typography below calculator --- */
+.blog-wrap {
+  max-width: 900px;
+  margin: 28px auto 60px;
+  padding: 0 16px;
+}
+
+article.post-article {
+  font-size: 17px;
+  color: #475569;
+  line-height: 1.7;
+  max-width: 1074px;
+  margin: 0 auto;
+}
+
+article.post-article h2 {
+  color: var(--accent-2);
+  margin-top: 28px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+article.post-article h3 {
+  color: var(--accent-1);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+article.post-article p {
+  margin-bottom: 1.1em;
+}
+
+article.post-article ul {
+  margin-bottom: 1.1em;
+  padding-left: 22px;
+}
+
+article.post-article li {
+  margin-bottom: 6px;
+}
+
+article.post-article hr {
+  border: 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  margin: 24px 0;
+}
+
   </style>
 </head>
 <body>
@@ -571,7 +645,7 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
 
-          <div class="ad-slot" style="min-height:250px;">
+          <div class="ad-slot" style="min-height:537px;">
             <ins class="adsbygoogle"
                  style="display:inline-block;width:300px;height:250px"
                  data-ad-client="ca-pub-4180233192929131"
@@ -581,29 +655,192 @@
 
           <div class="ad-note">Support ❤️ Us By Clicking Ads</div>
         </aside>
-      </div>
-
-      <section id="learn-emi" class="glass" style="margin-top:20px; padding:18px;">
-        <h2 style="margin:0 0 8px;">What is EMI?</h2>
-        <p>
-          <strong>EMI (Equated Monthly Installment)</strong> is the fixed amount you pay every month until your loan is fully repaid.
-          Each EMI has two parts—interest on the outstanding balance and a portion of the principal. Early in the loan, the interest
-          share is higher; as the balance reduces, more of each EMI goes toward principal.
+      </div>      
+    </div>
+   
+          <!-- Blog-style explanation below calculator -->
+       <section id="learn-emi" class="glass" style="margin-top:20px; padding:18px;">
+        <article class="post-article">
+        <h2 style="margin-top:18px;">How to use this calculator</h2>
+        <ol style="margin:0 0 0 18px; padding:0;">
+          <li>Enter <strong>Loan Amount</strong>, <strong>Annual Interest</strong>, and <strong>Tenure</strong>.</li>
+          <li>Choose a mode:
+            <ul style="margin:6px 0 0 16px;">
+              <li><strong>Reduce Tenure</strong> — EMI stays same; prepayments shorten the loan.</li>
+              <li><strong>Reduce EMI</strong> — Tenure stays same; prepayments lower the EMI.</li>
+            </ul>
+          </li>
+          <li>(Optional) Add <strong>Part Payments</strong> by month and amount. You can add multiple entries.</li>
+        </ol>
+        <p class="small-muted" style="margin-top:8px;">
+          The schedule table shows the month-wise split of principal and interest, any prepayments, and the updated outstanding balance.
         </p>
-      </section>
 
-      <footer class="glass" style="margin-top:24px;">
-        <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
-          <div class="social" aria-label="Social links">
-            <!-- your existing social SVG icons here (unchanged) -->
-          </div>
-          <div class="container">
-            Designed &amp; Maintained by Kiran Rathva • © <span id="year"></span> TechFinserv.com
-          </div>
-        </div>
-      </footer>
+        <h3 style="margin:16px 0 8px;">Floating / Variable Rate Planning</h3>
+        <p>If your loan has a floating rate, test both directions to stay prepared:</p>
+        <ul style="margin:0 0 0 18px; padding:0;">
+          <li><strong>Optimistic case:</strong> Rate falls by 1–3%. EMI may drop (or you can keep EMI same and finish sooner).</li>
+          <li><strong>Pessimistic case:</strong> Rate rises by 1–3%. Check if your cash flow can still handle the EMI comfortably.</li>
+        </ul>
+        <p class="small-muted" style="margin-top:8px;">
+          Try a few “what-if” runs in the calculator to decide a safe EMI and sensible tenure for your situation.
+        </p>
+
+        <h3 style="margin:16px 0 8px;">FAQs</h3>
+        <details>
+          <summary><strong>Does EMI change every month?</strong></summary>
+          <p>For fixed-rate loans, the EMI amount stays constant, but the interest/principal split shifts over time. For floating-rate loans, the lender may change EMI or tenure when rates move.</p>
+        </details>
+        <details>
+          <summary><strong>Is it better to prepay early or late?</strong></summary>
+          <p>Earlier prepayments save more interest because they reduce the outstanding when interest is the largest share of EMI.</p>
+        </details>
+        <details>
+          <summary><strong>Which is better: reduce EMI or reduce tenure?</strong></summary>
+          <p>Reducing tenure usually cuts total interest more. Reducing EMI improves monthly cash flow—pick what suits your goals.</p>
+        </details>
+        <details>
+          <summary><strong>What fees should I check before prepaying?</strong></summary>
+          <p>Look for prepayment/foreclosure charges, minimum part-payment amounts, and how quickly the lender updates your schedule.</p>
+        </details>
+
+        <h3 style="margin:16px 0 8px;">Glossary</h3>
+        <ul style="margin:0 0 0 18px; padding:0;">
+          <li><strong>Principal:</strong> Original loan amount borrowed.</li>
+          <li><strong>Interest:</strong> Cost of borrowing, charged on the outstanding balance.</li>
+          <li><strong>Tenure:</strong> Total time to repay the loan, in months/years.</li>
+          <li><strong>Prepayment / Part-payment:</strong> Extra payments made to reduce the outstanding sooner.</li>
+          <li><strong>Amortization:</strong> Gradual repayment of principal over time through EMIs.</li>
+        </ul>        
+
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <h2><i class="fas fa-calculator"></i> What is EMI?</h2>
+    <p>
+        EMI (Equated Monthly Instalment) is the fixed amount you pay every month to repay your loan. 
+        Every EMI includes two parts — <strong>Principal</strong> and <strong>Interest</strong>. 
+        Most banks calculate EMI using the <strong>reducing balance method</strong>, where interest is charged 
+        only on the remaining loan amount. This helps borrowers plan their monthly budget easily.
+    </p>
+
+    <h2><i class="fas fa-percent"></i> Types of Interest Rates</h2>
+
+    <h3><i class="fas fa-lock"></i> Fixed Interest Rate</h3>
+    <p>
+        This rate remains constant throughout the loan tenure. Your EMI never changes, making it a stable 
+        and predictable option for loans like personal loans and car loans.
+    </p>
+
+    <h3><i class="fas fa-arrows-rotate"></i> Floating / Variable Interest Rate</h3>
+    <p>
+        Floating rates change based on market conditions and RBI repo rate. Your EMI may increase or decrease. 
+        This is common in <strong>home loans</strong>.
+    </p>
+
+    <h3><i class="fas fa-chart-line"></i> Reducing Balance Interest Rate</h3>
+    <p>
+        Interest is calculated on the outstanding principal each month. As the principal decreases, 
+        interest also reduces. This method is more cost-effective and widely used in home loans.
+    </p>
+
+    <h3><i class="fas fa-money-bill"></i> Flat Interest Rate</h3>
+    <p>
+        Interest is charged on the full loan amount for the entire tenure, even though the principal 
+        reduces over time. This increases the total interest cost and is common in small loans.
+    </p>
+
+    <hr style="margin:25px 0;">
+
+    <h2><i class="fas fa-house"></i> Home Loan EMI</h2>
+    <p>
+        Home loan EMIs are typically long-term and depend on loan amount, interest rate, and tenure. 
+        Banks mostly use the <strong>floating interest rate</strong> system for home loans. 
+        Calculating your home loan EMI helps you estimate affordability and plan repayment better.
+    </p>
+
+    <h2><i class="fas fa-car"></i> Car Loan EMI</h2>
+    <p>
+        Car loans usually come with <strong>fixed interest rates</strong>. This keeps your EMI the same 
+        every month, making it easier to manage vehicle purchase planning.
+    </p>
+
+    <h2><i class="fas fa-user"></i> Personal Loan EMI</h2>
+    <p>
+        Personal loans come with higher interest rates compared to home and car loans. EMI depends on 
+        credit score, income, and loan amount. The reducing balance method is normally used to calculate 
+        personal loan EMIs.
+    </p>
+
+    <hr style="margin:25px 0;">
+
+    <h2><i class="fas fa-lightbulb"></i> Why EMI Calculation is Important?</h2>
+    <ul>
+        <li>Helps plan monthly finances</li>
+        <li>Allows comparison of different loan offers</li>
+        <li>Shows total interest payable</li>
+        <li>Helps choose the right tenure</li>
+        <li>Reduces chances of financial stress</li>
+    </ul>
+
+        </article>
+      </section>
     </div>
   </main>
+
+ 
+
+<!-- ====== Footer social icons END ====== -->
+<style>
+footer.glass .social {
+  display:flex; gap:10px; align-items:center; margin:12px 0;
+}
+footer.glass .social a{
+  width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:10px;background:#fff;border:1px solid rgba(2,6,23,.10);
+  box-shadow:0 4px 10px rgba(2,6,23,.06);
+  text-decoration:none; transition:transform .15s ease,border-color .2s ease;
+}
+footer.glass .social a:hover{ transform:translateY(-2px); border-color:#0ea5e950; }
+footer.glass .social svg{ width:18px;height:18px; display:block; }
+footer.glass .social .fb svg{ fill:#1877F2; }
+footer.glass .social .ig svg{ fill:#E1306C; }
+footer.glass .social .ln svg{ fill:#0A66C2; }
+footer.glass .social .x  svg{ fill:#111; }
+footer.glass .social .yt svg{ fill:#FF0000; }
+footer.glass .social .wa svg{ fill:#25D366; }
+</style>
+<!-- ====== Footer social icons END ====== -->
+
+  <!-- ====== FOOTER (replaced with Coming Soon footer) ====== -->
+  <footer id="contact" class="glass">
+    <div class="container">      
+      <div class="social" aria-label="Social links">
+      <a class="fb" href="https://www.facebook.com/profile.php?id=61583100667662" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.48 17.52 2 11.94 2 6.36 2 1.88 6.48 1.88 12.06c0 4.88 3.56 8.93 8.22 9.8v-6.93H7.9v-2.87h2.2V9.6c0-2.18 1.3-3.39 3.3-3.39.96 0 1.97.17 1.97.17v2.16h-1.11c-1.1 0-1.44.69-1.44 1.4v1.68h2.45l-.39 2.87h-2.06v6.93c4.66-.87 8.22-4.92 8.22-9.8z"/></svg>
+      </a>
+      <a class="ig" href="https://www.instagram.com/techfinserv/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-2.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/></svg>
+      </a>
+      <a class="ln" href="https://www.linkedin.com/company/techfinserv" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3A2.94 2.94 0 0 1 22 6v12a2.94 2.94 0 0 1-3 3H5a2.94 2.94 0 0 1-3-3V6a2.94 2.94 0 0 1 3-3Zm-9.65 7H6.08v8h3.27Zm.23-2.93a1.86 1.86 0 1 0-1.87 1.86 1.86 1.86 0 0 0 1.87-1.86ZM21 18v-4.27c0-3.06-1.63-4.48-3.81-4.48a3.28 3.28 0 0 0-3 1.65h-.06V10H11v8h3.27v-4.44c0-1.17.22-2.31 1.68-2.31S17.6 12.33 17.6 13.6V18Z"/></svg>
+      </a>
+      <a class="x" href="https://x.com/TechFinservIN" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h4.6l5.17 6.96L16.8 3H21l-7.54 9.9L21.3 21h-4.6l-5.5-7.4L7.2 21H2l7.83-10.25z"/></svg>
+      </a>
+      <a class="yt" href="https://www.youtube.com/@TechFinservYT" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.23-1.65-.95-2.37c-.9-.95-1.92-.96-2.38-1C16.9 2.4 12 2.4 12 2.4h-.01s-4.9 0-8.17.43c-.46.05-1.48.06-2.38 1C.73 4.55.5 6.2.5 6.2S.27 8.22.27 10.24v1.52c0 2.02.23 4.04.23 4.04s.23 1.65.95 2.37c.9.95 2.08.92 2.61 1.02 1.9.18 7.94.43 7.94.43s4.9 0 8.17-.43c.46-.05 1.48-.06 2.38-1 .72-.72.95-2.37.95-2.37s.23-2.02.23-4.04v-1.52c0-2.02-.23-4.04-.23-4.04ZM9.75 14.41V7.59l6.34 3.41-6.34 3.41Z"/></svg>
+      </a>
+      <a class="wa" href="https://wa.me/919054356860" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.03 0 11.97 11.97 0 0 0 1.8 17.7L0 24l6.45-1.7A11.96 11.96 0 0 0 12.03 24h.01A11.97 11.97 0 0 0 24 12.02a11.8 11.8 0 0 0-3.48-8.54ZM12.04 21.5h-.01a9.45 9.45 0 0 1-4.83-1.32l-.35-.2-3.83 1.01 1.02-3.73-.22-.38a9.48 9.48 0 1 1 8.22 4.62Zm5.49-7.17c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15s-.78.98-.96 1.18-.35.22-.64.08a7.73 7.73 0 0 1-2.28-1.41 8.57 8.57 0 0 1-1.58-1.96c-.17-.3 0-.46.13-.62.13-.15.3-.38.45-.58.15-.2.2-.35.3-.58.1-.22.05-.42-.03-.58-.08-.15-.68-1.63-.93-2.23-.24-.6-.5-.5-.68-.5h-.58c-.2 0-.52.08-.8.38-.28.3-1.06 1.03-1.06 2.5s1.09 2.9 1.24 3.11c.15.2 2.14 3.25 5.19 4.55.73.32 1.3.51 1.74.65.73.23 1.4.2 1.93.12.59-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.08-.13-.28-.2-.58-.35Z"/></svg>
+      </a>
+    </div>
+     
+    <p class="subtitle" style="font-size:13px">Need something urgently? <a href="mailto:techfinserv.com@gmail.com">support@techfinserv.com</a></p>
+    <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+  </div>
+</footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -695,9 +932,12 @@
       let html = '';
       payments.forEach((p, idx) => {
         html += '<div class="chip">' +
-                  '<div class="small-muted">Month ' + p.month + ' → <strong>' + fmt(p.amount) + '</strong></div>' +
-                  '<button data-rm="' + idx + '" class="btn btn-danger" style="padding:6px 10px">Remove</button>' +
-                '</div>';
+          '<div class="small-muted">' +
+            'Month ' + p.month + ' (' + (p.mode === "emi" ? "Reduce EMI" : "Reduce Tenure") + ') → ' +
+            '<strong>' + fmt(p.amount) + '</strong>' +
+          '</div>' +
+          '<button data-rm="' + idx + '" class="btn btn-danger" style="padding:6px 10px">Remove</button>' +
+        '</div>';
       });
       paymentsList.innerHTML = html;
       paymentsList.querySelectorAll('button[data-rm]').forEach(btn => {
@@ -714,7 +954,7 @@
       const m = Math.max(1, Math.round(Number(ppMonthEl.value) || 0));
       const a = Math.max(0, Math.round(Number(ppAmountEl.value) || 0));
       if (!a) { alert('Please enter a part payment amount > 0'); return; }
-      payments.push({ month: m, amount: a });
+      payments.push({ month: m, amount: a, mode: modeEl.value }); // store mode per payment
       payments.sort((x, y) => x.month - y.month);
       ppMonthEl.value = '';
       ppAmountEl.value = '';
@@ -732,69 +972,94 @@
     }
 
     function computeSchedule(usePayments = true) {
-      const { principal, monthlyRate, monthsInitial } = getInputs();
-      const mode = modeEl.value;
-      const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
+  const { principal, monthlyRate, monthsInitial } = getInputs();
+  const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
 
-      const partMap = new Map();
-      if (usePayments) {
-        for (const p of payments) {
-          partMap.set(p.month, (partMap.get(p.month) || 0) + p.amount);
+  // Build maps per month: total part amount + effective mode
+  const partMap = new Map();   // month -> total amount
+  const modeMap = new Map();   // month -> "tenure" or "emi"
+
+  if (usePayments) {
+    for (const p of payments) {
+      const m = p.month;
+      const amt = p.amount || 0;
+      const mMode = p.mode || "tenure"; // default safety
+
+      // sum part-payments for same month
+      partMap.set(m, (partMap.get(m) || 0) + amt);
+
+      // if multiple payments in same month, "emi" wins
+      if (!modeMap.has(m)) {
+        modeMap.set(m, mMode);
+      } else {
+        const existing = modeMap.get(m);
+        if (existing === "tenure" && mMode === "emi") {
+          modeMap.set(m, "emi");
         }
       }
-
-      const schedule = [];
-      let outstanding = principal;
-      let emi = initialEmi;
-      let remainingMonths = monthsInitial;
-
-      for (let month = 1; month <= 1200; month++) {
-        if (outstanding <= 0.0001) break;
-        const interest = outstanding * monthlyRate;
-        let principalComp = emi - interest;
-        if (principalComp < 0) principalComp = 0;
-
-        const part = partMap.get(month) || 0;
-
-        if (outstanding - principalComp - part <= 0) {
-          const finalInterest = outstanding * monthlyRate;
-          const finalPrincipal = outstanding;
-          const finalEmi = finalPrincipal + finalInterest;
-          schedule.push({
-            month,
-            emi: Math.round(finalEmi),
-            principalPaid: Math.round(finalPrincipal),
-            interestPaid: Math.round(finalInterest),
-            partPayment: Math.round(part),
-            outstanding: 0
-          });
-          outstanding = 0;
-          break;
-        }
-
-        outstanding = outstanding - principalComp - part;
-
-        if (mode === 'emi' && part > 0 && usePayments) {
-          remainingMonths = Math.max(1, monthsInitial - month);
-          if (outstanding > 0) {
-            emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
-          }
-        }
-
-        schedule.push({
-          month,
-          emi: Math.round(emi),
-          principalPaid: Math.round(principalComp),
-          interestPaid: Math.round(interest),
-          partPayment: Math.round(part),
-          outstanding: Math.round(Math.max(0, outstanding))
-        });
-
-        if (month > monthsInitial + 600) break;
-      }
-
-      return { schedule, initialEmi: Math.round(initialEmi) };
     }
+  }
+
+  const schedule = [];
+  let outstanding = principal;
+  let emi = initialEmi;
+  let remainingMonths = monthsInitial;
+
+  for (let month = 1; month <= 1200; month++) {
+    if (outstanding <= 0.0001) break;
+
+    const interest = outstanding * monthlyRate;
+    let principalComp = emi - interest;
+    if (principalComp < 0) principalComp = 0;
+
+    const part = partMap.get(month) || 0;
+    const thisMonthMode = modeMap.get(month) || "tenure";
+
+    // If this is the final month (including part payment), close loan cleanly
+    if (outstanding - principalComp - part <= 0) {
+      const finalInterest = outstanding * monthlyRate;
+      const finalPrincipal = outstanding;
+      const finalEmi = finalPrincipal + finalInterest;
+
+      schedule.push({
+        month,
+        emi: Math.round(finalEmi),
+        principalPaid: Math.round(finalPrincipal),
+        interestPaid: Math.round(finalInterest),
+        partPayment: Math.round(part),
+        outstanding: 0
+      });
+
+      outstanding = 0;
+      break;
+    }
+
+    // Normal month: subtract EMI principal + part-payment
+    outstanding = outstanding - principalComp - part;
+
+    // 🔁 Recalculate EMI ONLY if this payment's mode is "emi"
+    if (thisMonthMode === "emi" && part > 0 && usePayments) {
+      remainingMonths = Math.max(1, monthsInitial - month);
+      if (outstanding > 0) {
+        emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
+      }
+    }
+
+    schedule.push({
+      month,
+      emi: Math.round(emi),
+      principalPaid: Math.round(principalComp),
+      interestPaid: Math.round(interest),
+      partPayment: Math.round(part),
+      outstanding: Math.round(Math.max(0, outstanding))
+    });
+
+    if (month > monthsInitial + 600) break;
+  }
+
+  return { schedule, initialEmi: Math.round(initialEmi) };
+}
+
 
     function renderSchedule(schedule) {
       let rows = '';
@@ -942,12 +1207,12 @@
       const schedule = lastSchedule || computeSchedule(true).schedule;
       const hasPart = payments.some(p => p.amount && p.amount > 0);
       const aoa = [
-        ['Loan Amount', loanEl.value],
-        ['Annual Rate (%)', rateEl.value],
-        ['Tenure (Years)', yearsEl.value],
-        ['Mode', modeEl.value],
-        [],
-      ];
+       ['Loan Amount', loanEl.value],
+       ['Annual Rate (%)', rateEl.value],
+       ['Tenure (Years)', yearsEl.value],
+       ['Mode', payments.length ? 'Per Part Payment' : 'Normal (No Part Payment)'],
+       [],
+       ];
       if (hasPart) {
         aoa.push(['Month','EMI','Principal Paid','Interest Paid','Part Payment','Outstanding']);
         schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding]));
