@@ -8,7 +8,7 @@
   <title>Online EMI Calculator with Part-Payment — TechFinserv</title>
   <meta name="description" content="Smart EMI calculator for home, car & personal loans. Use part-payments, see instant amortization, export to PDF/Excel, and get complete loan planning for 2025">
   <link rel="canonical" href="https://www.techfinserv.com/emi-calculator/">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow, max-image-preview:large">  
 
   <!-- Hreflang (adjust if you have more locales) -->
   <link rel="alternate" href="https://www.techfinserv.com/emi-calculator/" hreflang="en-IN">
@@ -17,6 +17,7 @@
   <!-- Performance niceties -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Telegram) -->
   <meta property="og:type" content="article">
@@ -51,8 +52,37 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#0ea5e9">
   
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />  
-  
+  <!-- AdSense loader: include ONCE -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
+          crossorigin="anonymous"></script>
+
+  <!-- Third-party libs for export -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Chart.js for doughnut charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9DHT9T8GZB');
+  </script>
+
+  <!-- MicrosoftClarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "u8560jazbw");
+   </script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -156,36 +186,7 @@
 }
 </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9DHT9T8GZB');
-  </script>
-
-  <!-- MicrosoftClarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "u8560jazbw");
-</script>
-  
-  <!-- AdSense loader: include ONCE -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4180233192929131"
-          crossorigin="anonymous"></script>
-
-  <!-- Third-party libs for export -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/file-saver/dist/FileSaver.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-
   <style>
-    /* === New site theme (light glass) === */
     :root {
       --bg: #f6f9ff;
       --bg-accent1: rgba(14,165,233,0.20);
@@ -206,85 +207,250 @@
       --input-focus: rgba(14,165,233,0.25);
       --table-stripe: rgba(2,6,23,0.03);
       --table-head: rgba(2,6,23,0.04);
-      /* header height (used when fixed) */
       --header-h: 72px;
     }
 
     * { box-sizing: border-box; }
     html, body { width:100%; overflow-x:hidden; }
     body {
-      margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
       background: var(--bg);
-      /* padding is set dynamically to match header height for identical layout */
       padding-top: 0;
     }
     a { color: inherit; text-decoration: none; }
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
-    .glass { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      backdrop-filter: blur(10px) saturate(160%); -webkit-backdrop-filter: blur(10px) saturate(160%); box-shadow: var(--shadow); }
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px) saturate(160%);
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
+      box-shadow: var(--shadow);
+    }
 
-    /* Header (new site) — now fixed */
-    .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: rgba(255,255,255,0.78);
-      border-bottom: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(12px) saturate(170%); -webkit-backdrop-filter: blur(12px) saturate(170%); }
-    header.nav { display:flex; justify-content:space-between; align-items:center; padding: 12px 0; }
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+      background: rgba(255,255,255,0.78);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+    }
+    header.nav {
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 12px 0;
+    }
     .brand-logo { height: 60px; border-radius: 10px; }
     nav.menu { display:flex; gap:14px; }
-    nav.menu a { padding: 8px 12px; border-radius: 10px; color: var(--muted); }
-    nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
-    .cta { background: var(--gradient-solid); color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600; }
+    nav.menu a {
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+    }
+    nav.menu a:hover {
+      background: var(--surface-strong);
+      color: var(--text);
+    }
+    .cta {
+      background: var(--gradient-solid);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
 
-    /* Page shell */
     main { padding: 24px 0 60px; }
     .page-title { margin: 16px 0 8px; font-size: 22px; }
     .subtitle { color: var(--muted); font-size: 14px; }
 
-    /* Two-column layout */
-    .layout { display:grid; grid-template-columns: 2fr 1fr; gap: 18px; align-items:start; }
+    .layout {
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 18px;
+      align-items:start;
+    }
 
-    /* Calculator card */
     .calc { padding: 18px; }
     .grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
     .grid-1 { display:grid; grid-template-columns: 1fr; gap: 10px; }
     label { font-size: 12px; color: var(--muted); display:block; margin:0 0 6px; }
-    input, select { width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background: var(--input-bg); color: var(--text); outline:none; }
-    input:focus, select:focus { box-shadow: 0 0 0 3px var(--input-focus); border-color: transparent; }
+    input, select {
+      width:100%; padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: var(--input-bg);
+      color: var(--text);
+      outline:none;
+    }
+    input:focus, select:focus {
+      box-shadow: 0 0 0 3px var(--input-focus);
+      border-color: transparent;
+    }
 
     .row { display:flex; gap:10px; align-items:center; }
     .chips { display:flex; gap:8px; flex-wrap:wrap; }
-    .chip { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:12px; background: var(--surface-strong); border:1px solid var(--border); }
+    .chip {
+      display:flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:12px;
+      background: var(--surface-strong);
+      border:1px solid var(--border);
+    }
 
-    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:700; font-size:13px; cursor:pointer; border:1px solid var(--border); background: var(--surface-strong); color: var(--text); }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+      border:1px solid var(--border);
+      background: var(--surface-strong);
+      color: var(--text);
+    }
     .btn:hover { background: rgba(2,6,23,0.04); }
     .btn-primary { background: var(--gradient-solid); border: 0; color: #fff; }
     .btn-danger { background: rgba(239,68,68,0.10); color: #b91c1c; border-color: rgba(239,68,68,0.35); }
     .btn-success { background: rgba(16,185,129,0.12); color: #065f46; border-color: rgba(16,185,129,0.35); }
 
-    .summary { display:grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 12px 0; }
-    .card { padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+    .summary {
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .card {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
     .small-muted { font-size: 12px; color: var(--muted); }
     .big { font-size: 20px; font-weight: 800; letter-spacing: 0.2px; }
 
-    .table-wrap { border-radius: 14px; border: 1px solid var(--border); overflow: auto; max-height: 480px; background: rgba(255,255,255,0.5); position: relative; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    thead th { position: sticky; top: 0; z-index: 10; background: var(--surface-strong); color: var(--muted); text-align: right; font-weight: 700;
-      box-shadow: 0 1px 0 rgba(2,6,23,0.12) inset, 0 2px 8px rgba(2,6,23,0.06);
+    /* Charts strip */
+    .charts-row {
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 12px;
+      margin-top: 10px;
     }
-    th, td { padding: 10px 10px; border-bottom: 1px solid rgba(2,6,23,0.06); text-align: right; }
+    .chart-card {
+      position: relative;
+      padding: 12px 14px 10px;
+      border-radius: 14px;
+      background: var(--surface);
+      border:1px solid var(--border);
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .chart-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .chart-title {
+      font-weight:600;
+      color:var(--text);
+    }
+    .chart-pill {
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:11px;
+      background:rgba(14,165,233,0.08);
+      color:#0369a1;
+      border:1px solid rgba(14,165,233,0.25);
+    }
+    .chart-body {
+      position:relative;
+      flex:1;
+      min-height:170px;
+    }
+    .chart-body canvas {
+      width:100% !important;
+      height:170px !important;
+    }
+    .chart-meta {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:11px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+    .dot {
+      width:8px; height:8px; border-radius:999px; margin-right:4px;
+    }
+    .legend-inline {
+      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+    }
+    .legend-item {
+      display:inline-flex; align-items:center; font-size:11px; color:var(--muted);
+    }
+
+    .table-wrap {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: auto;
+      max-height: 480px;
+      background: rgba(255,255,255,0.5);
+      position: relative;
+      margin-top: 12px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--surface-strong);
+      color: var(--muted);
+      text-align: right;
+      font-weight: 700;
+      box-shadow:
+        0 1px 0 rgba(2,6,23,0.12) inset,
+        0 2px 8px rgba(2,6,23,0.06);
+    }
+    th, td {
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(2,6,23,0.06);
+      text-align: right;
+    }
     th:first-child, td:first-child { text-align: left; }
     tbody tr:nth-child(odd) { background: var(--table-stripe); }
 
-    /* Right column ad card — non-sticky for manual display ads (policy-safe) */
-    .ad-card { position: static; top: 84px; padding: 16px; display: grid; gap: 12px; }
-    .ad-slot { border: 1px dashed var(--border); border-radius: 14px; min-height: 250px; display: grid; place-items: center; color: var(--muted); background: var(--surface-strong); }
+    .ad-card {
+      position: static;
+      top: 84px;
+      padding: 8px;
+      display: grid;
+      gap: 12px;
+    }
+    .ad-slot {
+      border: 0px dashed var(--border);
+      border-radius: 14px;
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      background: var(--surface-strong);
+    }
     .ad-note { font-size: 12px; color: var(--muted); text-align:center; }
 
-    footer { border-top: 1px solid var(--border); padding: 30px 0 80px; color: var(--muted); background: rgba(255,255,255,0.75); }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0 80px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.75);
+    }
 
-    /* Responsive */
     @media (max-width: 1000px) {
       .layout { grid-template-columns: 1fr; }
       .summary { grid-template-columns: 1fr 1fr; }
+      .charts-row { grid-template-columns: 1fr; }
       .ad-card { position: static; }
     }
     @media (max-width: 640px) {
@@ -297,15 +463,40 @@
     @media (max-width: 600px) {
       table thead { display: none; }
       table, tbody, tr, td { display: block; width: 100%; }
-      tr { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 10px; background: var(--surface); }
-      td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border: none; text-align: left; font-size: 13px; color: var(--text); }
-      td[data-label]:before { content: attr(data-label) ":"; font-weight: 600; margin-right: 10px; color: var(--muted); width: 40%; max-width: 160px; }
-      td .value { width: 60%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      tr {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background: var(--surface);
+      }
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 0;
+        border: none;
+        text-align: left;
+        font-size: 13px;
+        color: var(--text);
+      }
+      td[data-label]:before {
+        content: attr(data-label) ":";
+        font-weight: 600;
+        margin-right: 10px;
+        color: var(--muted);
+        width: 40%;
+        max-width: 160px;
+      }
+      td .value {
+        width: 60%;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
-    /* =========================
-       MOBILE-ONLY header menu (copied style from Home)
-       ========================= */
     .mobile-menu-toggle{ display:none; }
     .mobile-menu{ display:none; }
 
@@ -322,17 +513,117 @@
         display:none; flex-direction:column; gap:6px; padding:10px 0 14px; background:#fff;
         border-bottom:1px solid var(--border);
       }
-      .mobile-menu a{ padding:12px 16px; font-size:15px; color:var(--muted); }
-      .mobile-menu a:hover{ background: var(--bg); color: var(--text); }
+      .mobile-menu a{
+        padding:12px 16px; font-size:15px; color:var(--muted);
+      }
+      .mobile-menu a:hover{
+        background: var(--bg); color: var(--text);
+      }
 
       .ad-card, .ad-slot{ width:100%; }
-      .ad-slot ins{ max-width:100% !important; width:100% !important; height:auto !important; display:block !important; }
+      .ad-slot ins{
+        max-width:100% !important;
+        width:100% !important;
+        height:auto !important;
+        display:block !important;
+      }
     }
     .mobile-menu.open{ display:flex !important; }
+
+    /* Footer (glass) */
+    footer.glass {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: #475569;
+    }
+    footer.glass::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      opacity:0.8; pointer-events:none;
+    }
+    /* Mobile nav */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:#0f172a; border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:#475569; text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: #0f172a; }
+    }
+    .mobile-menu.open { display:flex !important; }
+
+    /* --- Blog-style typography below calculator --- */
+.blog-wrap {
+  max-width: 900px;
+  margin: 28px auto 60px;
+  padding: 0 16px;
+}
+
+article.post-article {
+  font-size: 17px;
+  color: #475569;
+  line-height: 1.7;
+  max-width: 1074px;
+  margin: 0 auto;
+}
+
+article.post-article h2 {
+  color: var(--accent-2);
+  margin-top: 28px;
+  margin-bottom: 14px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+article.post-article h3 {
+  color: var(--accent-1);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+article.post-article p {
+  margin-bottom: 1.1em;
+}
+
+article.post-article ul {
+  margin-bottom: 1.1em;
+  padding-left: 22px;
+}
+
+article.post-article li {
+  margin-bottom: 6px;
+}
+
+article.post-article hr {
+  border: 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  margin: 24px 0;
+}
+
   </style>
 </head>
 <body>
-  <!-- Header (new site) -->
   <div class="topbar">
     <div class="container">
       <header class="nav" role="banner">
@@ -340,7 +631,6 @@
           <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo">
         </a>
 
-        <!-- desktop menu (unchanged) -->
         <nav class="menu" aria-label="Primary">
           <a href="/">Home</a>
           <a href="/blogs/">Blog</a>
@@ -348,13 +638,11 @@
           <a class="cta" href="/coming-soon.html">Apply Now</a>
         </nav>
 
-        <!-- MOBILE: hamburger (added) -->
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
       </header>
 
-      <!-- MOBILE: dropdown menu (added) -->
       <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
         <a href="/">Home</a>
         <a href="/blogs/">Blog</a>
@@ -369,9 +657,7 @@
       <p class="subtitle">EMI calculator for home, personal and car loans with part-payment support, instant amortization schedule, and one-click PDF/Excel export.</p>
 
       <div class="layout">
-        <!-- Left: Calculator -->
         <section id="calculator" class="calc glass" role="region" aria-label="EMI Calculator">
-          <!-- Inputs -->
           <div class="grid" style="margin-bottom:12px;">
             <div>
               <label>Loan Amount (Principal)</label>
@@ -407,13 +693,11 @@
             </div>
           </div>
 
-          <!-- Part payments list -->
           <div style="margin:10px 0 6px;">
             <div class="small-muted">Part Payments (click remove to delete):</div>
             <div id="paymentsList" class="chips" style="margin-top:8px;"></div>
           </div>
 
-          <!-- KPI cards -->
           <div class="summary" id="dashboard">
             <div class="card">
               <div class="small-muted">Initial EMI</div>
@@ -434,7 +718,54 @@
             </div>
           </div>
 
-          <!-- Schedule + exports -->
+          <!-- Charts row -->
+          <div class="charts-row">
+            <div class="chart-card">
+              <div class="chart-header">
+                <span class="chart-title">Normal Loan Split</span>
+                <span class="chart-pill">No Part Payment</span>
+              </div>
+              <div class="chart-body">
+                <canvas id="chartNormal"></canvas>
+              </div>
+              <div class="chart-meta">
+                <div class="legend-inline">
+                  <div class="legend-item">
+                    <span class="dot" style="background:#0ea5e9;"></span>Interest
+                  </div>
+                  <div class="legend-item">
+                    <span class="dot" style="background:#22c55e;"></span>Principal
+                  </div>
+                </div>
+                <span class="small-muted">Helps you see cost of interest without prepayments</span>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <span class="chart-title">With Part Payment</span>
+                <span class="chart-pill" id="ppStatusBadge">After Pre-Payments</span>
+              </div>
+              <div class="chart-body">
+                <canvas id="chartWithPP"></canvas>
+              </div>
+              <div class="chart-meta">
+                <div class="legend-inline">
+                  <div class="legend-item">
+                    <span class="dot" style="background:#22c55e;"></span>Principal
+                  </div>
+                  <div class="legend-item">
+                    <span class="dot" style="background:#0ea5e9;"></span>Interest
+                  </div>
+                  <div class="legend-item">
+                    <span class="dot" style="background:#f97316;"></span>Interest Saved
+                  </div>
+                </div>
+                <span class="small-muted">Compare total interest vs savings from prepayments</span>
+              </div>
+            </div>
+          </div>
+
           <div class="glass" style="padding:14px; margin-top:12px;">
             <div class="row" style="justify-content: space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
               <strong>Repayment Schedule</strong>
@@ -453,12 +784,13 @@
             </div>
           </div>
 
-          <p class="small-muted" style="margin-top:10px;">Tip: add one or more part payments (month number & amount). Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes earlier), or <em>Reduce EMI</em> to keep tenure same and reduce monthly payment. Save the file to keep your data.</p>
+          <p class="small-muted" style="margin-top:10px;">
+            Tip: add one or more part payments (month number & amount). Choose <em>Reduce Tenure</em> to keep EMI the same (loan closes earlier),
+            or <em>Reduce EMI</em> to keep tenure same and reduce monthly payment. Save the file to keep your data.
+          </p>
         </section>
 
-        <!-- Right: Ad space -->
         <aside class="ad-card glass" aria-label="Ad">
-          <!-- first ad RightRail_300x600 (Fixed) -->
           <div class="ad-slot" style="min-height:600px;">
             <ins class="adsbygoogle"
                  style="display:inline-block;width:300px;height:600px"
@@ -467,10 +799,9 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           </div>
 
-          <!-- second ad TopBanner_300x250 (Fixed) -->
-          <div class="ad-slot" style="min-height:250px;">
+          <div class="ad-slot" style="min-height:555px;">
             <ins class="adsbygoogle"
-                 style="display:inline-block;width:300px;height:250px"
+                 style="display:inline-block;width:300px;height:500px"
                  data-ad-client="ca-pub-4180233192929131"
                  data-ad-slot="2241854911"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -478,88 +809,13 @@
 
           <div class="ad-note">Support ❤️ Us By Clicking Ads</div>
         </aside>
-      </div>
-      
-      <!-- ===== Learn About EMI (Article) ===== -->
-      <section id="learn-emi" class="glass" style="margin-top:20px; padding:18px;">
-        <h2 style="margin:0 0 8px;">What is EMI?</h2>
-        <p>
-          <strong>EMI (Equated Monthly Installment)</strong> is the fixed amount you pay every month until your loan is fully repaid.
-          Each EMI has two parts—<em>interest</em> on the outstanding balance and a portion of the <em>principal</em>. Early in the
-          loan, the interest share is higher; as the balance reduces, more of each EMI goes toward principal. While your EMI amount
-          usually remains constant, the <em>split</em> between interest and principal changes over time.
-        </p>
-
-        <h3 style="margin:16px 0 8px;">EMI Formula</h3>
-        <p class="small-muted">Monthly rate <code>r</code> = Annual rate ÷ 12 ÷ 100; Tenure <code>n</code> = number of months</p>
-        <div class="glass" style="padding:12px;">
-          <p style="margin:0;">
-            <strong>EMI</strong> = <code>P × r × (1 + r)<sup>n</sup> ÷ ((1 + r)<sup>n</sup> − 1)</code>
-          </p>
-          <ul style="margin:8px 0 0 18px; padding:0;">
-            <li><code>P</code> = Principal (loan amount)</li>
-            <li><code>r</code> = Monthly interest rate</li>
-            <li><code>n</code> = Number of monthly installments</li>
-          </ul>
-        </div>
-
-        <h3 style="margin:16px 0 8px;">Worked Example</h3>
-        <p>
-          Suppose you borrow <strong>₹10,00,000</strong> at <strong>10.5% p.a.</strong> for <strong>10 years</strong> (i.e., <code>n = 120</code> months).
-          Then <code>r = 10.5 ÷ 12 ÷ 100 = 0.00875</code>.
-        </p>
-        <div class="glass" style="padding:12px; margin-bottom:14px;">
-          <p style="margin:0;">
-            EMI = <code>10,00,000 × 0.00875 × (1 + 0.00875)<sup>120</sup> ÷ ((1 + 0.00875)<sup>120</sup> − 1)</code> = <strong>₹13,493</strong>
-          </p>
-          <p style="margin:6px 0 0;">
-            Total paid = <code>₹13,493 × 120 = ₹16,19,220</code>, of which <strong>₹6,19,220</strong> is interest.
-          </p>
-        </div>
-
-        <!-- Example Table -->
-        <div class="glass" style="padding:14px; overflow-x:auto; margin-bottom:16px;">
-          <table style="width:100%; border-collapse:collapse; font-size:14px;">
-            <thead>
-              <tr style="background:var(--table-head);">
-                <th style="padding:8px; text-align:left;">Parameter</th>
-                <th style="padding:8px; text-align:right;">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding:8px;">Loan Amount (P)</td>
-                <td style="padding:8px; text-align:right;">₹10,00,000</td>
-              </tr>
-              <tr>
-                <td style="padding:8px;">Annual Interest Rate</td>
-                <td style="padding:8px; text-align:right;">10.5%</td>
-              </tr>
-              <tr>
-                <td style="padding:8px;">Tenure (n)</td>
-                <td style="padding:8px; text-align:right;">120 months (10 years)</td>
-              </tr>
-              <tr>
-                <td style="padding:8px;">Monthly Interest Rate (r)</td>
-                <td style="padding:8px; text-align:right;">0.00875</td>
-              </tr>
-              <tr>
-                <td style="padding:8px;">Calculated EMI</td>
-                <td style="padding:8px; text-align:right; font-weight:700;">₹13,493</td>
-              </tr>
-              <tr>
-                <td style="padding:8px;">Total Payment</td>
-                <td style="padding:8px; text-align:right;">₹16,19,220</td>
-              </tr>
-              <tr>
-                <td style="padding:8px;">Total Interest</td>
-                <td style="padding:8px; text-align:right;">₹6,19,220</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 style="margin:16px 0 8px;">How to Use This EMI Calculator</h3>
+      </div>      
+    </div>
+   
+          <!-- Blog-style explanation below calculator -->
+       <section id="learn-emi" class="glass" style="margin-top:20px; padding:18px;">
+        <article class="post-article">
+        <h2 style="margin-top:18px;">How to use this calculator</h2>
         <ol style="margin:0 0 0 18px; padding:0;">
           <li>Enter <strong>Loan Amount</strong>, <strong>Annual Interest</strong>, and <strong>Tenure</strong>.</li>
           <li>Choose a mode:
@@ -609,16 +865,87 @@
           <li><strong>Tenure:</strong> Total time to repay the loan, in months/years.</li>
           <li><strong>Prepayment / Part-payment:</strong> Extra payments made to reduce the outstanding sooner.</li>
           <li><strong>Amortization:</strong> Gradual repayment of principal over time through EMIs.</li>
-        </ul>
+        </ul>        
 
-        <p class="small-muted" style="margin-top:14px;">
-          <strong>Disclaimer:</strong> This tool provides estimates for planning only. Actual EMIs/charges depend on lender policies and your loan agreement.
-        </p>
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <h2><i class="fas fa-calculator"></i> What is EMI?</h2>
+    <p>
+        EMI (Equated Monthly Instalment) is the fixed amount you pay every month to repay your loan. 
+        Every EMI includes two parts — <strong>Principal</strong> and <strong>Interest</strong>. 
+        Most banks calculate EMI using the <strong>reducing balance method</strong>, where interest is charged 
+        only on the remaining loan amount. This helps borrowers plan their monthly budget easily.
+    </p>
+
+    <h2><i class="fas fa-percent"></i> Types of Interest Rates</h2>
+
+    <h3><i class="fas fa-lock"></i> Fixed Interest Rate</h3>
+    <p>
+        This rate remains constant throughout the loan tenure. Your EMI never changes, making it a stable 
+        and predictable option for loans like personal loans and car loans.
+    </p>
+
+    <h3><i class="fas fa-arrows-rotate"></i> Floating / Variable Interest Rate</h3>
+    <p>
+        Floating rates change based on market conditions and RBI repo rate. Your EMI may increase or decrease. 
+        This is common in <strong>home loans</strong>.
+    </p>
+
+    <h3><i class="fas fa-chart-line"></i> Reducing Balance Interest Rate</h3>
+    <p>
+        Interest is calculated on the outstanding principal each month. As the principal decreases, 
+        interest also reduces. This method is more cost-effective and widely used in home loans.
+    </p>
+
+    <h3><i class="fas fa-money-bill"></i> Flat Interest Rate</h3>
+    <p>
+        Interest is charged on the full loan amount for the entire tenure, even though the principal 
+        reduces over time. This increases the total interest cost and is common in small loans.
+    </p>
+
+    <hr style="margin:25px 0;">
+
+    <h2><i class="fas fa-house"></i> Home Loan EMI</h2>
+    <p>
+        Home loan EMIs are typically long-term and depend on loan amount, interest rate, and tenure. 
+        Banks mostly use the <strong>floating interest rate</strong> system for home loans. 
+        Calculating your home loan EMI helps you estimate affordability and plan repayment better.
+    </p>
+
+    <h2><i class="fas fa-car"></i> Car Loan EMI</h2>
+    <p>
+        Car loans usually come with <strong>fixed interest rates</strong>. This keeps your EMI the same 
+        every month, making it easier to manage vehicle purchase planning.
+    </p>
+
+    <h2><i class="fas fa-user"></i> Personal Loan EMI</h2>
+    <p>
+        Personal loans come with higher interest rates compared to home and car loans. EMI depends on 
+        credit score, income, and loan amount. The reducing balance method is normally used to calculate 
+        personal loan EMIs.
+    </p>
+
+    <hr style="margin:25px 0;">
+
+    <h2><i class="fas fa-lightbulb"></i> Why EMI Calculation is Important?</h2>
+    <ul>
+        <li>Helps plan monthly finances</li>
+        <li>Allows comparison of different loan offers</li>
+        <li>Shows total interest payable</li>
+        <li>Helps choose the right tenure</li>
+        <li>Reduces chances of financial stress</li>
+    </ul>
+
+        </article>
       </section>
     </div>
   </main>
 
- <!-- ====== Footer social icons END ====== -->
+ 
+
+<!-- ====== Footer social icons END ====== -->
 <style>
 footer.glass .social {
   display:flex; gap:10px; align-items:center; margin:12px 0;
@@ -640,9 +967,10 @@ footer.glass .social .wa svg{ fill:#25D366; }
 </style>
 <!-- ====== Footer social icons END ====== -->
 
-  <footer class="glass" style="margin-top:24px;">
-    <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
-         <div class="social" aria-label="Social links">
+  <!-- ====== FOOTER (replaced with Coming Soon footer) ====== -->
+  <footer id="contact" class="glass">
+    <div class="container">      
+      <div class="social" aria-label="Social links">
       <a class="fb" href="https://www.facebook.com/profile.php?id=61583100667662" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.48 17.52 2 11.94 2 6.36 2 1.88 6.48 1.88 12.06c0 4.88 3.56 8.93 8.22 9.8v-6.93H7.9v-2.87h2.2V9.6c0-2.18 1.3-3.39 3.3-3.39.96 0 1.97.17 1.97.17v2.16h-1.11c-1.1 0-1.44.69-1.44 1.4v1.68h2.45l-.39 2.87h-2.06v6.93c4.66-.87 8.22-4.92 8.22-9.8z"/></svg>
       </a>
@@ -662,16 +990,15 @@ footer.glass .social .wa svg{ fill:#25D366; }
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.03 0 11.97 11.97 0 0 0 1.8 17.7L0 24l6.45-1.7A11.96 11.96 0 0 0 12.03 24h.01A11.97 11.97 0 0 0 24 12.02a11.8 11.8 0 0 0-3.48-8.54ZM12.04 21.5h-.01a9.45 9.45 0 0 1-4.83-1.32l-.35-.2-3.83 1.01 1.02-3.73-.22-.38a9.48 9.48 0 1 1 8.22 4.62Zm5.49-7.17c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15s-.78.98-.96 1.18-.35.22-.64.08a7.73 7.73 0 0 1-2.28-1.41 8.57 8.57 0 0 1-1.58-1.96c-.17-.3 0-.46.13-.62.13-.15.3-.38.45-.58.15-.2.2-.35.3-.58.1-.22.05-.42-.03-.58-.08-.15-.68-1.63-.93-2.23-.24-.6-.5-.5-.68-.5h-.58c-.2 0-.52.08-.8.38-.28.3-1.06 1.03-1.06 2.5s1.09 2.9 1.24 3.11c.15.2 2.14 3.25 5.19 4.55.73.32 1.3.51 1.74.65.73.23 1.4.2 1.93.12.59-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.08-.13-.28-.2-.58-.35Z"/></svg>
       </a>
     </div>
-    <div class="container">
-      Designed & Maintained by Kiran Rathva • © <span id="year"></span> TechFinserv.com
-    </div>
-  </footer>
+     
+    <p class="subtitle" style="font-size:13px">Need something urgently? <a href="mailto:techfinserv.com@gmail.com">support@techfinserv.com</a></p>
+    <p>Designed & Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+  </div>
+</footer>
 
   <script>
-    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Match body padding to exact header height so nothing shifts and layout stays identical
     (function(){
       const topbar = document.querySelector('.topbar');
       if(!topbar) return;
@@ -680,7 +1007,6 @@ footer.glass .social .wa svg{ fill:#25D366; }
       window.addEventListener('resize', setPad, { passive: true });
     })();
 
-    // ===== Mobile menu toggle (same behavior as Home) =====
     (function () {
       const toggle = document.querySelector('.mobile-menu-toggle');
       const menu = document.getElementById('mobileMenu');
@@ -696,21 +1022,15 @@ footer.glass .social .wa svg{ fill:#25D366; }
         setExpanded(open);
       }, { passive: true });
 
-      // Close menu when a link is clicked
       menu.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') setExpanded(false);
       }, { passive: true });
 
-      // Reset on resize to desktop & recompute header height padding once
       const onResize = () => {
         if (window.innerWidth > 768) setExpanded(false);
       };
       window.addEventListener('resize', onResize, { passive: true });
     })();
-
-    // =============================
-    // LOGIC — performance-optimized (no visual/calculation/content changes)
-    // =============================
 
     const fmt = (v) => {
       const n = Math.round(Number(v) || 0);
@@ -723,7 +1043,6 @@ footer.glass .social .wa svg{ fill:#25D366; }
       return (pv * rate) / (1 - Math.pow(1 + rate, -nper));
     }
 
-    // DOM
     const loanEl = document.getElementById('loan');
     const rateEl = document.getElementById('rate');
     const yearsEl = document.getElementById('years');
@@ -742,30 +1061,46 @@ footer.glass .social .wa svg{ fill:#25D366; }
     const downloadXLSXBtn = document.getElementById('downloadXLSX');
     const downloadPDFBtn = document.getElementById('downloadPDF');
 
-    let payments = []; // {month, amount}
+    const ppStatusBadge = document.getElementById('ppStatusBadge');
+
+    let payments = [];
 
     function getInputs() {
       const principal = Math.max(1, Math.round(Number(loanEl.value) || 1));
       const annualRate = Math.max(0, Number(rateEl.value) || 0);
       const tenureYears = Math.max(0.1, Number(yearsEl.value) || 0.1);
-      return { principal, annualRate, tenureYears, monthlyRate: annualRate/12/100, monthsInitial: Math.round(Math.max(1, tenureYears*12)) };
+      return {
+        principal,
+        annualRate,
+        tenureYears,
+        monthlyRate: annualRate / 12 / 100,
+        monthsInitial: Math.round(Math.max(1, tenureYears * 12))
+      };
     }
 
     function renderPayments() {
-      // Use a single string write to avoid many DOM nodes operations
       if (payments.length === 0) {
         paymentsList.innerHTML = '<div class="small-muted">No part payments added.</div>';
         return;
       }
       let html = '';
       payments.forEach((p, idx) => {
-        html += `<div class="chip"><div class="small-muted">Month ${p.month} → <strong>${fmt(p.amount)}</strong></div>` +
-                `<button data-rm="${idx}" class="btn btn-danger" style="padding:6px 10px">Remove</button></div>`;
+        html += '<div class="chip">' +
+          '<div class="small-muted">' +
+            'Month ' + p.month + ' (' + (p.mode === "emi" ? "Reduce EMI" : "Reduce Tenure") + ') → ' +
+            '<strong>' + fmt(p.amount) + '</strong>' +
+          '</div>' +
+          '<button data-rm="' + idx + '" class="btn btn-danger" style="padding:6px 10px">Remove</button>' +
+        '</div>';
       });
       paymentsList.innerHTML = html;
-      // delegate remove clicks (less listeners)
       paymentsList.querySelectorAll('button[data-rm]').forEach(btn => {
-        btn.onclick = () => { payments.splice(Number(btn.getAttribute('data-rm')),1); renderPayments(); scheduleDirty = true; scheduleRAF(); };
+        btn.onclick = () => {
+          payments.splice(Number(btn.getAttribute('data-rm')), 1);
+          renderPayments();
+          scheduleDirty = true;
+          scheduleRAF();
+        };
       });
     }
 
@@ -773,87 +1108,131 @@ footer.glass .social .wa svg{ fill:#25D366; }
       const m = Math.max(1, Math.round(Number(ppMonthEl.value) || 0));
       const a = Math.max(0, Math.round(Number(ppAmountEl.value) || 0));
       if (!a) { alert('Please enter a part payment amount > 0'); return; }
-      payments.push({month:m, amount:a});
-      payments.sort((x,y)=>x.month-y.month);
-      ppMonthEl.value=''; ppAmountEl.value='';
+      payments.push({ month: m, amount: a, mode: modeEl.value }); // store mode per payment
+      payments.sort((x, y) => x.month - y.month);
+      ppMonthEl.value = '';
+      ppAmountEl.value = '';
       renderPayments();
-      scheduleDirty = true; scheduleRAF();
+      scheduleDirty = true;
+      scheduleRAF();
     }
 
-    function clearPayments(){
-      if(!confirm('Clear all part payments?')) return;
+    function clearPayments() {
+      if (!confirm('Clear all part payments?')) return;
       payments = [];
       renderPayments();
-      scheduleDirty = true; scheduleRAF();
+      scheduleDirty = true;
+      scheduleRAF();
     }
 
-    function computeSchedule() {
-      const { principal, monthlyRate, monthsInitial } = getInputs();
-      const mode = modeEl.value; // 'tenure' or 'emi'
-      const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
+    function computeSchedule(usePayments = true) {
+  const { principal, monthlyRate, monthsInitial } = getInputs();
+  const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
 
-      // Precompute part-payments per month for O(1) lookup
-      const partMap = new Map();
-      for (const p of payments) partMap.set(p.month, (partMap.get(p.month)||0) + p.amount);
+  // Build maps per month: total part amount + effective mode
+  const partMap = new Map();   // month -> total amount
+  const modeMap = new Map();   // month -> "tenure" or "emi"
 
-      const schedule = [];
-      let outstanding = principal;
-      let emi = initialEmi;
-      let remainingMonths = monthsInitial;
+  if (usePayments) {
+    for (const p of payments) {
+      const m = p.month;
+      const amt = p.amount || 0;
+      const mMode = p.mode || "tenure"; // default safety
 
-      for (let month=1; month<=1200; month++) {
-        if (outstanding <= 0.0001) break;
-        const interest = outstanding * monthlyRate;
-        let principalComp = emi - interest;
-        if (principalComp < 0) principalComp = 0;
+      // sum part-payments for same month
+      partMap.set(m, (partMap.get(m) || 0) + amt);
 
-        const part = partMap.get(month) || 0;
-
-        if (outstanding - principalComp - part <= 0) {
-          const finalInterest = outstanding * monthlyRate;
-          const finalPrincipal = outstanding;
-          const finalEmi = finalPrincipal + finalInterest;
-          schedule.push({ month, emi: Math.round(finalEmi), principalPaid: Math.round(finalPrincipal), interestPaid: Math.round(finalInterest), partPayment: Math.round(part), outstanding: 0 });
-          outstanding = 0;
-          break;
+      // if multiple payments in same month, "emi" wins
+      if (!modeMap.has(m)) {
+        modeMap.set(m, mMode);
+      } else {
+        const existing = modeMap.get(m);
+        if (existing === "tenure" && mMode === "emi") {
+          modeMap.set(m, "emi");
         }
-
-        outstanding = outstanding - principalComp - part;
-
-        if (mode === 'emi' && part > 0) {
-          remainingMonths = Math.max(1, monthsInitial - month);
-          if (outstanding > 0) {
-            emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
-          }
-        }
-
-        schedule.push({ month, emi: Math.round(emi), principalPaid: Math.round(principalComp), interestPaid: Math.round(interest), partPayment: Math.round(part), outstanding: Math.round(Math.max(0, outstanding)) });
-
-        if (month > monthsInitial + 600) break;
       }
+    }
+  }
 
-      return { schedule, initialEmi: Math.round(initialEmi) };
+  const schedule = [];
+  let outstanding = principal;
+  let emi = initialEmi;
+  let remainingMonths = monthsInitial;
+
+  for (let month = 1; month <= 1200; month++) {
+    if (outstanding <= 0.0001) break;
+
+    const interest = outstanding * monthlyRate;
+    let principalComp = emi - interest;
+    if (principalComp < 0) principalComp = 0;
+
+    const part = partMap.get(month) || 0;
+    const thisMonthMode = modeMap.get(month) || "tenure";
+
+    // If this is the final month (including part payment), close loan cleanly
+    if (outstanding - principalComp - part <= 0) {
+      const finalInterest = outstanding * monthlyRate;
+      const finalPrincipal = outstanding;
+      const finalEmi = finalPrincipal + finalInterest;
+
+      schedule.push({
+        month,
+        emi: Math.round(finalEmi),
+        principalPaid: Math.round(finalPrincipal),
+        interestPaid: Math.round(finalInterest),
+        partPayment: Math.round(part),
+        outstanding: 0
+      });
+
+      outstanding = 0;
+      break;
     }
 
-    // Efficient render: build a single HTML string and write once
+    // Normal month: subtract EMI principal + part-payment
+    outstanding = outstanding - principalComp - part;
+
+    // 🔁 Recalculate EMI ONLY if this payment's mode is "emi"
+    if (thisMonthMode === "emi" && part > 0 && usePayments) {
+      remainingMonths = Math.max(1, monthsInitial - month);
+      if (outstanding > 0) {
+        emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
+      }
+    }
+
+    schedule.push({
+      month,
+      emi: Math.round(emi),
+      principalPaid: Math.round(principalComp),
+      interestPaid: Math.round(interest),
+      partPayment: Math.round(part),
+      outstanding: Math.round(Math.max(0, outstanding))
+    });
+
+    if (month > monthsInitial + 600) break;
+  }
+
+  return { schedule, initialEmi: Math.round(initialEmi) };
+}
+
+
     function renderSchedule(schedule) {
       let rows = '';
-      for (let i=0; i<schedule.length; i++) {
+      for (let i = 0; i < schedule.length; i++) {
         const r = schedule[i];
-        rows += `\n<tr>`+
-          `<td data-label="Month"><span class="value">${r.month}</span></td>`+
-          `<td data-label="EMI"><span class="value">${fmt(r.emi)}</span></td>`+
-          `<td data-label="Principal"><span class="value">${fmt(r.principalPaid)}</span></td>`+
-          `<td data-label="Interest"><span class="value">${fmt(r.interestPaid)}</span></td>`+
-          `<td data-label="Part Payment"><span class="value">${fmt(r.partPayment)}</span></td>`+
-          `<td data-label="Outstanding"><span class="value">${fmt(r.outstanding)}</span></td>`+
-        `</tr>`;
+        rows += '\n<tr>' +
+          '<td data-label="Month"><span class="value">' + r.month + '</span></td>' +
+          '<td data-label="EMI"><span class="value">' + fmt(r.emi) + '</span></td>' +
+          '<td data-label="Principal"><span class="value">' + fmt(r.principalPaid) + '</span></td>' +
+          '<td data-label="Interest"><span class="value">' + fmt(r.interestPaid) + '</span></td>' +
+          '<td data-label="Part Payment"><span class="value">' + fmt(r.partPayment) + '</span></td>' +
+          '<td data-label="Outstanding"><span class="value">' + fmt(r.outstanding) + '</span></td>' +
+        '</tr>';
       }
       scheduleTbody.innerHTML = rows;
     }
 
-    function updateKpis(schedule, initialEmi){
-      const totalInterest = schedule.reduce((s,r)=>s+r.interestPaid, 0);
+    function updateKpis(schedule, initialEmi) {
+      const totalInterest = schedule.reduce((s, r) => s + r.interestPaid, 0);
       const principalInput = Math.max(1, Math.round(Number(loanEl.value) || 1));
       const totalPayment = totalInterest + principalInput;
 
@@ -863,20 +1242,105 @@ footer.glass .social .wa svg{ fill:#25D366; }
       totalPaymentEl.textContent = fmt(totalPayment);
     }
 
-    function computeAndRender(){
-      const { schedule, initialEmi } = computeSchedule();
-      renderSchedule(schedule);
-      updateKpis(schedule, initialEmi);
-      lastSchedule = schedule; // cache for exports
-      lastInitialEmi = initialEmi;
+    // ---- Charts setup ----
+    let chartNormal = null;
+    let chartWithPP = null;
+
+    function initCharts() {
+      const ctxNormal = document.getElementById('chartNormal').getContext('2d');
+      const ctxPP = document.getElementById('chartWithPP').getContext('2d');
+
+      const baseOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(15,23,42,0.94)',
+            titleColor: '#e5e7eb',
+            bodyColor: '#e5e7eb',
+            borderColor: 'rgba(148,163,184,0.4)',
+            borderWidth: 1,
+            padding: 8,
+            callbacks: {
+              label: function(ctx) {
+                const label = ctx.label || '';
+                const value = ctx.raw || 0;
+                return label + ': ' + fmt(value);
+              }
+            }
+          }
+        },
+        cutout: '68%',
+        animation: { duration: 450, easing: 'easeOutCubic' }
+      };
+
+      chartNormal = new Chart(ctxNormal, {
+        type: 'doughnut',
+        data: {
+          labels: ['Interest', 'Principal'],
+          datasets: [{
+            data: [0, 0],
+            backgroundColor: ['#0ea5e9', '#22c55e'],
+            borderWidth: 0
+          }]
+        },
+        options: baseOptions
+      });
+
+      chartWithPP = new Chart(ctxPP, {
+        type: 'doughnut',
+        data: {
+          labels: ['Principal', 'Interest', 'Interest Saved'],
+          datasets: [{
+            data: [0, 0, 0],
+            backgroundColor: ['#22c55e', '#0ea5e9', '#f97316'],
+            borderWidth: 0
+          }]
+        },
+        options: baseOptions
+      });
     }
 
-    // rAF throttle for inputs to avoid jank while typing
+    function updateCharts(currentSchedule) {
+      if (!chartNormal || !chartWithPP) return;
+
+      const principal = Math.max(1, Math.round(Number(loanEl.value) || 1));
+
+      const baseline = computeSchedule(false).schedule;
+      const baselineInterest = baseline.reduce((s, r) => s + r.interestPaid, 0);
+
+      const currentInterest = currentSchedule.reduce((s, r) => s + r.interestPaid, 0);
+      const interestSavedRaw = baselineInterest - currentInterest;
+      const interestSaved = Math.max(0, Math.round(interestSavedRaw));
+
+      // Normal loan chart
+      chartNormal.data.datasets[0].data = [baselineInterest, principal];
+      chartNormal.update();
+
+      // With part-payment chart
+      const hasPP = payments.some(p => p.amount && p.amount > 0);
+      ppStatusBadge.textContent = hasPP ? 'Part payments applied' : 'No part payments';
+
+      chartWithPP.data.datasets[0].data = [principal, currentInterest, interestSaved];
+      chartWithPP.update();
+    }
+
+    function computeAndRender() {
+      const { schedule, initialEmi } = computeSchedule(true);
+      renderSchedule(schedule);
+      updateKpis(schedule, initialEmi);
+      lastSchedule = schedule;
+      lastInitialEmi = initialEmi;
+      updateCharts(schedule);
+    }
+
     let scheduleDirty = false;
     let rafId = 0;
     let lastSchedule = null;
     let lastInitialEmi = 0;
-    function scheduleRAF(){
+
+    function scheduleRAF() {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
@@ -887,18 +1351,22 @@ footer.glass .social .wa svg{ fill:#25D366; }
       });
     }
 
-    // Events
     document.getElementById('addPp').addEventListener('click', addPayment);
     document.getElementById('clearPps').addEventListener('click', clearPayments);
 
     const onInput = () => { scheduleDirty = true; scheduleRAF(); };
     [loanEl, rateEl, yearsEl, modeEl].forEach(el => el.addEventListener('input', onInput));
 
-    // Export: use cached lastSchedule to avoid recompute during click (but still accurate because we refresh on input)
-    function exportXLSX(){
-      const schedule = lastSchedule || computeSchedule().schedule;
+    function exportXLSX() {
+      const schedule = lastSchedule || computeSchedule(true).schedule;
       const hasPart = payments.some(p => p.amount && p.amount > 0);
-      const aoa = [ ['Loan Amount', loanEl.value], ['Annual Rate (%)', rateEl.value], ['Tenure (Years)', yearsEl.value], ['Mode', modeEl.value], [], ];
+      const aoa = [
+       ['Loan Amount', loanEl.value],
+       ['Annual Rate (%)', rateEl.value],
+       ['Tenure (Years)', yearsEl.value],
+       ['Mode', payments.length ? 'Per Part Payment' : 'Normal (No Part Payment)'],
+       [],
+       ];
       if (hasPart) {
         aoa.push(['Month','EMI','Principal Paid','Interest Paid','Part Payment','Outstanding']);
         schedule.forEach(r => aoa.push([r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding]));
@@ -910,80 +1378,305 @@ footer.glass .social .wa svg{ fill:#25D366; }
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Schedule');
       const wbout = XLSX.write(wb, {bookType:'xlsx', type:'array'});
-      try { saveAs(new Blob([wbout],{type:"application/octet-stream"}), 'emi_schedule.xlsx'); } catch(e) { alert('Excel export failed: ' + e.message); }
+      try { saveAs(new Blob([wbout],{type:"application/octet-stream"}), 'emi_schedule.xlsx'); }
+      catch(e) { alert('Excel export failed: ' + e.message); }
     }
 
-    function exportPDF(){
-      const scheduleData = lastSchedule || computeSchedule().schedule;
-      const initialEmi = lastInitialEmi || computeSchedule().initialEmi;
-      const loan = Math.round(Number(loanEl.value) || 0);
-      const rate = Number(rateEl.value) || 0;
-      const years = Number(yearsEl.value) || 0;
-      const hasPart = payments.some(p => p.amount && p.amount > 0);
+function exportPDF() {
+  const result = lastSchedule ? { schedule: lastSchedule, initialEmi: lastInitialEmi } : computeSchedule(true);
+  const scheduleData = result.schedule;
+  const initialEmi = result.initialEmi;
 
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const margin = 40;
-      let y = 40;
+  const loan = Math.round(Number(loanEl.value) || 0);
+  const rate = Number(rateEl.value) || 0;
+  const years = Number(yearsEl.value) || 0;
+  const principal = loan;
 
-      doc.setFillColor(246, 249, 255);
-      doc.rect(0,0,pageWidth,60,'F');
-      doc.setFontSize(18);
-      doc.setTextColor(15,23,42);
-      doc.text('EMI Repayment Schedule', margin, 40);
+  const totalInterest = scheduleData.reduce((s, r) => s + r.interestPaid, 0);
+  const totalPayment = principal + totalInterest;
 
-      y = 80;
-      const cardW = 140; const cardH = 40; const gap = 12;
-      const cards = [
-        {label:'Loan Amount', value: fmt(loan), color: [14,165,233]},
-        {label:'Rate (%)', value: String(rate), color: [16,185,129]},
-        {label:'Tenure (yrs)', value: String(years), color: [234,179,8]},
-        {label:'Initial EMI', value: fmt(initialEmi), color: [99,102,241]}
-      ];
-      let x = margin;
-      cards.forEach(c=>{
-        doc.setFillColor(c.color[0], c.color[1], c.color[2]);
-        doc.roundedRect(x, y, cardW, cardH, 6, 6, 'F');
-        doc.setTextColor(255,255,255);
-        doc.setFontSize(10);
-        doc.text(c.label, x + 10, y + 14);
-        doc.setFontSize(13);
-        doc.setFont(undefined, 'bold');
-        doc.text(c.value, x + 10, y + 30);
-        doc.setFont(undefined, 'normal');
-        x += cardW + gap;
-      });
+  const hasPart = payments.some(p => p.amount && p.amount > 0);
 
-      y += cardH + 18;
+  // Baseline (no prepayment) interest -> interest saved
+  const baseline = computeSchedule(false).schedule;
+  const baselineInterest = baseline.reduce((s, r) => s + r.interestPaid, 0);
+  const rawSaved = baselineInterest - totalInterest;
+  const interestSaved = Math.max(0, Math.round(rawSaved));
 
-      const head = hasPart ? [['Month','EMI','Principal','Interest','Part Payment','Outstanding']] : [['Month','EMI','Principal','Interest','Outstanding']];
-      const body = scheduleData.map(r => hasPart ? [r.month, r.emi, r.principalPaid, r.interestPaid, r.partPayment, r.outstanding] : [r.month, r.emi, r.principalPaid, r.interestPaid, r.outstanding]);
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
 
-      doc.autoTable({
-        startY: y,
-        head: head,
-        body: body,
-        styles: { fontSize: 9 },
-        headStyles: { fillColor: [245,245,245], textColor: 20 },
-        margin: { left: margin, right: margin },
-        didDrawPage: function (data) {
-          const page = doc.internal.getNumberOfPages();
-          doc.setFontSize(9);
-          doc.setTextColor(120);
-          doc.text('Page ' + page, data.settings.margin.left, doc.internal.pageSize.height - 10);
-        },
-        theme: 'grid'
-      });
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 40;
 
-      doc.save('emi_schedule.pdf');
+  // ---------- PAGE BACKGROUND ----------
+  doc.setFillColor(246, 249, 255);
+  doc.rect(0, 0, pageW, pageH, "F");
+
+  doc.setFillColor(230, 242, 255);
+  doc.rect(0, 0, pageW, 70, "F");
+
+  // ---------- TITLE ----------
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(18);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Amortization Schedule", margin, 40);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.setTextColor(71, 85, 105);
+  doc.text("Loan summary with part-payment & amortization schedule", margin, 56);
+
+  // ---------- MAIN CARD (LEFT BLUE SUMMARY) ----------
+  const cardX = margin;
+  const cardY = 90;
+  const cardH = 230;
+  const cardW = pageW - margin * 2;
+  const leftW = cardW * 0.5;
+
+  // dark navy block
+  doc.setFillColor(5, 37, 66);
+  doc.roundedRect(cardX, cardY, leftW, cardH, 18, 18, "F");
+  doc.setDrawColor(15, 118, 178);
+  doc.roundedRect(cardX, cardY, leftW, cardH, 18, 18, "S");
+
+  // heading
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.text("TechFinserv", cardX + 18, cardY + 22);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.setTextColor(191, 219, 254);
+  doc.text("Smart EMI & part-payment planner", cardX + 18, cardY + 38);
+
+  // helper for centered field boxes
+  function drawFieldBox(row, col, label, value) {
+    const cols = 3;
+    const padX = 18;
+    const padY = 60;
+    const gapX = 10;
+    const gapY = 12;
+    const totalInnerW = leftW - padX * 2 - gapX * (cols - 1);
+    const boxW = totalInnerW / cols;
+    const boxH = 54;
+
+    const x = cardX + padX + col * (boxW + gapX);
+    const y = cardY + padY + row * (boxH + gapY);
+
+    // blue inner box
+    doc.setFillColor(24, 77, 112);
+    doc.roundedRect(x, y, boxW, boxH, 12, 12, "F");
+    doc.setDrawColor(59, 130, 246);
+    doc.roundedRect(x, y, boxW, boxH, 12, 12, "S");
+
+    // label (centered, auto-wrap)
+    doc.setTextColor(226, 232, 240);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8);
+
+    const labelLines = doc.splitTextToSize(label, boxW - 16);
+    const labelY = y + 14;
+    doc.text(labelLines, x + boxW / 2, labelY, { align: "center" });
+
+    // value (centered)
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    const valueY = y + boxH - 10;
+    doc.text(value, x + boxW / 2, valueY, { align: "center" });
+  }
+
+  // row 1
+  drawFieldBox(0, 0, "Loan Amount", fmt(principal));
+  drawFieldBox(0, 1, "Interest Rate (%)", String(rate));
+  drawFieldBox(0, 2, "Tenure (yrs)", String(years));
+
+  // row 2
+  drawFieldBox(1, 0, "Total Interest Paid", fmt(totalInterest));
+  drawFieldBox(1, 1, "Total Payment", fmt(totalPayment));
+  drawFieldBox(1, 2, "EMI", fmt(initialEmi));
+
+  // ---------- RIGHT CARD + CUSTOM PIE CHART ----------
+  const pieCardX = cardX + leftW + 30;
+  const pieCardY = cardY + 6;
+  const pieCardW = cardW - leftW - 30;
+  const pieCardH = cardH - 12;
+
+  // white card
+  doc.setFillColor(255, 255, 255);
+  doc.roundedRect(pieCardX, pieCardY, pieCardW, pieCardH, 20, 20, "F");
+  doc.setDrawColor(226, 232, 240);
+  doc.roundedRect(pieCardX, pieCardY, pieCardW, pieCardH, 20, 20, "S");
+
+  // title + subtitle
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Loan Split with Part Payments", pieCardX + 18, pieCardY + 22);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(107, 114, 128);
+  doc.text(
+    hasPart
+      ? "Principal, interest & interest saved after pre-payments"
+      : "No part payments added – normal loan split",
+    pieCardX + 18,
+    pieCardY + 36
+  );
+
+  // ---- custom pie chart + legend (ALL inside this card) ----
+  (function () {
+    const canvas = document.createElement("canvas");
+    const size = 260;
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+
+    const cx = size / 2;
+    const cy = size / 2;
+    const radius = 110;
+
+    const values = [principal, totalInterest, interestSaved];
+    const colors = ["#0b5ed7", "#f97316", "#22c55e"]; // blue, orange, green
+
+    const total = values.reduce((a, b) => a + (b > 0 ? b : 0), 0) || 1;
+    let startAngle = -Math.PI / 2;
+
+    for (let i = 0; i < values.length; i++) {
+      const v = values[i];
+      if (v <= 0) continue;          // skip 0 slices
+      const sliceAngle = (v / total) * Math.PI * 2;
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, radius, startAngle, startAngle + sliceAngle);
+      ctx.closePath();
+      ctx.fillStyle = colors[i];
+      ctx.fill();
+
+      startAngle += sliceAngle;
     }
 
+    // soft outline
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "rgba(15,23,42,0.1)";
+    ctx.stroke();
+
+    const imgData = canvas.toDataURL("image/png");
+
+    // keep chart + legend fully inside card
+    const innerTop = pieCardY + 48;               // below title
+    const chartSize = 120;
+    const chartY = innerTop;
+    const chartX = pieCardX + (pieCardW - chartSize) / 2;
+
+    doc.addImage(imgData, "PNG", chartX, chartY, chartSize, chartSize);
+
+    // legend directly under chart
+    const legendBaseY = chartY + chartSize + 14;
+
+    // Raw list, then remove "Interest Saved" if value is 0
+    const sectionsRaw = [
+      { key: "principal", label: "Principal",      value: principal,     color: [11, 94, 215] },
+      { key: "interest",  label: "Interest",       value: totalInterest, color: [249, 115, 22] },
+      { key: "saved",     label: "Interest Saved", value: interestSaved, color: [34, 197, 94] }
+    ];
+    const sections = sectionsRaw.filter(s => s.key !== "saved" || s.value > 0);
+
+    const count = sections.length;
+    const totalLegendWidth = pieCardW - 64; // some left-right padding
+    const gap = totalLegendWidth / count;
+    let lx = pieCardX + 32;
+
+    sections.forEach((s, idx) => {
+      const cxDot = lx;
+      const cyDot = legendBaseY - 4;
+
+      // dot
+      doc.setFillColor(s.color[0], s.color[1], s.color[2]);
+      doc.circle(cxDot, cyDot, 4, "F");
+
+      // label
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(55, 65, 81);
+      doc.text(s.label, cxDot + 10, legendBaseY);
+
+      // value (NO ₹ symbol now)
+      doc.setFont("helvetica", "bold");
+      doc.text(fmt(s.value), cxDot + 10, legendBaseY + 11);
+
+      lx += gap;
+    });
+  })();
+
+  // ---------- TABLE TITLE ----------
+  const tableStartY = cardY + cardH + 40;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Detailed Amortization Schedule", margin, tableStartY - 8);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9);
+  doc.setTextColor(107, 114, 128);
+  doc.text(
+    "",
+    margin,
+    tableStartY + 6
+  );
+
+  // ---------- TABLE DATA ----------
+  const head = hasPart
+    ? [["Month", "EMI", "Principal", "Interest", "Part Payment", "Outstanding"]]
+    : [["Month", "EMI", "Principal", "Interest", "Outstanding"]];
+
+  const body = scheduleData.map(r =>
+    hasPart
+      ? [r.month, fmt(r.emi), fmt(r.principalPaid), fmt(r.interestPaid), fmt(r.partPayment), fmt(r.outstanding)]
+      : [r.month, fmt(r.emi), fmt(r.principalPaid), fmt(r.interestPaid), fmt(r.outstanding)]
+  );
+
+  doc.autoTable({
+    startY: tableStartY + 14,
+    head: head,
+    body: body,
+    styles: { fontSize: 8 },
+    headStyles: {
+      fillColor: [241, 245, 249],
+      textColor: 30,
+      lineWidth: 0.25,
+      lineColor: [203, 213, 225]
+    },
+    bodyStyles: { lineWidth: 0.1, lineColor: [226, 232, 240] },
+    margin: { left: margin, right: margin },
+    theme: "grid",
+    didDrawPage: function (data) {
+      const page = doc.internal.getNumberOfPages();
+      doc.setFontSize(8);
+      doc.setTextColor(148, 163, 184);
+      doc.text("Page " + page, data.settings.margin.left, doc.internal.pageSize.height - 10);
+      doc.text(
+        "Generated via TechFinserv EMI Calculator",
+        pageW - data.settings.margin.right - 190,
+        doc.internal.pageSize.height - 10
+      );
+    }
+  });
+
+  doc.save("emi_schedule.pdf");
+}
     downloadXLSXBtn.addEventListener('click', exportXLSX);
     downloadPDFBtn.addEventListener('click', exportPDF);
 
-    // First render
     renderPayments();
+    initCharts();
     computeAndRender();
   </script>
 </body>
