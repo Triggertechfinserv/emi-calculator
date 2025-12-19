@@ -98,5 +98,12 @@
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
+
+  <url>
+    <loc>https://www.techfinserv.com/blogs/loan-on-cc-001/</loc>
+    <lastmod>2025-12-19</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
   
 </urlset>
