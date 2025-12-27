@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Check Free CIBIL Score Online | TechFinserv</title>
+  <meta name="description" content="Check your free CIBIL score online and know your loan eligibility with a calm, secure and modern TechFinserv experience." />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9DHT9T8GZB');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "u8560jazbw");
+  </script>
+
+  <!-- Favicon + Font -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* calm fintech blue / slate palette for hero background */
+      --hero-start: #e4efff;
+      --hero-mid:   #c7d6ff;
+      --hero-end:   #4c5b86;
+
+      --text-main:  #0f172a;
+      --text-soft:  #cfd8ff;
+      --muted:      #e2e8f0;
+
+      --accent:     #22c55e;
+      --border-glass: rgba(226, 232, 240, 0.7);
+      --shadow-soft: 0 22px 46px rgba(15, 23, 42, 0.25);
+      
+      /* tokens from Coming Soon */
+      --bg: #f6f9ff;
+      --surface: rgba(255,255,255,0.78);
+      --surface-strong: rgba(255,255,255,0.92);
+      --text: #0f172a;
+      --muted-main: #475569;
+      --border: rgba(2,6,23,0.12);
+      --accent-1: #0ea5e9;
+      --accent-2: #10b981;
+      --radius: 16px;
+      --maxw: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      /* ONE continuous soft gradient for whole page */
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.40), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(148,163,253,0.32), transparent 55%),
+        linear-gradient(135deg, var(--hero-start) 0%, var(--hero-mid) 40%, var(--hero-end) 100%);
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container-max {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== HEADER (exactly from Coming Soon) ===== */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar::after {
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+    }
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+    }
+    .brand-logo {
+      height: 65px; border-radius: 10px;
+      display:block; width:auto; object-fit:contain;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: var(--muted-main); transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: var(--surface-strong); color: var(--text); }
+    .cta {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
+    }
+
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:var(--text); border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:var(--muted-main); text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: var(--text); }
+      .mobile-menu.open { display:flex !important; }
+    }
+
+    /* ===== HERO LAYOUT (same as your last code) ===== */
+    .hero {
+      flex: 1;
+      display: flex;
+      align-items: stretch;
+      padding: 32px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 26px;
+      }
+    }
+
+    .hero-left {
+      padding-top: 18px;
+      padding-bottom: 12px;
+      color: var(--text-soft);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.28rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.42);
+      border: 1px solid rgba(148,163,253,0.5);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.32);
+    }
+
+    .hero-heading {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #f9fafb;
+    }
+
+    .hero-highlight { color: #bfdbfe; }
+
+    .hero-subline {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .hero-meta {
+      font-size: 0.88rem;
+      color: rgba(226,232,240,0.9);
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: rgba(226,232,240,0.92);
+    }
+
+    .hero-points span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-points span i {
+      display:inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background-color: rgba(34,197,94,0.15);
+      border: 1px solid rgba(74,222,128,0.5);
+      position:relative;
+    }
+    .hero-points span i::after {
+      content:"";
+      position:absolute;
+      inset:3px;
+      border-radius:inherit;
+      background-color:#22c55e;
+    }
+
+    /* ===== Glassmorphism form ===== */
+    .hero-right {
+      display:flex;
+      align-items:flex-start;
+      justify-content:flex-end;
+    }
+
+    .glass-form {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 22px;
+      padding: 22px 22px 20px;
+      border: 1px solid var(--border-glass);
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.55), rgba(15,23,42,0.12));
+      background-color: rgba(15,23,42,0.35);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+      color: var(--muted);
+      overflow: hidden;
+    }
+
+    .glass-form::before {
+      content:"";
+      position:absolute;
+      inset:-25%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.20), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(148,163,253,0.25), transparent 55%);
+      opacity: 0.9;
+      pointer-events:none;
+    }
+
+    .glass-inner {
+      position:relative;
+      z-index:1;
+    }
+
+    .glass-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      margin-bottom: 12px;
+      color:#e5e7eb;
+    }
+
+    .glass-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+    }
+
+    .glass-sub {
+      font-size: 0.8rem;
+      color: rgba(209,213,219,0.9);
+    }
+
+    .glass-tag {
+      font-size: 0.78rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.45);
+      border: 1px solid rgba(148,163,253,0.7);
+      color: #c7d2fe;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #cbd5f5;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-control,
+    .form-select {
+      border-radius: 11px;
+      border: 1px solid rgba(148,163,184,0.9);
+      font-size: 0.9rem;
+      padding: 0.55rem 0.7rem;
+      background-color: #ffffff;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 0.12rem rgba(37,99,235,0.45);
+    }
+
+    .form-check-label {
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-color: transparent;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      padding-block: 0.65rem;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    }
+
+    .trust-copy {
+      font-size: 0.8rem;
+      color: rgba(209,213,219,0.96);
+    }
+
+    .micro-copy {
+      font-size: 0.75rem;
+      color: rgba(209,213,219,0.85);
+    }
+
+    /* ===== FOOTER (exactly from Coming Soon, class renamed) ===== */
+    footer.glass-footer {
+      position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: var(--muted-main);
+    }
+    footer.glass-footer::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      opacity:0.8; pointer-events:none;
+    }
+    footer .subtitle { font-size:13px; color:#64748b; }
+
+    @media (max-width: 767.98px) {
+      .hero { padding-top: 24px; }
+      .glass-form { margin-inline: auto; }
+      footer.glass-footer { padding:22px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Header (same as Coming Soon) -->
+  <div class="topbar">
+    <div class="container-max">
+      <header class="nav">
+        <a href="/" aria-label="TechFinserv home">
+          <img class="brand-logo" src="techfinserv-logo.png" alt="TechFinserv logo">
+        </a>
+        <nav class="menu" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/blogs/">Blog</a>
+          <a href="/emi-calculator/">EMI calculator</a>
+          <a href="#contact" class="cta">Contact</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
+        <a href="/">Home</a>
+        <a href="/blogs/">Blog</a>
+        <a href="/emi-calculator/">EMI calculator</a>
+        <a href="#contact" style="font-weight:600;color:var(--accent-1)">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero (single continuous background) -->
+  <main class="hero">
+    <div class="container-max">
+      <div class="hero-grid">
+
+        <!-- Left content -->
+        <div class="hero-left">
+          <div class="hero-badge mb-3">
+            <span class="dot"></span>
+            <span>Loan eligibility in under 2 minutes</span>
+          </div>
+
+          <h1 class="hero-heading display-6 mb-3">
+            Check Your Loan Eligibility <span class="hero-highlight">Without Any CIBIL Impact</span>
+          </h1>
+
+          <p class="hero-subline mb-3">
+            Get an instant view of where your credit stands and see which personal loans you may qualify for, without affecting your score.
+          </p>
+
+          <p class="hero-meta mb-2">
+            A soft enquiry only – your existing cards and loans remain untouched, and your CIBIL score stays exactly as it is.
+          </p>
+          <p class="hero-meta">
+            Built for working professionals and business owners who prefer clear, jargon-free insights before applying.
+          </p>
+
+          <div class="hero-points">
+            <span><i></i>No impact on credit score</span>
+            <span><i></i>Free CIBIL score check</span>
+            <span><i></i>Bank-grade encryption</span>
+          </div>
+        </div>
+
+        <!-- Right: glassmorphism form -->
+        <div class="hero-right">
+          <div class="glass-form">
+            <div class="glass-inner">
+              <div class="glass-header">
+                <div>
+                  <div class="glass-title">Start with basic details</div>
+                  <div class="glass-sub">Takes less than 2 minutes. No documents required.</div>
+                </div>
+                <span class="glass-tag">Step 1 of 2</span>
+              </div>
+
+              <form action="https://formsubmit.co/techfinserv.com@gmail.com" method="POST">
+			  <!-- FormSubmit settings -->
+              <input type="hidden" name="_subject" value="New Loan Lead - TechFinserv">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://www.techfinserv.com/thank-you.html">
+
+                <div class="row g-3">
+                  <div class="col-md-12">
+                    <label class="form-label">Full Name*</label>
+                    <input type="text" class="form-control" name="full_name" placeholder="As per PAN" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">Mobile Number*</label>
+                    <input type="tel" class="form-control" name="mobile" placeholder="10-digit mobile" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Employment Type*</label>
+                    <select class="form-select" name="employment" required>
+                      <option value="">Select</option>
+                      <option value="salaried">Salaried employee</option>
+                      <option value="business">Business owner</option>
+                      <option value="self">Self employed / professional</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">Monthly Net Income*</label>
+                    <input type="number" class="form-control" name="income" placeholder="₹ (approx)" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">City*</label>
+                    <input type="text" class="form-control" name="city" required />
+                  </div>
+
+                  <div class="col-md-12">
+                    <label class="form-label">Looking For*</label>
+                    <select class="form-select" name="product" required>
+                      <option value="">Select</option>
+                      <option>Personal Loan</option>
+                      <option>Flexi Hybrid Loan</option>
+                      <option>Decrease My EMI burden</option>
+                      <option>Home Loan</option>
+                    </select>
+                  </div>
+
+                  <div class="col-12 mt-1">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="consent1" required />
+                      <label class="form-check-label" for="consent1">
+                        I agree to the Terms &amp; Conditions and authorize TechFinserv and its partners to fetch my CIBIL score via soft enquiry.
+                      </label>
+                    </div>
+                  </div>
+                 
+                  <div class="col-12 mt-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                      get expert assistance
+                    </button>
+                  </div>
+
+                  <div class="col-12 mt-2 trust-copy">
+                    Instant summary of your estimated eligibility, with no impact on your current CIBIL score.
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+  </main>
+  
+  <!-- What We Do Section -->
+<section class="py-5">
+  <div class="container-max">
+    <div class="row justify-content-center">
+      <div class="col-lg-20">
+
+        <div class="whatwedo-card">
+
+          <h2 class="whatwedo-title mb-3">
+            How TechFinserv Helps You Choose the Right Loan
+          </h2>
+
+          <p class="whatwedo-intro mb-4">
+            We make loan selection simple. Instead of applying blindly with one bank,
+            we help you understand and compare suitable loan options — before you apply.
+          </p>
+
+          <div class="row g-4">
+
+            <div class="col-md-6">
+              <p><strong>1️⃣ You share your requirement</strong><br>
+              Tell us the loan type, amount, employment details, income range and city.</p>
+            </div>
+
+            <div class="col-md-6">
+              <p><strong>2️⃣ We review your profile</strong><br>
+              We analyse your profile, employer category and overall credit behaviour.</p>
+            </div>
+
+            <div class="col-md-6">
+              <p><strong>3️⃣ We simulate eligibility — safely</strong><br>
+              Based on bank & NBFC rules, we check which loans may suit you.<br>
+              <span class="text-success">
+                ✔ No CIBIL enquiry<br>
+                ✔ No impact on credit score<br>
+                ✔ Completely free
+              </span>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <p><strong>4️⃣ We show suitable loan options</strong><br>
+              You get indicative options like personal loan, flexi hybrid loan or home loan — with EMI ideas.</p>
+            </div>
+
+            <div class="col-md-6">
+              <p><strong>5️⃣ You choose what fits you best</strong><br>
+              Compare options and select the loan that matches your needs and comfort.</p>
+            </div>
+
+            <div class="col-md-6">
+              <p><strong>6️⃣ Application starts only after your confirmation</strong><br>
+              If you decide to proceed, the selected bank or NBFC processes your application.<br>
+              <span class="text-muted">A CIBIL enquiry happens only at this stage.</span>
+              </p>
+            </div>
+
+          </div>
+
+          <hr class="my-4">
+
+          <div class="alert alert-light border-0 small mb-0">
+            <strong>Good to know:</strong><br>
+            Checking options on this page does <strong>not</strong> affect your CIBIL score.
+            A credit bureau enquiry is initiated only if you choose to apply with a bank or NBFC.
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== What We Do (Matched with Hero Theme) ===== */
+.whatwedo-card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 20px;
+  border: 1px solid rgba(148,163,184,0.25);
+
+  padding: 32px 36px;
+  box-shadow: 0 14px 34px rgba(15,23,42,0.12);
+}
+
+.whatwedo-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0b2340;
+}
+
+.whatwedo-intro {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.whatwedo-card p {
+  color: #334155;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.whatwedo-card strong {
+  color: #0f172a;
+}
+</style>
+
+  <!-- Footer (same as Coming Soon) -->
+  <footer id="contact" class="glass-footer">
+    <div class="container-max">
+      <p>Designed &amp; Maintained by Kiran Rathva | © <span id="year"></span> TechFinserv.com</p>
+      <p class="subtitle">Need something urgently? <a href="mailto:hello@techfinserv.com">hello@techfinserv.com</a></p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Mobile menu script (same behaviour as Coming Soon) -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  (function () {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const menu = document.getElementById('mobileMenu');
+    if (!toggle || !menu) return;
+    const setExpanded = (open) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('open', open);
+    };
+    toggle.addEventListener('click', () => {
+      const open = !menu.classList.contains('open');
+      setExpanded(open);
+    });
+    menu.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') setExpanded(false);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) setExpanded(false);
+    });
+  })();
+</script>
+</body>
+</html>
