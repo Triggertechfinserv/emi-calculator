@@ -841,29 +841,31 @@ footer.glass .social .wa svg{ fill:#25D366; }
 <script>
 const googleScriptURL = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLgBmhrqJVGJouzskX4zTCQYmLpdmwYMB9mQx44Xy-C1M6qvyaf1s0-AlbCdl2WAA21Q7m8SF2i19qKsBLu6RkXgpv58i_3GQh1Qe4mkl9IkITlCaKYXxiWkVRT1VWHbLBDNAYiYXczHchytYo-kLuFWJrXKXKY-hhTclQX5YOHoB_rXcTsokeAhsW_lnMj-ihTVsNzmTmV3LIT8McSG-SlysVCGkCSdaQ_z0wQVBeNyNO-rVDvo0plL1WQmEg&lib=M2tYjApKfudY_irN2yA_oOSfppGzV3uwS";
 
-document.getElementById("leadForm").addEventListener("submit", function(e) {
+document.getElementById("leadForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const form = e.target;
   const formData = new FormData(form);
 
-  const data = {};
-  formData.forEach((value, key) => data[key] = value);
-
-  Promise.allSettled([
+  Promise.all([
     fetch(googleScriptURL, {
       method: "POST",
       body: formData
-    })
+    }),
     fetch(form.dataset.formsubmit, {
       method: "POST",
       body: formData
     })
-  ]).finally(() => {
+  ])
+  .then(() => {
+    alert("Both submissions sent successfully");
     window.location.href = "/apply-now/thank-you/";
+  })
+  .catch(err => {
+    console.error("Submission error:", err);
+    alert("Submission failed. Check console.");
   });
 });
 </script>
-
 </body>
 </html>
