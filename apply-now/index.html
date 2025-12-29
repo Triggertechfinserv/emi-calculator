@@ -561,6 +561,8 @@
               <input type="hidden" name="_subject" value="New Loan Lead - TechFinserv">
               <input type="hidden" name="_template" value="table">
               <input type="hidden" name="_captcha" value="false">
+			  <input type="hidden" name="_next" value="https://www.techfinserv.com/apply-now/thank-you/">
+
 				  
                 <div class="row g-3">
                   <div class="col-md-12">
@@ -839,33 +841,29 @@ footer.glass .social .wa svg{ fill:#25D366; }
   })();
 </script>
 <script>
-const googleScriptURL = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLgBmhrqJVGJouzskX4zTCQYmLpdmwYMB9mQx44Xy-C1M6qvyaf1s0-AlbCdl2WAA21Q7m8SF2i19qKsBLu6RkXgpv58i_3GQh1Qe4mkl9IkITlCaKYXxiWkVRT1VWHbLBDNAYiYXczHchytYo-kLuFWJrXKXKY-hhTclQX5YOHoB_rXcTsokeAhsW_lnMj-ihTVsNzmTmV3LIT8McSG-SlysVCGkCSdaQ_z0wQVBeNyNO-rVDvo0plL1WQmEg&lib=M2tYjApKfudY_irN2yA_oOSfppGzV3uwS";
+const googleScriptURL = "https://script.google.com/macros/s/AKfycbwx8ndVqvI-pghNnAzivMnM31wt1oKrkMOMxapRysYD8huXJ15vUr1eM7ntn1eJZuJu/exec";
 
 document.getElementById("leadForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const form = e.target;
-  const formData = new FormData(form);
+  const sheetData = new FormData(form);
 
-  Promise.all([
-    fetch(googleScriptURL, {
-      method: "POST",
-      body: formData
-    }),
-    fetch(form.dataset.formsubmit, {
-      method: "POST",
-      body: formData
-    })
-  ])
+  // 1️⃣ Send to Google Sheet
+  fetch(googleScriptURL, {
+    method: "POST",
+    body: sheetData
+  })
   .then(() => {
-    alert("Both submissions sent successfully");
-    window.location.href = "/apply-now/thank-you/";
+    // 2️⃣ Submit form normally to FormSubmit
+    form.submit();
   })
   .catch(err => {
-    console.error("Submission error:", err);
-    alert("Submission failed. Check console.");
+    console.error("Google Sheet error:", err);
+    alert("Submission failed. Please try again.");
   });
 });
 </script>
-</body>
+
+  </body>
 </html>
