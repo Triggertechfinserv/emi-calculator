@@ -561,9 +561,12 @@
               <input type="hidden" name="_subject" value="New Loan Lead - TechFinserv">
               <input type="hidden" name="_template" value="table">
               <input type="hidden" name="_captcha" value="false">
-			  <input type="hidden" name="_next" value="https://www.techfinserv.com/apply-now/thank-you/">
+              
+              <input type="hidden" name="consent_text"
+                     value="User agreed to Terms & Conditions and authorized TechFinserv to contact regarding loan options and related guidance, including DND/DNC consent.">
+              <input type="hidden" name="consent_version" value="v1.0 | 2025-01-01">
+              <input type="hidden" name="source_page" value="Apply Now Page">
 
-				  
                 <div class="row g-3">
                   <div class="col-md-12">
                     <label class="form-label">Full Name*</label>
@@ -613,10 +616,6 @@
                         regarding loan options and related guidance, even if my number is registered under DND/DNC.
                       </label>
                     </div>
-					 <input type="hidden" name="consent_text"
-                            value="User agreed to Terms & Conditions and authorized TechFinserv to contact regarding loan options and related guidance, including DND/DNC consent.">
-                      <input type="hidden" name="consent_version" value="v1.0 | 2025-01-01">
-                      <input type="hidden" name="source_page" value="Apply Now Page">
                   </div>
                  
                   <div class="col-12 mt-2">
@@ -843,27 +842,30 @@ footer.glass .social .wa svg{ fill:#25D366; }
 <script>
 const googleScriptURL = "https://script.google.com/macros/s/AKfycbwx8ndVqvI-pghNnAzivMnM31wt1oKrkMOMxapRysYD8huXJ15vUr1eM7ntn1eJZuJu/exec";
 
-document.getElementById("leadForm").addEventListener("submit", function (e) {
+document.getElementById("leadForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const form = e.target;
-  const sheetData = new FormData(form);
+  const formData = new FormData(form);
 
-  // 1️⃣ Send to Google Sheet
-  fetch(googleScriptURL, {
-    method: "POST",
-    body: sheetData
-  })
-  .then(() => {
-    // 2️⃣ Submit form normally to FormSubmit
-    form.submit();
-  })
-  .catch(err => {
-    console.error("Google Sheet error:", err);
-    alert("Submission failed. Please try again.");
+  const data = {};
+  formData.forEach((value, key) => data[key] = value);
+
+  Promise.allSettled([
+    fetch(googleScriptURL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    }),
+    fetch(form.dataset.formsubmit, {
+      method: "POST",
+      body: formData
+    })
+  ]).finally(() => {
+    window.location.href = "/apply-now/thank-you/";
   });
 });
 </script>
 
-  </body>
+</body>
 </html>
