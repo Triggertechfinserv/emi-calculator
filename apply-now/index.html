@@ -515,11 +515,11 @@
         <div class="hero-left">
           <div class="hero-badge mb-3">
             <span class="dot"></span>
-            <span>Loan eligibility in under 2 minutes</span>
+            <span>Loan guidance in under 2 minutes</span>
           </div>
 
           <h1 class="hero-heading display-6 mb-3">
-            Check Your Loan Eligibility <span class="hero-highlight">Without Any CIBIL Impact</span>
+            Understand Your Loan Options  <span class="hero-highlight">Without Any CIBIL Impact</span>
           </h1>
 
           <p class="hero-subline mb-3">
@@ -535,9 +535,9 @@
           </p>
 
           <div class="hero-points">
-            <span><i></i>No impact on credit score</span>
-            <span><i></i>Free CIBIL score check</span>
-            <span><i></i>Bank-grade encryption</span>
+           <span><i></i>No bank or NBFC application</span>
+           <span><i></i>Guidance based on your details</span>
+           <span><i></i>Proceed only if you choose</span>
           </div>
 		  <h2 class="visually-hidden">
               Free Loan Eligibility Check Without CIBIL Score Impact in India
@@ -556,12 +556,16 @@
                 <span class="glass-tag">Step 1 </span>
               </div>
 
-              <form action="https://formsubmit.co/techfinserv.com@gmail.com" method="POST">
-			  <!-- FormSubmit settings -->
+              <form id="leadForm" data-formsubmit="https://formsubmit.co/techfinserv.com@gmail.com">
+      			  <!-- FormSubmit settings -->
               <input type="hidden" name="_subject" value="New Loan Lead - TechFinserv">
               <input type="hidden" name="_template" value="table">
               <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_next" value="https://www.techfinserv.com/apply-now/thank-you/">
+              
+              <input type="hidden" name="consent_text"
+                     value="User agreed to Terms & Conditions and authorized TechFinserv to contact regarding loan options and related guidance, including DND/DNC consent.">
+              <input type="hidden" name="consent_version" value="v1.0 | 2025-01-01">
+              <input type="hidden" name="source_page" value="Apply Now Page">
 
                 <div class="row g-3">
                   <div class="col-md-12">
@@ -606,7 +610,7 @@
 
                   <div class="col-12 mt-1">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="consent1" required />
+                      <input class="form-check-input" type="checkbox" id="consent1" name="consent_checkbox" value="accepted" required>
                       <label class="form-check-label" for="consent1">
                         I agree to the Terms & Conditions and authorize TechFinserv to contact me 
                         regarding loan options and related guidance, even if my number is registered under DND/DNC.
@@ -835,5 +839,33 @@ footer.glass .social .wa svg{ fill:#25D366; }
     });
   })();
 </script>
+<script>
+const googleScriptURL = "https://script.google.com/macros/s/AKfycbwx8ndVqvI-pghNnAzivMnM31wt1oKrkMOMxapRysYD8huXJ15vUr1eM7ntn1eJZuJu/exec";
+
+document.getElementById("leadForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  const data = {};
+  formData.forEach((value, key) => data[key] = value);
+
+  Promise.allSettled([
+    fetch(googleScriptURL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    }),
+    fetch(form.dataset.formsubmit, {
+      method: "POST",
+      body: formData
+    })
+  ]).finally(() => {
+    window.location.href = "/apply-now/thank-you/";
+  });
+});
+</script>
+
 </body>
 </html>
