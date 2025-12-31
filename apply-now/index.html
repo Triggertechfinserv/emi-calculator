@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Primary SEO -->
   <title>Get Expert Assistance | Free & Secure – TechFinserv</title>
-  <meta name="description" content="This is a guidance-only process. We do not check or fetch your CIBIL score, and no bank or NBFC enquiry is initiated at this stage. instant eligibility insights for personal, home & flexi loans in India." />
+  <meta name="description" content="Guidance-only loan eligibility check without CIBIL impact. No bank or NBFC enquiry at this stage. Get expert assistance for personal, home and flexi loans in India." />
 
   <link rel="canonical" href="https://www.techfinserv.com/apply-now/" />
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="TechFinserv">
   <meta property="og:locale" content="en_IN">
   <meta property="og:title" content="Check Loan Eligibility Without CIBIL Impact – TechFinserv">
-  <meta property="og:description" content="Know your loan eligibility in under 2 minutes. Free soft enquiry, no CIBIL score impact, bank-grade security." />
+  <meta property="og:description" content="Know your loan eligibility in under 2 minutes. guidance-only check, no CIBIL score impact, bank-grade security." />
   <meta property="og:url" content="https://www.techfinserv.com/apply-now/">
 
   <!-- OG Image (PNG/JPG only) -->
@@ -77,11 +77,15 @@
   "name": "TechFinserv",
   "url": "https://www.techfinserv.com/apply-now/",
   "logo": "https://www.techfinserv.com/images/techfinserv-logo.png",
-  "areaServed": "IN",
-  "description": "Free loan eligibility check without CIBIL impact using soft enquiry. Personal, home and flexi loan guidance in India.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "description": "Guidance-only loan eligibility check without CIBIL impact. No bank or NBFC enquiry at this stage. Expert assistance for personal, home and flexi loan options in India.",
   "provider": {
     "@type": "Organization",
     "name": "TechFinserv",
+    "url": "https://www.techfinserv.com/",
     "sameAs": [
       "https://www.facebook.com/profile.php?id=61583100667662",
       "https://www.instagram.com/techfinserv/",
@@ -94,22 +98,79 @@
 
 <script type="application/ld+json">
 {
- "@context": "https://schema.org",
- "@type": "BreadcrumbList",
- "itemListElement": [
-  {
-   "@type": "ListItem",
-   "position": 1,
-   "name": "Home",
-   "item": "https://www.techfinserv.com/"
-  },
-  {
-   "@type": "ListItem",
-   "position": 2,
-   "name": "Loan Eligibility",
-   "item": "https://www.techfinserv.com/apply-now/"
-  }
- ]
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.techfinserv.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Loan Eligibility",
+      "item": "https://www.techfinserv.com/apply-now/"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does checking eligibility here affect my CIBIL score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Checking options on this page does not impact your CIBIL score. We do not initiate any credit bureau enquiry at this stage. A CIBIL enquiry happens only if you decide to apply with a bank or NBFC."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is TechFinserv a bank or NBFC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. TechFinserv is a loan guidance platform. We help users understand suitable loan options based on their profile before they apply with a bank or NBFC."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will I get a guaranteed loan or lowest interest rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Loan approval and interest rates depend on bank or NBFC policies, your income profile and credit behaviour. We provide guidance and indicative options, not guarantees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can this help me reduce my EMI or interest rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, where applicable. Based on your details, we may suggest balance transfer or lower interest rate options offered by banks and NBFCs. You choose whether or not to proceed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens after I submit my details?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A representative reviews your requirement and shares suitable loan guidance. No application is submitted to any bank or NBFC without your confirmation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my personal information safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Your information is used only for providing loan-related guidance and is handled as per our Privacy Policy. We do not sell or misuse your personal data."
+      }
+    }
+  ]
 }
 </script>
   
@@ -292,12 +353,12 @@
     .hero-highlight { color: #bfdbfe; }
 
     .hero-subline {
-      font-size: 1rem;
+      font-size: 0.8rem;
       color: #fff;
     }
 
     .hero-meta {
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       color: rgb(255, 255, 255);
     }
 
@@ -306,7 +367,7 @@
       flex-wrap: wrap;
       gap: 10px 16px;
       margin-top: 14px;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: rgb(255, 255, 255);
     }
 
@@ -345,7 +406,7 @@
       width: 100%;
       max-width: 440px;
       border-radius: 22px;
-      padding: 22px 22px 20px;
+      padding: 32px 22px 40px;
       border: 1px solid var(--border-glass);
       background: radial-gradient(circle at 0 0, rgba(255,255,255,0.55), rgba(15,23,42,0.12));
       background-color: rgba(7, 109, 119, 0.35);
@@ -470,11 +531,74 @@
     }
     footer .subtitle { font-size:13px; color:#64748b; }
 
+    
     @media (max-width: 767.98px) {
-      .hero { padding-top: 24px; }
-      .glass-form { margin-inline: auto; }
-      footer.glass-footer { padding:22px 0 56px; }
+     .hero {
+     padding-top: 24px;
+     }
+
+     .glass-form {
+      margin-inline: auto;
+     }
+
+     footer.glass-footer {
+     padding: 22px 0 56px;
+     }
     }
+
+    .hero-info-box {
+  background: rgba(15, 23, 42, 0.38);
+  border: 1px solid rgba(148, 163, 253, 0.45);
+  border-radius: 20px;
+  padding: 22px 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.25);
+  color: #f8fafc;
+}
+
+/* Balance transfer inner box */
+.bt-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(148, 163, 253, 0.35);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.bt-box h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+
+.bt-box p {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.bt-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  font-size: 0.88rem;
+}
+
+.bt-box li {
+  margin-bottom: 4px;
+}
+
+.bt-note {
+  font-size: 0.75rem;
+  color: #c7d2fe;
+  margin-top: 6px;
+}
+
+.custom-wide {
+  max-width: 1400px;
+  margin: auto;
+}
+
   </style>
 </head>
 <body>
@@ -491,7 +615,7 @@
           <a href="/">Home</a>
           <a href="/blogs/">Blog</a>
           <a href="/emi-calculator/">EMI calculator</a>
-          <a href="#contact" class="cta">Contact</a>
+          <a href="/apply-now/" class="cta">Contact</a>
         </nav>
         <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
@@ -501,7 +625,7 @@
         <a href="/">Home</a>
         <a href="/blogs/">Blog</a>
         <a href="/emi-calculator/">EMI calculator</a>
-        <a href="#contact" style="font-weight:600;color:var(--accent-1)">Contact</a>
+        <a href="/apply-now/" style="font-weight:600;color:var(--accent-1)">Contact</a>
       </nav>
     </div>
   </div>
@@ -513,36 +637,62 @@
 
         <!-- Left content -->
         <div class="hero-left">
-          <div class="hero-badge mb-3">
-            <span class="dot"></span>
-            <span>Loan guidance in under 2 minutes</span>
-          </div>
 
-          <h1 class="hero-heading display-6 mb-3">
-            Find the Right Loan Options <span class="hero-highlight">Without Any CIBIL Impact</span>
+         <!-- H1 stays OUTSIDE -->
+          <h1 class="hero-heading display-6 mb-4">
+            Find the Right Loan Options
+            <span class="hero-highlight">Without Any CIBIL Impact</span>
           </h1>
-
-          <p class="hero-subline mb-3">
-            Get expert guidance to understand suitable loan options based on your income, city and requirements — without making any bank application.
-          </p>
-
-          <p class="hero-meta mb-2">
-            We first understand your requirement, then match your profile with multiple bank and NBFC loan products.
-          </p>
-          <p class="hero-meta">
-            Built for working professionals and business owners who prefer clear, jargon-free insights before applying, backed by our
-            <a href="/blogs/" title="Loan and CIBIL score guides by TechFinserv">Loan & CIBIL guides</a>.
-          </p>
-
-          <div class="hero-points">
-           <span><i></i>No bank or NBFC application</span>
-           <span><i></i>Guidance based on your details</span>
-           <span><i></i>Proceed only if you choose</span>
-          </div>
-		  <h2 class="visually-hidden">
-              Free Loan Eligibility Check Without CIBIL Score Impact in India
+          <h2 class="visually-hidden">
+            Free Loan Eligibility Guidance Without Credit Score Impact
           </h2>
+
+         <!-- EVERYTHING ELSE GOES INSIDE THIS BOX -->
+          <div class="hero-info-box">
+
+           <div class="hero-badge mb-3">
+             <span class="dot"></span>
+             <span>Loan guidance in under 2 minutes</span>
+           </div>
+
+           <!-- Balance Transfer Highlight -->
+            <div class="bt-box mb-3">
+             <h3>Paying High EMI or Interest?</h3>
+              <p>
+               Explore <strong>balance transfer</strong> and
+                <strong>lower interest rate</strong> options by matching your profile
+                with multiple banks & NBFCs — <strong>without any CIBIL enquiry.</strong>
+              </p>
+
+              <ul>
+                <li>✔ Reduce EMI burden via balance transfer</li>
+                <li>✔ Lower interest rate options</li>
+                <li>✔ Free eligibility simulation</li>
+                <li>✔ Apply only if you choose</li>
+              </ul>
+
+              <p class="bt-note">
+               CIBIL enquiry is done only after your confirmation.
+              </p>
+            </div>
+ 
+              <p class="hero-subline">
+               Get expert guidance to understand suitable loan options based on your income,
+               city and requirements — without making any bank application.
+              </p>
+
+              <p class="hero-meta">
+                We first understand your requirement, then match your profile with multiple
+                bank and NBFC loan products.
+              </p>
+    
+            <div class="hero-points">
+              <span><i></i>Guidance based on your details</span>
+              <span><i></i>Proceed only if you choose</span>
+            </div>
+          </div>
         </div>
+
 
         <!-- Right: glassmorphism form -->
         <div class="hero-right">
@@ -569,8 +719,8 @@
 
                 <div class="row g-3">
                   <div class="col-md-12">
-                    <label class="form-label">Full Name*</label>
-                    <input type="text" class="form-control" name="full_name" placeholder="" required />
+                    <label class="form-label" for="full_name">Full Name*</label>
+                    <input id="full_name" type="text" class="form-control" name="full_name" required>
                   </div>
 
                   <div class="col-md-6">
@@ -612,8 +762,15 @@
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" id="consent1" name="consent_checkbox" value="accepted" required>
                       <label class="form-check-label" for="consent1">
-                        I agree to the Terms & Conditions and authorize TechFinserv to contact me 
-                        regarding loan options and related guidance, even if my number is registered under DND/DNC.
+                        I agree to the 
+                        <a href="/terms-and-conditions/" target="_blank" style="color:#0040FF;font-weight:500;">
+                          Terms & Conditions
+                        </a> and 
+                        <a href="/privacy-policy/" target="_blank" style="color:#0040FF;font-weight:500;">
+                        Privacy Policy
+                        </a> and authorize
+                        TechFinserv to contact me regarding loan options and related guidance,
+                        even if my number is registered under DND/DNC.
                       </label>
                     </div>
                   </div>
@@ -642,8 +799,7 @@
 <section class="py-5">
   <div class="container-max">
     <div class="row justify-content-center">
-      <div class="col-lg-20">
-
+      <div class="custom-wide">
         <div class="whatwedo-card">
 
           <h2 class="whatwedo-title mb-3">
@@ -712,6 +868,171 @@
   </div>
 </section>
 
+<section class="py-5">
+  <div class="container-max">
+    <div class="faq-card">
+
+      <h2 class="faq-title mb-3">
+        Frequently Asked Questions
+      </h2>
+
+      <p class="faq-intro mb-4">
+        Clear answers to common questions about our loan guidance process,
+        eligibility checks and data privacy.
+      </p>
+
+      <div class="accordion faq-accordion" id="faqAccordion">
+
+        <!-- FAQ 1 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+              Does checking eligibility here affect my CIBIL score?
+            </button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              No. Checking options on this page does <strong>not</strong> impact your CIBIL score.
+              We do not initiate any credit bureau enquiry at this stage.
+              A CIBIL enquiry happens only if you decide to apply with a bank or NBFC.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+              Is TechFinserv a bank or NBFC?
+            </button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              No. TechFinserv is a <strong>loan guidance platform</strong>.
+              We help users understand suitable loan options based on their profile
+              before they apply with a bank or NBFC.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+              Will I get a guaranteed loan or lowest interest rate?
+            </button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Loan approval and interest rates depend on bank or NBFC policies,
+              your income profile and credit behaviour.
+              We provide <strong>guidance and indicative options</strong>, not guarantees.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+              Can this help me reduce my EMI or interest rate?
+            </button>
+          </h3>
+          <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, where applicable. Based on your details, we may suggest
+              balance transfer or lower interest rate options offered by banks and NBFCs.
+              You choose whether or not to proceed.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+              What happens after I submit my details?
+            </button>
+          </h3>
+          <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              A representative reviews your requirement and shares suitable loan guidance.
+              No application is submitted to any bank or NBFC without your confirmation.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+              Is my personal information safe?
+            </button>
+          </h3>
+          <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes. Your information is used only for providing loan-related guidance
+              and is handled as per our Privacy Policy.
+              We do not sell or misuse your personal data.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== FAQ Section ===== */
+.faq-card {
+  background: rgba(255,255,255,0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  border: 1px solid rgba(148,163,184,0.25);
+  padding: 32px 36px;
+  box-shadow: 0 14px 34px rgba(15,23,42,0.12);
+}
+
+.faq-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0b2340;
+}
+
+.faq-intro {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.faq-accordion .accordion-item {
+  border: none;
+  background: transparent;
+  margin-bottom: 10px;
+}
+
+.faq-accordion .accordion-button {
+  background: rgba(15,23,42,0.05);
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #0f172a;
+  box-shadow: none;
+}
+
+.faq-accordion .accordion-button:not(.collapsed) {
+  background: rgba(14,165,233,0.12);
+  color: #0b2340;
+}
+
+.faq-accordion .accordion-body {
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.55;
+}
+</style>
+
 <style>
 /* ===== What We Do (Matched with Hero Theme) ===== */
 .whatwedo-card {
@@ -779,12 +1100,8 @@ footer.glass .social .wa svg{ fill:#25D366; }
 </style>
 <!-- ====== Footer social icons END ====== -->
 
-  <!-- Footer (same as Coming Soon) -->
-  <footer id="contact" class="glass-footer">
-    <div class="container-max">
-
   <!-- ====== FOOTER (replaced with Coming Soon footer) ====== -->
-  <footer id="contact" class="glass">
+  <footer id="contact" class="glass-footer glass">
     <div class="container">
       <p class="subtitle" style="font-size:13px">Follow us</p>
       <div class="social" aria-label="Social links">
@@ -811,7 +1128,6 @@ footer.glass .social .wa svg{ fill:#25D366; }
   </div>
 </footer>
 
-</div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
