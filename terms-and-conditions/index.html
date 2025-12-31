@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms & Conditions - TechFinserv</title>
+  <meta name="description" content="Terms and Conditions for TechFinserv platform and financial services.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --accent: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --border-glow: rgba(59, 130, 246, 0.2);
+      --shadow-neumorph: 8px 8px 16px rgba(0,0,0,0.06), -8px -8px 16px rgba(255,255,255,0.8);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+      z-index: -1;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(1deg); }
+      66% { transform: translateY(-10px) rotate(-1deg); }
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Floating Header */
+    .header-float {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-neumorph);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-float::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: var(--accent);
+      opacity: 0.06;
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .header-float h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .last-updated {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Sidebar TOC */
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .toc-sidebar {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+      box-shadow: var(--shadow-neumorph);
+    }
+
+    .toc-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-list a {
+      display: block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.75rem 0.5rem;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .toc-list a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: height 0.3s ease;
+    }
+
+    .toc-list a:hover {
+      background: rgba(59, 130, 246, 0.08);
+      color: var(--text-primary);
+      transform: translateX(8px);
+    }
+
+    .toc-list a:hover::before {
+      height: 80%;
+    }
+
+    .toc-list a.active {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--text-primary);
+    }
+
+    .toc-list a.active::before {
+      height: 100%;
+      background: var(--accent);
+    }
+
+    /* Content */
+    .content {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow-neumorph);
+    }
+
+    .intro-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-neumorph);
+    }
+
+    .intro-card::before {
+      content: '⚡';
+      position: absolute;
+      font-size: 3rem;
+      top: -20px;
+      right: -20px;
+      opacity: 0.08;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 100px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section p, .section li {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .toc-sidebar {
+        position: static;
+        order: 2;
+      }
+      
+      .content {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem 0.5rem;
+      }
+      
+      .header-float, .content {
+        border-radius: 20px;
+        padding: 1.5rem;
+      }
+    }
+
+    /* Scroll animations */
+    .section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Floating Header -->
+    <header class="header-float">
+      <h1>Terms & Conditions</h1>
+      <div class="last-updated">Last updated: December 30, 2025</div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout">
+      <!-- Sidebar TOC -->
+      <nav class="toc-sidebar" aria-label="Table of contents">
+        <div class="toc-title">📋 On this page</div>
+        <ul class="toc-list">
+          <li><a href="#introduction">1. Introduction</a></li>
+          <li><a href="#eligibility">2. Eligibility</a></li>
+          <li><a href="#services">3. Services</a></li>
+          <li><a href="#disclaimer">4. Disclaimer</a></li>
+          <li><a href="#partners">5. Partners</a></li>
+          <li><a href="#ip">6. IP Rights</a></li>
+          <li><a href="#privacy">7. Privacy</a></li>
+          <li><a href="#liability">8. Liability</a></li>
+          <li><a href="#governing">9. Governing Law</a></li>
+          <li><a href="#contact">10. Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="content">
+        <!-- Intro Card -->
+        <div class="intro-card">
+          <p><strong>⚠️ Important:</strong> By using TechFinserv, you agree to these Terms. Please read carefully before proceeding.</p>
+        </div>
+
+        <!-- Sections -->
+        <section id="introduction" class="section">
+         <span class="section-label">SECTION 1</span>
+         <h2>Introduction</h2>
+          <p>
+           TechFinserv (“TechFinserv”, “we”, “our”, or “us”) operates the website
+           <strong>www.techfinserv.com</strong> and associated digital platforms for the purpose of
+           providing financial education, loan-related information, calculators, and guidance to
+           users seeking to better understand available financial products.
+          </p>
+
+          <p>
+           These Terms & Conditions (“Terms”) govern your access to and use of the website, its
+           content, tools, calculators, and any services offered through the platform. By accessing
+           or using the website, you acknowledge that you have read, understood, and agreed to be
+           legally bound by these Terms, as amended from time to time.
+          </p>
+
+          <p>
+           TechFinserv reserves the right to revise or update these Terms at its sole discretion.
+           Any such changes shall become effective immediately upon publication on this page, and
+           continued use of the website constitutes acceptance of the revised Terms.
+          </p>
+        </section>
+
+        <section id="eligibility" class="section">
+          <span class="section-label">SECTION 2</span>
+          <h2>Eligibility</h2>
+          <p>
+           Use of the TechFinserv platform is available only to individuals who are at least
+           eighteen (18) years of age and are legally capable of entering into binding contracts
+           under applicable laws of India. By using this website, you represent and warrant that
+           you meet these eligibility requirements.
+          </p>
+
+          <p>
+           You further agree that any information provided by you while accessing calculators,
+           submitting forms, or requesting guidance shall be accurate, current, and complete to
+           the best of your knowledge. TechFinserv shall not be responsible for consequences arising
+           from incorrect, misleading, or incomplete information provided by users.
+          </p>
+        </section>
+
+        <section id="services" class="section">
+          <span class="section-label">SECTION 3</span>
+          <h2>Services</h2>
+          <p>
+           TechFinserv provides informational tools, educational content, calculators, and
+           indicative guidance relating to loans, EMIs, interest calculations, and general financial
+           awareness. The services offered are designed to assist users in understanding available
+           options before independently approaching a bank or non-banking financial company (NBFC).
+          </p>
+
+          <p>
+           TechFinserv is not a bank, financial institution, or NBFC, and does not sanction,
+           approve, or disburse loans. Any loan product, eligibility determination, interest rate,
+           or approval decision is made solely by the respective lender based on its internal
+           policies and regulatory requirements.
+          </p>
+        </section>
+
+        <section id="disclaimer" class="section">
+          <span class="section-label">SECTION 4</span>
+          <h2>Disclaimer</h2>
+          <p>
+           All information, calculators, and guidance provided on this website are made available
+           on an “as is” and “as available” basis and are intended solely for informational
+           purposes. Nothing on this website shall be construed as financial, legal, or investment
+           advice.
+          </p>
+
+          <p>
+           While reasonable efforts are made to ensure accuracy, TechFinserv does not warrant the
+           completeness, reliability, or suitability of any information. Users are advised to
+           independently verify details and consult qualified professionals before making financial
+           decisions.
+          </p>
+        </section>
+
+        <section id="partners" class="section">
+          <span class="section-label">SECTION 5</span>
+          <h2>Partners & Third Parties</h2>
+          <p>
+           TechFinserv may work with or facilitate introductions to third-party lenders, service
+           providers, or financial institutions. Such third parties operate independently and are
+           governed by their own terms, policies, and regulatory obligations.
+          </p>
+
+          <p>
+           TechFinserv does not control and shall not be responsible for the actions, decisions,
+           products, or services offered by any third party. Any engagement between the user and a
+           third-party lender is solely between those parties.
+          </p>
+        </section>
+
+        <section id="ip" class="section">
+          <span class="section-label">SECTION 6</span>
+          <h2>Intellectual Property</h2>
+          <p>
+           All content displayed on the website, including but not limited to text, graphics,
+           logos, calculators, software, design elements, and layout, is the intellectual property
+           of TechFinserv and is protected under applicable intellectual property laws.
+          </p>
+
+          <p>
+           No part of the website may be copied, reproduced, distributed, transmitted, or used for
+           commercial purposes without prior written consent from TechFinserv.
+          </p>
+        </section>
+
+        <section id="privacy" class="section">
+          <span class="section-label">SECTION 7</span>
+          <h2>Privacy & Data</h2>
+          <p>
+           Protection of user data is governed by TechFinserv’s <a href="/privacy-policy/" target="_blank" style="color:#0040FF;font-weight:500;">Privacy Policy</a>,
+           which forms an
+           integral part of these Terms. By using this website, you consent to the collection,
+           processing, and use of information in accordance with the <a href="/privacy-policy/" target="_blank" style="color:#0040FF;font-weight:500;">Privacy Policy</a>.
+          </p>
+
+          <p>
+           Users are encouraged to review the <a href="/privacy-policy/" target="_blank" style="color:#0040FF;font-weight:500;">Privacy Policy</a> carefully to understand data handling,
+           analytics usage, session recording disclosures, and consent practices.
+          </p>
+        </section>
+
+        <section id="liability" class="section">
+          <span class="section-label">SECTION 8</span>
+          <h2>Liability</h2>
+          <p>
+           To the maximum extent permitted by law, TechFinserv shall not be liable for any direct,
+           indirect, incidental, consequential, or special damages arising out of or in connection
+           with the use of the website, reliance on information provided, or interaction with any
+           third-party service.
+          </p>
+
+          <p>
+           Users agree to indemnify and hold TechFinserv harmless from any claims, losses, or
+           liabilities arising from misuse of the platform or violation of these Terms.
+          </p>
+        </section>
+
+        <section id="governing" class="section">
+          <span class="section-label">SECTION 9</span>
+          <h2>Governing Law</h2>
+          <p>
+           These Terms & Conditions shall be governed by and construed in accordance with the laws of India.
+           Any disputes arising out of or in connection with the use of this website shall be subject to the
+           jurisdiction of competent courts in India.
+          </p>
+        </section>
+
+        <section id="contact" class="section">
+          <span class="section-label">SECTION 10</span>
+          <h2>Contact Us</h2>
+          <p>
+           For any questions, concerns, or clarifications regarding these Terms & Conditions,
+           you may contact TechFinserv at:
+          </p>
+
+          <p>
+           <strong>Email:</strong> support@techfinserv.com<br>
+           <strong>Location:</strong> India
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scrolling + active TOC
+    document.querySelectorAll('.toc-list a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        document.getElementById(targetId).scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      });
+    });
+
+    // Active TOC highlighting
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.toc-list a').forEach(a => a.classList.remove('active'));
+          document.querySelector(`a[href="#${entry.target.id}"]`)?.classList.add('active');
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
+
+    document.querySelectorAll('.section').forEach(section => observer.observe(section));
+
+    // Scroll animations
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.section').forEach(section => scrollObserver.observe(section));
+
+    // Dynamic year
+    document.querySelector('.last-updated').innerHTML += ` | © ${new Date().getFullYear()} TechFinserv`;
+  </script>
+</body>
+</html>
