@@ -113,4 +113,26 @@
     <priority>0.9</priority>
   </url>
   
+    <!-- Legal Pages -->
+  <url>
+    <loc>https://www.techfinserv.com/privacy-policy/</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.techfinserv.com/terms-and-conditions/</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.techfinserv.com/apply-now/terms-and-conditions/</loc>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  
 </urlset>
