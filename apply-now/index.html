@@ -768,8 +768,7 @@
                         TechFinserv to contact me regarding loan options and related guidance,
                         even if my number is registered under DND/DNC.
                       </label>
-                     <input type="hidden" name="consent_version" value="v1.0 | 2025-01-01">
-                     <input type="hidden" name="consent_timestamp" value="">
+                     <input type="hidden" name="consent_version" value="v1.0 | 2025-12-30">
                      <input type="hidden" name="consent_text"
                      value="User explicitly agreed to Terms & Conditions and Privacy Policy and authorized TechFinserv to contact regarding loan options and related guidance, including DND/DNC consent."> 
                     </div>
@@ -1185,23 +1184,5 @@ document.getElementById("leadForm").addEventListener("submit", function(e) {
   });
 });
 </script>
-  
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('form');
-
-  if (!form) return; // safety check
-
-  form.addEventListener('submit', function () {
-    const ts = new Date().toISOString();
-    const field = document.getElementById('consent_timestamp');
-
-    if (field) {
-      field.value = ts;
-    }
-  });
-});
-</script>
-
 </body>
 </html>
