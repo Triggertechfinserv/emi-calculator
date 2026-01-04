@@ -158,19 +158,24 @@
     }
   }
 </style>
- 
-<!-- GA4 Lead Conversion -->
+
+ <!-- Google tag (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9DHT9T8GZB');
 
+  /* ✅ GA4 Lead Conversion */
   gtag('event', 'generate_lead', {
     event_category: 'form',
     event_label: 'apply_now_form',
     value: 1
   });
 </script>
- 
+
+
 </head>
 
 <body>
