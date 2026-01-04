@@ -1184,47 +1184,6 @@ document.getElementById("leadForm").addEventListener("submit", function(e) {
   });
 });
 </script>
-
-<script>
-const googleScriptURL = "https://script.google.com/macros/s/AKfycbwx8ndVqvI-pghNnAzivMnM31wt1oKrkMOMxapRysYD8huXJ15vUr1eM7ntn1eJZuJu/exec";
-
-document.getElementById("leadForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const formData = new FormData(form);
-
-  const data = {};
-  formData.forEach((value, key) => data[key] = value);
-
-  Promise.allSettled([
-    fetch(googleScriptURL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" }
-    }),
-    fetch(form.dataset.formsubmit, {
-      method: "POST",
-      body: formData
-    })
-  ]).finally(() => {
-
-    /* ✅ GA4 CONVERSION EVENT */
-    if (typeof gtag === "function") {
-      gtag("event", "generate_lead", {
-        event_category: "form",
-        event_label: "apply_now_form",
-        value: 1
-      });
-    }
-
-    /* Small delay so GA4 receives event */
-    setTimeout(() => {
-      window.location.href = "/apply-now/thank-you/";
-    }, 300);
-  });
-});
-</script>
   
 </body>
 </html>
