@@ -134,5 +134,12 @@
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+
+  <url>
+    <loc>https://www.techfinserv.com/blogs/upi-1/</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   
 </urlset>
