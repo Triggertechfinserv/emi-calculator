@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TechFinserv | Safe Loan Guidance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: linear-gradient(160deg, #0c1427 0%, #1a237e 50%, #0d47a1 100%);
+            --secondary-bg: rgba(255,255,255,0.95);
+            --accent-gold: #ffd700;
+            --accent-blue: #2196f3;
+            --accent-green: #25c06b;
+            --text-dark: #1a1a2e;
+            --text-light: #64748b;
+            --border-radius: 16px;
+            --shadow-light: 0 10px 40px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-dark);
+            font-size: 16px;
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 100px 0 80px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-gold), #ffed4a);
+            color: var(--text-dark);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(255,215,0,0.3);
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        /* Content Blocks */
+        .content-block {
+            background: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 48px;
+            margin-bottom: 48px;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue));
+        }
+
+        .block-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        /* Split Layout */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 48px 0;
+        }
+
+        .split-card {
+            padding: 32px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+        }
+
+        .do-card {
+            border-top: 5px solid var(--accent-green);
+            background: linear-gradient(135deg, #f0fff4, white);
+        }
+
+        .dont-card {
+            border-top: 5px solid #ff6b6b;
+            background: linear-gradient(135deg, #fff5f5, white);
+        }
+
+        /* Step Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin: 48px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-gold), var(--accent-blue));
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .step-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2196f3, #269f5b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+        }
+
+        /* Checkmark List */
+        .checkmark-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(72,187,120,0.1);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-green);
+            transition: all 0.3s ease;
+        }
+
+        .check-item:hover {
+            transform: translateX(8px);
+            background: rgba(72,187,120,0.2);
+        }
+
+        .check-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: green;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* CTA */
+        .cta-hero {
+            background: linear-gradient(135deg, var(--accent-blue), #269f5b);
+            color: white;
+            text-align: center;
+            padding: 72px 48px;
+            border-radius: var(--border-radius);
+            margin: 72px 0;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-hero::before {
+             pointer-events: none;
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-button {
+            position: relative;
+            z-index: 5;
+            display: inline-block;
+            background: rgba(255,255,255,0.95);
+            color: var(--text-dark);
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1);
+            margin-top: 24px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .split-layout { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+            .content-block { padding: 32px 24px; }
+            .timeline-step { flex-direction: column; text-align: center; padding-left: 0; }
+            .timeline::before { left: 28px; }
+        }
+        
+        /* Header */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid rgba(2,6,23,0.12);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
+      border-bottom: 1px solid rgba(2,6,23,0.12);
+    }
+    .topbar::after {
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+    }
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .brand-logo {
+      height: 50px; border-radius: 0px;
+      display:block; width:auto; object-fit:contain;
+      filter:none; mix-blend-mode:normal;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: #475569;
+      transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: rgba(255,255,255,0.92); color: #0f172a; }
+    .cta {
+      background: linear-gradient(135deg, #0ea5e9, #10b981);
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
+      cursor: pointer;
+    }
+    /* Mobile Header */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding: 8px 20px; }
+      .brand-logo { height: 48px; border-radius: 8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:#232d3b; border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction: column; gap: 6px; padding: 10px 0 14px;
+        background:#fff; border-bottom:1px solid rgba(2,6,23,0.12);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:#475569; text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: #232d3b; }
+      .mobile-menu.open { display:flex !important; }
+    }
+    
+    
+    /* Footer - full width */
+    footer.glass {
+      position: relative;
+      left: 0;
+      right: 0;
+      width: 100vw;
+      overflow: hidden;
+      background: rgba(255,255,255,0.85);
+      border-top: 1px solid rgba(2,6,23,0.12);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      box-shadow: 0 -8px 20px rgba(2,6,23,0.06) inset;
+      padding: 30px 0 80px;
+      color: #475569;
+      margin: 0;
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    footer.glass::after {
+      content:""; position:absolute; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, #0ea5e9, #10b981);
+      opacity:0.8; pointer-events:none;
+    }
+    footer.glass p { margin: 0; font-weight: 400; font-size: 14px; }
+    footer.glass .subtitle { font-size: 13px; margin-top: 6px; }
+    footer.glass a {
+      color: #0ea5e9; text-decoration: none;
+    }
+    footer.glass a:hover {
+      text-decoration: underline;
+    }
+    /* Inner .container remains for footer content spacing */
+    
+    .sr-only {
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0,0,0,0) !important;
+      white-space:nowrap !important;
+      border:0 !important;
+    }
+    
+    .trust-links {
+      text-align: center;
+      font-size: 15px;
+      color: #475569;
+      margin-top: 18px;
+    }
+
+    .trust-links a {
+      color: #25c06b;              /* green */
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .trust-links a:hover {
+      text-decoration: underline;
+    }
+       
+    </style>
+</head>
+<body>
+    
+  <div class="topbar">
+    <div class="container">
+      <header class="nav">
+        <a href="/" aria-label="TechFinserv home">
+          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo">
+        </a>
+        <nav class="menu" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/blogs/">Blog</a>
+          <a href="/emi-calculator/">EMI calculator</a>
+          <a href="/apply-now/" style="font-weight:600;color:#0ea5e9">Contact us</a>
+          <a href="/apply-now/" class="cta">Apply Now!</a>
+        </nav>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+      <nav id="mobileMenu" class="mobile-menu" aria-label="Mobile">
+        <a href="/">Home</a>
+        <a href="/blogs/">Blog</a>
+        <a href="/emi-calculator/">EMI calculator</a>
+        <a href="/apply-now/" style="font-weight:600;color:#0ea5e9">Contact us</a>
+        <a href="/apply-now/" style="font-weight:600;color:#0ea5e9">Apply Now!</a>
+      </nav>
+    </div>
+  </div>
+    <section class="hero reveal">
+        <div class="container">
+            
+            <h1>About Us – Who We Are at TechFinserv</h1>
+            <div class="hero-badge">Trusted Loan Guidance Platform</div>
+            <p class="hero-subtitle">Helping You Make Smarter Loan Decisions — Without Risking Your Credit Score</p>
+            <p>Choosing the right loan shouldn't be confusing, risky, or stressful.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="content-block reveal">
+            <h2 class="block-title">Our Mission</h2>
+            <p style="font-size: 1.15rem; text-align: center; max-width: 800px; margin: 0 auto 32px; color: var(--text-light);">
+                Help people understand the right loan options before they apply — safely, transparently, and without unnecessary CIBIL impact.
+                <br><strong style="color: var(--text-dark);">We are a loan guidance and assistance platform, not a bank or NBFC.</strong>
+            </p>
+            <h2 class="block-title">Our Philosophy</h2>
+            <div class="checkmark-list">
+                <div class="check-item"><div class="check-icon">✔</div><div>Loans should be chosen thoughtfully, not rushed.</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>Eligibility should be understood before applications</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>Your credit score deserves protection.</div></div>     
+            </div>                        
+            <p style="font-size: 1.15rem; text-align: center; max-width: 800px; margin: 0 auto 32px; color: var(--text-light);">
+                <br><strong style="color: var(--text-dark);">That's the foundation on which TechFinserv is built.</strong>
+            </p>
+        </section>
+
+        <section class="content-block reveal">
+            <h2 class="block-title">Who We Are</h2>
+            <p>TechFinserv is built for borrowers who want clarity before commitment.</p>
+            
+            <p style="margin: 20px 0;">Many people unknowingly:</p>
+            <ul style="color: var(--text-light); padding-left: 28px; margin: 24px 0; font-size: 1rem;">
+                <li>Apply to multiple banks at once</li>
+                <li>Trigger multiple credit enquiries</li>
+                <li>End up with rejections or higher interest rates</li>
+            </ul>
+            
+            <p style="margin-top: 32px; font-weight: 600; font-size: 1.12rem;"><strong>We exist to prevent that.</strong></p>
+            <p style="margin: 20px 0;">Instead of pushing instant applications, we focus on:</p>
+            <div class="checkmark-list">
+                <div class="check-item">
+                    <div class="check-icon">➤</div>
+                    <div>Understanding your requirement</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-icon">➤</div>
+                    <div>Explaining available options</div>
+                </div>
+                <div class="check-item">
+                    <div class="check-icon">➤</div>
+                    <div>Helping you proceed only when you're ready</div>
+                </div>
+            </div>            
+        </section>
+
+        <section class="content-block reveal">
+            <h2 class="block-title">What We Do (And What We Don't)</h2>
+            <div class="split-layout">
+                <div class="split-card do-card">
+                    <h3 style="color: #25c06b; margin-bottom: 20px; font-size: 1.3rem;">✅ What We Do</h3>
+                    <ul style="color: var(--text-light);">
+                        <li>Provide guidance-based loan eligibility assessment</li>
+                        <li>Help users explore personal loans, home loans, flexi loans, and EMI reduction options</li>
+                        <li>Suggest balance transfer or lower interest possibilities</li>
+                        <li>Offer expert assistance before bank application</li>
+                    </ul>
+                </div>
+                <div class="split-card dont-card">
+                    <h3 style="color: #ff6b6b; margin-bottom: 20px; font-size: 1.3rem;">❌ What We Don't Do</h3>
+                    <ul style="color: var(--text-light);">
+                        <li>We do not approve or reject loans</li>
+                        <li>We do not guarantee interest rates or loan amounts</li>
+                        <li>We do not perform CIBIL enquiries without your consent</li>
+                        <li>We are not a bank or NBFC</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block reveal">
+            <h2 class="block-title">How Our Process Helps You</h2>
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="step-icon">1</div>
+                    <div>
+                        <h4>You Share Basic Details</h4>
+                        <p style="color: var(--text-light);">Income range, employment type, city, and loan requirement.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon">2</div>
+                    <div>
+                        <h4>We Analyse Your Profile</h4>
+                        <p style="color: var(--text-light);">Based on lending patterns, eligibility rules, and market practices.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon">3</div>
+                    <div>
+                        <h4>We Simulate Options Safely</h4>
+                        <p style="color: var(--text-light);">You get an understanding of what may suit you — without any credit bureau enquiry.</p>
+                    </div>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-icon">4</div>
+                    <div>
+                        <h4>You Decide the Next Step</h4>
+                        <p style="color: var(--text-light);">Only if you choose to proceed, we help initiate the application with a bank or NBFC.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="background: rgba(72,187,120,0.15); border-left: 6px solid var(--accent-green); padding: 28px; border-radius: 12px; margin-top: 32px;">
+                <strong style="color: #25c06b; font-size: 1.1rem;">👉 A CIBIL enquiry happens only after your confirmation.</strong>
+            </div>
+        </section>
+
+        <section class="content-block reveal">
+            <h2 class="block-title">Why TechFinserv Is Different</h2>
+            <div class="checkmark-list">
+                <div class="check-item"><div class="check-icon">✔</div><div>Guidance-first approach</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>No blind applications</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>No forced bank tie-ups</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>Transparency over promises</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>User control at every step</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>No CIBIL enquiry unless you explicitly approve</div></div>
+            </div>
+        </section>
+          
+        <section class="content-block reveal">
+            <h2 class="block-title">Is TechFinserv Safe & Trustworthy?</h2>
+            <div class="checkmark-list">
+            <div class="check-item"><div class="check-icon">🛡️</div><div>Built on trust, transparency, and user-first guidance</div></div>
+                <div class="check-item"><div class="check-icon">🔒</div><div>Your information is used only for loan-related guidance</div></div>
+                <div class="check-item"><div class="check-icon">📜</div><div>We follow strict data handling and privacy practices</div></div>
+                <div class="check-item"><div class="check-icon">🚫</div><div>We never sell or misuse your personal data</div></div>
+                <div class="check-item"><div class="check-icon">💬</div><div>Communication happens only after your consent (including DND/DNC)</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>Complete transparency in guidance, process, and charges</div></div>
+            </div>
+            <p class="trust-links">
+                You can review our
+                <a href="/privacy-policy/">Privacy Policy</a>
+                and
+                <a href="/terms-and-conditions/">Terms &amp; Conditions</a>anytime.
+            </p>
+        </section>        
+
+        <section class="content-block reveal">
+            <h2 class="block-title">Who Can Benefit From TechFinserv?</h2>
+            <div class="checkmark-list">
+                <div class="check-item"><div class="check-icon">👨‍💼‍</div><div>Salaried professionals</div></div>
+                <div class="check-item"><div class="check-icon">💼</div><div>Business owners & self-employed individuals</div></div>
+                <div class="check-item"><div class="check-icon">📈</div><div>People paying high EMI or interest</div></div>
+                <div class="check-item"><div class="check-icon">❓</div><div>Borrowers confused between banks and loan apps</div></div>
+                <div class="check-item"><div class="check-icon">✔</div><div>First-time loan applicants who want guidance before applying</div></div>
+                <div class="check-item"><div class="check-icon">🛡️</div><div>Anyone who wants to check options without affecting CIBIL score</div></div>
+            </div>
+        </section>
+        
+        <section class="cta-hero reveal">
+            <div class="container">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 700;">Ready to Explore Loan Options Safely?</h2>
+                <p style="font-size: 1.25rem; margin-bottom: 32px;">
+                    If you're planning a loan, EMI reduction, or balance transfer,<br>
+                    start with guidance — not a risky application.
+                </p>
+                <a href="/apply-now/" class="cta-button" role="button">👉 Get Expert Loan Assistance Without CIBIL Impact</a>
+            </div>
+        </section>
+    </div>
+
+  <!-- ====== Footer social icons END ====== -->
+<style>
+footer.glass .social {
+  display:flex; gap:10px; align-items:center; margin:12px 0;
+}
+footer.glass .social a{
+  width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:10px;background:#fff;border:1px solid rgba(2,6,23,.10);
+  box-shadow:0 4px 10px rgba(2,6,23,.06);
+  text-decoration:none; transition:transform .15s ease,border-color .2s ease;
+}
+footer.glass .social a:hover{ transform:translateY(-2px); border-color:#0ea5e950; }
+footer.glass .social svg{ width:18px;height:18px; display:block; }
+footer.glass .social .fb svg{ fill:#1877F2; }
+footer.glass .social .ig svg{ fill:#E1306C; }
+footer.glass .social .ln svg{ fill:#0A66C2; }
+footer.glass .social .x  svg{ fill:#111; }
+footer.glass .social .yt svg{ fill:#FF0000; }
+footer.glass .social .wa svg{ fill:#25D366; }
+    
+  .credit-line {
+     font-size: 11px;
+     color: #94a3b8;
+     text-align: right;
+     opacity: 0.9;
+    }  
+</style>
+<!-- ====== Footer social icons END ====== -->
+
+  <!-- Footer full width -->
+  <footer id="contact" class="glass" role="contentinfo">
+    <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+            <div class="social" aria-label="Social links">
+      <a class="fb" href="https://www.facebook.com/profile.php?id=61583100667662" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.48 17.52 2 11.94 2 6.36 2 1.88 6.48 1.88 12.06c0 4.88 3.56 8.93 8.22 9.8v-6.93H7.9v-2.87h2.2V9.6c0-2.18 1.3-3.39 3.3-3.39.96 0 1.97.17 1.97.17v2.16h-1.11c-1.1 0-1.44.69-1.44 1.4v1.68h2.45l-.39 2.87h-2.06v6.93c4.66-.87 8.22-4.92 8.22-9.8z"/></svg>
+      </a>
+      <a class="ig" href="https://www.instagram.com/techfinserv/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.51 5.51 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zm5.75-2.75a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25z"/></svg>
+      </a>
+      <a class="ln" href="https://www.linkedin.com/company/techfinserv" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3A2.94 2.94 0 0 1 22 6v12a2.94 2.94 0 0 1-3 3H5a2.94 2.94 0 0 1-3-3V6a2.94 2.94 0 0 1 3-3Zm-9.65 7H6.08v8h3.27Zm.23-2.93a1.86 1.86 0 1 0-1.87 1.86 1.86 1.86 0 0 0 1.87-1.86ZM21 18v-4.27c0-3.06-1.63-4.48-3.81-4.48a3.28 3.28 0 0 0-3 1.65h-.06V10H11v8h3.27v-4.44c0-1.17.22-2.31 1.68-2.31S17.6 12.33 17.6 13.6V18Z"/></svg>
+      </a>
+      <a class="x" href="https://x.com/TechFinservIN" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h4.6l5.17 6.96L16.8 3H21l-7.54 9.9L21.3 21h-4.6l-5.5-7.4L7.2 21H2l7.83-10.25z"/></svg>
+      </a>
+      <a class="yt" href="https://www.youtube.com/@TechFinservYT" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.23-1.65-.95-2.37c-.9-.95-1.92-.96-2.38-1C16.9 2.4 12 2.4 12 2.4h-.01s-4.9 0-8.17.43c-.46.05-1.48.06-2.38 1C.73 4.55.5 6.2.5 6.2S.27 8.22.27 10.24v1.52c0 2.02.23 4.04.23 4.04s.23 1.65.95 2.37c.9.95 2.08.92 2.61 1.02 1.9.18 7.94.43 7.94.43s4.9 0 8.17-.43c.46-.05 1.48-.06 2.38-1 .72-.72.95-2.37.95-2.37s.23-2.02.23-4.04v-1.52c0-2.02-.23-4.04-.23-4.04ZM9.75 14.41V7.59l6.34 3.41-6.34 3.41Z"/></svg>
+      </a>
+      <a class="wa" href="https://wa.me/919054356860" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.03 0 11.97 11.97 0 0 0 1.8 17.7L0 24l6.45-1.7A11.96 11.96 0 0 0 12.03 24h.01A11.97 11.97 0 0 0 24 12.02a11.8 11.8 0 0 0-3.48-8.54ZM12.04 21.5h-.01a9.45 9.45 0 0 1-4.83-1.32l-.35-.2-3.83 1.01 1.02-3.73-.22-.38a9.48 9.48 0 1 1 8.22 4.62Zm5.49-7.17c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15s-.78.98-.96 1.18-.35.22-.64.08a7.73 7.73 0 0 1-2.28-1.41 8.57 8.57 0 0 1-1.58-1.96c-.17-.3 0-.46.13-.62.13-.15.3-.38.45-.58.15-.2.2-.35.3-.58.1-.22.05-.42-.03-.58-.08-.15-.68-1.63-.93-2.23-.24-.6-.5-.5-.68-.5h-.58c-.2 0-.52.08-.8.38-.28.3-1.06 1.03-1.06 2.5s1.09 2.9 1.24 3.11c.15.2 2.14 3.25 5.19 4.55.73.32 1.3.51 1.74.65.73.23 1.4.2 1.93.12.59-.09 1.78-.73 2.03-1.43.25-.7.25-1.3.17-1.43-.08-.13-.28-.2-.58-.35Z"/></svg>
+      </a>
+    </div>
+     <p class="credit-line">  © 2025-<span id="year"></span> All rights reserved. TechFinserv.com </p>
+      <p class="credit-line" style="font-size:13px;">
+       <a href="/terms-and-conditions/" style="margin-right:14px;">Terms &amp; Conditions</a>
+       <a href="/privacy-policy/">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Mobile menu toggle from coming soon
+    (function () {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+      const setExpanded = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        menu.classList.toggle('open', open);
+      };
+      toggle.addEventListener('click', () => {
+        const open = !menu.classList.contains('open');
+        setExpanded(open);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') setExpanded(false);
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) setExpanded(false);
+      });
+    })();
+   </script>
+
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
