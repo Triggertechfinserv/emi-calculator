@@ -169,5 +169,12 @@
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
+
+   <url>
+    <loc>https://www.techfinserv.com/blogs/indian-payment-systems/</loc>
+    <lastmod>2026-02-03</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
   
 </urlset>
