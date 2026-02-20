@@ -18,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Telegram) -->
   <meta property="og:type" content="article">
@@ -901,7 +902,7 @@ article.post-article hr {
       <li>Any part payment applied</li>
       <li>Updated outstanding after each month</li>
     </ul>
-    This helps you visualize how fast your loan shrinks when you prepa
+    This helps you visualize how fast your loan shrinks when you prepay.
   <h3 style="color:#0ea5e9;margin-top:24px;margin-bottom:10px;font-weight:600;">6️⃣ Download Full Report (PDF / Excel)</h3>
   <p>
     With one click, export:
@@ -963,10 +964,6 @@ article.post-article hr {
           <li><strong>Prepayment / Part-payment:</strong> Extra payments made to reduce the outstanding sooner.</li>
           <li><strong>Amortization:</strong> Gradual repayment of principal over time through EMIs.</li>
         </ul>        
-
-        <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 
     <h2><i class="fas fa-calculator"></i> What is EMI?</h2>
     <p>
@@ -1309,29 +1306,26 @@ footer.glass h4 {
       scheduleRAF();
     }
 
-    function computeSchedule(usePayments = true) {
+function computeSchedule(usePayments = true) {
+
   const { principal, monthlyRate, monthsInitial } = getInputs();
   const initialEmi = Math.abs(pmt(monthlyRate, monthsInitial, principal));
 
-  // Build maps per month: total part amount + effective mode
-  const partMap = new Map();   // month -> total amount
-  const modeMap = new Map();   // month -> "tenure" or "emi"
+  const partMap = new Map();
+  const modeMap = new Map();
 
   if (usePayments) {
     for (const p of payments) {
       const m = p.month;
       const amt = p.amount || 0;
-      const mMode = p.mode || "tenure"; // default safety
+      const mMode = p.mode || "tenure";
 
-      // sum part-payments for same month
       partMap.set(m, (partMap.get(m) || 0) + amt);
 
-      // if multiple payments in same month, "emi" wins
       if (!modeMap.has(m)) {
         modeMap.set(m, mMode);
       } else {
-        const existing = modeMap.get(m);
-        if (existing === "tenure" && mMode === "emi") {
+        if (modeMap.get(m) === "tenure" && mMode === "emi") {
           modeMap.set(m, "emi");
         }
       }
@@ -1343,8 +1337,12 @@ footer.glass h4 {
   let emi = initialEmi;
   let remainingMonths = monthsInitial;
 
+  // 🔒 This will store final reduced tenure
+  let lockedTenure = monthsInitial;
+
   for (let month = 1; month <= 1200; month++) {
-    if (outstanding <= 0.0001) break;
+
+    if (outstanding <= 0.0001 || remainingMonths <= 0) break;
 
     const interest = outstanding * monthlyRate;
     let principalComp = emi - interest;
@@ -1353,8 +1351,8 @@ footer.glass h4 {
     const part = partMap.get(month) || 0;
     const thisMonthMode = modeMap.get(month) || "tenure";
 
-    // If this is the final month (including part payment), close loan cleanly
     if (outstanding - principalComp - part <= 0) {
+
       const finalInterest = outstanding * monthlyRate;
       const finalPrincipal = outstanding;
       const finalEmi = finalPrincipal + finalInterest;
@@ -1372,30 +1370,40 @@ footer.glass h4 {
       break;
     }
 
-    // Normal month: subtract EMI principal + part-payment
     outstanding = outstanding - principalComp - part;
 
-    // 🔁 Recalculate EMI ONLY if this payment's mode is "emi"
+    // 🔹 Reduce EMI mode
     if (thisMonthMode === "emi" && part > 0 && usePayments) {
-      remainingMonths = Math.max(1, monthsInitial - month);
-      if (outstanding > 0) {
-        emi = Math.abs(pmt(monthlyRate, remainingMonths, outstanding));
+
+      const monthsLeft = lockedTenure - month;
+      if (outstanding > 0 && monthsLeft > 0) {
+        emi = Math.abs(pmt(monthlyRate, monthsLeft, outstanding));
       }
     }
 
-    schedule.push({
-      month,
-      emi: Math.round(emi),
-      principalPaid: Math.round(principalComp),
-      interestPaid: Math.round(interest),
-      partPayment: Math.round(part),
-      outstanding: Math.round(Math.max(0, outstanding))
-    });
+schedule.push({
+  month,
+  emi: Math.round(emi),
+  principalPaid: Math.round(principalComp),
+  interestPaid: Math.round(interest),
+  partPayment: Math.round(part),
+  outstanding: Math.round(Math.max(0, outstanding))
+});
+
+// 🔹 If Reduce Tenure mode, update lockedTenure
+if (thisMonthMode === "tenure" && part > 0 && usePayments) {
+  lockedTenure = month + Math.ceil(outstanding / emi);
+}
+
+remainingMonths--;
 
     if (month > monthsInitial + 600) break;
   }
 
-  return { schedule, initialEmi: Math.round(initialEmi) };
+  return {
+    schedule,
+    initialEmi: Math.round(initialEmi)
+  };
 }
 
 
