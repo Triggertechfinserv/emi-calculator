@@ -191,4 +191,11 @@
     <changefreq>weekly</changefreq>
   </url>
   
+  <url>
+    <loc>https://www.techfinserv.com/blogs/rbi-saving-account/</loc>
+    <lastmod>2026-04-04</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  
 </urlset>
