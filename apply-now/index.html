@@ -1294,7 +1294,8 @@ footer.glass h4 {
     });
   })();
 </script>
-<script>
+  
+  <script>
 const googleScriptURL = "https://script.google.com/macros/s/AKfycbwx8ndVqvI-pghNnAzivMnM31wt1oKrkMOMxapRysYD8huXJ15vUr1eM7ntn1eJZuJu/exec";
 
 document.getElementById("leadForm").addEventListener("submit", async function(e) {
@@ -1306,35 +1307,40 @@ document.getElementById("leadForm").addEventListener("submit", async function(e)
 
   // Convert form data for Google Sheets
   const data = {};
-  formData.forEach((value, key) => data[key] = value);
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
 
   try {
 
-    // Send to Google Sheets
-    await fetch(googleScriptURL, {
+    // SEND TO WEB3FORMS FIRST
+    const web3Response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const web3Result = await web3Response.json();
+
+    console.log(web3Result);
+
+    // Optional Google Sheet submit
+    fetch(googleScriptURL, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    }).catch(err => console.log("Google Sheet Error:", err));
 
-    // Send to Web3Forms
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
+    // SUCCESS
+    if (web3Result.success) {
       window.location.href = "/apply-now/thank-you/";
     } else {
-      alert("Form submission failed");
-      console.log(result);
+      alert("Web3Forms submission failed");
+      console.log(web3Result);
     }
 
-  } catch (error) {
+  } catch(error) {
     console.log(error);
     alert("Something went wrong");
   }
