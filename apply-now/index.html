@@ -680,88 +680,98 @@
                 <span class="glass-tag">Step 1 </span>
               </div>
 
-              <form id="leadForm" data-formsubmit="https://formsubmit.co/support@techfinserv.com">
-      			  <!-- FormSubmit settings -->
-              <input type="hidden" name="_subject" value="New Loan Lead - TechFinserv">
-              <input type="hidden" name="_template" value="table">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="source_page" value="Apply Now Page">
-              
-                <div class="row g-3">
-                  <div class="col-md-12">
-                    <label class="form-label" for="full_name">Full Name*</label>
-                    <input id="full_name" type="text" class="form-control" name="full_name" required>
-                  </div>
+<form id="leadForm" action="https://api.web3forms.com/submit" method="POST">
 
-                  <div class="col-md-6">
-                    <label class="form-label">Mobile Number*</label>
-                    <input type="tel" class="form-control" name="mobile" placeholder="10-digit mobile" required />
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label">Employment Type*</label>
-                    <select class="form-select" name="employment" required>
-                      <option value="">Select</option>
-                      <option value="salaried">Salaried employee</option>
-                      <option value="business_owner">Business owner</option>
-                      <option value="Self_employed">Self employed / professional</option>
-                    </select>
-                  </div>
+  <!-- Web3Forms Access Key -->
+  <input type="hidden" name="access_key" value="d1bf814f-4b60-44fa-b47b-ed5e08afaf53">
 
-                  <div class="col-md-6">
-                    <label class="form-label">Monthly Net Income*</label>
-                    <input type="number" class="form-control" name="income" placeholder="₹ (approx)" required />
-                  </div>
+  <!-- Optional Settings -->
+  <input type="hidden" name="subject" value="New Loan Lead - TechFinserv">
+  <input type="hidden" name="from_name" value="TechFinserv Website">
+  <input type="hidden" name="source_page" value="Apply Now Page">
 
-                  <div class="col-md-6">
-                    <label class="form-label">City*</label>
-                    <input type="text" class="form-control" name="city" required />
-                  </div>
+  <div class="row g-3">
 
-                  <div class="col-md-12">
-                    <label class="form-label">Looking For*</label>
-                    <select class="form-select" name="product" required>
-                      <option value="">Select</option>
-                      <option>Personal Loan</option>
-                      <option>Flexi Hybrid Loan</option>
-                      <option>Reduce My EMI burden</option>
-                      <option>Reduce Interest Rate</option>
-                      <option>General Enquiry</option>
-                      <option>Home Loan</option>
-                    </select>
-                  </div>
+    <div class="col-md-12">
+      <label class="form-label" for="full_name">Full Name*</label>
+      <input id="full_name" type="text" class="form-control" name="full_name" required>
+    </div>
 
-                  <div class="col-12 mt-1">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="consent1" name="consent_checkbox" value="accepted" required>
-                      <label class="form-check-label" for="consent1">
-                        I agree to the 
-                        <a href="/apply-now/terms-and-conditions/" target="_blank" style="color:#0040FF;font-weight:500;">
-                          Terms & Conditions
-                        </a> and 
-                        <a href="/privacy-policy/" target="_blank" style="color:#0040FF;font-weight:500;">
-                        Privacy Policy
-                        </a> and authorize
-                        TechFinserv to contact me regarding loan options and related guidance,
-                        even if my number is registered under DND/DNC.
-                      </label>
-                     <input type="hidden" name="consent_version" value="v1.0 | 2025-12-30">
-                     <input type="hidden" name="consent_text"
-                     value="User explicitly agreed to Terms & Conditions and Privacy Policy and authorized TechFinserv to contact regarding loan options and related guidance, including DND/DNC consent."> 
-                    </div>
-                  </div>
-                 
-                  <div class="col-12 mt-2">
-                    <button type="submit" class="btn btn-primary w-100">
-                      get expert assistance
-                    </button>
-                  </div>
+    <div class="col-md-6">
+      <label class="form-label">Mobile Number*</label>
+      <input type="tel" class="form-control" name="mobile" placeholder="10-digit mobile" required>
+    </div>
 
-                  <div class="col-12 mt-2 trust-copy">
-                    You will receive guidance on suitable loan options. 
-                    No credit bureau check is done at this stage.
-                  </div>
-                </div>
-              </form>
+    <div class="col-md-6">
+      <label class="form-label">Employment Type*</label>
+      <select class="form-select" name="employment" required>
+        <option value="">Select</option>
+        <option value="salaried">Salaried employee</option>
+        <option value="business_owner">Business owner</option>
+        <option value="Self_employed">Self employed / professional</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Monthly Net Income*</label>
+      <input type="number" class="form-control" name="income" placeholder="₹ (approx)" required>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">City*</label>
+      <input type="text" class="form-control" name="city" required>
+    </div>
+
+    <div class="col-md-12">
+      <label class="form-label">Looking For*</label>
+      <select class="form-select" name="product" required>
+        <option value="">Select</option>
+        <option>Personal Loan</option>
+        <option>Flexi Hybrid Loan</option>
+        <option>Reduce My EMI burden</option>
+        <option>Reduce Interest Rate</option>
+        <option>General Enquiry</option>
+        <option>Home Loan</option>
+      </select>
+    </div>
+
+    <div class="col-12 mt-1">
+      <div class="form-check">
+
+        <input class="form-check-input" type="checkbox" id="consent1" name="consent_checkbox" value="accepted" required>
+
+        <label class="form-check-label" for="consent1">
+          I agree to the 
+          <a href="/apply-now/terms-and-conditions/" target="_blank" style="color:#0040FF;font-weight:500;">
+            Terms & Conditions
+          </a> and 
+          <a href="/privacy-policy/" target="_blank" style="color:#0040FF;font-weight:500;">
+            Privacy Policy
+          </a> and authorize TechFinserv to contact me regarding loan options and related guidance, even if my number is registered under DND/DNC.
+        </label>
+
+        <input type="hidden" name="consent_version" value="v1.0 | 2025-12-30">
+
+        <input type="hidden" name="consent_text"
+        value="User explicitly agreed to Terms & Conditions and Privacy Policy and authorized TechFinserv to contact regarding loan options and related guidance, including DND/DNC consent.">
+
+      </div>
+    </div>
+
+    <div class="col-12 mt-2">
+      <button type="submit" class="btn btn-primary w-100">
+        Get Expert Assistance
+      </button>
+    </div>
+
+    <div class="col-12 mt-2 trust-copy">
+      You will receive guidance on suitable loan options.
+      No credit bureau check is done at this stage.
+    </div>
+
+  </div>
+
+</form>
             </div>
           </div>
         </div>
