@@ -765,6 +765,264 @@
 @media (max-width: 768px) {  
   .brand-logo-footer { height:48px; border-radius:8px; }
     }
+
+    /* =========================
+   MOBILE + TABLET FIXES
+========================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+  .container {
+    width: calc(100% - 1.5rem);
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-copy h1 {
+    max-width: 100%;
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .stats-bar,
+  .choose-grid,
+  .benefits-grid,
+  .testimonial-grid,
+  .info-grid,
+  .work-steps,
+  .faq-grid,
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .logo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nav-wrap {
+    gap: 0.7rem;
+  }
+
+  .btn {
+    min-height: 48px;
+    padding: 0.85rem 1.2rem;
+  }
+
+  .brand-logo {
+    height: 52px;
+  }
+
+  .brand-logo-footer {
+    height: 65px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    padding: 0.7rem 0;
+  }
+
+  .nav-wrap {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .navbar .btn-primary {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .hero {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-grid,
+  .stats-bar,
+  .logo-grid,
+  .info-grid,
+  .benefits-grid,
+  .choose-grid,
+  .work-steps,
+  .testimonial-grid,
+  .faq-grid,
+  .footer-grid,
+  .trust-badges {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.2rem;
+    line-height: 1.15;
+  }
+
+  .hero-copy p {
+    font-size: 0.96rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .hero-card {
+    padding: 0.8rem;
+  }
+
+  .score-panel {
+    padding: 1rem;
+  }
+
+  .score-ring {
+    width: 140px;
+    height: 140px;
+  }
+
+  .mini-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    text-align: center;
+  }
+
+  .card {
+    padding: 1.1rem;
+  }
+
+  .range-table-wrap {
+    overflow-x: auto;
+  }
+
+  .range-table {
+    min-width: 600px;
+  }
+
+  .cta-band {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .cta-band .btn-secondary {
+    width: 100%;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-contact {
+    text-align: center;
+  }
+
+  .socials {
+    justify-content: center;
+  }
+
+  .contact-line {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .brand-logo {
+    height: 42px;
+  }
+
+  .brand-logo-footer {
+    height: 52px;
+  }
+
+  .floating-call {
+    width: 50px;
+    height: 50px;
+    bottom: 8.3rem;
+    right: 0.8rem;
+  }
+
+  .floating-wa {
+    width: 50px;
+    height: 50px;
+    bottom: 4.5rem;
+    right: 0.8rem;
+  }
+
+  .floating-cta {
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    padding: 0.9rem 1rem;
+    font-size: 0.92rem;
+  }
+}
+
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .hero-copy h1 {
+    font-size: 1.9rem;
+  }
+
+  .section-head h2 {
+    font-size: 1.7rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .score-ring {
+    width: 125px;
+    height: 125px;
+  }
+
+  .score-inner strong {
+    font-size: 1.8rem;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+  }
+
+  .cta-band h3 {
+    font-size: 1.4rem;
+  }
+
+}
   </style>
   
 </head>
