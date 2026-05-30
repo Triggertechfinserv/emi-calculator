@@ -1042,30 +1042,115 @@
   }
 
 }
+
+    /* ========================
+       HEADER & FOOTER STYLES
+       (from Coming Soon page)
+       ======================== */
+    :root {
+      --bg: #f6f9ff;
+      --bg-accent1: rgba(14,165,233,0.20);
+      --bg-accent2: rgba(16,185,129,0.18);
+      --surface: rgba(255,255,255,0.78);
+      --surface-strong: rgba(255,255,255,0.92);
+      --border: rgba(2,6,23,0.12);
+      --radius: 16px;
+      --shadow: 0 12px 34px rgba(2,6,23,0.10), 0 4px 14px rgba(2,6,23,0.06);
+      --maxw: 1200px;
+    }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.68);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px) saturate(170%);
+      -webkit-backdrop-filter: blur(12px) saturate(170%);
+      isolation: isolate;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; inset: 0; pointer-events:none;
+      background: rgba(255,255,255,0.7); opacity:0.28;
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar::after {
+      content: ""; position: absolute; inset: -20% -10%; pointer-events:none;
+      background:
+        radial-gradient(1200px 500px at 0% 0%, rgba(14,165,233,0.22), transparent 60%),
+        radial-gradient(1200px 500px at 100% 30%, rgba(16,185,129,0.22), transparent 60%);
+    }
+    header.nav {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0;
+    }
+    .brand-logo {
+      height: 60px; border-radius: 0px;
+      display:block; width:auto; object-fit:contain;
+      filter:none; mix-blend-mode:normal;
+    }
+    nav.menu { display: flex; gap: 14px; }
+    nav.menu a {
+      padding: 8px 12px; border-radius: 10px;
+      color: #475569; transition: background 200ms ease;
+      font-size: 15px; text-decoration: none; font-weight: 400;
+    }
+    nav.menu a:hover { background: var(--surface-strong); color: #0f172a; }
+    .cta {
+      background: linear-gradient(135deg, #10a7e6, #10b981);
+      color: #fff; padding: 10px 14px; border-radius: 12px; font-weight: 600;
+    }
+	    /* Mobile nav */
+    .mobile-menu-toggle { display:none; }
+    .mobile-menu { display:none; }
+    @media (max-width: 768px) {
+      .topbar { background:#ffffffee; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+      .topbar::before, .topbar::after { display:none !important; }
+      header.nav { padding:8px 0; }
+      .brand-logo { height:48px; border-radius:8px; }
+      nav.menu { display:none; }
+      .mobile-menu-toggle {
+        display:inline-flex; flex-direction:column; justify-content:center;
+        gap:4px; width:28px; height:22px; cursor:pointer; background:transparent; border:0;
+      }
+      .mobile-menu-toggle span {
+        display:block; height:3px; width:100%; background:#0f172a; border-radius:2px;
+      }
+      .mobile-menu {
+        display:none; flex-direction:column; gap:6px; padding:10px 0 14px;
+        background:#fff; border-bottom:1px solid var(--border);
+      }
+      .mobile-menu a { padding:12px 16px; font-size:15px; color:#475569; text-decoration:none; }
+      .mobile-menu a:hover { background: var(--bg); color: #0f172a; }
+    }
+    .mobile-menu.open { display:flex !important; }
+
   </style>
   
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <header class="navbar">
-    <div class="container nav-wrap">
-
-      <a href="/" class="brand" aria-label="TechFinserv Home">
-          <img class="brand-logo" src="/images/techfinserv-logo.png" alt="TechFinserv logo"> </a>  
-  
-        
-      </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#what-is-cibil">What is CIBIL</a>
-        <a href="#benefits">Benefits</a>
-        <a href="#partners">Partners</a>
-        <a href="#faq">FAQs</a>
-      </nav>
-      <a class="btn btn-primary" href="https://www.urbanmoney.com/cibil-credit-score" target="_blank" rel="noopener noreferrer">Check Free Score Now</a>
-    </div>
-  </header>
-
+    <header class="navbar">
+        <div class="container nav-wrap">
+            <a href="/" class="brand" aria-label="TechFinserv Home">                   
+                <img class="brand-logo" src="images/techfinserv-logo.png" alt="TechFinserv logo">
+	        </a>
+            
+			<nav class="nav-links" aria-label="Primary">                
+                <a href="#partners">Partners</a>
+                <a href="#faq">FAQs</a>
+                <a href="/">Home</a>
+                <a href="blogs/">Blog</a>
+                <a href="/emi-calculator/">EMI calculator</a>
+                <a href="/about-us/" style="font-weight:600;color:var(--accent-1)">About Us</a>
+                <a href="/apply-now/" class="cta">Apply Now !</a>
+		        <a class="btn btn-primary" href="https://www.urbanmoney.com/cibil-credit-score" target="_blank" rel="noopener noreferrer">Check Free Score Now</a>
+		    </nav>          
+        </div>     
+    </header>
+		 	  
   <main id="main-content">
     <section class="hero" id="home">
       <div class="container hero-grid">
@@ -1466,21 +1551,22 @@
     
         </div>
         <p>Powered by TechFinserv in partnership with Urban Money. Built for a professional, responsive, conversion-focused credit score landing experience.</p>
-        <div class="socials">
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <div class="socials">         
+		 <a href="https://www.facebook.com/profile.php?id=61583100667662" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/techfinserv/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/techfinserv" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3A2.94 2.94 0 0 1 22 6v12a2.94 2.94 0 0 1-3 3H5a2.94 2.94 0 0 1-3-3V6a2.94 2.94 0 0 1 3-3Zm-9.65 7H6.08v8h3.27Zm.23-2.93a1.86 1.86 0 1 0-1.87 1.86 1.86 1.86 0 0 0 1.87-1.86ZM21 18v-4.27c0-3.06-1.63-4.48-3.81-4.48a3.28 3.28 0 0 0-3 1.65h-.06V10H11v8h3.27v-4.44c0-1.17.22-2.31 1.68-2.31S17.6 12.33 17.6 13.6V18Z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@TechFinservYT" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
 
       <div>
         <div class="footer-title">Quick Links</div>
         <div class="footer-links">
-          <a href="#what-is-cibil">What is CIBIL Score</a>
-          <a href="#benefits">Benefits</a>
-          <a href="#partners">Partner Banks</a>
-          <a href="#faq">FAQs</a>
+          <a href="/blogs/what-is-cibil/">What is CIBIL Score</a>
+          <a href="/blogs/what-is-emi/">What is EMI</a>
+          <a href="/blogs/personal-loan/">Low Rate Personal Loan</a>
+          <a href="/terms-and-conditions/">Terms & Conditions</a>
         </div>
       </div>
 
@@ -1508,8 +1594,8 @@
     </div>
   </footer>
 
-  <a class="floating-call" href="tel:+919999999999" aria-label="Call now"><i class="fa-solid fa-phone"></i></a>
-  <a class="floating-wa" href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp support"><i class="fa-brands fa-whatsapp"></i></a>
+  <a class="floating-call" href="tel:+919054356860" aria-label="Call now"><i class="fa-solid fa-phone"></i></a>
+  <a class="floating-wa" href="https://wa.me/919054356860" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp support"><i class="fa-brands fa-whatsapp"></i></a>
   <a class="floating-cta" href="https://www.urbanmoney.com/cibil-credit-score" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shield-check"></i> Check Your Score</a>
 
   <script>
