@@ -197,5 +197,25 @@
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
-  
+
+  <url>
+    <loc>https://www.techfinserv.com/check-cibil-score/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.techfinserv.com/apply-now/debt-consolidation/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.techfinserv.com/apply-now/flexi-loan-assistance/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>  
 </urlset>
