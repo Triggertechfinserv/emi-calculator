@@ -1227,8 +1227,12 @@
                   </div>
 
                     <div class="col-12 mt-2">
-                        <button type="submit" id="submitBtn" class="btn-brand">
-                            Get Expert Assistance
+						<button
+                           type="submit"
+                           id="submitBtn"
+                           data-default-text="Get Expert Assistance"
+                           class="btn-brand">
+                           Get Expert Assistance
                         </button>
                     </div>
                 </div>
@@ -1982,7 +1986,20 @@ if (web3Result.success) {
 
 });
 </script>
-  
+
+<script>
+window.addEventListener("pageshow", function () {
+
+    const submitBtn = document.getElementById("submitBtn");
+
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtn.dataset.defaultText;
+    }
+
+});
+</script>
+	
     <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
   <script>
@@ -1999,7 +2016,6 @@ if (web3Result.success) {
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "u8560jazbw");
-  </script>
-  
+  </script>	
 </body>
 </html>
