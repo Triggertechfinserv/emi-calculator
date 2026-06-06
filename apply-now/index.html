@@ -1310,6 +1310,18 @@ document.getElementById("leadForm").addEventListener("submit", async function(e)
   formData.forEach((value, key) => {
     data[key] = value;
   });
+  
+  // Get visitor IP
+  try {
+  const ipResponse = await fetch("https://api.ipify.org?format=json");
+  const ipData = await ipResponse.json();
+  data.ip = ipData.ip;
+  }
+  catch (error) {
+  data.ip = "";
+  console.log("IP fetch failed");
+  }
+
 
   try {
 
@@ -1347,6 +1359,7 @@ document.getElementById("leadForm").addEventListener("submit", async function(e)
 
 });
 </script>
-  
+
+ 
 </body>
 </html>
