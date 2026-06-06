@@ -573,7 +573,26 @@
   }
 }
 
+ /* form submiting */    
+.btn-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}    
   </style>
+
 </head>
 <body>
 <div class="page-wrapper">
@@ -758,12 +777,12 @@
       </div>
     </div>
 
-    <div class="col-12 mt-2">
-      <button type="submit" class="btn btn-primary w-100">
-        Get Expert Assistance
-      </button>
-    </div>
-
+<div class="col-12 mt-2">
+  <button type="submit" id="submitBtn" class="btn btn-primary w-100">
+    Get Expert Assistance
+  </button>
+</div>
+    
     <div class="col-12 mt-2 trust-copy">
       You will receive guidance on suitable loan options.
       No credit bureau check is done at this stage.
@@ -1301,7 +1320,13 @@ const googleScriptURL = "https://script.google.com/macros/s/AKfycbyYa9eV4Y6P8k0v
 document.getElementById("leadForm").addEventListener("submit", async function(e) {
 
   e.preventDefault();
+const submitBtn = document.getElementById("submitBtn");
 
+submitBtn.disabled = true;
+submitBtn.innerHTML = `
+<span class="btn-spinner"></span>
+Submitting...
+`;
   const form = e.target;
   const formData = new FormData(form);
 
@@ -1335,7 +1360,7 @@ document.getElementById("leadForm").addEventListener("submit", async function(e)
 
     console.log(web3Result);
 
-    console.log("Sending to Sheet:", data);
+    
 // Send to Google Sheet and wait
     console.log("Sending to Sheet:", data);
 
@@ -1348,17 +1373,41 @@ await fetch(googleScriptURL, {
 console.log("Lead sent to Google Sheet");
 
     // SUCCESS
-    if (web3Result.success) {
-      window.location.href = "/apply-now/thank-you/";
-    } else {
-      alert("Web3Forms submission failed");
-      console.log(web3Result);
-    }
+if (web3Result.success) {
 
-  } catch(error) {
-    console.log(error);
-    alert("Something went wrong");
+  submitBtn.innerHTML = `
+  <span class="btn-spinner"></span>
+  Redirecting...
+  `;
+
+  setTimeout(() => {
+    window.location.href = "/apply-now/thank-you/";
+  }, 500);
+
+}    
+    else {
+
+  submitBtn.disabled = false;
+
+  submitBtn.innerHTML = "Get Expert Assistance";
+
+  alert("Unable to submit your request. Please try again.");
+
+  console.log(web3Result);
+}
+
   }
+  catch(error) {
+
+    console.error(error);
+
+    submitBtn.disabled = false;
+
+    submitBtn.innerHTML = "Get Expert Assistance";
+
+    alert("Unable to submit your request. Please try again.");
+
+}
 
 });
 </script>
