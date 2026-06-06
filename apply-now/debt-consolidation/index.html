@@ -2187,6 +2187,18 @@ if (web3Result.success) {
 });
 </script>
 
+<script>
+window.addEventListener("pageshow", function () {
+
+    const submitBtn = document.getElementById("submitBtn");
+
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtn.dataset.defaultText;
+    }
+
+});
+</script>				  
 
 </body>
 </html>
