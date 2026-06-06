@@ -778,7 +778,11 @@
     </div>
 
 <div class="col-12 mt-2">
-  <button type="submit" id="submitBtn" class="btn btn-primary w-100">
+  <button
+    type="submit"
+    id="submitBtn"
+    data-default-text="Get Expert Assistance"
+    class="btn btn-primary w-100">
     Get Expert Assistance
   </button>
 </div>
@@ -1412,6 +1416,18 @@ if (web3Result.success) {
 });
 </script>
 
+<script>
+window.addEventListener("pageshow", function () {
+
+    const submitBtn = document.getElementById("submitBtn");
+
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtn.dataset.defaultText;
+    }
+
+});
+</script>  
  
 </body>
 </html>
