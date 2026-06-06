@@ -996,6 +996,25 @@
         width:100%;
       }
     }
+
+	 /* form submiting */    
+     .btn-spinner {
+     width: 18px;
+     height: 18px;
+     border: 2px solid rgba(255,255,255,0.4);
+     border-top: 2px solid #fff;
+     border-radius: 50%;
+     display: inline-block;
+     animation: spin 0.8s linear infinite;
+     vertical-align: middle;
+     margin-right: 8px;
+    }
+
+    @keyframes spin {
+     100% {
+        transform: rotate(360deg);
+    }
+}	
   </style>
 </head>
 <body>
@@ -1207,10 +1226,11 @@
                     </div>
                   </div>
 
-                  <div class="col-12">
-                    <button id="applyForm" type="submit" class="btn-brand">Get Expert Assistance</button>
-                    <p class="form-note">You will receive guidance on suitable loan options. No credit bureau check is done at this stage.</p>
-                  </div>
+                    <div class="col-12 mt-2">
+                        <button type="submit" id="submitBtn" class="btn-brand">
+                            Get Expert Assistance
+                        </button>
+                    </div>
                 </div>
               </form>
             </div>
@@ -1865,50 +1885,103 @@
     })();
   </script>
 
-  <script>
-    const googleScriptURL = "https://script.google.com/macros/s/AKfycbwx8ndVqvI-pghNnAzivMnM31wt1oKrkMOMxapRysYD8huXJ15vUr1eM7ntn1eJZuJu/exec";
+    <script>
+const googleScriptURL = "https://script.google.com/macros/s/AKfycbyYa9eV4Y6P8k0v6PKvjF4eXbNUb0UfipnO71rt2yuBbCcDrElvPW-uHwY9t9yNsLYyhQ/exec";
 
-    document.getElementById("leadForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
+document.getElementById("leadForm").addEventListener("submit", async function(e) {
 
-      const form = e.target;
-      const formData = new FormData(form);
+  e.preventDefault();
+const submitBtn = document.getElementById("submitBtn");
 
-      const data = {};
-      formData.forEach((value, key) => {
-        data[key] = value;
-      });
+submitBtn.disabled = true;
+submitBtn.innerHTML = `
+<span class="btn-spinner"></span>
+Submitting...
+`;
+  const form = e.target;
+  const formData = new FormData(form);
 
-      try {
-        const web3Response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: formData
-        });
+  // Convert form data for Google Sheets
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+  
+  // Get visitor IP
+  try {
+  const ipResponse = await fetch("https://api.ipify.org?format=json");
+  const ipData = await ipResponse.json();
+  data.ip = ipData.ip;
+  }
+  catch (error) {
+  data.ip = "";
+  console.log("IP fetch failed");
+  }
 
-        const web3Result = await web3Response.json();
-        console.log(web3Result);
 
-        fetch(googleScriptURL, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).catch(err => console.log("Google Sheet Error:", err));
+  try {
 
-        if (web3Result.success) {
-          window.location.href = "/apply-now/thank-you/";
-        } else {
-          alert("Web3Forms submission failed");
-          console.log(web3Result);
-        }
-
-      } catch(error) {
-        console.log(error);
-        alert("Something went wrong");
-      }
+    // SEND TO WEB3FORMS FIRST
+    const web3Response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
     });
-  </script>
+
+    const web3Result = await web3Response.json();
+
+    console.log(web3Result);
+
+    
+// Send to Google Sheet and wait
+    console.log("Sending to Sheet:", data);
+
+await fetch(googleScriptURL, {
+  method: "POST",
+  mode: "no-cors",
+  body: JSON.stringify(data)
+});
+
+console.log("Lead sent to Google Sheet");
+
+    // SUCCESS
+if (web3Result.success) {
+
+  submitBtn.innerHTML = `
+  <span class="btn-spinner"></span>
+  Redirecting...
+  `;
+
+  setTimeout(() => {
+    window.location.href = "/apply-now/thank-you/";
+  }, 500);
+
+}    
+    else {
+
+  submitBtn.disabled = false;
+
+  submitBtn.innerHTML = "Get Expert Assistance";
+
+  alert("Unable to submit your request. Please try again.");
+
+  console.log(web3Result);
+}
+
+  }
+  catch(error) {
+
+    console.error(error);
+
+    submitBtn.disabled = false;
+
+    submitBtn.innerHTML = "Get Expert Assistance";
+
+    alert("Unable to submit your request. Please try again.");
+
+}
+
+});
+</script>
   
     <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DHT9T8GZB"></script>
