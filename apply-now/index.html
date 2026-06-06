@@ -1335,14 +1335,17 @@ document.getElementById("leadForm").addEventListener("submit", async function(e)
 
     console.log(web3Result);
 
-    // Optional Google Sheet submit
-    fetch(googleScriptURL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).catch(err => console.log("Google Sheet Error:", err));
+    console.log("Sending to Sheet:", data);
+// Send to Google Sheet and wait
+const sheetResponse = await fetch(googleScriptURL, {
+  method: "POST",
+  body: JSON.stringify(data),
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
+
+console.log("Sheet Response:", await sheetResponse.text());
 
     // SUCCESS
     if (web3Result.success) {
