@@ -1238,7 +1238,432 @@
     margin:0;
 }
 
+/* =====================================================
+   MOBILE OPTIMIZATION
+   Desktop remains unchanged
+=====================================================*/
 
+@media (max-width:768px){
+
+html{
+    font-size:15px;
+}
+
+/* ---------- General ---------- */
+
+body{
+    overflow-x:hidden;
+}
+
+.container-max{
+    padding-left:18px;
+    padding-right:18px;
+}
+
+.section{
+    padding:42px 0;
+}
+
+.section-title{
+    font-size:30px;
+    line-height:1.2;
+    margin-bottom:12px;
+}
+
+.section-copy{
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:0;
+}
+
+.eyebrow{
+    font-size:11px;
+    padding:6px 12px;
+}
+
+/* ---------- Hero ---------- */
+
+.hero{
+    padding-top:20px;
+    padding-bottom:35px;
+}
+
+.hero-grid{
+    gap:22px;
+}
+
+.hero-copy{
+    text-align:center;
+}
+
+.hero-title{
+    font-size:38px;
+    max-width:100%;
+    margin:18px auto;
+}
+
+.hero-subtitle{
+    font-size:16px;
+    max-width:100%;
+}
+
+.hero-points{
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-top:24px;
+}
+
+.hero-point{
+    padding:16px;
+    border-radius:18px;
+}
+
+.hero-point strong{
+    font-size:15px;
+}
+
+.hero-point span{
+    font-size:14px;
+}
+
+/* ---------- Trust ---------- */
+
+.hero-trustbar{
+    justify-content:center;
+    gap:10px;
+}
+
+.trust-chip{
+    font-size:13px;
+    min-height:40px;
+}
+
+/* ---------- Form ---------- */
+
+.form-panel{
+    border-radius:22px;
+    overflow:hidden;
+}
+
+.form-panel-head{
+    padding:20px;
+}
+
+.form-panel-body{
+    padding:20px;
+}
+
+.form-title{
+    font-size:22px;
+}
+
+.form-sub{
+    font-size:14px;
+}
+
+.form-control,
+.form-select{
+
+    height:56px;
+    font-size:16px;
+    border-radius:14px;
+
+}
+
+.btn-brand{
+
+    height:58px;
+    font-size:16px;
+    border-radius:14px;
+
+}
+
+/* ---------- Stats ---------- */
+
+.stats-row{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.stat-card{
+
+    padding:18px;
+    text-align:center;
+
+}
+
+.stat-card h3{
+    font-size:26px;
+}
+
+/* ---------- Cards ---------- */
+
+.benefit-card,
+.process-card,
+.trust-card{
+
+    padding:20px;
+    border-radius:18px;
+
+}
+
+.icon-box{
+
+    width:46px;
+    height:46px;
+
+}
+
+.benefit-card h3,
+.process-card h3{
+
+    font-size:18px;
+
+}
+
+.benefit-card p,
+.process-card p{
+
+    font-size:14px;
+
+}
+
+/* ---------- Buttons ---------- */
+
+.btn-outline-brand{
+
+    width:100%;
+    height:52px;
+
+}
+
+/* ---------- Logo Section ---------- */
+
+.logo-strip{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+
+}
+
+.logo-pill{
+
+    min-width:100%;
+    height:72px;
+
+}
+
+.logo-pill img{
+
+    max-width:110px;
+    max-height:28px;
+
+}
+
+/* ---------- Comparison ---------- */
+
+.comparison-table{
+
+    min-width:650px;
+
+}
+
+/* ---------- Blogs ---------- */
+
+.featured-blog{
+
+    margin-bottom:10px;
+
+}
+
+.featured-blog-image img{
+
+    height:220px;
+
+}
+
+.featured-blog-content{
+
+    padding:22px;
+
+}
+
+.featured-blog-content h3{
+
+    font-size:24px;
+
+}
+
+.blog-list{
+
+    gap:16px;
+
+}
+
+.mini-blog{
+
+    flex-direction:row;
+    align-items:center;
+    padding:14px;
+
+}
+
+.mini-blog img{
+
+    width:90px;
+    height:90px;
+
+}
+
+.mini-blog h4{
+
+    font-size:16px;
+
+}
+
+/* ---------- CTA ---------- */
+
+.cta-box{
+
+    padding:45px 22px;
+    border-radius:24px;
+
+}
+
+.cta-actions{
+
+    flex-direction:column;
+
+}
+
+.cta-actions a{
+
+    width:100%;
+
+}
+
+.cta-stat{
+
+    padding:18px;
+
+}
+
+.cta-stat h3{
+
+    font-size:26px;
+
+}
+
+/* ---------- Footer ---------- */
+
+.footer-grid{
+
+    grid-template-columns:1fr;
+    gap:24px;
+    text-align:center;
+
+}
+
+.footer .social{
+
+    justify-content:center;
+
+}
+
+/* ---------- Better Touch ---------- */
+
+button,
+.btn-brand,
+.btn-outline-brand,
+.logo-pill,
+.hero-point{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+/* ---------- Card Animation ---------- */
+
+.benefit-card,
+.process-card,
+.stat-card,
+.featured-blog,
+.mini-blog{
+
+    transition:.3s;
+
+}
+
+.benefit-card:active,
+.process-card:active,
+.stat-card:active{
+
+    transform:scale(.98);
+
+}
+
+/* ---------- Prevent Horizontal Scroll ---------- */
+
+img,
+table{
+
+    max-width:100%;
+
+}
+
+}
+
+/* =====================================================
+   SMALL DEVICES
+=====================================================*/
+
+@media (max-width:480px){
+
+.hero-title{
+
+    font-size:32px;
+
+}
+
+.section-title{
+
+    font-size:26px;
+
+}
+
+.stats-row{
+
+    grid-template-columns:1fr 1fr;
+
+}
+
+.hero-point{
+
+    padding:14px;
+
+}
+
+.logo-strip{
+
+    grid-template-columns:1fr 1fr;
+
+}
+
+.form-control,
+.form-select{
+
+    height:54px;
+
+}
+
+}
+
+	  @media (max-width:768px){
+body{
+    padding-bottom:80px;
+}
+}
 
   </style>
 </head>
