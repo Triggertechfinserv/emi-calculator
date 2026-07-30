@@ -1665,6 +1665,260 @@ body{
 }
 }
 
+
+/* ===========================================
+   APP STYLE LOAN CARDS - MOBILE ONLY
+=========================================== */
+
+@media (max-width:768px){
+
+/* Two cards per row */
+.loan-grid,
+.row.loan-grid{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+
+}
+
+/* Card */
+.loan-card,
+.benefit-card{
+
+    background:#fff;
+    border-radius:28px;
+    padding:22px 16px;
+    text-align:center;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.06);
+
+    border:1px solid #edf2f7;
+
+    min-height:270px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+}
+
+/* Icon Circle */
+
+.loan-card .icon-box,
+.benefit-card .icon-box{
+
+    width:64px;
+    height:64px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#f5f7fb;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+}
+
+/* Heading */
+
+.loan-card h3,
+.benefit-card h3{
+
+    font-size:18px;
+    line-height:1.3;
+    margin:18px 0 8px;
+
+    font-weight:700;
+
+}
+
+/* Description */
+
+.loan-card p,
+.benefit-card p{
+
+    font-size:15px;
+    color:#666;
+
+    line-height:1.45;
+
+    margin-bottom:18px;
+
+}
+
+/* Button */
+
+.loan-card .btn-outline-brand,
+.benefit-card .btn-outline-brand{
+
+    width:100%;
+    height:48px;
+
+    border-radius:999px;
+
+    background:#2ed89d;
+    color:#111;
+
+    border:none;
+
+    font-size:17px;
+    font-weight:600;
+
+}
+
+.loan-card .btn-outline-brand:hover,
+.benefit-card .btn-outline-brand:hover{
+
+    background:#26c68f;
+
+}
+
+/* Badge */
+
+.loan-badge{
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    background:#ffc400;
+
+    color:#111;
+
+    font-size:12px;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+}
+
+/* ==========================================
+   MOBILE APP STYLE CARDS
+========================================== */
+
+@media (max-width:768px){
+
+/* Two cards per row */
+.row.g-4{
+    --bs-gutter-x:14px;
+    --bs-gutter-y:14px;
+}
+
+.col-md-6.col-lg-4{
+    width:50%;
+    flex:0 0 50%;
+}
+
+/* Card */
+.benefit-card{
+
+    height:195px;          /* Same feel as screenshot */
+    padding:18px 14px;
+
+    border-radius:28px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+
+    text-align:center;
+
+    background:#fff;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+}
+
+/* Icon */
+
+.benefit-card .icon-box{
+
+    width:62px;
+    height:62px;
+
+    margin:0;
+
+    border-radius:50%;
+
+    background:#f5f6f8;
+
+    font-size:26px;
+
+}
+
+/* Title */
+
+.benefit-card h3{
+
+    font-size:18px;
+    line-height:1.25;
+
+    margin:10px 0 4px;
+
+}
+
+/* Description */
+
+.benefit-card p{
+
+    font-size:14px;
+    line-height:1.4;
+
+    color:#666;
+
+    margin:0;
+
+}
+
+/* Button */
+
+.benefit-card .btn-outline-brand{
+
+    width:100%;
+
+    height:46px;
+
+    border-radius:999px;
+
+    background:#2ed89d;
+
+    color:#111;
+
+    border:none;
+
+    font-size:16px;
+    font-weight:600;
+
+    margin-top:12px;
+
+}
+
+/* Hide long text if needed */
+
+.benefit-card p{
+
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+
+}
+
+}
   </style>
 </head>
 <body>
