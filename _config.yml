@@ -1,0 +1,10 @@
+title: TechFinServ
+description: Compare Personal, Home & Business Loans
+url: https://www.techfinserv.com
+baseurl: ""
+
+markdown: kramdown
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
