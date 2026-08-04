@@ -632,17 +632,7 @@
     }
     /* Inner .container remains for footer content spacing */
     
-    .sr-only {
-      position:absolute !important;
-      width:1px !important;
-      height:1px !important;
-      padding:0 !important;
-      margin:-1px !important;
-      overflow:hidden !important;
-      clip:rect(0,0,0,0) !important;
-      white-space:nowrap !important;
-      border:0 !important;
-    }
+   
     html, body {
   width: 100%;
   max-width: 100%;
@@ -1386,12 +1376,12 @@ Explore more:
     document.getElementById('year').textContent = new Date().getFullYear();
     // Mobile menu toggle from coming soon
     (function () {
-      const toggle = document.querySelector('.mobile-menu-toggle');
-      const menu = document.getElementById('mobileMenu');
+      const toggle = document.querySelector('.tfs-mobile-menu-toggle');
+      const menu = document.getElementById('tfsMobileMenu');
       if (!toggle || !menu) return;
       const setExpanded = (open) => {
         toggle.setAttribute('aria-expanded', String(open));
-        menu.classList.toggle('open', open);
+        menu.classList.toggle('tfs-open', open);
       };
       toggle.addEventListener('click', () => {
         const open = !menu.classList.contains('open');
