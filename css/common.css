@@ -1,6 +1,6 @@
 /* ========= TECHFINSERV UNIVERSAL HEADER ========= */
 
-.tf-topbar{
+.tfs-topbar{
     position:sticky;
     top:0;
     z-index:9999;
@@ -10,7 +10,7 @@
     -webkit-backdrop-filter:saturate(180%) blur(10px);
 }
 
-.tf-nav-shell{
+.tfs-nav-shell{
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -18,26 +18,26 @@
     min-height:78px;
 }
 
-.tf-brand-wrap{
+.tfs-brand-wrap{
     display:flex;
     align-items:center;
     gap:14px;
     min-width:0;
 }
 
-.tf-brand-logo{
+.tfs-brand-logo{
     height:52px;
     width:auto;
     object-fit:contain;
 }
 
-.tf-menu{
+.tfs-menu{
     display:flex;
     align-items:center;
     gap:8px;
 }
 
-.tf-menu a{
+.tfs-menu a{
     color:var(--muted);
     font-size:15px;
     font-weight:500;
@@ -46,12 +46,12 @@
     text-decoration:none;
 }
 
-.tf-menu a:hover{
+.tfs-menu a:hover{
     background:var(--bg-soft);
     color:var(--brand);
 }
 
-.tf-nav-cta{
+.tfs-nav-cta{
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -66,7 +66,7 @@
     text-decoration:none;
 }
 
-.tf-mobile-menu-toggle{
+.tfs-mobile-menu-toggle{
     display:none;
     width:46px;
     height:46px;
@@ -80,7 +80,7 @@
     cursor:pointer;
 }
 
-.tf-mobile-menu-toggle span{
+.tfs-mobile-menu-toggle span{
     width:18px;
     height:2px;
     background:var(--brand);
@@ -88,12 +88,12 @@
     display:block;
 }
 
-.tf-mobile-menu{
+.tfs-mobile-menu{
     display:none;
     padding:0 0 16px;
 }
 
-.tf-mobile-menu a{
+.tfs-mobile-menu a{
     display:block;
     padding:14px 0;
     border-bottom:1px solid var(--border);
@@ -102,35 +102,35 @@
     text-decoration:none;
 }
 
-.tf-mobile-menu.open{
+.tfs-mobile-menu.open{
     display:block;
 }
 
 
 /* ========= TECHFINSERV UNIVERSAL FOOTER ========= */
 
-.tf-footer{
+.tfs-footer{
     padding:40px 0 28px;
     background:#fff;
     border-top:1px solid var(--border);
 }
 
-.tf-footer-grid{
+.tfs-footer-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:40px;
     margin:30px 0 20px;
 }
 
-.tf-footer h4{
+.tfs-footer h4{
     font-size:.95rem;
     font-weight:700;
     color:var(--text);
     margin-bottom:14px;
 }
 
-.tf-footer a,
-.tf-footer p{
+.tfs-footer a,
+.tfs-footer p{
     display:block;
     font-size:13px;
     color:#1e23b7;
@@ -139,7 +139,7 @@
     transition:color .2s ease;
 }
 
-.tf-footer-bottom{
+.tfs-footer-bottom{
     padding-top:18px;
     margin-top:18px;
     border-top:1px solid var(--border);
@@ -150,14 +150,14 @@
 
 /* ========= SOCIAL ========= */
 
-.tf-footer .tf-social{
+.tfs-footer .tfs-social{
     display:flex;
     gap:10px;
     align-items:center;
     margin:12px 0;
 }
 
-.tf-footer .tf-social a{
+.tfs-footer .tfs-social a{
     width:34px;
     height:34px;
     display:inline-flex;
@@ -170,27 +170,27 @@
     transition:.2s;
 }
 
-.tf-footer .tf-social a:hover{
+.tfs-footer .tfs-social a:hover{
     transform:translateY(-2px);
     border-color:#0ea5e950;
 }
 
-.tf-footer .tf-social svg{
+.tfs-footer .tfs-social svg{
     width:18px;
     height:18px;
 }
 
-.tf-footer .tf-social .fb svg{fill:#1877F2;}
-.tf-footer .tf-social .ig svg{fill:#E1306C;}
-.tf-footer .tf-social .ln svg{fill:#0A66C2;}
-.tf-footer .tf-social .x svg{fill:#111;}
-.tf-footer .tf-social .yt svg{fill:#FF0000;}
-.tf-footer .tf-social .wa svg{fill:#25D366;}
+.tfs-footer .tfs-social .fb svg{fill:#1877F2;}
+.tfs-footer .tfs-social .ig svg{fill:#E1306C;}
+.tfs-footer .tfs-social .ln svg{fill:#0A66C2;}
+.tfs-footer .tfs-social .x svg{fill:#111;}
+.tfs-footer .tfs-social .yt svg{fill:#FF0000;}
+.tfs-footer .tfs-social .wa svg{fill:#25D366;}
 
 
 /* ========= ACCESSIBILITY ========= */
 
-.tf-sr-only{
+.tfs-sr-only{
     position:absolute;
     width:1px;
     height:1px;
@@ -207,19 +207,19 @@
 
 @media (max-width:991.98px){
 
-    .tf-menu{
+    .tfs-menu{
         display:none;
     }
 
-    .tf-mobile-menu-toggle{
+    .tfs-mobile-menu-toggle{
         display:inline-flex;
     }
 
-    .tf-mobile-menu.open{
+    .tfs-mobile-menu.open{
         display:block;
     }
 
-    .tf-footer-grid{
+    .tfs-footer-grid{
         grid-template-columns:1fr;
     }
 
@@ -227,13 +227,13 @@
 
 @media (max-width:768px){
 
-    .tf-footer-grid{
+    .tfs-footer-grid{
         grid-template-columns:1fr;
         gap:24px;
         text-align:center;
     }
 
-    .tf-footer .tf-social{
+    .tfs-footer .tfs-social{
         justify-content:center;
     }
 
@@ -241,11 +241,11 @@
 
 @media (max-width:767.98px){
 
-    .tf-nav-shell{
+    .tfs-nav-shell{
         min-height:72px;
     }
 
-    .tf-brand-logo{
+    .tfs-brand-logo{
         height:46px;
     }
 
