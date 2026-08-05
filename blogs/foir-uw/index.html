@@ -381,13 +381,21 @@
     strong {
       font-weight: 600;
     }
-    a {
-      color: var(--accent-1);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+
+    article a,
+.post-card a,
+.faq-section a,
+.other-posts-section a{
+    color:var(--accent-1);
+    text-decoration:none;
+}
+
+article a:hover,
+.post-card a:hover,
+.faq-section a:hover,
+.other-posts-section a:hover{
+    text-decoration:underline;
+}
     .ad-slot {
       max-width: 700px;
       box-sizing: border-box;
