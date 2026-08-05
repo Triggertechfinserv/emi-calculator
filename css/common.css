@@ -187,12 +187,12 @@
     height:18px;
 }
 
-.tfs-footer .tfs-social .fb svg{fill:#1877F2;}
-.tfs-footer .tfs-social .ig svg{fill:#E1306C;}
-.tfs-footer .tfs-social .ln svg{fill:#0A66C2;}
-.tfs-footer .tfs-social .x svg{fill:#111;}
-.tfs-footer .tfs-social .yt svg{fill:#FF0000;}
-.tfs-footer .tfs-social .wa svg{fill:#25D366;}
+.tfs-footer .tfs-social .tfs-fb svg
+.tfs-footer .tfs-social .tfs-ig svg
+.tfs-footer .tfs-social .tfs-ln svg
+.tfs-footer .tfs-social .tfs-x svg
+.tfs-footer .tfs-social .tfs-yt svg
+.tfs-footer .tfs-social .tfs-wa svg
 
 
 /* ========= ACCESSIBILITY ========= */
