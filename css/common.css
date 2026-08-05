@@ -107,8 +107,11 @@
 }
 
 .tfs-container{
-    width:min(1200px,calc(100% - 32px));
-    margin:auto;
+    max-width:1200px;
+    width:100%;
+    margin:0 auto;
+    padding:0 16px;
+    box-sizing:border-box;
 }
 
 /* ========= TECHFINSERV UNIVERSAL FOOTER ========= */
