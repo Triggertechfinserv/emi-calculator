@@ -257,6 +257,39 @@
 }
 
 
+
+
+.tfs-fb svg,
+.tfs-fb svg path{
+    fill:#1877F2 !important;
+}
+
+.tfs-ig svg,
+.tfs-ig svg path{
+    fill:#E4405F !important;
+}
+
+.tfs-ln svg,
+.tfs-ln svg path{
+    fill:#0A66C2 !important;
+}
+
+.tfs-x svg,
+.tfs-x svg path{
+    fill:#111 !important;
+}
+
+.tfs-yt svg,
+.tfs-yt svg path{
+    fill:#FF0000 !important;
+}
+
+.tfs-wa svg,
+.tfs-wa svg path{
+    fill:#25D366 !important;
+}
+
+
 /* ========= ACCESSIBILITY ========= */
 
 .tfs-sr-only{
