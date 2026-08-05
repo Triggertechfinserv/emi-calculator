@@ -187,12 +187,74 @@
     height:18px;
 }
 
-.tfs-footer .tfs-social .tfs-fb svg
-.tfs-footer .tfs-social .tfs-ig svg
-.tfs-footer .tfs-social .tfs-ln svg
-.tfs-footer .tfs-social .tfs-x svg
-.tfs-footer .tfs-social .tfs-yt svg
-.tfs-footer .tfs-social .tfs-wa svg
+/* ========= SOCIAL ========= */
+
+.tfs-footer .tfs-social{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin:12px 0;
+}
+
+.tfs-footer .tfs-social a{
+    width:34px;
+    height:34px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:#fff;
+    border:1px solid rgba(2,6,23,.10);
+    box-shadow:0 4px 10px rgba(2,6,23,.06);
+    transition:.2s;
+}
+
+.tfs-footer .tfs-social a:hover{
+    transform:translateY(-2px);
+    border-color:#0ea5e950;
+}
+
+.tfs-footer .tfs-social svg{
+    width:18px;
+    height:18px;
+    display:block;
+}
+
+/* Facebook */
+.tfs-footer .tfs-social .tfs-fb svg,
+.tfs-footer .tfs-social .tfs-fb svg path{
+    fill:#1877F2;
+}
+
+/* Instagram */
+.tfs-footer .tfs-social .tfs-ig svg,
+.tfs-footer .tfs-social .tfs-ig svg path{
+    fill:#E4405F;
+}
+
+/* LinkedIn */
+.tfs-footer .tfs-social .tfs-ln svg,
+.tfs-footer .tfs-social .tfs-ln svg path{
+    fill:#0A66C2;
+}
+
+/* X */
+.tfs-footer .tfs-social .tfs-x svg,
+.tfs-footer .tfs-social .tfs-x svg path{
+    fill:#111111;
+}
+
+/* YouTube */
+.tfs-footer .tfs-social .tfs-yt svg,
+.tfs-footer .tfs-social .tfs-yt svg path{
+    fill:#FF0000;
+}
+
+/* WhatsApp */
+.tfs-footer .tfs-social .tfs-wa svg,
+.tfs-footer .tfs-social .tfs-wa svg path{
+    fill:#25D366;
+}
 
 
 /* ========= ACCESSIBILITY ========= */
