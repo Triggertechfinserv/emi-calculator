@@ -703,6 +703,66 @@
 .cibil-login-btn:hover {
     background: #005f78;
     transform: translateY(-2px);
+}
+
+.dispute-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 25px 0;
+}
+
+.dispute-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.dispute-option:hover {
+  transform: translateY(-3px);
+  border-color: #0097b2;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.option-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eaf8fb;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.option-content h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.option-content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .dispute-options {
+    grid-template-columns: 1fr;
+  }
+
+  .dispute-option {
+    padding: 16px;
+  }
 }    
   </style>
   
@@ -872,8 +932,63 @@
         </p>
     </div>
 </div>
+
+<h3>Step 5: Choose the Part of Your CIBIL Report You Want to Dispute</h3>
+  <p>After clicking <strong>“Raise a Dispute”</strong>, you will be asked to choose which section of your CIBIL report contains the incorrect information.</p>
+
+  <h3>You may see options such as:</h3>
   
-  
+  <div class="dispute-options">
+
+  <div class="dispute-option">
+    <div class="option-icon">🏦</div>
+    <div class="option-content">
+      <h3>Account Section</h3>
+      <p>Loan, credit card, balance, payment history, account status, etc.</p>
+    </div>
+  </div>
+
+  <div class="dispute-option">
+    <div class="option-icon">👤</div>
+    <div class="option-content">
+      <h3>Personal Information</h3>
+      <p>Name, date of birth, gender, etc.</p>
+    </div>
+  </div>
+
+  <div class="dispute-option">
+    <div class="option-icon">💼</div>
+    <div class="option-content">
+      <h3>Employment Information</h3>
+      <p>Employment type, income, etc.</p>
+    </div>
+  </div>
+
+  <div class="dispute-option">
+    <div class="option-icon">📋</div>
+    <div class="option-content">
+      <h3>Credit Application History</h3>
+      <p>Incorrect loan or credit card enquiries.</p>
+    </div>
+  </div>
+
+  <div class="dispute-option">
+    <div class="option-icon">📞</div>
+    <div class="option-content">
+      <h3>Contact Information</h3>
+      <p>Address, mobile number, or other contact details.</p>
+    </div>
+  </div>
+
+  <div class="dispute-option">
+    <div class="option-icon">ℹ️</div>
+    <div class="option-content">
+      <h3>Other Information</h3>
+      <p>Other dispute-related issues.</p>
+    </div>
+  </div>
+
+</div>
 
 
 
