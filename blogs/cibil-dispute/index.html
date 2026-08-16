@@ -769,265 +769,239 @@
    FINAL BLOG CTA SECTION
 ======================================== */
 
-.blog-final-cta {
-  width: 100%;
-  padding: 45px 20px 25px;
-}
+/* =========================================
+   COMPACT CTA SECTION
+========================================= */
 
-.blog-final-cta-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 58px 30px 60px;
-  text-align: center;
-
-  background:
-    radial-gradient(
-      circle at top center,
-      rgba(255, 255, 255, 0.95),
-      rgba(245, 247, 252, 0.92)
+.payment-cta {
+    max-width: 100%;
+    margin: 30px auto;
+    padding: 38px 30px 32px;
+    text-align: center;
+    border: 1px solid #dbe3ee;
+    border-radius: 22px;
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f5f8fc 100%
     );
-
-  border: 1px solid #d7deea;
-  border-radius: 30px;
-
-  box-shadow:
-    0 10px 35px rgba(7, 20, 89, 0.06);
+    box-sizing: border-box;
 }
 
+/* Top Label */
+.payment-cta .cta-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 22px;
+    margin-bottom: 20px;
 
-/* Badge */
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 
-.blog-final-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 13px 28px;
-
-  border-radius: 50px;
-
-  background: #eef2fb;
-  border: 1px solid #d6dff1;
-
-  color: #071459;
-
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 2px;
-
-  text-transform: uppercase;
+    color: #1f315c;
+    background: #eef3fb;
+    border: 1px solid #d6e0f0;
+    border-radius: 50px;
 }
 
+/* Main Heading */
+.payment-cta h2 {
+    margin: 0 0 12px;
 
-/* Main heading */
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -1.5px;
 
-.blog-final-cta h2 {
-  margin: 30px 0 12px;
-
-  color: #16213a;
-
-  font-size: clamp(34px, 5vw, 72px);
-  line-height: 1.08;
-  font-weight: 800;
-
-  letter-spacing: -2px;
+    color: #17233f;
 }
 
+/* Subtitle */
+.payment-cta .cta-subtitle {
+    margin: 0 0 18px;
 
-/* Sub heading */
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.3;
+    font-weight: 700;
 
-.blog-final-cta h3 {
-  margin: 0 0 22px;
-
-  color: #1b2d5a;
-
-  font-size: clamp(24px, 3vw, 38px);
-  line-height: 1.3;
-
-  font-weight: 700;
+    color: #263964;
 }
-
 
 /* Description */
+.payment-cta .cta-description {
+    max-width: 850px;
+    margin: 0 auto 24px;
 
-.blog-final-cta p {
-  max-width: 950px;
-
-  margin: 0 auto 32px;
-
-  color: #536173;
-
-  font-size: clamp(18px, 2vw, 25px);
-  line-height: 1.55;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #596779;
 }
-
 
 /* Buttons */
-
-.blog-final-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-
-  margin-top: 10px;
-  flex-wrap: wrap;
+.payment-cta .cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
 }
 
-.blog-final-actions a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.payment-cta .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  min-width: 280px;
+    min-width: 220px;
+    padding: 15px 25px;
 
-  padding: 19px 30px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
 
-  border-radius: 18px;
-
-  font-size: 20px;
-  font-weight: 700;
-
-  text-decoration: none;
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease,
-    background .2s ease;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
 }
 
-
-/* Primary button */
-
-.blog-final-primary {
-  background: #071459;
-  color: #ffffff !important;
-
-  box-shadow:
-    0 8px 20px rgba(7, 20, 89, 0.18);
+/* Primary Button */
+.payment-cta .cta-btn-primary {
+    background: #18275b;
+    color: #ffffff;
+    border: 1px solid #18275b;
 }
 
-.blog-final-primary:hover {
-  background: #0b1d78;
-
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 12px 28px rgba(7, 20, 89, 0.25);
+.payment-cta .cta-btn-primary:hover {
+    background: #0f1c48;
+    transform: translateY(-2px);
 }
 
-
-/* Secondary button */
-
-.blog-final-secondary {
-  background: #ffffff;
-
-  color: #071459 !important;
-
-  border: 1px solid #cbd5e1;
+/* Secondary Button */
+.payment-cta .cta-btn-secondary {
+    background: #ffffff;
+    color: #18275b;
+    border: 1px solid #ccd6e4;
 }
 
-.blog-final-secondary:hover {
-  background: #f5f7fb;
-
-  transform: translateY(-3px);
+.payment-cta .cta-btn-secondary:hover {
+    border-color: #18275b;
+    transform: translateY(-2px);
 }
 
-
-/* Trust chips */
-
-.blog-final-trust {
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  gap: 16px;
-
-  margin-top: 38px;
-
-  flex-wrap: wrap;
+/* Benefits */
+.payment-cta .cta-benefits {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.blog-final-chip {
-  padding: 13px 24px;
+.payment-cta .cta-benefit {
+    padding: 9px 18px;
 
-  background: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    font-weight: 600;
+    color: #536174;
 
-  border: 1px solid #d8dee8;
-
-  border-radius: 50px;
-
-  color: #536173;
-
-  font-size: 17px;
-  font-weight: 600;
+    background: #ffffff;
+    border: 1px solid #dce4ee;
+    border-radius: 50px;
 }
 
 
-/* Mobile */
+/* =========================================
+   MOBILE VIEW
+========================================= */
 
 @media (max-width: 768px) {
 
-  .blog-final-cta {
-    padding: 30px 12px 20px;
-  }
+    .payment-cta {
+        margin: 20px 0;
+        padding: 28px 18px 24px;
+        border-radius: 18px;
+    }
 
-  .blog-final-cta-inner {
-    padding: 42px 20px;
-    border-radius: 22px;
-  }
+    .payment-cta .cta-tag {
+        padding: 8px 16px;
+        margin-bottom: 16px;
 
-  .blog-final-badge {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    padding: 10px 18px;
-  }
+        font-size: 10px;
+        letter-spacing: 1.5px;
+    }
 
-  .blog-final-cta h2 {
-    margin-top: 24px;
-    font-size: 38px;
-    letter-spacing: -1px;
-  }
+    .payment-cta h2 {
+        font-size: 32px;
+        line-height: 1.12;
+        letter-spacing: -1px;
+    }
 
-  .blog-final-cta h3 {
-    font-size: 24px;
-  }
+    .payment-cta .cta-subtitle {
+        margin-bottom: 14px;
+        font-size: 20px;
+        line-height: 1.3;
+    }
 
-  .blog-final-cta p {
-    font-size: 17px;
-  }
+    .payment-cta .cta-description {
+        margin-bottom: 20px;
 
-  .blog-final-actions {
-    flex-direction: column;
-    gap: 12px;
-  }
+        font-size: 15px;
+        line-height: 1.55;
+    }
 
-  .blog-final-actions a {
-    width: 100%;
-    min-width: auto;
+    .payment-cta .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
 
-    font-size: 17px;
+    .payment-cta .cta-btn {
+        width: 100%;
+        min-width: 0;
+        padding: 14px 20px;
 
-    padding: 16px 20px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
 
-    border-radius: 15px;
-  }
+    .payment-cta .cta-benefits {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
 
-  .blog-final-trust {
-    gap: 10px;
-    margin-top: 28px;
-  }
+    .payment-cta .cta-benefit {
+        width: 100%;
+        padding: 9px 12px;
 
-  .blog-final-chip {
-    width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+    }
+}
 
-    font-size: 15px;
 
-    padding: 12px 16px;
-  }
+/* EXTRA SMALL MOBILE */
 
-}    
+@media (max-width: 480px) {
+
+    .payment-cta {
+        padding: 24px 14px 20px;
+    }
+
+    .payment-cta h2 {
+        font-size: 28px;
+    }
+
+    .payment-cta .cta-subtitle {
+        font-size: 18px;
+    }
+
+    .payment-cta .cta-description {
+        font-size: 14px;
+    }
+}
+  
   </style>
   
 </head>
