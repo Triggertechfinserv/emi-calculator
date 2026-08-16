@@ -764,7 +764,270 @@
     padding: 16px;
   }
 }
-    
+
+/* ========================================
+   FINAL BLOG CTA SECTION
+======================================== */
+
+.blog-final-cta {
+  width: 100%;
+  padding: 45px 20px 25px;
+}
+
+.blog-final-cta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 58px 30px 60px;
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(255, 255, 255, 0.95),
+      rgba(245, 247, 252, 0.92)
+    );
+
+  border: 1px solid #d7deea;
+  border-radius: 30px;
+
+  box-shadow:
+    0 10px 35px rgba(7, 20, 89, 0.06);
+}
+
+
+/* Badge */
+
+.blog-final-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 13px 28px;
+
+  border-radius: 50px;
+
+  background: #eef2fb;
+  border: 1px solid #d6dff1;
+
+  color: #071459;
+
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+/* Main heading */
+
+.blog-final-cta h2 {
+  margin: 30px 0 12px;
+
+  color: #16213a;
+
+  font-size: clamp(34px, 5vw, 72px);
+  line-height: 1.08;
+  font-weight: 800;
+
+  letter-spacing: -2px;
+}
+
+
+/* Sub heading */
+
+.blog-final-cta h3 {
+  margin: 0 0 22px;
+
+  color: #1b2d5a;
+
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.3;
+
+  font-weight: 700;
+}
+
+
+/* Description */
+
+.blog-final-cta p {
+  max-width: 950px;
+
+  margin: 0 auto 32px;
+
+  color: #536173;
+
+  font-size: clamp(18px, 2vw, 25px);
+  line-height: 1.55;
+}
+
+
+/* Buttons */
+
+.blog-final-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.blog-final-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 280px;
+
+  padding: 19px 30px;
+
+  border-radius: 18px;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+
+/* Primary button */
+
+.blog-final-primary {
+  background: #071459;
+  color: #ffffff !important;
+
+  box-shadow:
+    0 8px 20px rgba(7, 20, 89, 0.18);
+}
+
+.blog-final-primary:hover {
+  background: #0b1d78;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(7, 20, 89, 0.25);
+}
+
+
+/* Secondary button */
+
+.blog-final-secondary {
+  background: #ffffff;
+
+  color: #071459 !important;
+
+  border: 1px solid #cbd5e1;
+}
+
+.blog-final-secondary:hover {
+  background: #f5f7fb;
+
+  transform: translateY(-3px);
+}
+
+
+/* Trust chips */
+
+.blog-final-trust {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 16px;
+
+  margin-top: 38px;
+
+  flex-wrap: wrap;
+}
+
+.blog-final-chip {
+  padding: 13px 24px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  border: 1px solid #d8dee8;
+
+  border-radius: 50px;
+
+  color: #536173;
+
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .blog-final-cta {
+    padding: 30px 12px 20px;
+  }
+
+  .blog-final-cta-inner {
+    padding: 42px 20px;
+    border-radius: 22px;
+  }
+
+  .blog-final-badge {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding: 10px 18px;
+  }
+
+  .blog-final-cta h2 {
+    margin-top: 24px;
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .blog-final-cta h3 {
+    font-size: 24px;
+  }
+
+  .blog-final-cta p {
+    font-size: 17px;
+  }
+
+  .blog-final-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .blog-final-actions a {
+    width: 100%;
+    min-width: auto;
+
+    font-size: 17px;
+
+    padding: 16px 20px;
+
+    border-radius: 15px;
+  }
+
+  .blog-final-trust {
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .blog-final-chip {
+    width: 100%;
+
+    font-size: 15px;
+
+    padding: 12px 16px;
+  }
+
+}    
   </style>
   
 </head>
@@ -1162,59 +1425,54 @@
     financial situation and explore suitable loan options.
   </p>
 
-<section class="section">
-  <div class="container-max">
+<!-- ===== FINAL BLOG CTA SECTION ===== -->
+<section class="blog-final-cta">
+  <div class="blog-final-cta-inner">
 
-    <div class="cta-panel text-center">
+    <span class="blog-final-badge">
+      TAKE THE FIRST STEP
+    </span>
 
-      <span class="eyebrow">
-        Take The First Step
-      </span>
+    <h2>Paying Too Many EMIs Every Month?</h2>
 
-      <h2 class="section-title mt-3">
-        Paying Too Many EMIs Every Month?
-      </h2>
+    <h3>Let's Explore Smarter Repayment Options</h3>
 
-      <h3 style="font-size:1.4rem;font-weight:600;color:#071459;">
-        Let's Explore Smarter Repayment Options
-      </h3>
+    <p>
+      If you're managing multiple loan EMIs, loan app repayments, or credit card
+      outstanding balances, start with a quick profile review and understand what
+      options may be available.
+    </p>
 
-      <p class="section-copy mx-auto mt-3">
-        If you're managing multiple loan EMIs, loan app repayments, or credit card outstanding balances, start with a quick profile review and understand what options may be available.
-      </p>
+    <div class="blog-final-actions">
 
-      <div class="cta-actions justify-content-center">
+      <a href="#main-content" class="blog-final-primary">
+        Check My Options
+      </a>
 
-        <a href="#main-content" class="nav-cta">
-          Check My Options
-        </a>
+      <a href="/emi-calculator/" class="blog-final-secondary">
+        Calculate EMI Burden
+      </a>
 
-        <a href="/emi-calculator/" class="btn-outline-brand">
-          Calculate EMI Burden
-        </a>
+    </div>
 
+    <div class="blog-final-trust">
+
+      <div class="blog-final-chip">
+        No obligation consultation
       </div>
 
-      <div class="hero-trustbar justify-content-center mt-4">
-        <div class="trust-chip">
-          No obligation consultation
-        </div>
+      <div class="blog-final-chip">
+        No immediate CIBIL impact
+      </div>
 
-        <div class="trust-chip">
-          No immediate CIBIL impact
-        </div>
-
-        <div class="trust-chip">
-          Multiple lender options
-        </div>
+      <div class="blog-final-chip">
+        Multiple lender options
       </div>
 
     </div>
 
   </div>
 </section>
-
-
 
   
 
