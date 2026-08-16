@@ -768,62 +768,65 @@
 /* ========================================
    FINAL BLOG CTA SECTION
 ======================================== */
+/* ===== FINAL BLOG CTA ===== */
 
-/* =========================================
-   COMPACT CTA SECTION
-========================================= */
-
-.payment-cta {
-    max-width: 100%;
-    margin: 30px auto;
-    padding: 38px 30px 32px;
-    text-align: center;
-    border: 1px solid #dbe3ee;
-    border-radius: 22px;
-    background: linear-gradient(
-        135deg,
-        #ffffff 0%,
-        #f5f8fc 100%
-    );
+.blog-final-cta {
+    width: 100%;
+    margin: 35px 0;
+    padding: 0 15px;
     box-sizing: border-box;
 }
 
-/* Top Label */
-.payment-cta .cta-tag {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.blog-final-cta-inner {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 35px 32px;
+    text-align: center;
+
+    background: linear-gradient(135deg, #ffffff, #f5f8fc);
+    border: 1px solid #dbe3ee;
+    border-radius: 22px;
+
+    box-sizing: border-box;
+}
+
+/* Badge */
+
+.blog-final-badge {
+    display: inline-block;
     padding: 9px 22px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
-    text-transform: uppercase;
 
-    color: #1f315c;
+    color: #1d315d;
     background: #eef3fb;
-    border: 1px solid #d6e0f0;
+
+    border: 1px solid #d5dfef;
     border-radius: 50px;
 }
 
 /* Main Heading */
-.payment-cta h2 {
+
+.blog-final-cta h2 {
     margin: 0 0 12px;
 
-    font-size: clamp(30px, 4vw, 52px);
-    line-height: 1.08;
+    font-size: 46px;
+    line-height: 1.1;
     font-weight: 800;
     letter-spacing: -1.5px;
 
     color: #17233f;
 }
 
-/* Subtitle */
-.payment-cta .cta-subtitle {
-    margin: 0 0 18px;
+/* Sub Heading */
 
-    font-size: clamp(20px, 2.2vw, 30px);
+.blog-final-cta h3 {
+    margin: 0 0 16px;
+
+    font-size: 27px;
     line-height: 1.3;
     font-weight: 700;
 
@@ -831,35 +834,40 @@
 }
 
 /* Description */
-.payment-cta .cta-description {
-    max-width: 850px;
-    margin: 0 auto 24px;
+
+.blog-final-cta p {
+    max-width: 820px;
+    margin: 0 auto 25px;
 
     font-size: 17px;
     line-height: 1.6;
+
     color: #596779;
 }
 
 /* Buttons */
-.payment-cta .cta-buttons {
+
+.blog-final-actions {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 14px;
+
     margin-bottom: 22px;
 }
 
-.payment-cta .cta-btn {
+.blog-final-actions a {
+    min-width: 220px;
+    padding: 15px 25px;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    min-width: 220px;
-    padding: 15px 25px;
-
     border-radius: 14px;
+
     font-size: 16px;
     font-weight: 700;
+
     text-decoration: none;
 
     transition: all 0.25s ease;
@@ -867,63 +875,77 @@
 }
 
 /* Primary Button */
-.payment-cta .cta-btn-primary {
+
+.blog-final-primary {
     background: #18275b;
     color: #ffffff;
     border: 1px solid #18275b;
 }
 
-.payment-cta .cta-btn-primary:hover {
-    background: #0f1c48;
+.blog-final-primary:hover {
+    background: #101b45;
+    color: #ffffff;
     transform: translateY(-2px);
 }
 
 /* Secondary Button */
-.payment-cta .cta-btn-secondary {
+
+.blog-final-secondary {
     background: #ffffff;
     color: #18275b;
+
     border: 1px solid #ccd6e4;
 }
 
-.payment-cta .cta-btn-secondary:hover {
+.blog-final-secondary:hover {
+    color: #18275b;
     border-color: #18275b;
+
     transform: translateY(-2px);
 }
 
-/* Benefits */
-.payment-cta .cta-benefits {
+/* Trust Chips */
+
+.blog-final-trust {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
     gap: 10px;
 }
 
-.payment-cta .cta-benefit {
+.blog-final-chip {
     padding: 9px 18px;
 
     font-size: 14px;
     font-weight: 600;
+
     color: #536174;
 
     background: #ffffff;
+
     border: 1px solid #dce4ee;
     border-radius: 50px;
 }
 
 
-/* =========================================
+/* ==========================
    MOBILE VIEW
-========================================= */
+========================== */
 
 @media (max-width: 768px) {
 
-    .payment-cta {
-        margin: 20px 0;
-        padding: 28px 18px 24px;
+    .blog-final-cta {
+        margin: 25px 0;
+        padding: 0 10px;
+    }
+
+    .blog-final-cta-inner {
+        padding: 30px 18px 25px;
         border-radius: 18px;
     }
 
-    .payment-cta .cta-tag {
+    .blog-final-badge {
         padding: 8px 16px;
         margin-bottom: 16px;
 
@@ -931,75 +953,78 @@
         letter-spacing: 1.5px;
     }
 
-    .payment-cta h2 {
+    .blog-final-cta h2 {
         font-size: 32px;
-        line-height: 1.12;
-        letter-spacing: -1px;
+        line-height: 1.15;
+        letter-spacing: -0.8px;
     }
 
-    .payment-cta .cta-subtitle {
+    .blog-final-cta h3 {
         margin-bottom: 14px;
+
         font-size: 20px;
-        line-height: 1.3;
+        line-height: 1.35;
     }
 
-    .payment-cta .cta-description {
+    .blog-final-cta p {
         margin-bottom: 20px;
 
         font-size: 15px;
         line-height: 1.55;
     }
 
-    .payment-cta .cta-buttons {
+    .blog-final-actions {
         flex-direction: column;
         gap: 10px;
+
         margin-bottom: 18px;
     }
 
-    .payment-cta .cta-btn {
+    .blog-final-actions a {
         width: 100%;
         min-width: 0;
-        padding: 14px 20px;
 
+        padding: 14px 20px;
         font-size: 15px;
-        border-radius: 12px;
     }
 
-    .payment-cta .cta-benefits {
+    .blog-final-trust {
         flex-direction: column;
-        align-items: stretch;
         gap: 8px;
     }
 
-    .payment-cta .cta-benefit {
+    .blog-final-chip {
         width: 100%;
         padding: 9px 12px;
 
         font-size: 13px;
+
         box-sizing: border-box;
     }
+
 }
 
 
-/* EXTRA SMALL MOBILE */
+/* Small Mobile */
 
 @media (max-width: 480px) {
 
-    .payment-cta {
-        padding: 24px 14px 20px;
+    .blog-final-cta-inner {
+        padding: 25px 14px 20px;
     }
 
-    .payment-cta h2 {
+    .blog-final-cta h2 {
         font-size: 28px;
     }
 
-    .payment-cta .cta-subtitle {
+    .blog-final-cta h3 {
         font-size: 18px;
     }
 
-    .payment-cta .cta-description {
+    .blog-final-cta p {
         font-size: 14px;
     }
+
 }
   
   </style>
