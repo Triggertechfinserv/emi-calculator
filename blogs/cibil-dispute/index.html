@@ -636,6 +636,74 @@
   overflow-x: hidden;
 }
 
+.cibil-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px 20px;
+    margin: 25px 0;
+    background: #fff8db;
+    border-left: 5px solid #f4b400;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.cibil-tip-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.cibil-tip-content {
+    flex: 1;
+    color: #333;
+}
+
+.cibil-tip-content strong {
+    color: #222;
+    font-size: 17px;
+}
+
+.cibil-tip-content p {
+    margin: 6px 0 0;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    .cibil-tip {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .cibil-tip-icon {
+        font-size: 20px;
+    }
+
+    .cibil-tip-content strong {
+        font-size: 16px;
+    }
+
+    .cibil-tip-content p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+}    
+
+.cibil-login-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #007d9c;
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.cibil-login-btn:hover {
+    background: #005f78;
+    transform: translateY(-2px);
+}    
   </style>
   
 </head>
@@ -671,9 +739,30 @@
   
 <h3>Step 1: Log in to Your CIBIL Account</h3>  
 
+  <a href="https://myscore.cibil.com/CreditView/login.page?enterprise=CIBIL&"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="cibil-login-btn">
+   Login to Your CIBIL Account ↗
+</a>
+
   <p>First, visit the official CIBIL website and log in using your registered username and password.</p>
 
   <p>Once you enter your login details, click on the Login button.</p>
+
+  <div class="cibil-tip">
+    <div class="cibil-tip-icon">💡</div>
+    
+    <div class="cibil-tip-content">
+        <strong>Tip:</strong>
+        <p>
+            Use the same registered email ID or mobile number associated with your
+            CIBIL account. If you have forgotten your login credentials, use the
+            <strong>Forgot Username</strong> or <strong>Forgot Password</strong>
+            option available on the login page.
+        </p>
+    </div>
+</div>
   
 <figure class="rbi-poster">
     <img src="/images/blogs/cibil-dispute/1.png"
