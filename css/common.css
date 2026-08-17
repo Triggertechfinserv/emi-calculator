@@ -352,3 +352,40 @@
     }
 
 }
+
+/* ========= Saas Browser code ========= */
+
+.tfs-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.tfs-saas-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    text-decoration: none;
+}
+
+.tfs-saas-badge img {
+    display: block;
+    width: 160px;
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    .tfs-footer-bottom {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .tfs-saas-badge img {
+        width: 150px;
+    }
+}
