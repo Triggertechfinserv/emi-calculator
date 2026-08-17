@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +77,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="/css/common.css">
+  
   <style>
     :root {
       --bg:#f6f9ff; --surface:#ffffff; --text:#0f172a; --muted:#475569; --border:rgba(2,6,23,0.12);
@@ -240,6 +243,7 @@
   </style>
 </head>
 <body>
+  {% include header.html %}
   <!-- ===== HEADER (exact as reference) ===== -->
   <div class="topbar">
     <div class="container">
@@ -524,6 +528,8 @@
       </div>
     </div>
   </main>
+
+  {% include footer.html %}
 
   <!-- Footer full width -->
   <!-- ====== Footer social icons END ====== -->
