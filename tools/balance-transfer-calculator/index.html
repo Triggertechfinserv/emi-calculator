@@ -1,0 +1,1128 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Balance Transfer Savings Calculator | TechFinserv</title>
+
+  <link rel="stylesheet" href="/css/common.css">
+  
+  <style>
+    :root {
+      --primary: #142a5c;
+      --primary-dark: #0c1d43;
+      --accent: #19a7a8;
+      --accent-soft: #e8f8f8;
+      --danger: #c2185b;
+      --danger-soft: #fff1f6;
+      --text: #1d2939;
+      --muted: #667085;
+      --border: #d9e1ea;
+      --bg: #f4f8fb;
+      --card: #ffffff;
+      --shadow: 0 10px 35px rgba(15, 35, 75, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, #e7f5f5 0%, transparent 35%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .bt-section {
+      width: 100%;
+      padding: 50px 20px;
+    }
+
+    .bt-container {
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    .bt-heading {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 35px;
+    }
+
+    .bt-heading h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--primary);
+    }
+
+    .bt-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .calculator-wrapper {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .calculator-card,
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .calculator-card {
+      padding: 30px;
+    }
+
+    .result-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 22px;
+      color: var(--primary);
+      margin: 0 0 8px;
+    }
+
+    .card-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .input-group {
+      margin-bottom: 25px;
+    }
+
+    .input-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .input-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #344054;
+    }
+
+    .number-box {
+      display: flex;
+      align-items: center;
+      width: 150px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .number-box span {
+      padding-left: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .number-box input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      padding: 10px 10px 10px 6px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: right;
+      color: var(--text);
+      background: transparent;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--danger);
+      cursor: pointer;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .summary-banner {
+      margin-top: 8px;
+      border: 1px solid #dce5ee;
+      background: linear-gradient(135deg, #f9fbfd, #eef6f8);
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .summary-banner small {
+      display: block;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .big-saving {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .saving-positive {
+      color: #16803c;
+    }
+
+    .saving-negative {
+      color: #c0392b;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: #f5f8fb;
+    }
+
+    .result-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .result-heading h2 {
+      margin: 0;
+      color: var(--primary);
+      font-size: 25px;
+    }
+
+    .result-badge {
+      background: var(--accent-soft);
+      color: #087a7b;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .comparison-chart {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      min-height: 220px;
+      padding: 10px 15px 20px;
+      border-bottom: 1px solid var(--border);
+      align-items: end;
+    }
+
+    .chart-item {
+      text-align: center;
+    }
+
+    .chart-area {
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 12px;
+      border-bottom: 1px solid #cfd8e3;
+      margin-bottom: 14px;
+      padding: 0 15px;
+    }
+
+    .bar {
+      width: 48px;
+      border-radius: 8px 8px 0 0;
+      min-height: 8px;
+      transition: height 0.35s ease;
+    }
+
+    .bar-existing {
+      background: var(--danger);
+    }
+
+    .bar-proposed {
+      background: var(--accent);
+    }
+
+    .chart-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .chart-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 10px;
+    }
+
+    .result-item {
+      padding: 18px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-item:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
+
+    .result-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .result-value {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .result-value.green {
+      color: #16803c;
+    }
+
+    .result-value.red {
+      color: #c0392b;
+    }
+
+    .bottom-result {
+      margin-top: auto;
+      padding-top: 20px;
+    }
+
+    .final-saving {
+      background: linear-gradient(135deg, #eaf8f1, #f7fcf9);
+      border: 1px solid #cdebd9;
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .final-saving .label {
+      color: #4b6354;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .final-saving .amount {
+      color: #16803c;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .disclaimer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .calculator-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-chart {
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .bt-section {
+        padding: 30px 12px;
+      }
+
+      .calculator-card,
+      .result-card {
+        padding: 20px;
+        border-radius: 16px;
+      }
+
+      .input-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .number-box {
+        width: 100%;
+      }
+
+      .comparison-chart {
+        grid-template-columns: 1fr 1fr;
+        min-height: 200px;
+      }
+
+      .chart-area {
+        gap: 6px;
+        padding: 0 5px;
+      }
+
+      .bar {
+        width: 32px;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .result-item {
+        padding: 14px 8px;
+      }
+
+      .action-row {
+        flex-direction: column;
+      }
+
+      .action-row .btn {
+        width: 100%;
+      }
+    }
+	
+	.saving-positive {
+      color: #16803c !important;
+    }
+
+    .saving-negative {
+      color: #c0392b !important;
+    }
+
+  </style>
+</head>
+
+<body>
+  {% include header.html %}
+
+<section class="bt-section">
+  <div class="bt-container">
+
+    <div class="bt-heading">
+      <h1>Balance Transfer Savings Calculator</h1>
+      <p>
+        Compare your existing loan with a proposed balance transfer option
+        and estimate your potential EMI and interest savings.
+      </p>
+    </div>
+
+    <div class="calculator-wrapper">
+
+      <!-- LEFT: INPUTS -->
+      <div class="calculator-card">
+
+        <h2 class="card-title">Enter Your Loan Details</h2>
+
+        <div class="card-subtitle">
+          Adjust the sliders or enter values directly. Results update automatically.
+        </div>
+
+        <!-- Outstanding -->
+        <div class="input-group">
+          <div class="input-top">
+            <div class="input-label">Existing Outstanding</div>
+
+            <div class="number-box">
+              <span>₹</span>
+              <input
+                type="number"
+                id="outstandingInput"
+                min="50000"
+                max="10000000"
+                step="1000"
+                value="500000"
+              />
+            </div>
+          </div>
+
+          <input
+            type="range"
+            id="outstanding"
+            min="50000"
+            max="10000000"
+            step="1000"
+            value="500000"
+          />
+
+          <div class="range-labels">
+            <span>₹50,000</span>
+            <span>₹1 Crore</span>
+          </div>
+        </div>
+
+        <!-- Existing Interest -->
+        <div class="input-group">
+          <div class="input-top">
+            <div class="input-label">Existing Interest Rate</div>
+
+            <div class="number-box">
+              <input
+                type="number"
+                id="existingRateInput"
+                min="1"
+                max="30"
+                step="0.1"
+                value="16"
+              />
+              <span>%</span>
+            </div>
+          </div>
+
+          <input
+            type="range"
+            id="existingRate"
+            min="1"
+            max="30"
+            step="0.1"
+            value="16"
+          />
+
+          <div class="range-labels">
+            <span>1% p.a.</span>
+            <span>30% p.a.</span>
+          </div>
+        </div>
+
+        <!-- Remaining Tenure -->
+        <div class="input-group">
+          <div class="input-top">
+            <div class="input-label">Remaining Tenure</div>
+
+            <div class="number-box">
+              <input
+                type="number"
+                id="existingTenureInput"
+                min="6"
+                max="120"
+                step="1"
+                value="48"
+              />
+              <span>Months</span>
+            </div>
+          </div>
+
+          <input
+            type="range"
+            id="existingTenure"
+            min="6"
+            max="120"
+            step="1"
+            value="48"
+          />
+
+          <div class="range-labels">
+            <span>6 Months</span>
+            <span>120 Months</span>
+          </div>
+        </div>
+
+        <!-- Proposed Interest -->
+        <div class="input-group">
+          <div class="input-top">
+            <div class="input-label">Proposed Interest Rate</div>
+
+            <div class="number-box">
+              <input
+                type="number"
+                id="proposedRateInput"
+                min="1"
+                max="30"
+                step="0.1"
+                value="11"
+              />
+              <span>%</span>
+            </div>
+          </div>
+
+          <input
+            type="range"
+            id="proposedRate"
+            min="1"
+            max="30"
+            step="0.1"
+            value="11"
+          />
+
+          <div class="range-labels">
+            <span>1% p.a.</span>
+            <span>30% p.a.</span>
+          </div>
+        </div>
+
+        <!-- Proposed Tenure -->
+        <div class="input-group">
+          <div class="input-top">
+            <div class="input-label">Proposed Tenure</div>
+
+            <div class="number-box">
+              <input
+                type="number"
+                id="proposedTenureInput"
+                min="6"
+                max="120"
+                step="1"
+                value="48"
+              />
+              <span>Months</span>
+            </div>
+          </div>
+
+          <input
+            type="range"
+            id="proposedTenure"
+            min="6"
+            max="120"
+            step="1"
+            value="48"
+          />
+
+          <div class="range-labels">
+            <span>6 Months</span>
+            <span>120 Months</span>
+          </div>
+        </div>
+
+        <!-- Charges -->
+        <div class="input-group">
+          <div class="input-top">
+            <div class="input-label">Balance Transfer Charges</div>
+
+            <div class="number-box">
+              <span>₹</span>
+              <input
+                type="number"
+                id="chargesInput"
+                min="0"
+                max="500000"
+                step="500"
+                value="9999"
+              />
+            </div>
+          </div>
+
+          <input
+            type="range"
+            id="charges"
+            min="0"
+            max="500000"
+            step="500"
+            value="9999"
+          />
+
+          <div class="range-labels">
+            <span>₹0</span>
+            <span>₹5,00,000</span>
+          </div>
+        </div>
+
+        <div class="summary-banner">
+          <small>Estimated Monthly EMI Difference</small>
+          <div class="big-saving" id="quickSaving">₹0</div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-outline" id="resetBtn">
+            Reset
+          </button>
+
+          <button class="btn btn-primary" id="applyBtn">
+            Check My Balance Transfer Options
+          </button>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: RESULTS -->
+      <div class="result-card">
+
+        <div class="result-heading">
+          <h2>Your Comparison</h2>
+          <div class="result-badge">Instant Estimate</div>
+        </div>
+
+        <div class="comparison-chart">
+
+          <div class="chart-item">
+            <div class="chart-area">
+              <div class="bar bar-existing" id="existingBar"></div>
+              <div class="bar bar-proposed" id="proposedBar"></div>
+            </div>
+
+            <div class="chart-label">Monthly EMI Comparison</div>
+          </div>
+
+          <div class="chart-item">
+            <div class="chart-area">
+              <div class="bar bar-existing" id="existingTenureBar"></div>
+              <div class="bar bar-proposed" id="proposedTenureBar"></div>
+            </div>
+
+            <div class="chart-label">Tenure Comparison</div>
+          </div>
+
+        </div>
+
+        <div class="result-grid">
+
+          <div class="result-item">
+            <div class="result-label">Existing EMI</div>
+            <div class="result-value" id="existingEmiResult">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Proposed EMI</div>
+            <div class="result-value" id="proposedEmiResult">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Monthly EMI Difference</div>
+            <div class="result-value green" id="monthlySavingResult">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Total Interest Saving</div>
+            <div class="result-value green" id="interestSavingResult">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Existing Total Payable</div>
+            <div class="result-value" id="existingPayableResult">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Proposed Total Payable</div>
+            <div class="result-value" id="proposedPayableResult">₹0</div>
+          </div>
+
+        </div>
+
+        <div class="bottom-result">
+
+          <div class="final-saving">
+            <div class="label">Estimated Net Savings After Charges</div>
+            <div class="amount" id="netSavingResult">₹0</div>
+          </div>
+
+          <button class="btn btn-primary" style="width:100%;" id="resultApplyBtn">
+            Check My Eligibility
+          </button>
+
+          <div class="disclaimer">
+            *This calculator provides an estimated comparison based on the values entered.
+            Actual EMI, interest rate, charges, eligibility and savings may vary depending
+            on the lender, loan terms and approved balance transfer offer.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  {% include footer.html %}
+
+<script>
+  const defaults = {
+    outstanding: 500000,
+    existingRate: 16,
+    existingTenure: 48,
+    proposedRate: 11,
+    proposedTenure: 48,
+    charges: 9999
+  };
+
+  const fields = [
+    "outstanding",
+    "existingRate",
+    "existingTenure",
+    "proposedRate",
+    "proposedTenure",
+    "charges"
+  ];
+
+  function formatCurrency(value) {
+    const rounded = Math.round(value);
+
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0
+    }).format(rounded);
+  }
+
+  function calculateEMI(principal, annualRate, months) {
+    if (!principal || !months) return 0;
+
+    const monthlyRate = annualRate / 12 / 100;
+
+    if (monthlyRate === 0) {
+      return principal / months;
+    }
+
+    const factor = Math.pow(1 + monthlyRate, months);
+
+    return (
+      principal *
+      monthlyRate *
+      factor /
+      (factor - 1)
+    );
+  }
+
+  function getValues() {
+    return {
+      outstanding: Number(
+        document.getElementById("outstanding").value
+      ),
+
+      existingRate: Number(
+        document.getElementById("existingRate").value
+      ),
+
+      existingTenure: Number(
+        document.getElementById("existingTenure").value
+      ),
+
+      proposedRate: Number(
+        document.getElementById("proposedRate").value
+      ),
+
+      proposedTenure: Number(
+        document.getElementById("proposedTenure").value
+      ),
+
+      charges: Number(
+        document.getElementById("charges").value
+      )
+    };
+  }
+
+  function calculate() {
+    const data = getValues();
+
+    const existingEMI = calculateEMI(
+      data.outstanding,
+      data.existingRate,
+      data.existingTenure
+    );
+
+    const proposedEMI = calculateEMI(
+      data.outstanding,
+      data.proposedRate,
+      data.proposedTenure
+    );
+
+    const existingTotalPayable =
+      existingEMI * data.existingTenure;
+
+    const proposedTotalPayable =
+      proposedEMI * data.proposedTenure;
+
+    const existingInterest =
+      existingTotalPayable - data.outstanding;
+
+    const proposedInterest =
+      proposedTotalPayable - data.outstanding;
+
+    const monthlySaving =
+      existingEMI - proposedEMI;
+
+    const interestSaving =
+      existingInterest - proposedInterest;
+
+    const netSaving =
+      interestSaving - data.charges;
+
+    document.getElementById(
+      "existingEmiResult"
+    ).textContent = formatCurrency(existingEMI);
+
+    document.getElementById(
+      "proposedEmiResult"
+    ).textContent = formatCurrency(proposedEMI);
+
+    const monthlyElement =
+      document.getElementById("monthlySavingResult");
+
+    monthlyElement.textContent =
+      formatCurrency(Math.abs(monthlySaving));
+
+    monthlyElement.className =
+      "result-value " +
+      (monthlySaving >= 0 ? "green" : "red");
+
+    document.getElementById(
+      "interestSavingResult"
+    ).textContent = formatCurrency(Math.abs(interestSaving));
+
+    document.getElementById(
+      "existingPayableResult"
+    ).textContent = formatCurrency(existingTotalPayable);
+
+    document.getElementById(
+      "proposedPayableResult"
+    ).textContent = formatCurrency(proposedTotalPayable);
+
+    const netElement = document.getElementById("netSavingResult");
+
+     netElement.textContent = formatCurrency(netSaving);
+
+     netElement.className =
+      "amount " +
+      (netSaving >= 0
+       ? "saving-positive"
+        : "saving-negative");
+
+    const quickSaving =
+      document.getElementById("quickSaving");
+
+    if (monthlySaving >= 0) {
+      quickSaving.textContent =
+        formatCurrency(monthlySaving) +
+        " / month lower EMI";
+
+      quickSaving.className =
+        "big-saving saving-positive";
+    } else {
+      quickSaving.textContent =
+        formatCurrency(Math.abs(monthlySaving)) +
+        " / month higher EMI";
+
+      quickSaving.className =
+        "big-saving saving-negative";
+    }
+
+    updateBars(
+      existingEMI,
+      proposedEMI,
+      data.existingTenure,
+      data.proposedTenure
+    );
+
+    return {
+      ...data,
+      existingEMI,
+      proposedEMI,
+      monthlySaving,
+      interestSaving,
+      netSaving,
+      existingTotalPayable,
+      proposedTotalPayable
+    };
+  }
+
+  function updateBars(
+    existingEMI,
+    proposedEMI,
+    existingTenure,
+    proposedTenure
+  ) {
+    const maxEMI = Math.max(existingEMI, proposedEMI);
+
+    const existingHeight =
+      Math.max(10, (existingEMI / maxEMI) * 140);
+
+    const proposedHeight =
+      Math.max(10, (proposedEMI / maxEMI) * 140);
+
+    document.getElementById(
+      "existingBar"
+    ).style.height = existingHeight + "px";
+
+    document.getElementById(
+      "proposedBar"
+    ).style.height = proposedHeight + "px";
+
+    const maxTenure =
+      Math.max(existingTenure, proposedTenure);
+
+    const existingTenureHeight =
+      Math.max(
+        10,
+        (existingTenure / maxTenure) * 140
+      );
+
+    const proposedTenureHeight =
+      Math.max(
+        10,
+        (proposedTenure / maxTenure) * 140
+      );
+
+    document.getElementById(
+      "existingTenureBar"
+    ).style.height =
+      existingTenureHeight + "px";
+
+    document.getElementById(
+      "proposedTenureBar"
+    ).style.height =
+      proposedTenureHeight + "px";
+  }
+
+  fields.forEach((field) => {
+    const range =
+      document.getElementById(field);
+
+    const number =
+      document.getElementById(field + "Input");
+
+    range.addEventListener("input", () => {
+      number.value = range.value;
+      calculate();
+    });
+
+    number.addEventListener("input", () => {
+      let value = Number(number.value);
+
+      if (value < Number(range.min)) {
+        value = Number(range.min);
+      }
+
+      if (value > Number(range.max)) {
+        value = Number(range.max);
+      }
+
+      range.value = value;
+      calculate();
+    });
+
+    number.addEventListener("change", () => {
+      number.value = range.value;
+    });
+  });
+
+  function redirectToApply() {
+    const result = calculate();
+
+    const params = new URLSearchParams({
+      source: "balance-transfer-calculator",
+
+      outstanding: Math.round(result.outstanding),
+
+      existingRate: result.existingRate,
+
+      existingTenure: result.existingTenure,
+
+      proposedRate: result.proposedRate,
+
+      proposedTenure: result.proposedTenure,
+
+      existingEMI: Math.round(result.existingEMI),
+
+      proposedEMI: Math.round(result.proposedEMI),
+
+      monthlySaving: Math.round(result.monthlySaving),
+
+      interestSaving: Math.round(result.interestSaving),
+
+      netSaving: Math.round(result.netSaving)
+    });
+
+    /*
+      Change this URL if your final lead form
+      is located somewhere else.
+    */
+
+    window.location.href =
+      "/apply-now/?" + params.toString();
+  }
+
+  document
+    .getElementById("applyBtn")
+    .addEventListener(
+      "click",
+      redirectToApply
+    );
+
+  document
+    .getElementById("resultApplyBtn")
+    .addEventListener(
+      "click",
+      redirectToApply
+    );
+
+  document
+    .getElementById("resetBtn")
+    .addEventListener("click", () => {
+
+      fields.forEach((field) => {
+
+        const range =
+          document.getElementById(field);
+
+        const number =
+          document.getElementById(field + "Input");
+
+        range.value = defaults[field];
+        number.value = defaults[field];
+
+      });
+
+      calculate();
+    });
+
+  calculate();
+</script>
+
+</body>
+</html>
