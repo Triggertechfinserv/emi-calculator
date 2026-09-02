@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* Copyright year */
+    /* =========================================
+       COPYRIGHT YEAR
+    ========================================= */
+
     const year = document.getElementById('year');
 
     if (year) {
@@ -8,7 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    /* Mobile menu */
+    /* =========================================
+       TECHFINSERV MOBILE MENU
+    ========================================= */
+
     (function () {
 
         const toggle = document.querySelector('.tfs-mobile-menu-toggle');
@@ -16,26 +22,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!toggle || !menu) return;
 
+
         const setExpanded = (open) => {
-            toggle.setAttribute('aria-expanded', String(open));
-            menu.classList.toggle('open', open);
+
+            toggle.setAttribute(
+                'aria-expanded',
+                String(open)
+            );
+
+            menu.classList.toggle(
+                'open',
+                open
+            );
+
         };
 
+
+        /* Open / Close */
+
         toggle.addEventListener('click', () => {
+
             const open = !menu.classList.contains('open');
+
             setExpanded(open);
+
         });
 
+
+        /* Close after clicking a link */
+
         menu.addEventListener('click', (e) => {
+
             if (e.target.tagName === 'A') {
                 setExpanded(false);
             }
+
         });
 
+
+        /* Close when screen becomes desktop */
+
         window.addEventListener('resize', () => {
+
             if (window.innerWidth > 991) {
                 setExpanded(false);
             }
+
         });
 
     })();
