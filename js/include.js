@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* =========================================
        FOOTER COPYRIGHT YEAR
        ========================================= */
+
     const yearElement = document.getElementById("year");
 
     if (yearElement) {
@@ -11,32 +12,76 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       MOBILE MENU
+       MOBILE NAVIGATION
        ========================================= */
+
     const menuToggle = document.querySelector(".tfs-mobile-menu-toggle");
     const mobileMenu = document.getElementById("tfsMobileMenu");
+    const desktopMenu = document.querySelector(".tfs-menu");
+
+    function setupNavigation() {
+
+        if (!menuToggle || !mobileMenu) {
+            return;
+        }
+
+        if (window.innerWidth <= 700) {
+
+            /* Hide desktop navigation on mobile */
+            if (desktopMenu) {
+                desktopMenu.style.display = "none";
+            }
+
+            /* Keep mobile menu closed initially */
+            if (menuToggle.getAttribute("aria-expanded") !== "true") {
+                mobileMenu.style.display = "none";
+            }
+
+        } else {
+
+            /* Restore desktop navigation */
+            if (desktopMenu) {
+                desktopMenu.style.display = "";
+            }
+
+            /* Hide mobile menu on desktop */
+            mobileMenu.style.display = "none";
+
+            menuToggle.setAttribute("aria-expanded", "false");
+        }
+    }
+
+
+    setupNavigation();
+
+
+    /* Hamburger click */
 
     if (menuToggle && mobileMenu) {
 
         menuToggle.addEventListener("click", function () {
 
-            const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+            const isOpen =
+                menuToggle.getAttribute("aria-expanded") === "true";
 
             if (isOpen) {
+
                 mobileMenu.style.display = "none";
                 menuToggle.setAttribute("aria-expanded", "false");
+
             } else {
+
                 mobileMenu.style.display = "flex";
                 menuToggle.setAttribute("aria-expanded", "true");
+
             }
 
         });
 
 
-        /* Close when clicking a menu link */
-        const mobileLinks = mobileMenu.querySelectorAll("a");
+        /* Close after clicking mobile link */
 
-        mobileLinks.forEach(function (link) {
+        mobileMenu.querySelectorAll("a").forEach(function (link) {
 
             link.addEventListener("click", function () {
 
@@ -48,7 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        /* Close with Escape key */
+        /* Close with Escape */
+
         document.addEventListener("keydown", function (event) {
 
             if (event.key === "Escape") {
@@ -62,8 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
+    /* Handle screen rotation / resize */
+
+    window.addEventListener("resize", setupNavigation);
+
 });
 
-  /* =========================================
-       MOBILE MENU END
+
+    /* =========================================
+       MOBILE NAVIGATION END
        ========================================= */
