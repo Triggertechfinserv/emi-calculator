@@ -715,6 +715,272 @@
     padding-right: 16px;
   }
 }
+
+/* =========================
+   SEO CONTENT
+========================= */
+
+.loan-seo-content {
+  margin: 42px 0;
+}
+
+.seo-content-card {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 20px;
+
+  background: #fff;
+  border: 1px solid var(--tf-border);
+  border-radius: 20px;
+
+  padding: 28px;
+  margin-bottom: 18px;
+
+  box-shadow: 0 8px 28px rgba(15,23,42,.045);
+}
+
+.seo-content-icon {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 13px;
+
+  background: var(--tf-blue-light);
+  color: var(--tf-blue);
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.seo-content-body {
+  min-width: 0;
+}
+
+.seo-content-body h2 {
+  margin: 0 0 10px;
+
+  color: var(--tf-primary);
+
+  font-size: 21px;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.seo-content-body h3 {
+  margin: 0 0 5px;
+
+  color: var(--tf-text);
+
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 750;
+}
+
+.seo-content-body p {
+  margin: 0 0 13px;
+
+  color: var(--tf-muted);
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.seo-content-body p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   HOW TO USE STEPS
+========================= */
+
+.seo-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+
+  margin-top: 22px;
+}
+
+.seo-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 15px;
+
+  border: 1px solid #edf1f5;
+  border-radius: 13px;
+
+  background: #fbfdff;
+}
+
+.seo-step > span {
+  flex: 0 0 auto;
+
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 8px;
+
+  background: var(--tf-primary);
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.seo-step p {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   BENEFITS
+========================= */
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+
+  margin-top: 20px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 16px;
+
+  border: 1px solid #edf1f5;
+  border-radius: 13px;
+
+  background: #fbfdff;
+}
+
+.benefit-icon {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: var(--tf-green-bg);
+  color: var(--tf-green);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.benefit-item p {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   FOIR
+========================= */
+
+.foir-section {
+  background:
+    linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.foir-formula {
+  margin: 20px 0;
+
+  padding: 18px 20px;
+
+  border-radius: 14px;
+
+  background: #f1f7fe;
+  border: 1px solid #dcecff;
+
+  text-align: center;
+}
+
+.formula-label {
+  margin-bottom: 8px;
+
+  color: var(--tf-muted);
+
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+}
+
+.formula {
+  color: var(--tf-primary);
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.formula strong {
+  font-weight: 800;
+}
+
+
+/* =========================
+   SEO CONTENT MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .loan-seo-content {
+    margin: 30px 0;
+  }
+
+  .seo-content-card {
+    grid-template-columns: 1fr;
+    gap: 15px;
+
+    padding: 20px 18px;
+
+    border-radius: 17px;
+  }
+
+  .seo-content-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+
+  .seo-content-body h2 {
+    font-size: 19px;
+  }
+
+  .seo-steps,
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seo-step,
+  .benefit-item {
+    padding: 14px;
+  }
+
+  .formula {
+    font-size: 13px;
+  }
+}    
 </style>
   
   <!-- jsPDF + AutoTable -->
@@ -1339,6 +1605,262 @@
       id="mobileCards"
       aria-label="Mobile bank comparison"
     ></section>
+
+    <!-- SEO CONTENT -->
+<section class="loan-seo-content">
+
+  <!-- HOW TO USE -->
+  <div class="seo-content-card">
+
+    <div class="seo-content-icon">
+      01
+    </div>
+
+    <div class="seo-content-body">
+
+      <h2>How to Use the Personal Loan Eligibility Calculator</h2>
+
+      <p>
+        Our personal loan eligibility calculator helps you estimate the
+        maximum loan amount you may be eligible for based on your income,
+        existing monthly obligations, credit card outstanding, loan tenure
+        and interest rate. Enter your details to get an estimated eligibility
+        amount and compare results across different lenders.
+      </p>
+
+      <div class="seo-steps">
+
+        <div class="seo-step">
+          <span>1</span>
+          <div>
+            <h3>Enter Your Net Monthly Salary</h3>
+            <p>
+              Enter the amount you receive as your monthly net salary.
+              Your income is one of the important factors used to determine
+              personal loan eligibility.
+            </p>
+          </div>
+        </div>
+
+        <div class="seo-step">
+          <span>2</span>
+          <div>
+            <h3>Enter Existing Monthly Obligations</h3>
+            <p>
+              Enter your existing EMIs and other monthly loan obligations.
+              These obligations can reduce the amount available for a new
+              personal loan EMI.
+            </p>
+          </div>
+        </div>
+
+        <div class="seo-step">
+          <span>3</span>
+          <div>
+            <h3>Enter Credit Card Outstanding</h3>
+            <p>
+              Add your current credit card outstanding amount. The calculator
+              considers the monthly obligation associated with your credit
+              card outstanding.
+            </p>
+          </div>
+        </div>
+
+        <div class="seo-step">
+          <span>4</span>
+          <div>
+            <h3>Select Loan Tenure and Interest Rate</h3>
+            <p>
+              Enter your preferred loan tenure and expected interest rate.
+              These values are used to estimate the loan amount based on the
+              available EMI.
+            </p>
+          </div>
+        </div>
+
+        <div class="seo-step">
+          <span>5</span>
+          <div>
+            <h3>Compare Your Eligibility</h3>
+            <p>
+              The calculator displays the estimated eligibility for each
+              lender. You can compare eligibility based on FOIR and income
+              multiplier calculations.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BENEFITS -->
+  <div class="seo-content-card">
+
+    <div class="seo-content-icon">
+      02
+    </div>
+
+    <div class="seo-content-body">
+
+      <h2>Benefits of Using a Personal Loan Eligibility Calculator</h2>
+
+      <p>
+        Checking your personal loan eligibility before applying can help you
+        understand the approximate loan amount you may qualify for. A loan
+        eligibility calculator gives you a quick estimate using important
+        financial factors.
+      </p>
+
+      <div class="benefits-grid">
+
+        <div class="benefit-item">
+          <div class="benefit-icon">✓</div>
+          <div>
+            <h3>Estimate Your Loan Amount</h3>
+            <p>
+              Get an estimate of the personal loan amount you may be eligible
+              for based on your financial details.
+            </p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">✓</div>
+          <div>
+            <h3>Compare Multiple Lenders</h3>
+            <p>
+              Compare estimated eligibility across different banks and
+              financial institutions in one place.
+            </p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">✓</div>
+          <div>
+            <h3>Understand Your EMI Capacity</h3>
+            <p>
+              Understand how your existing EMIs and monthly obligations can
+              affect your eligibility for a new loan.
+            </p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">✓</div>
+          <div>
+            <h3>Check Eligibility Before Applying</h3>
+            <p>
+              Get an estimate before approaching a lender so you can better
+              understand your potential loan eligibility.
+            </p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">✓</div>
+          <div>
+            <h3>Understand FOIR</h3>
+            <p>
+              See how the relationship between your income and monthly
+              obligations affects your estimated eligibility.
+            </p>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon">✓</div>
+          <div>
+            <h3>Quick and Easy Calculation</h3>
+            <p>
+              Calculate estimated personal loan eligibility without manually
+              performing complex calculations.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- FOIR -->
+  <div class="seo-content-card foir-section">
+
+    <div class="seo-content-icon">
+      03
+    </div>
+
+    <div class="seo-content-body">
+
+      <h2>What is FOIR in Personal Loan Eligibility?</h2>
+
+      <p>
+        FOIR stands for <strong>Fixed Obligations to Income Ratio</strong>.
+        It is a commonly used measure for assessing a borrower's repayment
+        capacity. FOIR compares a person's fixed monthly financial obligations
+        with their monthly income.
+      </p>
+
+      <div class="foir-formula">
+
+        <div class="formula-label">
+          FOIR Formula
+        </div>
+
+        <div class="formula">
+          FOIR =
+          <strong>
+            (Existing Monthly Obligations + Proposed EMI)
+            ÷ Net Monthly Income × 100
+          </strong>
+        </div>
+
+      </div>
+
+      <p>
+        For example, if your monthly income is ₹50,000 and your existing
+        monthly obligations are ₹10,000, your existing obligations represent
+        20% of your monthly income. A lender may then consider its applicable
+        FOIR limit when determining how much additional EMI you can afford.
+      </p>
+
+      <h3>Why is FOIR Important for Personal Loan Eligibility?</h3>
+
+      <p>
+        FOIR helps lenders estimate whether a borrower has sufficient monthly
+        income to manage a new loan repayment along with existing financial
+        commitments. A higher level of existing obligations may reduce the
+        maximum EMI available for a new personal loan.
+      </p>
+
+      <p>
+        The applicable FOIR can vary between lenders and may depend on factors
+        such as income, customer profile, employment details, existing
+        obligations and the lender's internal credit policy.
+      </p>
+
+      <h3>How FOIR Affects Your Loan Eligibility</h3>
+
+      <p>
+        In general, when existing monthly obligations are higher, the amount
+        available for a new EMI may be lower. When monthly obligations are
+        lower relative to income, the borrower may have greater repayment
+        capacity. This is why FOIR is an important factor in personal loan
+        eligibility calculations.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
 
   </div>
 
