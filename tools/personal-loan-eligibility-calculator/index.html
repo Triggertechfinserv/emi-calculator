@@ -19,10 +19,10 @@
     Personal Loan Eligibility Calculator – Check Loan Eligibility
   </title>
 
-  <meta
-    name="description"
-    content="Use our free personal loan eligibility calculator to estimate how much personal loan you may qualify for based on salary, existing EMIs, FOIR, tenure and interest rate."
-  >
+ <meta
+  name="description"
+  content="Estimate your personal loan eligibility with our free calculator. Check loan amount based on salary, EMIs, FOIR, tenure and interest rate."
+>
 
   <meta
     name="keywords"
@@ -222,110 +222,144 @@
 
   <link rel="stylesheet" href="/css/common.css">
 
+<!-- =========================================================
+     PERSONAL LOAN ELIGIBILITY CALCULATOR
+     COMPLETE STRUCTURED DATA
+========================================================= -->
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
 
-  {
-  "@type": "WebSite",
-  "@id": "https://www.techfinserv.com/#website",
-  "name": "TechFinserv",
-  "url": "https://www.techfinserv.com/",
-  "publisher": {
-    "@id": "https://www.techfinserv.com/#organization"
-  },
-  "inLanguage": "en-IN"
-}
     {
       "@type": "Organization",
-      "@id": "https://techfinserv.com/#organization",
-      "name": "Tech Finserv",
-      "url": "https://techfinserv.com/",
+      "@id": "https://www.techfinserv.com/#organization",
+      "name": "TechFinserv",
+      "url": "https://www.techfinserv.com/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://techfinserv.com/images/techfinserv-logo.png"
+        "@id": "https://www.techfinserv.com/#logo",
+        "url": "https://www.techfinserv.com/images/techfinserv-logo.png",
+        "contentUrl": "https://www.techfinserv.com/images/techfinserv-logo.png"
       },
- "sameAs": [
-    "https://www.facebook.com/profile.php?id=61583100667662",
-    "https://www.instagram.com/techfinservin/",
-    "https://www.linkedin.com/company/techfinserv",
-    "https://x.com/TechFinservIN"
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61583100667662",
+        "https://www.instagram.com/techfinservin/",
+        "https://www.linkedin.com/company/techfinserv",
+        "https://x.com/TechFinservIN"
       ]
     },
 
 
- {
-  "@type": "WebPage",
-  "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#webpage",
-  "url": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/",
-  "name": "Personal Loan Eligibility Calculator",
-  "headline": "Personal Loan Eligibility Calculator – Check Your Eligibility",
-  "description": "Use our free personal loan eligibility calculator to estimate how much personal loan you may qualify for based on salary, existing EMIs, FOIR, tenure and interest rate.",
-  "isPartOf": {
-    "@id": "https://www.techfinserv.com/#website"
-  },
-  "publisher": {
-    "@id": "https://www.techfinserv.com/#organization"
-  },
-  "about": {
-    "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#calculator"
-  },
-  "breadcrumb": {
-    "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#breadcrumb"
-  },
-  "inLanguage": "en-IN"
-}
+    {
+      "@type": "WebSite",
+      "@id": "https://www.techfinserv.com/#website",
+      "name": "TechFinserv",
+      "url": "https://www.techfinserv.com/",
+      "publisher": {
+        "@id": "https://www.techfinserv.com/#organization"
+      },
+      "inLanguage": "en-IN"
+    },
+
+
+    {
+      "@type": "WebPage",
+      "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#webpage",
+      "url": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/",
+      "name": "Personal Loan Eligibility Calculator",
+      "headline": "Personal Loan Eligibility Calculator – Check Your Eligibility",
+      "description": "Estimate your personal loan eligibility with our free calculator. Check loan amount based on salary, EMIs, FOIR, tenure and interest rate.",
+      "isPartOf": {
+        "@id": "https://www.techfinserv.com/#website"
+      },
+      "publisher": {
+        "@id": "https://www.techfinserv.com/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#calculator"
+      },
+      "breadcrumb": {
+        "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#breadcrumb"
+      },
+      "hasPart": {
+        "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#faq"
+      },
+      "inLanguage": "en-IN"
+    },
 
 
     {
       "@type": "WebApplication",
-      "@id": "https://techfinserv.com/tools/personal-loan-eligibility-calculator/#calculator",
+      "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#calculator",
       "name": "Personal Loan Eligibility Calculator",
-      "url": "https://techfinserv.com/tools/personal-loan-eligibility-calculator/",
-      "description": "Free personal loan eligibility calculator to estimate your potential loan amount based on income, existing EMIs, FOIR, loan tenure and interest rate.",
+      "url": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/",
+      "description": "Free personal loan eligibility calculator to estimate your potential loan amount based on salary, existing EMIs, FOIR, loan tenure and interest rate.",
       "applicationCategory": "FinanceApplication",
       "applicationSubCategory": "Personal Loan Eligibility Calculator",
       "operatingSystem": "Web",
       "browserRequirements": "Requires JavaScript",
       "isAccessibleForFree": true,
+      "inLanguage": "en-IN",
+      "featureList": [
+        "Personal loan eligibility calculation",
+        "Salary based loan eligibility estimation",
+        "Existing EMI consideration",
+        "Credit card outstanding consideration",
+        "FOIR based eligibility calculation",
+        "Income multiplier based eligibility calculation",
+        "Loan tenure based calculation",
+        "Interest rate based calculation",
+        "Lender eligibility comparison"
+      ],
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "INR"
+      },
+      "provider": {
+        "@id": "https://www.techfinserv.com/#organization"
       }
     },
 
 
     {
       "@type": "BreadcrumbList",
-      "@id": "https://techfinserv.com/tools/personal-loan-eligibility-calculator/#breadcrumb",
+      "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#breadcrumb",
       "itemListElement": [
+
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://techfinserv.com/"
+          "item": "https://www.techfinserv.com/"
         },
+
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Tools",
-          "item": "https://techfinserv.com/tools/"
+          "item": "https://www.techfinserv.com/tools/"
         },
+
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Personal Loan Eligibility Calculator",
-          "item": "https://techfinserv.com/tools/personal-loan-eligibility-calculator/"
+          "item": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/"
         }
+
       ]
     },
 
 
     {
       "@type": "FAQPage",
-      "@id": "https://techfinserv.com/tools/personal-loan-eligibility-calculator/#faq",
+      "@id": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#faq",
+      "url": "https://www.techfinserv.com/tools/personal-loan-eligibility-calculator/#faq",
+      "name": "Personal Loan Eligibility Calculator FAQs",
+      "inLanguage": "en-IN",
       "mainEntity": [
 
         {
@@ -333,7 +367,7 @@
           "name": "How is personal loan eligibility calculated?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Personal loan eligibility is generally determined using factors such as monthly income, existing EMIs and other financial obligations, credit profile, employment details, loan tenure and the lender's eligibility policy. The calculator estimates potential eligibility using income-based and obligation-based calculations."
+            "text": "Personal loan eligibility is generally determined using factors such as monthly income, existing EMIs and other financial obligations, credit profile, employment details, loan tenure and the lender's eligibility policy. The calculator provides an estimate using income-based and obligation-based calculations."
           }
         },
 
@@ -342,7 +376,7 @@
           "name": "What is a personal loan eligibility calculator?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A personal loan eligibility calculator is an online tool that estimates the maximum personal loan amount you may qualify for based on your income, existing financial obligations, loan tenure and other selected parameters."
+            "text": "A personal loan eligibility calculator is an online tool that estimates the maximum personal loan amount you may qualify for based on your income, existing financial obligations, loan tenure, interest rate and other selected parameters."
           }
         },
 
@@ -351,7 +385,7 @@
           "name": "What is FOIR in personal loan eligibility?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "FOIR stands for Fixed Obligations to Income Ratio. It is a measure used to compare a borrower's fixed monthly financial obligations with their monthly income. Lenders may use FOIR to assess how much additional EMI a borrower can reasonably afford."
+            "text": "FOIR stands for Fixed Obligations to Income Ratio. It compares a borrower's fixed monthly financial obligations with monthly income. Lenders may use FOIR to assess how much additional EMI a borrower may be able to afford."
           }
         },
 
@@ -360,7 +394,7 @@
           "name": "How does FOIR affect personal loan eligibility?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "FOIR can affect the amount of personal loan a borrower may be eligible for. If a larger portion of monthly income is already committed to existing obligations, the amount available for a new EMI may be lower. The applicable FOIR limit can vary between lenders."
+            "text": "FOIR can affect the amount of personal loan a borrower may be eligible for. When a larger portion of monthly income is already committed to existing obligations, the amount available for a new EMI may be lower. The applicable FOIR limit can vary by lender."
           }
         },
 
@@ -378,7 +412,7 @@
           "name": "Do existing EMIs reduce personal loan eligibility?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Existing EMIs can reduce the amount available for a new personal loan EMI. Lenders generally consider existing monthly obligations when assessing repayment capacity."
+            "text": "Existing EMIs can reduce the amount available for a new personal loan EMI. Lenders generally consider existing monthly obligations when assessing a borrower's repayment capacity."
           }
         },
 
@@ -405,7 +439,7 @@
           "name": "What is the maximum personal loan eligibility?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Maximum personal loan eligibility varies by lender and borrower. It can depend on income, FOIR, existing obligations, credit profile, employment, tenure and the lender's internal loan policies."
+            "text": "Maximum personal loan eligibility varies by lender and borrower. It can depend on income, FOIR, existing obligations, credit profile, employment, loan tenure and the lender's internal eligibility policies."
           }
         },
 
@@ -414,7 +448,7 @@
           "name": "Is the personal loan eligibility calculator accurate?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The calculator provides an estimate based on the information entered and the calculation rules used for each lender. Actual eligibility may differ after the lender reviews income, credit history, employment details, documents and other eligibility criteria."
+            "text": "The calculator provides an estimate based on the information entered and the calculation rules used for each lender. Actual eligibility may differ after a lender reviews income, credit history, employment details, documents and other eligibility criteria."
           }
         }
 
@@ -423,7 +457,7 @@
 
   ]
 }
-</script>  
+</script> 
   
   
   <style>
