@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Auto-update footer copyright year
+    /* =========================================
+       FOOTER COPYRIGHT YEAR
+       ========================================= */
     const yearElement = document.getElementById("year");
 
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
 
-});
-  // Auto-update footer copyright year End
 
-/* =========================================
+    /* =========================================
        MOBILE MENU
        ========================================= */
     const menuToggle = document.querySelector(".tfs-mobile-menu-toggle");
@@ -22,33 +22,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
 
-            menuToggle.setAttribute("aria-expanded", String(!isOpen));
-
-            mobileMenu.classList.toggle("is-open", !isOpen);
+            if (isOpen) {
+                mobileMenu.style.display = "none";
+                menuToggle.setAttribute("aria-expanded", "false");
+            } else {
+                mobileMenu.style.display = "flex";
+                menuToggle.setAttribute("aria-expanded", "true");
+            }
 
         });
 
 
-        /* Close menu when a menu link is clicked */
+        /* Close when clicking a menu link */
         const mobileLinks = mobileMenu.querySelectorAll("a");
 
         mobileLinks.forEach(function (link) {
+
             link.addEventListener("click", function () {
 
+                mobileMenu.style.display = "none";
                 menuToggle.setAttribute("aria-expanded", "false");
-                mobileMenu.classList.remove("is-open");
 
             });
+
         });
 
 
-        /* Close menu when pressing Escape */
+        /* Close with Escape key */
         document.addEventListener("keydown", function (event) {
 
             if (event.key === "Escape") {
 
+                mobileMenu.style.display = "none";
                 menuToggle.setAttribute("aria-expanded", "false");
-                mobileMenu.classList.remove("is-open");
 
             }
 
@@ -58,6 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-/* =========================================
+  /* =========================================
        MOBILE MENU END
        ========================================= */
