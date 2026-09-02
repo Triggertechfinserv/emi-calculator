@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,6 +18,8 @@
     gtag('js', new Date());
     gtag('config', 'G-9DHT9T8GZB');
   </script>
+
+  <link rel="stylesheet" href="/css/common.css">
   
   <style>
 :root {
@@ -707,24 +711,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-  <header class="site-header" role="banner">
-    <div class="header-inner">
-      <a href="/"><img class="logo" src="images/techfinserv-logo.png" alt="Tech Finserv logo"></a>
 
-      <nav class="site-nav" role="navigation" aria-label="Main navigation">
-        <div class="nav-links" id="navLinks">
-          <a class="btn" href="/">Home</a>
-          <a class="btn" href="/blogs/">Blogs</a>
-          <a class="btn" href="/emi-calculator/">EMI Calculator</a>
-        </div>
-      </nav>
-
-      <div class="header-cta">
-        <button id="downloadPdf" class="pdf-btn">Download PDF</button>
-      </div>
-    </div>
-  </header>
-
+{% include header.html %}
+  
 <main class="loan-page" role="main">
 
   <div class="loan-container">
@@ -1357,9 +1346,7 @@
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
   
-  <footer style="text-align:center;padding:18px;color:var(--muted);font-size:13px">
-    Design and Maintained By Kiran Rathva
-  </footer>
+{% include footer.html %}
 
 <script>
 /* Full working JS (auto-calc + PDF) */
