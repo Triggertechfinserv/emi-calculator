@@ -8,3 +8,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+  // Auto-update footer copyright year End
