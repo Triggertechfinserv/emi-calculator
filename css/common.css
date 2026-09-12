@@ -154,6 +154,16 @@
     color:#64748B;
 }
 
+/* ========= FOOTER LINK HOVER ========= */
+
+.tfs-footer a{
+    color:#1e23b7;
+    transition:color .2s ease;
+}
+
+.tfs-footer a:hover{
+    color:#0EA5A4;
+}
 
 /* ========= SOCIAL ========= */
 
