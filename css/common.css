@@ -127,6 +127,8 @@
     grid-template-columns:repeat(4,1fr);
     gap:40px;
     margin:30px 0 20px;
+    align-content: space-around;
+    grid-auto-flow: column;
 }
 
 .tfs-footer h4{
