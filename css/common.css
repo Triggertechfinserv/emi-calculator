@@ -146,14 +146,6 @@
     transition:color .2s ease;
 }
 
-.tfs-footer-bottom{
-    padding-top:18px;
-    margin-top:18px;
-    border-top:1px solid #E2E8F0;
-    font-size:.86rem;
-    color:#64748B;
-}
-
 /* ========= FOOTER LINK HOVER ========= */
 
 .tfs-footer a{
@@ -163,6 +155,14 @@
 
 .tfs-footer a:hover{
     color:#0EA5A4;
+}
+
+.tfs-footer-bottom{
+    padding-top:18px;
+    margin-top:18px;
+    border-top:1px solid #E2E8F0;
+    font-size:.86rem;
+    color:#64748B;
 }
 
 /* ========= SOCIAL ========= */
