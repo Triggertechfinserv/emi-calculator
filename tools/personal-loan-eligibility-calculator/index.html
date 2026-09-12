@@ -1025,6 +1025,253 @@
 }
 
 /* =========================
+   EXPERT CTA
+========================= */
+
+.expert-cta {
+  margin: 0 20px 20px;
+  padding: 16px;
+  border: 1px solid #dcecff;
+  border-radius: 14px;
+  background: linear-gradient(135deg,#f7fbff,#ffffff);
+}
+
+.expert-cta-title {
+  margin: 0 0 5px;
+  color: var(--tf-primary);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.expert-cta-text {
+  margin: 0 0 12px;
+  color: var(--tf-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.expert-cta-btn {
+  width: 100%;
+  min-height: 42px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--tf-primary);
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.expert-cta-btn:hover {
+  background: var(--tf-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,59,115,.18);
+}
+
+/* =========================
+   EXPERT MODAL
+========================= */
+
+.expert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(15,23,42,.58);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.expert-modal.is-open {
+  display: flex;
+}
+
+.expert-modal-card {
+  position: relative;
+  width: min(100%, 430px);
+  max-height: calc(100vh - 36px);
+  overflow-y: auto;
+  padding: 26px;
+  border: 1px solid rgba(226,232,240,.9);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(15,23,42,.25);
+  box-sizing: border-box;
+}
+
+.expert-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--tf-border);
+  border-radius: 50%;
+  background: #fff;
+  color: #64748b;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.expert-modal-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  border-radius: 13px;
+  background: var(--tf-blue-light);
+  color: var(--tf-blue);
+  font-size: 20px;
+}
+
+.expert-modal-title {
+  margin: 0;
+  color: var(--tf-primary);
+  font-size: 23px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.expert-modal-subtitle {
+  margin: 7px 0 20px;
+  color: var(--tf-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.expert-form-field {
+  margin-bottom: 15px;
+}
+
+.expert-form-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.expert-form-field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 13px;
+  border: 1px solid var(--tf-border);
+  border-radius: 11px;
+  background: #fbfdff;
+  color: var(--tf-text);
+  font: 600 14px/1 inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.expert-form-field input:focus {
+  border-color: var(--tf-blue);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(11,99,183,.09);
+}
+
+.expert-consent {
+  margin: 12px 0 16px;
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.expert-submit {
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--tf-primary);
+  color: #fff;
+  font: 800 13px/1 inherit;
+  cursor: pointer;
+}
+
+.expert-submit:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.expert-form-message {
+  display: none;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.expert-form-message.error {
+  display: block;
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.expert-success {
+  display: none;
+  text-align: center;
+}
+
+.expert-success.is-visible {
+  display: block;
+}
+
+.expert-success-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin: 4px auto 15px;
+  border-radius: 50%;
+  background: var(--tf-green-bg);
+  color: var(--tf-green);
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.expert-success h3 {
+  margin: 0 0 7px;
+  color: var(--tf-primary);
+  font-size: 21px;
+}
+
+.expert-success p {
+  margin: 0 0 18px;
+  color: var(--tf-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 430px) {
+  .expert-cta {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .expert-modal {
+    padding: 10px;
+    align-items: flex-end;
+  }
+
+  .expert-modal-card {
+    width: 100%;
+    max-height: calc(100vh - 20px);
+    padding: 22px 18px;
+    border-radius: 18px 18px 14px 14px;
+  }
+}
+
+/* =========================
    MOBILE COMPARISON
 ========================= */
 
@@ -2063,6 +2310,12 @@
 
           </div>
 
+          <div class="expert-cta" id="bajaj_expert_cta">
+            <p class="expert-cta-title" id="bajaj_expert_title">Need Help With Your Loan Eligibility?</p>
+            <p class="expert-cta-text" id="bajaj_expert_text">Get personalized guidance from a loan expert based on your profile.</p>
+            <button type="button" class="expert-cta-btn" data-expert-lender="bajaj">Talk to an Expert →</button>
+          </div>
+
         </article>
 
 
@@ -2180,6 +2433,12 @@
 
           </div>
 
+          <div class="expert-cta" id="tata_expert_cta">
+            <p class="expert-cta-title" id="tata_expert_title">Need Help With Your Loan Eligibility?</p>
+            <p class="expert-cta-text" id="tata_expert_text">Get personalized guidance from a loan expert based on your profile.</p>
+            <button type="button" class="expert-cta-btn" data-expert-lender="tata">Talk to an Expert →</button>
+          </div>
+
         </article>
 
 
@@ -2295,6 +2554,12 @@
               class="modern-badge"
             ></span>
 
+          </div>
+
+          <div class="expert-cta" id="hdfc_expert_cta">
+            <p class="expert-cta-title" id="hdfc_expert_title">Need Help With Your Loan Eligibility?</p>
+            <p class="expert-cta-text" id="hdfc_expert_text">Get personalized guidance from a loan expert based on your profile.</p>
+            <button type="button" class="expert-cta-btn" data-expert-lender="hdfc">Talk to an Expert →</button>
           </div>
 
         </article>
@@ -2920,6 +3185,44 @@
 
     
   </div>
+
+<!-- TALK TO AN EXPERT MODAL -->
+<div class="expert-modal" id="expertModal" aria-hidden="true">
+  <div class="expert-modal-card" role="dialog" aria-modal="true" aria-labelledby="expertModalTitle">
+    <button type="button" class="expert-modal-close" id="expertModalClose" aria-label="Close">×</button>
+
+    <div id="expertFormView">
+      <div class="expert-modal-icon">☎</div>
+      <h2 class="expert-modal-title" id="expertModalTitle">Talk to a Loan Expert</h2>
+      <p class="expert-modal-subtitle">Get personalized guidance based on your loan eligibility.</p>
+
+      <form id="expertLeadForm" novalidate>
+        <div class="expert-form-field">
+          <label for="expertMobile">Mobile Number *</label>
+          <input id="expertMobile" name="mobile" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="Enter 10-digit mobile number" required>
+        </div>
+
+        <div class="expert-form-field">
+          <label for="expertLocation">City / Location *</label>
+          <input id="expertLocation" name="location" type="text" maxlength="80" autocomplete="address-level2" placeholder="Enter your city" required>
+        </div>
+
+        <p class="expert-consent">By submitting, you agree to be contacted by TechFinServ regarding loan assistance and related services.</p>
+
+        <button type="submit" class="expert-submit" id="expertSubmit">Connect Me With an Expert →</button>
+        <div class="expert-form-message" id="expertFormMessage"></div>
+      </form>
+    </div>
+
+    <div class="expert-success" id="expertSuccess">
+      <div class="expert-success-icon">✓</div>
+      <h3>Thank You!</h3>
+      <p>We've received your details and eligibility information. Our loan expert will contact you shortly.</p>
+      <button type="button" class="expert-submit" id="expertDone">Done</button>
+    </div>
+  </div>
+</div>
+
 </main>
   
 
@@ -2976,6 +3279,242 @@
   const homeEl   = document.getElementById('home');
 
   const mobileCardsWrap = document.getElementById('mobileCards');
+
+  // Web3Forms email delivery. Replace the placeholder with your existing Web3Forms access key.
+  const WEB3FORMS_ACCESS_KEY = 'd1bf814f-4b60-44fa-b47b-ed5e08afaf53';
+  const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+
+  let currentExpertLender = '';
+  let currentExpertSnapshot = null;
+
+  const expertModal = document.getElementById('expertModal');
+  const expertModalClose = document.getElementById('expertModalClose');
+  const expertLeadForm = document.getElementById('expertLeadForm');
+  const expertFormView = document.getElementById('expertFormView');
+  const expertSuccess = document.getElementById('expertSuccess');
+  const expertSubmit = document.getElementById('expertSubmit');
+  const expertFormMessage = document.getElementById('expertFormMessage');
+  const expertMobile = document.getElementById('expertMobile');
+  const expertLocation = document.getElementById('expertLocation');
+  const expertDone = document.getElementById('expertDone');
+
+  const lenderNames = {
+    bajaj: 'Bajaj Finance',
+    tata: 'Tata Capital',
+    hdfc: 'HDFC Bank'
+  };
+
+  function getExpertSnapshot(){
+    const sal = Math.max(0, Number(salaryEl.value) || 0);
+    const obl = Math.max(0, Number(obligEl.value) || 0);
+    const cc  = Math.max(0, Number(ccEl.value) || 0);
+    const t   = Math.max(0.5, Number(tenureEl.value) || 0.5);
+    const r   = Math.max(0, Number(rateEl.value) || 0);
+    const home= homeEl.value === 'yes';
+
+    return {
+      calculatorInputs: {
+        monthlyNetSalary: sal,
+        existingMonthlyObligations: obl,
+        creditCardOutstanding: cc,
+        loanTenureYears: t,
+        interestRateAnnual: r,
+        homeLoanOnApplicant: home ? 'Yes' : 'No'
+      },
+      lenderResults: {
+        bajaj: getLeadResult('bajaj', sal, obl, cc, t, r, home),
+        tata: getLeadResult('tata', sal, obl, cc, t, r, home),
+        hdfc: getLeadResult('hdfc', sal, obl, cc, t, r, home)
+      }
+    };
+  }
+
+  function getLeadResult(bankKey, sal, obl, cc, t, r, home){
+    const x = compute(bankKey, sal, obl, cc, t, r, home);
+    return {
+      lender: lenderNames[bankKey],
+      maxEmiAllowed: Math.round(x.maxEmiAllowed),
+      applicableFoir: Number((x.foir * 100).toFixed(0)),
+      eligibilityByFoir: Math.round(x.eligByFoir),
+      eligibilityByMultiplier: x.eligByMultiplier === null ? null : Math.round(x.eligByMultiplier),
+      finalEligibility: Math.round(x.finalElig),
+      status: x.ok ? 'Eligible' : 'Not eligible'
+    };
+  }
+
+  function openExpertModal(lenderKey){
+    const snapshot = getExpertSnapshot();
+    currentExpertLender = lenderKey || 'general';
+    currentExpertSnapshot = snapshot;
+
+    const result = lenderKey && snapshot.lenderResults[lenderKey];
+    const titleEls = document.querySelectorAll('.expert-cta-title');
+    const textEls = document.querySelectorAll('.expert-cta-text');
+
+    if(result && result.status === 'Eligible'){
+      document.getElementById(lenderKey+'_expert_title').textContent = 'Your profile may qualify for a personal loan';
+      document.getElementById(lenderKey+'_expert_text').textContent = 'Speak with our expert to explore suitable lender options and loan terms.';
+    } else if(result){
+      document.getElementById(lenderKey+'_expert_title').textContent = 'Not eligible with this lender?';
+      document.getElementById(lenderKey+'_expert_text').textContent = 'Your eligibility can vary by lender. Let our expert check other suitable options for your profile.';
+    }
+
+    expertFormView.style.display = 'block';
+    expertSuccess.classList.remove('is-visible');
+    expertFormMessage.className = 'expert-form-message';
+    expertFormMessage.textContent = '';
+    expertSubmit.disabled = false;
+    expertSubmit.textContent = 'Connect Me With an Expert →';
+    expertModal.classList.add('is-open');
+    expertModal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => expertMobile.focus(), 50);
+  }
+
+  function closeExpertModal(){
+    expertModal.classList.remove('is-open');
+    expertModal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.expert-cta-btn').forEach(btn => {
+    btn.addEventListener('click', () => openExpertModal(btn.dataset.expertLender));
+  });
+
+  expertModalClose.addEventListener('click', closeExpertModal);
+  expertDone.addEventListener('click', closeExpertModal);
+  expertModal.addEventListener('click', e => {
+    if(e.target === expertModal) closeExpertModal();
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && expertModal.classList.contains('is-open')) closeExpertModal();
+  });
+
+  expertMobile.addEventListener('input', () => {
+    expertMobile.value = expertMobile.value.replace(/\D/g,'').slice(0,10);
+  });
+
+  expertLeadForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    const mobile = expertMobile.value.trim();
+    const location = expertLocation.value.trim();
+
+    if(!/^[6-9]\d{9}$/.test(mobile)){
+      expertFormMessage.className = 'expert-form-message error';
+      expertFormMessage.textContent = 'Please enter a valid 10-digit Indian mobile number.';
+      expertMobile.focus();
+      return;
+    }
+
+    if(location.length < 2){
+      expertFormMessage.className = 'expert-form-message error';
+      expertFormMessage.textContent = 'Please enter your city or location.';
+      expertLocation.focus();
+      return;
+    }
+
+    const payload = {
+      lead: {
+        mobile,
+        location,
+        interestedLender: currentExpertLender === 'general' ? 'General' : lenderNames[currentExpertLender],
+        source: 'Personal Loan Eligibility Calculator',
+        pageUrl: window.location.href,
+        submittedAt: new Date().toISOString()
+      },
+      calculator: currentExpertSnapshot || getExpertSnapshot()
+    };
+
+    if(WEB3FORMS_ACCESS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY'){
+      expertFormMessage.className = 'expert-form-message error';
+      expertFormMessage.textContent = 'Web3Forms is not configured yet. Add your existing Web3Forms access key in the calculator code.';
+      return;
+    }
+
+    expertSubmit.disabled = true;
+    expertSubmit.textContent = 'Submitting…';
+    expertFormMessage.className = 'expert-form-message';
+    expertFormMessage.textContent = '';
+
+    const formatMoney = value => '₹' + fmt(value);
+    const formatResult = r => [
+      `${r.lender}: ${formatMoney(r.finalEligibility)} — ${r.status}`,
+      `  Max EMI Allowed: ${formatMoney(r.maxEmiAllowed)}`,
+      `  Applicable FOIR: ${r.applicableFoir}%`,
+      `  Eligibility by FOIR: ${formatMoney(r.eligibilityByFoir)}`,
+      `  Eligibility by Multiplier: ${r.eligibilityByMultiplier === null ? 'N/A' : formatMoney(r.eligibilityByMultiplier)}`
+    ].join('\n');
+
+    const input = payload.calculator.calculatorInputs;
+    const results = payload.calculator.lenderResults;
+    const emailMessage = [
+      'NEW LOAN EXPERT LEAD',
+      '',
+      'LEAD DETAILS',
+      `Mobile: ${payload.lead.mobile}`,
+      `Location: ${payload.lead.location}`,
+      `Interested Lender: ${payload.lead.interestedLender}`,
+      `Source: ${payload.lead.source}`,
+      `Page URL: ${payload.lead.pageUrl}`,
+      `Submitted At: ${payload.lead.submittedAt}`,
+      '',
+      'CALCULATOR INPUTS',
+      `Net Monthly Salary: ${formatMoney(input.monthlyNetSalary)}`,
+      `Existing Monthly Obligations: ${formatMoney(input.existingMonthlyObligations)}`,
+      `Credit Card Outstanding: ${formatMoney(input.creditCardOutstanding)}`,
+      `Loan Tenure: ${input.loanTenureYears} years`,
+      `Interest Rate: ${input.interestRateAnnual}% p.a.`,
+      `Home Loan on Applicant: ${input.homeLoanOnApplicant}`,
+      '',
+      'ELIGIBILITY RESULTS',
+      formatResult(results.bajaj),
+      '',
+      formatResult(results.tata),
+      '',
+      formatResult(results.hdfc)
+    ].join('\n');
+
+    const web3Payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: `New Loan Expert Lead — ${payload.lead.interestedLender} — ${payload.lead.location}`,
+      from_name: 'TechFinServ Loan Calculator',
+      botcheck: '',
+      mobile: payload.lead.mobile,
+      location: payload.lead.location,
+      interested_lender: payload.lead.interestedLender,
+      source: payload.lead.source,
+      page_url: payload.lead.pageUrl,
+      submitted_at: payload.lead.submittedAt,
+      message: emailMessage
+    };
+
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(web3Payload)
+      });
+
+      const result = await response.json();
+
+      if(!response.ok || !result.success){
+        throw new Error(result.message || 'Web3Forms submission failed.');
+      }
+
+      expertFormView.style.display = 'none';
+      expertSuccess.classList.add('is-visible');
+    } catch(err){
+      console.error('Expert lead submission error:', err);
+      expertSubmit.disabled = false;
+      expertSubmit.textContent = 'Connect Me With an Expert →';
+      expertFormMessage.className = 'expert-form-message error';
+      expertFormMessage.textContent = 'We could not submit your request right now. Please try again.';
+    }
+  });
 
   function fmt(n){ return new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(Math.round(n||0)); }
 
@@ -3059,6 +3598,11 @@
         <div class="kv"><span>Eligibility (Multiplier)</span><strong>${r.eligByMultiplier ? fmt(r.eligByMultiplier) : 'N/A'}</strong></div>
         <div class="kv"><span>Final Eligibility</span><strong>${fmt(r.finalElig)}</strong></div>
         <div class="kv"><span>Verdict</span><strong style="color:${r.ok ? '#0a7a53' : '#b91c1c'}">${r.ok ? 'Eligible' : 'Not eligible'}</strong></div>
+        <div class="expert-cta" style="margin:14px 0 0;padding:14px">
+          <p class="expert-cta-title">${r.ok ? 'Your profile may qualify for a personal loan' : 'Not eligible with this lender?'}</p>
+          <p class="expert-cta-text">${r.ok ? 'Speak with our expert to explore suitable lender options and loan terms.' : 'Your eligibility can vary by lender. Let our expert check other suitable options for your profile.'}</p>
+          <button type="button" class="expert-cta-btn mobile-expert-btn" data-expert-lender="${b.k}">Talk to an Expert →</button>
+        </div>
       `;
       mobileCardsWrap.appendChild(card);
     });
@@ -3069,6 +3613,12 @@
       mobileCardsWrap.style.display = 'none';
     }
   }
+
+  // Handle expert CTA buttons generated inside mobile cards.
+  mobileCardsWrap.addEventListener('click', function(e){
+    const btn = e.target.closest('.mobile-expert-btn');
+    if(btn) openExpertModal(btn.dataset.expertLender);
+  });
 
   // wire events: auto-calc on input
   document.querySelectorAll('input,select').forEach(el => el.addEventListener('input', debounce(render, 120)));
