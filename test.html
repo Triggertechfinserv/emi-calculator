@@ -10,7 +10,7 @@
   <title>Online EMI Calculator with Part-Payment — TechFinserv</title>
   <meta name="description" content="Smart EMI calculator for home, car & personal loans. Use part-payments, see instant amortization, export to PDF/Excel, and get complete loan planning for 2025">
   <link rel="canonical" href="https://www.techfinserv.com/emi-calculator/">
-  <meta name="robots" content="noindex, follow, max-image-preview:large">  
+  <meta name="robots" content="index, follow, max-image-preview:large">  
 
   <!-- Hreflang (adjust if you have more locales) -->
   <link rel="alternate" href="https://www.techfinserv.com/emi-calculator/" hreflang="en-IN">
@@ -627,7 +627,7 @@ article.post-article hr {
 }
 
 
-/* Poonawalla Popup Styles */
+/* Poonawalla Fincorp Popup */
 .tf-pf-popup-overlay,
 .tf-pf-popup-overlay * {
   box-sizing: border-box;
@@ -680,9 +680,9 @@ article.post-article hr {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255,255,255,.45);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255,255,255,.15);
   color: #fff;
   font-size: 25px;
   line-height: 1;
@@ -690,7 +690,7 @@ article.post-article hr {
 }
 
 .tf-pf-popup-close:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255,255,255,.3);
 }
 
 .tf-pf-popup-header {
@@ -725,12 +725,12 @@ article.post-article hr {
 .tf-pf-popup-label {
   flex-shrink: 0;
   padding: 6px 9px;
-  border: 1px solid rgba(242, 198, 109, 0.65);
+  border: 1px solid rgba(242,198,109,.65);
   border-radius: 20px;
   color: var(--tf-pf-gold);
   font-size: 9px;
   font-weight: 800;
-  letter-spacing: 0.6px;
+  letter-spacing: .6px;
 }
 
 .tf-pf-popup-body {
@@ -754,7 +754,7 @@ article.post-article hr {
   font-size: clamp(24px, 5vw, 32px);
   font-weight: 800;
   line-height: 1.2;
-  letter-spacing: -0.6px;
+  letter-spacing: -.6px;
 }
 
 .tf-pf-popup-body h2 span {
@@ -815,8 +815,8 @@ article.post-article hr {
   font-weight: 800;
   text-align: center;
   text-decoration: none !important;
-  box-shadow: 0 5px 14px rgba(229, 57, 53, 0.22);
-  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 5px 14px rgba(229,57,53,.22);
+  transition: background .2s ease, transform .2s ease;
 }
 
 .tf-pf-popup-cta:hover {
@@ -851,8 +851,14 @@ article.post-article hr {
 }
 
 @keyframes tfPfSlideUp {
-  from { opacity: 0; transform: translateY(18px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @media (max-width: 480px) {
@@ -888,8 +894,8 @@ article.post-article hr {
     animation: none;
   }
 }
-/* Poonawalla Popup Styles END */	  
-
+	  
+/* Poonawalla Fincorp Popup END */
   </style>
 </head>
 <body>
@@ -1305,79 +1311,7 @@ article.post-article hr {
   </main>
 	
 {% include footer.html %}
-
-
-<!-- Poonawalla Fincorp Popup -->
-<div id="tf-pf-popup-overlay" class="tf-pf-popup-overlay" aria-hidden="true">
-  <div
-    class="tf-pf-popup"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="tf-pf-popup-title"
-  >
-    <button
-      type="button"
-      class="tf-pf-popup-close"
-      id="tf-pf-popup-close"
-      aria-label="Close popup"
-    >&times;</button>
-
-    <div class="tf-pf-popup-header">
-      <div class="tf-pf-popup-logo">
-        <img
-          src="https://commons.wikimedia.org/wiki/Special:FilePath/PFincorp-logo.png"
-          alt="Poonawalla Fincorp"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
-        />
-        <span class="tf-pf-popup-logo-fallback">POONAWALLA<br>FINCORP</span>
-      </div>
-      <span class="tf-pf-popup-label">PERSONAL LOAN</span>
-    </div>
-
-    <div class="tf-pf-popup-body">
-      <p class="tf-pf-popup-eyebrow">A NEW FINANCIAL POSSIBILITY</p>
-
-      <h2 id="tf-pf-popup-title">
-        Personal Loan Offer
-        <span>Up to ₹5 Lakh*</span>
-      </h2>
-
-      <p class="tf-pf-popup-description">
-        Check whether you qualify for a personal loan offer
-        from Poonawalla Fincorp.
-      </p>
-
-      <div class="tf-pf-popup-benefits">
-        <div><span>✓</span> Explore offers up to ₹5 lakh*</div>
-        <div><span>✓</span> Simple online application</div>
-        <div><span>✓</span> Quick eligibility check</div>
-      </div>
-
-      <a
-        class="tf-pf-popup-cta"
-        href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Check Your Offer <span aria-hidden="true">→</span>
-      </a>
-
-      <p class="tf-pf-popup-disclaimer">
-        *Offer amount and pre-approval are subject to lender eligibility,
-        verification and terms. The amount is not guaranteed for every applicant.
-      </p>
-    </div>
-
-    <div class="tf-pf-popup-footer">
-      Powered by Poonawalla Fincorp
-    </div>
-  </div>
-</div>
-
-	<!-- Poonawalla Fincorp Popup END-->
-
-
-	
+ 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -2074,9 +2008,69 @@ function exportPDF() {
   </script>
 
 
-	
+<!-- Poonawalla Fincorp Popup -->
+<div id="tf-pf-popup-overlay" class="tf-pf-popup-overlay" aria-hidden="true">
+  <div class="tf-pf-popup" role="dialog" aria-modal="true"
+       aria-labelledby="tf-pf-popup-title">
+
+    <button type="button" class="tf-pf-popup-close"
+            id="tf-pf-popup-close" aria-label="Close popup">
+      &times;
+    </button>
+
+    <div class="tf-pf-popup-header">
+      <div class="tf-pf-popup-logo">
+        <img
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/PFincorp-logo.png"
+          alt="Poonawalla Fincorp"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span class="tf-pf-popup-logo-fallback">
+          POONAWALLA<br>FINCORP
+        </span>
+      </div>
+      <span class="tf-pf-popup-label">PERSONAL LOAN</span>
+    </div>
+
+    <div class="tf-pf-popup-body">
+      <p class="tf-pf-popup-eyebrow">A NEW FINANCIAL POSSIBILITY</p>
+
+      <h2 id="tf-pf-popup-title">
+        Personal Loan Offer
+        <span>Up to ₹5 Lakh*</span>
+      </h2>
+
+      <p class="tf-pf-popup-description">
+        Check whether you qualify for a personal loan offer
+        from Poonawalla Fincorp.
+      </p>
+
+      <div class="tf-pf-popup-benefits">
+        <div><span>✓</span> Explore offers up to ₹5 lakh*</div>
+        <div><span>✓</span> Simple online application</div>
+        <div><span>✓</span> Quick eligibility check</div>
+      </div>
+
+      <a class="tf-pf-popup-cta"
+         href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com"
+         target="_blank" rel="noopener noreferrer">
+        Check Your Offer <span aria-hidden="true">→</span>
+      </a>
+
+      <p class="tf-pf-popup-disclaimer">
+        *Offer amount and pre-approval are subject to lender eligibility,
+        verification and terms. The amount is not guaranteed for every applicant.
+      </p>
+    </div>
+
+    <div class="tf-pf-popup-footer">
+      Powered by Poonawalla Fincorp
+    </div>
+  </div>
+</div>
+<!-- Poonawalla Fincorp Popup END -->
+
+	<script>
 /* Poonawalla Popup: 20-second delay, once per day */
-<Script>
 (function () {
   const overlay = document.getElementById("tf-pf-popup-overlay");
   const closeButton = document.getElementById("tf-pf-popup-close");
@@ -2087,10 +2081,18 @@ function exportPDF() {
   let popupTimer = null;
   let previousFocus = null;
 
+  function todayKey() {
+    const date = new Date();
+    return [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0")
+    ].join("-");
+  }
+
   function wasDismissedToday() {
     try {
-      return localStorage.getItem(storageKey) ===
-        new Date().toLocaleDateString("en-CA");
+      return localStorage.getItem(storageKey) === todayKey();
     } catch (error) {
       return false;
     }
@@ -2098,13 +2100,8 @@ function exportPDF() {
 
   function markDismissedToday() {
     try {
-      localStorage.setItem(
-        storageKey,
-        new Date().toLocaleDateString("en-CA")
-      );
-    } catch (error) {
-      // Popup still works when browser storage is unavailable.
-    }
+      localStorage.setItem(storageKey, todayKey());
+    } catch (error) {}
   }
 
   function openPopup() {
@@ -2149,15 +2146,14 @@ function exportPDF() {
     popupTimer = window.setTimeout(openPopup, 20000);
   }
 
-  // Cancel pending display if the page is being unloaded.
   window.addEventListener("pagehide", function () {
     if (popupTimer) {
       window.clearTimeout(popupTimer);
     }
   });
 })();
+/* Poonawalla Popup: 20-second delay, once per day */	
 </Script>
-	/* Poonawalla Popup: 20-second delay, once per day *END/
 	
 </body>
 </html>
