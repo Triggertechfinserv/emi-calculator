@@ -9,7 +9,7 @@
   <!-- Primary SEO -->
   <title>Online EMI Calculator with Part-Payment — TechFinserv</title>
   <meta name="description" content="Smart EMI calculator for home, car & personal loans. Use part-payments, see instant amortization, export to PDF/Excel, and get complete loan planning for 2025">
-  <link rel="canonical" href="https://www.techfinserv.com/test.html">
+  <link rel="canonical" href="https://www.techfinserv.com/emi-calculator/">
   <meta name="robots" content="index, follow, max-image-preview:large">  
 
   <!-- Hreflang (adjust if you have more locales) -->
@@ -627,224 +627,160 @@ article.post-article hr {
 }
 
 
-/* Poonawalla Banner */
-.tf-poonawalla-offer {
-  --tf-navy: #10264b;
-  --tf-red: #e53935;
-  --tf-gold: #f2c66d;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin: 0 0 20px;
-  border: 1px solid #e1e6ef;
-  border-radius: 16px;
-  background: #fff;
-  color: #172b4d;
-  font-family: inherit;
-  box-shadow: 0 8px 24px rgba(16,38,75,.10);
-}
-
-.tf-poonawalla-offer * {
-  box-sizing: border-box;
-}
-
-.tf-pf-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 17px 18px;
-  background: var(--tf-navy);
-  border-bottom: 3px solid var(--tf-red);
-}
-
-.tf-pf-logo img {
-  display: block;
-  width: 150px;
-  max-width: 100%;
-  max-height: 42px;
-  height: auto;
-  object-fit: contain;
-  background: #fff;
-  border-radius: 4px;
-}
-
-.tf-pf-logo-fallback {
-  display: none;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 800;
-  line-height: 1.1;
-}
-
-.tf-pf-tag {
-  flex-shrink: 0;
-  padding: 6px 9px;
-  border: 1px solid rgba(242,198,109,.65);
-  border-radius: 20px;
-  color: var(--tf-gold);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .8px;
-}
-
-.tf-pf-content {
-  padding: 22px 20px 18px;
-  background: radial-gradient(circle at 100% 0,
-    rgba(242,198,109,.15), transparent 38%), #fff;
-}
-
-.tf-pf-eyebrow {
-  margin: 0 0 9px;
-  color: #7a8497;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.4px;
-}
-
-.tf-pf-content h3 {
-  margin: 0;
-  color: var(--tf-navy);
-  font-size: clamp(22px, 4vw, 29px);
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-.tf-pf-content h3 span {
-  display: block;
-  margin-top: 5px;
-  color: var(--tf-red);
-  font-size: 1.12em;
-}
-
-.tf-pf-description {
-  margin: 13px 0 18px;
-  color: #56647a;
-  font-size: 13px;
-  line-height: 1.65;
-}
-
-.tf-pf-benefits {
-  display: grid;
-  gap: 11px;
-  margin-bottom: 21px;
-}
-
-.tf-pf-benefits > div {
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  color: #263751;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.tf-pf-check {
-  display: inline-flex;
-  flex: 0 0 18px;
-  width: 18px;
-  height: 18px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #e9f5ed;
-  color: #23814a;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.tf-pf-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  min-height: 48px;
-  padding: 13px 16px;
-  border-radius: 9px;
-  background: var(--tf-red);
-  color: #fff !important;
-  font-size: 14px;
-  font-weight: 800;
-  text-align: center;
-  text-decoration: none !important;
-  transition: background .2s ease, transform .2s ease;
-}
-
-.tf-pf-cta:hover {
-  background: #c92d2a;
-  transform: translateY(-1px);
-}
-
-.tf-pf-cta span {
-  font-size: 20px;
-}
-
-.tf-pf-disclaimer {
-  margin: 13px 0 0;
-  color: #7b8493;
-  font-size: 10px;
-  line-height: 1.6;
-}
-
-.tf-pf-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 14px;
-  background: #f5f7fb;
-  border-top: 1px solid #e8edf4;
-  color: #657187;
-  font-size: 10px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.tf-pf-footer-dot {
-  width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #23814a;
-}
-
-/* Google Ad directly below banner */
-.tf-google-ad {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  margin: 0 0 20px;
-  text-align: center;
-  overflow: hidden;
-}
-
-.tf-google-ad ins.adsbygoogle {
-  display: block;
-  width: 100%;
-  min-height: 100px;
-}
-
-@media (max-width: 380px) {
-  .tf-pf-top {
-    padding: 14px 12px;
-  }
-
-  .tf-pf-logo img {
-    width: 120px;
-  }
-
-  .tf-pf-content {
-    padding: 19px 14px 15px;
-  }
-
-  .tf-pf-content h3 {
-    font-size: 23px;
-  }
-}
-
-
-  </style>
+    /* Poonawalla Fincorp banner replaces only the first right-sidebar ad */
+    .tf-poonawalla-offer {
+      --tf-pf-navy: #10264b;
+      --tf-pf-red: #e53935;
+      --tf-pf-gold: #f2c66d;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow: hidden;
+      border: 1px solid #e1e6ef;
+      border-radius: 14px;
+      background: #fff;
+      color: #172b4d;
+      font-family: Inter, system-ui, sans-serif;
+      box-shadow: 0 6px 18px rgba(16, 38, 75, .10);
+      align-self: start;
+    }
+    .tf-poonawalla-offer * { box-sizing: border-box; }
+    .tf-pf-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 14px 12px;
+      background: var(--tf-pf-navy);
+      border-bottom: 3px solid var(--tf-pf-red);
+    }
+    .tf-pf-logo { min-width: 0; }
+    .tf-pf-logo img {
+      display: block;
+      width: 132px;
+      max-width: 100%;
+      max-height: 38px;
+      height: auto;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 4px;
+    }
+    .tf-pf-logo-fallback {
+      display: none;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .tf-pf-tag {
+      flex-shrink: 0;
+      padding: 5px 7px;
+      border: 1px solid rgba(242, 198, 109, .7);
+      border-radius: 20px;
+      color: var(--tf-pf-gold);
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+    .tf-pf-content {
+      padding: 18px 14px 15px;
+      background: radial-gradient(circle at 100% 0, rgba(242,198,109,.15), transparent 38%), #fff;
+    }
+    .tf-pf-eyebrow {
+      margin: 0 0 8px;
+      color: #7a8497;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .tf-pf-content h3 {
+      margin: 0;
+      color: var(--tf-pf-navy);
+      font-size: 23px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.4px;
+    }
+    .tf-pf-content h3 span {
+      display: block;
+      margin-top: 5px;
+      color: var(--tf-pf-red);
+      font-size: 1.08em;
+    }
+    .tf-pf-description {
+      margin: 12px 0 16px;
+      color: #56647a;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .tf-pf-benefits {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+    .tf-pf-benefits > div {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #263751;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .tf-pf-check {
+      display: inline-flex;
+      flex: 0 0 17px;
+      width: 17px;
+      height: 17px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #e9f5ed;
+      color: #23814a;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .tf-pf-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 44px;
+      padding: 11px 12px;
+      border-radius: 8px;
+      background: var(--tf-pf-red);
+      color: #fff !important;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none !important;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .tf-pf-cta:hover {
+      background: #c92d2a;
+      color: #fff !important;
+      transform: translateY(-1px);
+    }
+    .tf-pf-cta span { font-size: 18px; }
+    .tf-pf-disclaimer {
+      margin: 12px 0 0;
+      color: #7b8493;
+      font-size: 9px;
+      line-height: 1.55;
+    }
+    .tf-pf-footer {
+      padding: 10px 12px;
+      border-top: 1px solid #e8edf4;
+      background: #f5f7fb;
+      color: #657187;
+      font-size: 9px;
+      font-weight: 600;
+      text-align: center;
+    }
+    @media (max-width: 1000px) {
+      .tf-poonawalla-offer { max-width: 420px; margin: 0 auto; }
+    }
+\n  </style>
 </head>
 <body>
   <div class="topbar">
@@ -1014,75 +950,61 @@ article.post-article hr {
           </p>
         </section>
 
-        
-<!-- Poonawalla Fincorp Banner -->
-<div class="tf-poonawalla-offer">
-  <div class="tf-pf-top">
-    <div class="tf-pf-logo">
-      <img
-        src="https://commons.wikimedia.org/wiki/Special:FilePath/PFincorp-logo.png"
-        alt="Poonawalla Fincorp"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
-      />
-      <span class="tf-pf-logo-fallback">POONAWALLA<br>FINCORP</span>
+        <aside class="ad-card glass" aria-label="Ad">
+          <div class="tf-poonawalla-offer">
+            <div class="tf-pf-top">
+              <div class="tf-pf-logo">
+                <img
+                  src="https://commons.wikimedia.org/wiki/Special:FilePath/PFincorp-logo.png"
+                  alt="Poonawalla Fincorp"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+                />
+                <span class="tf-pf-logo-fallback">POONAWALLA<br>FINCORP</span>
+              </div>
+              <span class="tf-pf-tag">PERSONAL LOAN</span>
+            </div>
+
+            <div class="tf-pf-content">
+              <p class="tf-pf-eyebrow">A NEW FINANCIAL POSSIBILITY</p>
+              <h3>Pre-Approved Offer <span>Up to ₹5 Lakh*</span></h3>
+              <p class="tf-pf-description">
+                Check whether you qualify for a personal loan offer from Poonawalla Fincorp.
+              </p>
+
+              <div class="tf-pf-benefits">
+                <div><span class="tf-pf-check">✓</span> Explore offers up to ₹5 lakh*</div>
+                <div><span class="tf-pf-check">✓</span> Simple online application</div>
+                <div><span class="tf-pf-check">✓</span> Quick eligibility check</div>
+              </div>
+
+              <a
+                class="tf-pf-cta"
+                href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Check Your Offer <span aria-hidden="true">→</span></a>
+
+              <p class="tf-pf-disclaimer">
+                *Offer amount and pre-approval are subject to lender eligibility,
+                verification and terms. The amount is not guaranteed for every applicant.
+              </p>
+            </div>
+
+            <div class="tf-pf-footer">Powered by Poonawalla Fincorp</div>
+          </div>
+
+          <div class="ad-slot" style="min-height:555px;">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:500px"
+                 data-ad-client="ca-pub-4180233192929131"
+                 data-ad-slot="2241854911"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
+
+          <div class="ad-note">Support ❤️ Us By Clicking Ads</div>
+        </aside>
+      </div>      
     </div>
-    <span class="tf-pf-tag">PERSONAL LOAN</span>
-  </div>
-
-  <div class="tf-pf-content">
-    <p class="tf-pf-eyebrow">A NEW FINANCIAL POSSIBILITY</p>
-
-    <h3>
-      Pre-Approved Offer
-      <span>Up to ₹5 Lakh*</span>
-    </h3>
-
-    <p class="tf-pf-description">
-      Check whether you qualify for a personal loan offer
-      from Poonawalla Fincorp.
-    </p>
-
-    <div class="tf-pf-benefits">
-      <div><span class="tf-pf-check">✓</span> Explore offers up to ₹5 lakh*</div>
-      <div><span class="tf-pf-check">✓</span> Simple online application</div>
-      <div><span class="tf-pf-check">✓</span> Quick eligibility check</div>
-    </div>
-
-    <a
-      class="tf-pf-cta"
-      href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Check Your Offer <span>→</span>
-    </a>
-
-    <p class="tf-pf-disclaimer">
-      *Offer amount and pre-approval are subject to lender eligibility,
-      verification and terms. The amount is not guaranteed for every applicant.
-    </p>
-  </div>
-
-  <div class="tf-pf-footer">
-    Powered by Poonawalla Fincorp
-    <span class="tf-pf-footer-dot"></span>
-  </div>
-</div>
-
-<!-- Google AdSense: Directly Below Poonawalla Banner -->
-<div class="tf-google-ad">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="YOUR_ADSENSE_CLIENT_ID"
-       data-ad-slot="YOUR_AD_SLOT_ID"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-</div>
-
-<script>
-  (window.adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
    
           <!-- Blog-style explanation below calculator -->
        <section id="learn-emi" class="glass" style="margin-top:20px; padding:18px;">
@@ -2001,22 +1923,6 @@ function exportPDF() {
     renderPayments();
     initCharts();
     computeAndRender();
-	
   </script>
-  
-  <script
-  
-document.addEventListener("DOMContentLoaded", function () {
-  const offerButtons = document.querySelectorAll(".tf-pf-cta");
-
-  offerButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      // Optional: connect your analytics tracking here.
-      console.log("Poonawalla Fincorp offer banner clicked");
-    });
-  });
-});
-</script>
-
 </body>
 </html>
