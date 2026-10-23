@@ -625,9 +625,9 @@ article.post-article hr {
   border-top: 1px solid rgba(148, 163, 184, 0.4);
   margin: 24px 0;
 }
+	  
 
-
-/* Poonawalla Fincorp Popup */
+/* TechFinserv — Poonawalla Premium Popup */
 .tf-pf-popup-overlay,
 .tf-pf-popup-overlay * {
   box-sizing: border-box;
@@ -640,10 +640,10 @@ article.post-article hr {
   z-index: 99999;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  background: rgba(8, 22, 45, 0.65);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  padding: 24px;
+  background: rgba(12, 25, 47, 0.66);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .tf-pf-popup-overlay.tf-pf-popup-visible {
@@ -652,151 +652,130 @@ article.post-article hr {
 }
 
 .tf-pf-popup {
-  --tf-pf-navy: #10264b;
-  --tf-pf-red: #e53935;
-  --tf-pf-gold: #f2c66d;
-
-  position: relative;
   width: 100%;
-  max-width: 440px;
-  max-height: calc(100vh - 32px);
+  max-width: 1040px;
+  max-height: calc(100vh - 48px);
   overflow-y: auto;
-  border: 1px solid #e1e6ef;
-  border-radius: 18px;
+  border-radius: 36px;
   background: #fff;
-  color: #172b4d;
-  font-family: Inter, system-ui, sans-serif;
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
-  animation: tfPfSlideUp 0.35s ease;
+  color: #263b66;
+  font-family: Inter, Arial, sans-serif;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, .3);
+  animation: tfPfSlideUp .35s ease;
+}
+
+.tf-pf-popup-header {
+  position: relative;
+  overflow: hidden;
+  padding: 46px 52px 40px;
+  color: #fff;
+  background: linear-gradient(115deg, #32a8e8 0%, #087bc5 72%, #253e73 72%);
+}
+
+.tf-pf-popup-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 100%;
+  background: #253e73;
+  clip-path: polygon(42% 0, 100% 0, 100% 100%, 0 100%);
+  z-index: 0;
+}
+
+.tf-pf-popup-header > * {
+  position: relative;
+  z-index: 1;
 }
 
 .tf-pf-popup-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(255,255,255,.45);
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+  width: 68px;
+  height: 68px;
+  border: 2px solid rgba(255,255,255,.55);
   border-radius: 50%;
-  background: rgba(255,255,255,.15);
+  background: transparent;
   color: #fff;
-  font-size: 25px;
+  font-size: 42px;
   line-height: 1;
   cursor: pointer;
 }
 
 .tf-pf-popup-close:hover {
-  background: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.15);
 }
 
-.tf-pf-popup-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 22px 48px 20px 20px;
-  background: linear-gradient(120deg, #1786d4, #10264b);
-  border-bottom: 4px solid var(--tf-pf-red);
-}
-
-.tf-pf-popup-logo img {
-  display: block;
-  width: 145px;
-  max-width: 100%;
-  max-height: 42px;
-  height: auto;
-  object-fit: contain;
-  background: #fff;
-  border-radius: 4px;
-}
-
-.tf-pf-popup-logo-fallback {
-  display: none;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.1;
+.tf-pf-popup-brand {
+  margin: 0 0 48px;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: .3px;
 }
 
 .tf-pf-popup-label {
-  flex-shrink: 0;
-  padding: 6px 9px;
-  border: 1px solid rgba(242,198,109,.65);
-  border-radius: 20px;
-  color: var(--tf-pf-gold);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .6px;
+  position: absolute;
+  top: 66px;
+  right: 110px;
+  color: #ffda55;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 .tf-pf-popup-body {
-  padding: 24px 24px 20px;
-  background:
-    radial-gradient(circle at 100% 0, rgba(242,198,109,.16), transparent 38%),
-    #fff;
+  padding: 0;
 }
 
-.tf-pf-popup-eyebrow {
-  margin: 0 0 10px;
-  color: #7a8497;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.3px;
+.tf-pf-popup-hero-title {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 0 24px;
+  color: #fff;
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -1.7px;
 }
 
-.tf-pf-popup-body h2 {
-  margin: 0;
-  color: var(--tf-pf-navy);
-  font-size: clamp(24px, 5vw, 32px);
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -.6px;
-}
-
-.tf-pf-popup-body h2 span {
+.tf-pf-popup-hero-title span {
   display: block;
-  margin-top: 5px;
-  color: var(--tf-pf-red);
-  font-size: 1.12em;
+  margin-top: 14px;
+  color: #ffc400;
 }
 
 .tf-pf-popup-description {
-  margin: 14px 0 20px;
-  color: #56647a;
-  font-size: 13px;
-  line-height: 1.65;
-}
-
-.tf-pf-popup-benefits {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 22px;
-}
-
-.tf-pf-popup-benefits > div {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  color: #263751;
-  font-size: 13px;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(17px, 2vw, 27px);
   line-height: 1.5;
 }
 
-.tf-pf-popup-benefits > div > span {
-  display: inline-flex;
-  flex: 0 0 19px;
-  width: 19px;
-  height: 19px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #e9f5ed;
-  color: #23814a;
-  font-size: 12px;
+.tf-pf-popup-content {
+  padding: 40px 52px 44px;
+}
+
+.tf-pf-popup-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.tf-pf-popup-benefits > div {
+  padding: 16px 20px;
+  border-radius: 15px;
+  background: #eef5ff;
+  color: #263f78;
+  font-size: 21px;
   font-weight: 800;
 }
 
@@ -804,45 +783,39 @@ article.post-article hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 20px;
   width: 100%;
-  min-height: 50px;
-  padding: 14px 16px;
-  border-radius: 10px;
-  background: var(--tf-pf-red);
-  color: #fff !important;
-  font-size: 15px;
-  font-weight: 800;
+  min-height: 96px;
+  padding: 22px;
+  border-radius: 19px;
+  background: #ffc400;
+  color: #102b63 !important;
+  font-size: 30px;
+  font-weight: 900;
   text-align: center;
   text-decoration: none !important;
-  box-shadow: 0 5px 14px rgba(229,57,53,.22);
+  box-shadow: 0 10px 25px rgba(30, 53, 91, .12);
   transition: background .2s ease, transform .2s ease;
 }
 
 .tf-pf-popup-cta:hover {
-  background: #c92d2a;
-  transform: translateY(-1px);
+  background: #f0b900;
+  transform: translateY(-2px);
 }
 
 .tf-pf-popup-cta span {
-  font-size: 21px;
+  font-size: 35px;
 }
 
 .tf-pf-popup-disclaimer {
-  margin: 14px 0 0;
-  color: #7b8493;
-  font-size: 10px;
+  margin: 25px 0 0;
+  color: #707989;
+  font-size: 19px;
   line-height: 1.6;
 }
 
 .tf-pf-popup-footer {
-  padding: 12px 16px;
-  border-top: 1px solid #e8edf4;
-  background: #f5f7fb;
-  color: #657187;
-  font-size: 11px;
-  font-weight: 600;
-  text-align: center;
+  display: none;
 }
 
 @keyframes tfPfFadeIn {
@@ -851,40 +824,84 @@ article.post-article hr {
 }
 
 @keyframes tfPfSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(20px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 650px) {
   .tf-pf-popup-overlay {
     padding: 12px;
   }
 
   .tf-pf-popup {
     max-height: calc(100vh - 24px);
-    border-radius: 15px;
+    border-radius: 22px;
   }
 
   .tf-pf-popup-header {
-    padding: 19px 42px 17px 15px;
+    padding: 28px 22px 26px;
   }
 
-  .tf-pf-popup-logo img {
-    width: 120px;
+  .tf-pf-popup-header::after {
+    opacity: .6;
   }
 
-  .tf-pf-popup-body {
-    padding: 21px 17px 17px;
-  }
-
-  .tf-pf-popup-body h2 {
+  .tf-pf-popup-close {
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
     font-size: 27px;
+  }
+
+  .tf-pf-popup-brand {
+    margin-bottom: 36px;
+    font-size: 17px;
+  }
+
+  .tf-pf-popup-label {
+    top: 47px;
+    right: 58px;
+    font-size: 10px;
+  }
+
+  .tf-pf-popup-hero-title {
+    font-size: clamp(31px, 8vw, 44px);
+    letter-spacing: -.8px;
+  }
+
+  .tf-pf-popup-description {
+    font-size: 16px;
+  }
+
+  .tf-pf-popup-content {
+    padding: 24px 22px 28px;
+  }
+
+  .tf-pf-popup-benefits {
+    gap: 9px;
+    margin-bottom: 24px;
+  }
+
+  .tf-pf-popup-benefits > div {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .tf-pf-popup-cta {
+    min-height: 64px;
+    padding: 16px;
+    border-radius: 13px;
+    font-size: 21px;
+  }
+
+  .tf-pf-popup-cta span {
+    font-size: 26px;
+  }
+
+  .tf-pf-popup-disclaimer {
+    margin-top: 17px;
+    font-size: 12px;
   }
 }
 
@@ -894,8 +911,8 @@ article.post-article hr {
     animation: none;
   }
 }
-	  
-/* Poonawalla Fincorp Popup END */
+/* TechFinserv — Poonawalla Premium Popup */
+ 
   </style>
 </head>
 <body>
@@ -2007,69 +2024,45 @@ function exportPDF() {
     computeAndRender();
   </script>
 
+	<div class="tf-pf-popup-header">
+  <button type="button" class="tf-pf-popup-close"
+          id="tf-pf-popup-close" aria-label="Close popup">&times;</button>
 
-<!-- Poonawalla Fincorp Popup -->
-<div id="tf-pf-popup-overlay" class="tf-pf-popup-overlay" aria-hidden="true">
-  <div class="tf-pf-popup" role="dialog" aria-modal="true"
-       aria-labelledby="tf-pf-popup-title">
+  <div class="tf-pf-popup-brand">POONAWALLA<br>FINCORP</div>
+  <span class="tf-pf-popup-label">PERSONAL LOAN</span>
 
-    <button type="button" class="tf-pf-popup-close"
-            id="tf-pf-popup-close" aria-label="Close popup">
-      &times;
-    </button>
+  <h2 class="tf-pf-popup-hero-title" id="tf-pf-popup-title">
+    Personal Loan Offer
+    <span>Up to ₹5 Lakh*</span>
+  </h2>
 
-    <div class="tf-pf-popup-header">
-      <div class="tf-pf-popup-logo">
-        <img
-          src="https://commons.wikimedia.org/wiki/Special:FilePath/PFincorp-logo.png"
-          alt="Poonawalla Fincorp"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="tf-pf-popup-logo-fallback">
-          POONAWALLA<br>FINCORP
-        </span>
-      </div>
-      <span class="tf-pf-popup-label">PERSONAL LOAN</span>
-    </div>
-
-    <div class="tf-pf-popup-body">
-      <p class="tf-pf-popup-eyebrow">A NEW FINANCIAL POSSIBILITY</p>
-
-      <h2 id="tf-pf-popup-title">
-        Personal Loan Offer
-        <span>Up to ₹5 Lakh*</span>
-      </h2>
-
-      <p class="tf-pf-popup-description">
-        Check whether you qualify for a personal loan offer
-        from Poonawalla Fincorp.
-      </p>
-
-      <div class="tf-pf-popup-benefits">
-        <div><span>✓</span> Explore offers up to ₹5 lakh*</div>
-        <div><span>✓</span> Simple online application</div>
-        <div><span>✓</span> Quick eligibility check</div>
-      </div>
-
-      <a class="tf-pf-popup-cta"
-         href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com"
-         target="_blank" rel="noopener noreferrer">
-        Check Your Offer <span aria-hidden="true">→</span>
-      </a>
-
-      <p class="tf-pf-popup-disclaimer">
-        *Offer amount and pre-approval are subject to lender eligibility,
-        verification and terms. The amount is not guaranteed for every applicant.
-      </p>
-    </div>
-
-    <div class="tf-pf-popup-footer">
-      Powered by Poonawalla Fincorp
-    </div>
-  </div>
+  <p class="tf-pf-popup-description">
+    Explore a personal loan offer from Poonawalla Fincorp through a simple
+    online process.
+  </p>
 </div>
-<!-- Poonawalla Fincorp Popup END -->
 
-	<script>
+<div class="tf-pf-popup-content">
+  <div class="tf-pf-popup-benefits">
+    <div>✓ Online process</div>
+    <div>✓ Check eligibility</div>
+    <div>✓ Offer up to ₹5 lakh*</div>
+  </div>
+
+  <a class="tf-pf-popup-cta"
+     href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com"
+     target="_blank" rel="noopener noreferrer">
+    Check Your Offer <span aria-hidden="true">➜</span>
+  </a>
+
+  <p class="tf-pf-popup-disclaimer">
+    *Offer amount and pre-approval are subject to lender eligibility,
+    verification and terms. The amount is not guaranteed for every applicant.
+  </p>
+</div>
+
+	<Script>
+	
 /* Poonawalla Popup: 20-second delay, once per day */
 (function () {
   const overlay = document.getElementById("tf-pf-popup-overlay");
@@ -2152,8 +2145,7 @@ function exportPDF() {
     }
   });
 })();
-/* Poonawalla Popup: 20-second delay, once per day */	
 </Script>
-	
-</body>
+
+	</body>
 </html>
