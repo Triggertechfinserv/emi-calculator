@@ -628,289 +628,361 @@ article.post-article hr {
 	  
 
 /* TechFinserv — Poonawalla Premium Popup */
-.tf-pf-popup-overlay,
-.tf-pf-popup-overlay * {
-  box-sizing: border-box;
-}
+{
+      box-sizing: border-box;
+    }
 
-.tf-pf-popup-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: rgba(12, 25, 47, 0.66);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      color: #172b4d;
+      background: #f1f5fb;
+    }
 
-.tf-pf-popup-overlay.tf-pf-popup-visible {
-  display: flex;
-  animation: tfPfFadeIn 0.3s ease;
-}
+    /* Demo page background */
+    .demo-page {
+      min-height: 100vh;
+      padding: 40px;
+    }
 
-.tf-pf-popup {
-  width: 100%;
-  max-width: 1040px;
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
-  border-radius: 36px;
-  background: #fff;
-  color: #263b66;
-  font-family: Inter, Arial, sans-serif;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, .3);
-  animation: tfPfSlideUp .35s ease;
-}
+    .demo-page h1 {
+      color: #10264b;
+    }
 
-.tf-pf-popup-header {
-  position: relative;
-  overflow: hidden;
-  padding: 46px 52px 40px;
-  color: #fff;
-  background: linear-gradient(115deg, #32a8e8 0%, #087bc5 72%, #253e73 72%);
-}
+    /* Popup overlay */
+    .tf-pf-popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(12, 25, 47, 0.66);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
 
-.tf-pf-popup-header::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 45%;
-  height: 100%;
-  background: #253e73;
-  clip-path: polygon(42% 0, 100% 0, 100% 100%, 0 100%);
-  z-index: 0;
-}
+    .tf-pf-popup-overlay.tf-pf-popup-visible {
+      display: flex;
+      animation: tfPfFadeIn 0.3s ease;
+    }
 
-.tf-pf-popup-header > * {
-  position: relative;
-  z-index: 1;
-}
+    /* Main popup */
+    .tf-pf-popup {
+      width: 100%;
+      max-width: 1040px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+      border-radius: 36px;
+      background: #fff;
+      color: #263b66;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30);
+      animation: tfPfSlideUp 0.35s ease;
+    }
 
-.tf-pf-popup-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 3;
-  width: 68px;
-  height: 68px;
-  border: 2px solid rgba(255,255,255,.55);
-  border-radius: 50%;
-  background: transparent;
-  color: #fff;
-  font-size: 42px;
-  line-height: 1;
-  cursor: pointer;
-}
+    /* Blue gradient header */
+    .tf-pf-popup-header {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 46px 52px 40px;
+      color: #fff;
+      background: linear-gradient(115deg, #32a8e8 0%, #087bc5 72%, #253e73 72%);
+    }
 
-.tf-pf-popup-close:hover {
-  background: rgba(255,255,255,.15);
-}
+    /* Navy diagonal panel */
+    .tf-pf-popup-header::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      width: 45%;
+      height: 100%;
+      background: #253e73;
+      clip-path: polygon(42% 0, 100% 0, 100% 100%, 0 100%);
+    }
 
-.tf-pf-popup-brand {
-  margin: 0 0 48px;
-  font-size: 26px;
-  font-weight: 900;
-  line-height: 1.12;
-  letter-spacing: .3px;
-}
+    /* Close button */
+    .tf-pf-popup-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 68px;
+      height: 68px;
+      padding: 0;
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
+      font-size: 42px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
 
-.tf-pf-popup-label {
-  position: absolute;
-  top: 66px;
-  right: 110px;
-  color: #ffda55;
-  font-size: 19px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
+    .tf-pf-popup-close:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
 
-.tf-pf-popup-body {
-  padding: 0;
-}
+    .tf-pf-popup-close:focus-visible,
+    .tf-pf-popup-cta:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 4px;
+    }
 
-.tf-pf-popup-hero-title {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  margin: 0 0 24px;
-  color: #fff;
-  font-size: clamp(36px, 5vw, 68px);
-  font-weight: 850;
-  line-height: 1.08;
-  letter-spacing: -1.7px;
-}
+    /* Brand */
+    .tf-pf-popup-brand {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 48px;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: 0.3px;
+    }
 
-.tf-pf-popup-hero-title span {
-  display: block;
-  margin-top: 14px;
-  color: #ffc400;
-}
+    .tf-pf-popup-label {
+      position: absolute;
+      z-index: 2;
+      top: 66px;
+      right: 110px;
+      color: #ffda55;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
 
-.tf-pf-popup-description {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  margin: 0;
-  color: #fff;
-  font-size: clamp(17px, 2vw, 27px);
-  line-height: 1.5;
-}
+    /* Offer headline */
+    .tf-pf-popup-hero-title {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 0 24px;
+      color: #fff;
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 850;
+      line-height: 1.08;
+      letter-spacing: -1.7px;
+    }
 
-.tf-pf-popup-content {
-  padding: 40px 52px 44px;
-}
+    .tf-pf-popup-hero-title span {
+      display: block;
+      margin-top: 14px;
+      color: #ffc400;
+    }
 
-.tf-pf-popup-benefits {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 36px;
-}
+    .tf-pf-popup-description {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(17px, 2vw, 27px);
+      line-height: 1.5;
+    }
 
-.tf-pf-popup-benefits > div {
-  padding: 16px 20px;
-  border-radius: 15px;
-  background: #eef5ff;
-  color: #263f78;
-  font-size: 21px;
-  font-weight: 800;
-}
+    /* White content area */
+    .tf-pf-popup-content {
+      padding: 40px 52px 44px;
+      background: #fff;
+    }
 
-.tf-pf-popup-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  min-height: 96px;
-  padding: 22px;
-  border-radius: 19px;
-  background: #ffc400;
-  color: #102b63 !important;
-  font-size: 30px;
-  font-weight: 900;
-  text-align: center;
-  text-decoration: none !important;
-  box-shadow: 0 10px 25px rgba(30, 53, 91, .12);
-  transition: background .2s ease, transform .2s ease;
-}
+    /* Benefit labels */
+    .tf-pf-popup-benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 0 0 36px;
+    }
 
-.tf-pf-popup-cta:hover {
-  background: #f0b900;
-  transform: translateY(-2px);
-}
+    .tf-pf-popup-benefits > div {
+      padding: 16px 20px;
+      border-radius: 15px;
+      background: #eef5ff;
+      color: #263f78;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
 
-.tf-pf-popup-cta span {
-  font-size: 35px;
-}
+    /* Yellow CTA button */
+    .tf-pf-popup-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      min-height: 96px;
+      padding: 22px;
+      border: none;
+      border-radius: 19px;
+      background: #ffc400;
+      color: #102b63;
+      font-size: 30px;
+      font-weight: 900;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(30, 53, 91, 0.12);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
 
-.tf-pf-popup-disclaimer {
-  margin: 25px 0 0;
-  color: #707989;
-  font-size: 19px;
-  line-height: 1.6;
-}
+    .tf-pf-popup-cta:hover {
+      background: #f0b900;
+      color: #102b63;
+      transform: translateY(-2px);
+    }
 
-.tf-pf-popup-footer {
-  display: none;
-}
+    .tf-pf-popup-cta-arrow {
+      font-size: 35px;
+      line-height: 1;
+    }
 
-@keyframes tfPfFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+    /* Eligibility disclaimer */
+    .tf-pf-popup-disclaimer {
+      margin: 25px 0 0;
+      color: #707989;
+      font-size: 19px;
+      line-height: 1.6;
+    }
 
-@keyframes tfPfSlideUp {
-  from { opacity: 0; transform: translateY(20px) scale(.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
+    /* Animations */
+    @keyframes tfPfFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-@media (max-width: 650px) {
-  .tf-pf-popup-overlay {
-    padding: 12px;
-  }
+    @keyframes tfPfSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-  .tf-pf-popup {
-    max-height: calc(100vh - 24px);
-    border-radius: 22px;
-  }
+    /* Tablet and mobile */
+    @media (max-width: 650px) {
+      .tf-pf-popup-overlay {
+        padding: 12px;
+      }
 
-  .tf-pf-popup-header {
-    padding: 28px 22px 26px;
-  }
+      .tf-pf-popup {
+        max-height: calc(100vh - 24px);
+        border-radius: 22px;
+      }
 
-  .tf-pf-popup-header::after {
-    opacity: .6;
-  }
+      .tf-pf-popup-header {
+        padding: 28px 22px 26px;
+      }
 
-  .tf-pf-popup-close {
-    top: 12px;
-    right: 12px;
-    width: 42px;
-    height: 42px;
-    font-size: 27px;
-  }
+      .tf-pf-popup-header::after {
+        width: 40%;
+        opacity: 0.8;
+      }
 
-  .tf-pf-popup-brand {
-    margin-bottom: 36px;
-    font-size: 17px;
-  }
+      .tf-pf-popup-close {
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+        font-size: 27px;
+      }
 
-  .tf-pf-popup-label {
-    top: 47px;
-    right: 58px;
-    font-size: 10px;
-  }
+      .tf-pf-popup-brand {
+        margin-bottom: 36px;
+        font-size: 17px;
+      }
 
-  .tf-pf-popup-hero-title {
-    font-size: clamp(31px, 8vw, 44px);
-    letter-spacing: -.8px;
-  }
+      .tf-pf-popup-label {
+        top: 47px;
+        right: 58px;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .tf-pf-popup-description {
-    font-size: 16px;
-  }
+      .tf-pf-popup-hero-title {
+        font-size: clamp(31px, 8vw, 44px);
+        letter-spacing: -0.8px;
+      }
 
-  .tf-pf-popup-content {
-    padding: 24px 22px 28px;
-  }
+      .tf-pf-popup-hero-title span {
+        margin-top: 9px;
+      }
 
-  .tf-pf-popup-benefits {
-    gap: 9px;
-    margin-bottom: 24px;
-  }
+      .tf-pf-popup-description {
+        font-size: 16px;
+      }
 
-  .tf-pf-popup-benefits > div {
-    padding: 11px 12px;
-    font-size: 13px;
-  }
+      .tf-pf-popup-content {
+        padding: 24px 22px 28px;
+      }
 
-  .tf-pf-popup-cta {
-    min-height: 64px;
-    padding: 16px;
-    border-radius: 13px;
-    font-size: 21px;
-  }
+      .tf-pf-popup-benefits {
+        gap: 9px;
+        margin-bottom: 24px;
+      }
 
-  .tf-pf-popup-cta span {
-    font-size: 26px;
-  }
+      .tf-pf-popup-benefits > div {
+        padding: 11px 12px;
+        font-size: 13px;
+      }
 
-  .tf-pf-popup-disclaimer {
-    margin-top: 17px;
-    font-size: 12px;
-  }
-}
+      .tf-pf-popup-cta {
+        min-height: 64px;
+        padding: 16px;
+        gap: 12px;
+        border-radius: 13px;
+        font-size: 21px;
+      }
 
-@media (prefers-reduced-motion: reduce) {
-  .tf-pf-popup-overlay,
-  .tf-pf-popup {
-    animation: none;
-  }
-}
+      .tf-pf-popup-cta-arrow {
+        font-size: 26px;
+      }
+
+      .tf-pf-popup-disclaimer {
+        margin-top: 17px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .tf-pf-popup-header {
+        padding: 25px 16px 22px;
+      }
+
+      .tf-pf-popup-content {
+        padding: 20px 16px 22px;
+      }
+
+      .tf-pf-popup-benefits > div {
+        font-size: 12px;
+      }
+
+      .tf-pf-popup-hero-title {
+        font-size: 30px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tf-pf-popup-overlay,
+      .tf-pf-popup {
+        animation: none;
+      }
+
+      .tf-pf-popup-cta {
+        transition: none;
+      }
+    }
 /* TechFinserv — Poonawalla Premium Popup */
  
   </style>
@@ -2023,129 +2095,210 @@ function exportPDF() {
     initCharts();
     computeAndRender();
   </script>
+<!-- Poonawalla Fincorp Popup -->
+  <div
+    id="tf-pf-popup-overlay"
+    class="tf-pf-popup-overlay"
+    aria-hidden="true"
+  >
+    <section
+      class="tf-pf-popup"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="tf-pf-popup-title"
+      aria-describedby="tf-pf-popup-description tf-pf-popup-disclaimer"
+    >
 
-	<div class="tf-pf-popup-header">
-  <button type="button" class="tf-pf-popup-close"
-          id="tf-pf-popup-close" aria-label="Close popup">&times;</button>
+      <div class="tf-pf-popup-header">
 
-  <div class="tf-pf-popup-brand">POONAWALLA<br>FINCORP</div>
-  <span class="tf-pf-popup-label">PERSONAL LOAN</span>
+        <button
+          type="button"
+          class="tf-pf-popup-close"
+          id="tf-pf-popup-close"
+          aria-label="Close popup"
+        >&times;</button>
 
-  <h2 class="tf-pf-popup-hero-title" id="tf-pf-popup-title">
-    Personal Loan Offer
-    <span>Up to ₹5 Lakh*</span>
-  </h2>
+        <div class="tf-pf-popup-brand">
+          POONAWALLA<br>
+          FINCORP
+        </div>
 
-  <p class="tf-pf-popup-description">
-    Explore a personal loan offer from Poonawalla Fincorp through a simple
-    online process.
-  </p>
-</div>
+        <span class="tf-pf-popup-label">PERSONAL LOAN</span>
 
-<div class="tf-pf-popup-content">
-  <div class="tf-pf-popup-benefits">
-    <div>✓ Online process</div>
-    <div>✓ Check eligibility</div>
-    <div>✓ Offer up to ₹5 lakh*</div>
+        <h2 class="tf-pf-popup-hero-title" id="tf-pf-popup-title">
+          Personal Loan Offer
+          <span>Up to ₹5 Lakh*</span>
+        </h2>
+
+        <p
+          class="tf-pf-popup-description"
+          id="tf-pf-popup-description"
+        >
+          Explore a personal loan offer from Poonawalla Fincorp through
+          a simple online process.
+        </p>
+
+      </div>
+
+      <div class="tf-pf-popup-content">
+
+        <div class="tf-pf-popup-benefits">
+          <div>✓ Online process</div>
+          <div>✓ Check eligibility</div>
+          <div>✓ Offer up to ₹5 lakh*</div>
+        </div>
+
+        <a
+          class="tf-pf-popup-cta"
+          href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&amp;utm_medium=QR_Code&amp;utm_DSA_Code=DS100027&amp;UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&amp;UTM_SM_Name=devang.patel@poonawallafincorp.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Check Your Offer
+          <span class="tf-pf-popup-cta-arrow" aria-hidden="true">➜</span>
+        </a>
+
+        <p class="tf-pf-popup-disclaimer" id="tf-pf-popup-disclaimer">
+          *Offer amount and pre-approval are subject to lender eligibility,
+          verification and terms. The amount is not guaranteed for every applicant.
+        </p>
+
+      </div>
+    </section>
   </div>
 
-  <a class="tf-pf-popup-cta"
-     href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com"
-     target="_blank" rel="noopener noreferrer">
-    Check Your Offer <span aria-hidden="true">➜</span>
-  </a>
+  <script>
+    /* Poonawalla Popup: 20-second delay, once dismissed per local day */
+    (function () {
+      "use strict";
 
-  <p class="tf-pf-popup-disclaimer">
-    *Offer amount and pre-approval are subject to lender eligibility,
-    verification and terms. The amount is not guaranteed for every applicant.
-  </p>
-</div>
+      const overlay = document.getElementById("tf-pf-popup-overlay");
+      const popup = overlay
+        ? overlay.querySelector(".tf-pf-popup")
+        : null;
+      const closeButton = document.getElementById("tf-pf-popup-close");
 
-	<Script>
-	
-/* Poonawalla Popup: 20-second delay, once per day */
-(function () {
-  const overlay = document.getElementById("tf-pf-popup-overlay");
-  const closeButton = document.getElementById("tf-pf-popup-close");
+      if (!overlay || !popup || !closeButton) return;
 
-  if (!overlay || !closeButton) return;
+      const storageKey = "tfPoonawallaPopupDismissed";
+      const delayMilliseconds = 20000;
 
-  const storageKey = "tfPoonawallaPopupDismissed";
-  let popupTimer = null;
-  let previousFocus = null;
+      let popupTimer = null;
+      let previousFocus = null;
+      let popupIsOpen = false;
 
-  function todayKey() {
-    const date = new Date();
-    return [
-      date.getFullYear(),
-      String(date.getMonth() + 1).padStart(2, "0"),
-      String(date.getDate()).padStart(2, "0")
-    ].join("-");
-  }
+      function todayKey() {
+        const date = new Date();
 
-  function wasDismissedToday() {
-    try {
-      return localStorage.getItem(storageKey) === todayKey();
-    } catch (error) {
-      return false;
-    }
-  }
+        return [
+          date.getFullYear(),
+          String(date.getMonth() + 1).padStart(2, "0"),
+          String(date.getDate()).padStart(2, "0")
+        ].join("-");
+      }
 
-  function markDismissedToday() {
-    try {
-      localStorage.setItem(storageKey, todayKey());
-    } catch (error) {}
-  }
+      function wasDismissedToday() {
+        try {
+          return localStorage.getItem(storageKey) === todayKey();
+        } catch (error) {
+          /* If storage is blocked, the popup still works for this visit. */
+          return false;
+        }
+      }
 
-  function openPopup() {
-    if (wasDismissedToday()) return;
+      function markDismissedToday() {
+        try {
+          localStorage.setItem(storageKey, todayKey());
+        } catch (error) {
+          /* Daily persistence is unavailable if browser storage is blocked. */
+        }
+      }
 
-    previousFocus = document.activeElement;
-    overlay.classList.add("tf-pf-popup-visible");
-    overlay.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    closeButton.focus();
-  }
+      function openPopup() {
+        if (popupIsOpen || wasDismissedToday()) return;
 
-  function closePopup() {
-    overlay.classList.remove("tf-pf-popup-visible");
-    overlay.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-    markDismissedToday();
+        previousFocus = document.activeElement;
+        popupIsOpen = true;
 
-    if (previousFocus && typeof previousFocus.focus === "function") {
-      previousFocus.focus();
-    }
-  }
+        overlay.classList.add("tf-pf-popup-visible");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
 
-  closeButton.addEventListener("click", closePopup);
+        closeButton.focus();
+      }
 
-  overlay.addEventListener("click", function (event) {
-    if (event.target === overlay) {
-      closePopup();
-    }
-  });
+      function closePopup() {
+        if (!popupIsOpen) return;
 
-  document.addEventListener("keydown", function (event) {
-    if (
-      event.key === "Escape" &&
-      overlay.classList.contains("tf-pf-popup-visible")
-    ) {
-      closePopup();
-    }
-  });
+        popupIsOpen = false;
 
-  if (!wasDismissedToday()) {
-    popupTimer = window.setTimeout(openPopup, 20000);
-  }
+        overlay.classList.remove("tf-pf-popup-visible");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
 
-  window.addEventListener("pagehide", function () {
-    if (popupTimer) {
-      window.clearTimeout(popupTimer);
-    }
-  });
-})();
-</Script>
+        markDismissedToday();
+
+        if (
+          previousFocus &&
+          typeof previousFocus.focus === "function" &&
+          document.contains(previousFocus)
+        ) {
+          previousFocus.focus();
+        }
+      }
+
+      closeButton.addEventListener("click", closePopup);
+
+      /* Close when the visitor clicks the dark overlay outside the popup. */
+      overlay.addEventListener("click", function (event) {
+        if (event.target === overlay) {
+          closePopup();
+        }
+      });
+
+      /* Close when the visitor presses Escape. */
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && popupIsOpen) {
+          closePopup();
+        }
+
+        /* Keep keyboard focus within the open dialog. */
+        if (event.key === "Tab" && popupIsOpen) {
+          const focusable = popup.querySelectorAll(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          );
+
+          if (!focusable.length) return;
+
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (
+            !event.shiftKey &&
+            document.activeElement === last
+          ) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      });
+
+      /* Show after 20 seconds unless already dismissed today. */
+      if (!wasDismissedToday()) {
+        popupTimer = window.setTimeout(openPopup, delayMilliseconds);
+      }
+
+      window.addEventListener("pagehide", function () {
+        if (popupTimer !== null) {
+          window.clearTimeout(popupTimer);
+          popupTimer = null;
+        }
+      });
+    })();
+  </script>
 
 	</body>
 </html>
