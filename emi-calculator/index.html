@@ -1736,5 +1736,434 @@ function exportPDF() {
     initCharts();
     computeAndRender();
   </script>
+
+	
+<style>
+/* ===== POONAWALLA POPUP ===== */
+.tf-pf-overlay {
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(9,22,46,.62);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+.tf-pf-overlay.tf-visible { display:flex; }
+
+.tf-pf-modal {
+  position:relative;
+  width:100%;
+  max-width:556px;
+  overflow:hidden;
+  border-radius:18px;
+  background:#fff;
+  color:#10264b;
+  box-shadow:0 24px 70px rgba(0,0,0,.32);
+  font-family:Inter,Arial,sans-serif;
+  animation:tfPfIn .25s ease-out;
+}
+@keyframes tfPfIn {
+  from {opacity:0;transform:translateY(12px) scale(.98)}
+  to {opacity:1;transform:translateY(0) scale(1)}
+}
+
+.tf-pf-close {
+  position:absolute;
+  z-index:5;
+  top:10px;
+  right:10px;
+  width:38px;
+  height:38px;
+  border:1px solid #fff;
+  border-radius:50%;
+  background:#20396f;
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.tf-pf-hero {
+  padding:24px 28px 20px;
+  color:#fff;
+  background:linear-gradient(115deg,#35a8ed 0%,#087bc8 62%,#243b73 62%,#243b73 100%);
+}
+.tf-pf-brand {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+  padding-right:38px;
+}
+.tf-pf-brand-name {
+  font-size:14px;
+  line-height:1.15;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+.tf-pf-label {
+  color:#ffe17a;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+.tf-pf-hero h2 {
+  margin:0;
+  color:#fff;
+  font-size:34px;
+  line-height:1.12;
+  font-weight:800;
+}
+.tf-pf-hero h2 span {
+  display:block;
+  margin-top:5px;
+  color:#ffc400;
+}
+.tf-pf-subtitle {
+  margin:12px 0 0;
+  color:#f1f7ff;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.tf-pf-body { padding:22px 28px 24px; }
+.tf-pf-points {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+}
+.tf-pf-points span {
+  padding:8px 10px;
+  border-radius:7px;
+  background:#eff6ff;
+  color:#243b73;
+  font-size:11px;
+  font-weight:700;
+}
+.tf-pf-button {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  min-height:52px;
+  padding:13px 16px;
+  border:0;
+  border-radius:10px;
+  background:#ffc400;
+  color:#17346b;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 5px 14px rgba(22,50,104,.14);
+}
+.tf-pf-button:hover { background:#ffd33d; }
+.tf-pf-disclaimer {
+  margin:13px 0 0;
+  color:#6b7280;
+  font-size:10px;
+  line-height:1.55;
+}
+
+/* ===== LEAD FORM ===== */
+.tf-pf-form-section {
+  display:none;
+  margin-top:18px;
+  padding-top:17px;
+  border-top:1px solid #e5e7eb;
+}
+.tf-pf-form-section.tf-form-visible { display:block; }
+.tf-pf-form-title {
+  margin:0 0 14px;
+  color:#20396f;
+  font-size:17px;
+  font-weight:800;
+}
+.tf-pf-field { margin-bottom:12px; }
+.tf-pf-field label {
+  display:block;
+  margin-bottom:6px;
+  color:#334155;
+  font-size:12px;
+  font-weight:700;
+}
+.tf-pf-field input {
+  width:100%;
+  height:46px;
+  padding:10px 12px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:#fff;
+  color:#10264b;
+  font-size:14px;
+  box-sizing:border-box;
+}
+.tf-pf-field input:focus {
+  outline:2px solid #93c5fd;
+  border-color:#168bd2;
+}
+.tf-pf-submit:disabled {
+  opacity:.65;
+  cursor:wait;
+}
+.tf-pf-status {
+  margin:10px 0 0;
+  font-size:12px;
+  color:#b91c1c;
+}
+.tf-pf-privacy {
+  margin:10px 0 0;
+  color:#64748b;
+  font-size:10px;
+  line-height:1.5;
+}
+body.tf-pf-locked { overflow:hidden; }
+
+@media(max-width:480px) {
+  .tf-pf-overlay { padding:12px; }
+  .tf-pf-modal { border-radius:14px; }
+  .tf-pf-hero { padding:22px 18px 18px; }
+  .tf-pf-hero h2 { font-size:27px; }
+  .tf-pf-brand { margin-bottom:18px; }
+  .tf-pf-body { padding:18px; }
+  .tf-pf-points { gap:6px; }
+  .tf-pf-points span { font-size:10px; }
+}
+</style>
+
+<!-- POPUP HTML -->
+<div class="tf-pf-overlay" id="tfPfOverlay" aria-hidden="true">
+  <section class="tf-pf-modal" role="dialog" aria-modal="true"
+           aria-labelledby="tfPfTitle">
+
+    <button type="button" class="tf-pf-close"
+            id="tfPfClose" aria-label="Close">&times;</button>
+
+    <div class="tf-pf-hero">
+      <div class="tf-pf-brand">
+        <div class="tf-pf-brand-name">POONAWALLA<br>FINCORP</div>
+        <div class="tf-pf-label">PERSONAL LOAN</div>
+      </div>
+
+      <h2 id="tfPfTitle">
+        Personal Loan Offer
+        <span>Up to ₹5 Lakh*</span>
+      </h2>
+
+      <p class="tf-pf-subtitle">
+        Explore a personal loan offer from Poonawalla Fincorp through a simple online process.
+      </p>
+    </div>
+
+    <div class="tf-pf-body">
+
+      <div class="tf-pf-points">
+        <span>✓ Online process</span>
+        <span>✓ Check eligibility</span>
+        <span>✓ Offer up to ₹5 lakh*</span>
+      </div>
+
+      <button type="button" class="tf-pf-button" id="tfPfStart">
+        Check Your Offer &nbsp; ➜
+      </button>
+
+      <p class="tf-pf-disclaimer">
+        *Offer amount and pre-approval are subject to lender eligibility,
+        verification and terms. The amount is not guaranteed for every applicant.
+      </p>
+
+      <!-- NAME AND MOBILE FORM -->
+      <div class="tf-pf-form-section" id="tfPfFormSection">
+
+        <h3 class="tf-pf-form-title">Enter Your Details</h3>
+
+        <form id="tfPfLeadForm">
+
+          <div class="tf-pf-field">
+            <label for="tfPfName">Full Name</label>
+            <input type="text" id="tfPfName" name="name"
+                   placeholder="Enter your full name"
+                   autocomplete="name" required minlength="2">
+          </div>
+
+          <div class="tf-pf-field">
+            <label for="tfPfMobile">Mobile Number</label>
+            <input type="tel" id="tfPfMobile" name="mobile"
+                   placeholder="Enter 10-digit mobile number"
+                   inputmode="numeric" autocomplete="tel-national"
+                   pattern="[6-9][0-9]{9}" maxlength="10" required>
+          </div>
+
+          <button type="submit" class="tf-pf-button tf-pf-submit"
+                  id="tfPfSubmit">
+            Submit & Continue ➜
+          </button>
+
+          <p class="tf-pf-status" id="tfPfStatus" role="status"></p>
+
+          <p class="tf-pf-privacy">
+            By submitting, you agree that TechFinserv may share these
+            details with the lender for the purpose of processing your enquiry.
+          </p>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  const overlay = document.getElementById('tfPfOverlay');
+  const closeBtn = document.getElementById('tfPfClose');
+  const startBtn = document.getElementById('tfPfStart');
+  const formSection = document.getElementById('tfPfFormSection');
+  const form = document.getElementById('tfPfLeadForm');
+  const submitBtn = document.getElementById('tfPfSubmit');
+  const status = document.getElementById('tfPfStatus');
+
+  if (!overlay || !form || window.tfPfPopupInitialized) return;
+  window.tfPfPopupInitialized = true;
+
+  const WEB3FORMS_KEY = 'd1bf814f-4b60-44fa-b47b-ed5e08afaf53';
+
+  const POONAWALLA_URL =
+    'https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com';
+
+  const storageKey = 'tfPoonawallaPopupDismissedOn';
+
+  // Use the visitor's local calendar date.
+  function localDate() {
+    const d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  let dismissedToday = false;
+  try {
+    dismissedToday = localStorage.getItem(storageKey) === localDate();
+  } catch (e) {}
+
+  function closePopup() {
+    overlay.classList.remove('tf-visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('tf-pf-locked');
+
+    try {
+      localStorage.setItem(storageKey, localDate());
+    } catch (e) {}
+  }
+
+  function showPopup() {
+    if (dismissedToday || document.visibilityState !== 'visible') return;
+
+    overlay.classList.add('tf-visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('tf-pf-locked');
+    closeBtn.focus();
+  }
+
+  closeBtn.addEventListener('click', closePopup);
+
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('tf-visible')) {
+      closePopup();
+    }
+  });
+
+  // Open lead form and record the Check Your Offer click.
+  startBtn.addEventListener('click', function () {
+    if (typeof gtag === 'function') {
+      gtag('event', 'poonawalla_check_offer_click', {
+        event_category: 'Poonawalla Popup',
+        event_label: 'Check Your Offer'
+      });
+    } else if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'poonawalla_check_offer_click'
+      });
+    }
+
+    formSection.classList.add('tf-form-visible');
+    startBtn.style.display = 'none';
+    form.querySelector('input[name="name"]').focus();
+  });
+
+  // Submit details to Web3Forms, then redirect.
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    if (WEB3FORMS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+      status.textContent = 'Website administrator: please configure the Web3Forms access key.';
+      return;
+    }
+
+    const name = document.getElementById('tfPfName').value.trim();
+    const mobile = document.getElementById('tfPfMobile').value.trim();
+
+    if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+      status.textContent = 'Please enter a valid 10-digit Indian mobile number.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    status.textContent = '';
+
+    const payload = new FormData(form);
+    payload.append('access_key', WEB3FORMS_KEY);
+    payload.append('subject', 'New Poonawalla Fincorp Lead - TechFinserv');
+    payload.append('from_name', 'TechFinserv EMI Calculator');
+    payload.append('source', 'EMI Calculator Poonawalla Popup');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        if (typeof gtag === 'function') {
+          gtag('event', 'poonawalla_lead_form_success', {
+            event_category: 'Poonawalla Popup'
+          });
+        }
+
+        status.style.color = '#15803d';
+        status.textContent = 'Details submitted successfully. Redirecting...';
+
+        window.location.assign(POONAWALLA_URL);
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+
+    } catch (error) {
+      status.style.color = '#b91c1c';
+      status.textContent = 'Unable to submit. Please try again.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit & Continue ➜';
+    }
+  });
+
+  // Display after 20 seconds.
+  if (!dismissedToday) {
+    window.setTimeout(showPopup, 20000);
+  }
+})();
+</script>
+
 </body>
 </html>
