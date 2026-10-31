@@ -625,366 +625,7 @@ article.post-article hr {
   border-top: 1px solid rgba(148, 163, 184, 0.4);
   margin: 24px 0;
 }
-	  
 
-/* TechFinserv — Poonawalla Premium Popup */
-{
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Inter, Arial, sans-serif;
-      color: #172b4d;
-      background: #f1f5fb;
-    }
-
-    /* Demo page background */
-    .demo-page {
-      min-height: 100vh;
-      padding: 40px;
-    }
-
-    .demo-page h1 {
-      color: #10264b;
-    }
-
-    /* Popup overlay */
-    .tf-pf-popup-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(12, 25, 47, 0.66);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .tf-pf-popup-overlay.tf-pf-popup-visible {
-      display: flex;
-      animation: tfPfFadeIn 0.3s ease;
-    }
-
-    /* Main popup */
-    .tf-pf-popup {
-      width: 100%;
-      max-width: 1040px;
-      max-height: calc(100vh - 48px);
-      overflow-y: auto;
-      border-radius: 36px;
-      background: #fff;
-      color: #263b66;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.30);
-      animation: tfPfSlideUp 0.35s ease;
-    }
-
-    /* Blue gradient header */
-    .tf-pf-popup-header {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: 46px 52px 40px;
-      color: #fff;
-      background: linear-gradient(115deg, #32a8e8 0%, #087bc5 72%, #253e73 72%);
-    }
-
-    /* Navy diagonal panel */
-    .tf-pf-popup-header::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      right: 0;
-      width: 45%;
-      height: 100%;
-      background: #253e73;
-      clip-path: polygon(42% 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    /* Close button */
-    .tf-pf-popup-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 68px;
-      height: 68px;
-      padding: 0;
-      border: 2px solid rgba(255, 255, 255, 0.55);
-      border-radius: 50%;
-      background: transparent;
-      color: #fff;
-      font-size: 42px;
-      line-height: 1;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .tf-pf-popup-close:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .tf-pf-popup-close:focus-visible,
-    .tf-pf-popup-cta:focus-visible {
-      outline: 3px solid #fff;
-      outline-offset: 4px;
-    }
-
-    /* Brand */
-    .tf-pf-popup-brand {
-      position: relative;
-      z-index: 1;
-      margin: 0 0 48px;
-      color: #fff;
-      font-size: 26px;
-      font-weight: 900;
-      line-height: 1.12;
-      letter-spacing: 0.3px;
-    }
-
-    .tf-pf-popup-label {
-      position: absolute;
-      z-index: 2;
-      top: 66px;
-      right: 110px;
-      color: #ffda55;
-      font-size: 19px;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-
-    /* Offer headline */
-    .tf-pf-popup-hero-title {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      margin: 0 0 24px;
-      color: #fff;
-      font-size: clamp(36px, 5vw, 68px);
-      font-weight: 850;
-      line-height: 1.08;
-      letter-spacing: -1.7px;
-    }
-
-    .tf-pf-popup-hero-title span {
-      display: block;
-      margin-top: 14px;
-      color: #ffc400;
-    }
-
-    .tf-pf-popup-description {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      margin: 0;
-      color: #fff;
-      font-size: clamp(17px, 2vw, 27px);
-      line-height: 1.5;
-    }
-
-    /* White content area */
-    .tf-pf-popup-content {
-      padding: 40px 52px 44px;
-      background: #fff;
-    }
-
-    /* Benefit labels */
-    .tf-pf-popup-benefits {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin: 0 0 36px;
-    }
-
-    .tf-pf-popup-benefits > div {
-      padding: 16px 20px;
-      border-radius: 15px;
-      background: #eef5ff;
-      color: #263f78;
-      font-size: 21px;
-      font-weight: 800;
-      line-height: 1.35;
-    }
-
-    /* Yellow CTA button */
-    .tf-pf-popup-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      width: 100%;
-      min-height: 96px;
-      padding: 22px;
-      border: none;
-      border-radius: 19px;
-      background: #ffc400;
-      color: #102b63;
-      font-size: 30px;
-      font-weight: 900;
-      text-align: center;
-      text-decoration: none;
-      box-shadow: 0 10px 25px rgba(30, 53, 91, 0.12);
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-
-    .tf-pf-popup-cta:hover {
-      background: #f0b900;
-      color: #102b63;
-      transform: translateY(-2px);
-    }
-
-    .tf-pf-popup-cta-arrow {
-      font-size: 35px;
-      line-height: 1;
-    }
-
-    /* Eligibility disclaimer */
-    .tf-pf-popup-disclaimer {
-      margin: 25px 0 0;
-      color: #707989;
-      font-size: 19px;
-      line-height: 1.6;
-    }
-
-    /* Animations */
-    @keyframes tfPfFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes tfPfSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* Tablet and mobile */
-    @media (max-width: 650px) {
-      .tf-pf-popup-overlay {
-        padding: 12px;
-      }
-
-      .tf-pf-popup {
-        max-height: calc(100vh - 24px);
-        border-radius: 22px;
-      }
-
-      .tf-pf-popup-header {
-        padding: 28px 22px 26px;
-      }
-
-      .tf-pf-popup-header::after {
-        width: 40%;
-        opacity: 0.8;
-      }
-
-      .tf-pf-popup-close {
-        top: 12px;
-        right: 12px;
-        width: 42px;
-        height: 42px;
-        font-size: 27px;
-      }
-
-      .tf-pf-popup-brand {
-        margin-bottom: 36px;
-        font-size: 17px;
-      }
-
-      .tf-pf-popup-label {
-        top: 47px;
-        right: 58px;
-        font-size: 10px;
-        letter-spacing: 0.5px;
-      }
-
-      .tf-pf-popup-hero-title {
-        font-size: clamp(31px, 8vw, 44px);
-        letter-spacing: -0.8px;
-      }
-
-      .tf-pf-popup-hero-title span {
-        margin-top: 9px;
-      }
-
-      .tf-pf-popup-description {
-        font-size: 16px;
-      }
-
-      .tf-pf-popup-content {
-        padding: 24px 22px 28px;
-      }
-
-      .tf-pf-popup-benefits {
-        gap: 9px;
-        margin-bottom: 24px;
-      }
-
-      .tf-pf-popup-benefits > div {
-        padding: 11px 12px;
-        font-size: 13px;
-      }
-
-      .tf-pf-popup-cta {
-        min-height: 64px;
-        padding: 16px;
-        gap: 12px;
-        border-radius: 13px;
-        font-size: 21px;
-      }
-
-      .tf-pf-popup-cta-arrow {
-        font-size: 26px;
-      }
-
-      .tf-pf-popup-disclaimer {
-        margin-top: 17px;
-        font-size: 12px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .tf-pf-popup-header {
-        padding: 25px 16px 22px;
-      }
-
-      .tf-pf-popup-content {
-        padding: 20px 16px 22px;
-      }
-
-      .tf-pf-popup-benefits > div {
-        font-size: 12px;
-      }
-
-      .tf-pf-popup-hero-title {
-        font-size: 30px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .tf-pf-popup-overlay,
-      .tf-pf-popup {
-        animation: none;
-      }
-
-      .tf-pf-popup-cta {
-        transition: none;
-      }
-    }
-/* TechFinserv — Poonawalla Premium Popup */
- 
   </style>
 </head>
 <body>
@@ -2095,210 +1736,434 @@ function exportPDF() {
     initCharts();
     computeAndRender();
   </script>
-<!-- Poonawalla Fincorp Popup -->
-  <div
-    id="tf-pf-popup-overlay"
-    class="tf-pf-popup-overlay"
-    aria-hidden="true"
-  >
-    <section
-      class="tf-pf-popup"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="tf-pf-popup-title"
-      aria-describedby="tf-pf-popup-description tf-pf-popup-disclaimer"
-    >
 
-      <div class="tf-pf-popup-header">
+	
+<style>
+/* ===== POONAWALLA POPUP ===== */
+.tf-pf-overlay {
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(9,22,46,.62);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+.tf-pf-overlay.tf-visible { display:flex; }
 
-        <button
-          type="button"
-          class="tf-pf-popup-close"
-          id="tf-pf-popup-close"
-          aria-label="Close popup"
-        >&times;</button>
+.tf-pf-modal {
+  position:relative;
+  width:100%;
+  max-width:556px;
+  overflow:hidden;
+  border-radius:18px;
+  background:#fff;
+  color:#10264b;
+  box-shadow:0 24px 70px rgba(0,0,0,.32);
+  font-family:Inter,Arial,sans-serif;
+  animation:tfPfIn .25s ease-out;
+}
+@keyframes tfPfIn {
+  from {opacity:0;transform:translateY(12px) scale(.98)}
+  to {opacity:1;transform:translateY(0) scale(1)}
+}
 
-        <div class="tf-pf-popup-brand">
-          POONAWALLA<br>
-          FINCORP
-        </div>
+.tf-pf-close {
+  position:absolute;
+  z-index:5;
+  top:10px;
+  right:10px;
+  width:38px;
+  height:38px;
+  border:1px solid #fff;
+  border-radius:50%;
+  background:#20396f;
+  color:#fff;
+  font-size:25px;
+  cursor:pointer;
+}
 
-        <span class="tf-pf-popup-label">PERSONAL LOAN</span>
+.tf-pf-hero {
+  padding:24px 28px 20px;
+  color:#fff;
+  background:linear-gradient(115deg,#35a8ed 0%,#087bc8 62%,#243b73 62%,#243b73 100%);
+}
+.tf-pf-brand {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+  padding-right:38px;
+}
+.tf-pf-brand-name {
+  font-size:14px;
+  line-height:1.15;
+  font-weight:800;
+  letter-spacing:.5px;
+}
+.tf-pf-label {
+  color:#ffe17a;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+.tf-pf-hero h2 {
+  margin:0;
+  color:#fff;
+  font-size:34px;
+  line-height:1.12;
+  font-weight:800;
+}
+.tf-pf-hero h2 span {
+  display:block;
+  margin-top:5px;
+  color:#ffc400;
+}
+.tf-pf-subtitle {
+  margin:12px 0 0;
+  color:#f1f7ff;
+  font-size:14px;
+  line-height:1.5;
+}
 
-        <h2 class="tf-pf-popup-hero-title" id="tf-pf-popup-title">
-          Personal Loan Offer
-          <span>Up to ₹5 Lakh*</span>
-        </h2>
+.tf-pf-body { padding:22px 28px 24px; }
+.tf-pf-points {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+}
+.tf-pf-points span {
+  padding:8px 10px;
+  border-radius:7px;
+  background:#eff6ff;
+  color:#243b73;
+  font-size:11px;
+  font-weight:700;
+}
+.tf-pf-button {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  min-height:52px;
+  padding:13px 16px;
+  border:0;
+  border-radius:10px;
+  background:#ffc400;
+  color:#17346b;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 5px 14px rgba(22,50,104,.14);
+}
+.tf-pf-button:hover { background:#ffd33d; }
+.tf-pf-disclaimer {
+  margin:13px 0 0;
+  color:#6b7280;
+  font-size:10px;
+  line-height:1.55;
+}
 
-        <p
-          class="tf-pf-popup-description"
-          id="tf-pf-popup-description"
-        >
-          Explore a personal loan offer from Poonawalla Fincorp through
-          a simple online process.
-        </p>
+/* ===== LEAD FORM ===== */
+.tf-pf-form-section {
+  display:none;
+  margin-top:18px;
+  padding-top:17px;
+  border-top:1px solid #e5e7eb;
+}
+.tf-pf-form-section.tf-form-visible { display:block; }
+.tf-pf-form-title {
+  margin:0 0 14px;
+  color:#20396f;
+  font-size:17px;
+  font-weight:800;
+}
+.tf-pf-field { margin-bottom:12px; }
+.tf-pf-field label {
+  display:block;
+  margin-bottom:6px;
+  color:#334155;
+  font-size:12px;
+  font-weight:700;
+}
+.tf-pf-field input {
+  width:100%;
+  height:46px;
+  padding:10px 12px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:#fff;
+  color:#10264b;
+  font-size:14px;
+  box-sizing:border-box;
+}
+.tf-pf-field input:focus {
+  outline:2px solid #93c5fd;
+  border-color:#168bd2;
+}
+.tf-pf-submit:disabled {
+  opacity:.65;
+  cursor:wait;
+}
+.tf-pf-status {
+  margin:10px 0 0;
+  font-size:12px;
+  color:#b91c1c;
+}
+.tf-pf-privacy {
+  margin:10px 0 0;
+  color:#64748b;
+  font-size:10px;
+  line-height:1.5;
+}
+body.tf-pf-locked { overflow:hidden; }
 
+@media(max-width:480px) {
+  .tf-pf-overlay { padding:12px; }
+  .tf-pf-modal { border-radius:14px; }
+  .tf-pf-hero { padding:22px 18px 18px; }
+  .tf-pf-hero h2 { font-size:27px; }
+  .tf-pf-brand { margin-bottom:18px; }
+  .tf-pf-body { padding:18px; }
+  .tf-pf-points { gap:6px; }
+  .tf-pf-points span { font-size:10px; }
+}
+</style>
+
+<!-- POPUP HTML -->
+<div class="tf-pf-overlay" id="tfPfOverlay" aria-hidden="true">
+  <section class="tf-pf-modal" role="dialog" aria-modal="true"
+           aria-labelledby="tfPfTitle">
+
+    <button type="button" class="tf-pf-close"
+            id="tfPfClose" aria-label="Close">&times;</button>
+
+    <div class="tf-pf-hero">
+      <div class="tf-pf-brand">
+        <div class="tf-pf-brand-name">POONAWALLA<br>FINCORP</div>
+        <div class="tf-pf-label">PERSONAL LOAN</div>
       </div>
 
-      <div class="tf-pf-popup-content">
+      <h2 id="tfPfTitle">
+        Personal Loan Offer
+        <span>Up to ₹5 Lakh*</span>
+      </h2>
 
-        <div class="tf-pf-popup-benefits">
-          <div>✓ Online process</div>
-          <div>✓ Check eligibility</div>
-          <div>✓ Offer up to ₹5 lakh*</div>
-        </div>
+      <p class="tf-pf-subtitle">
+        Explore a personal loan offer from Poonawalla Fincorp through a simple online process.
+      </p>
+    </div>
 
-        <a
-          class="tf-pf-popup-cta"
-          href="https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&amp;utm_medium=QR_Code&amp;utm_DSA_Code=DS100027&amp;UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&amp;UTM_SM_Name=devang.patel@poonawallafincorp.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Check Your Offer
-          <span class="tf-pf-popup-cta-arrow" aria-hidden="true">➜</span>
-        </a>
+    <div class="tf-pf-body">
 
-        <p class="tf-pf-popup-disclaimer" id="tf-pf-popup-disclaimer">
-          *Offer amount and pre-approval are subject to lender eligibility,
-          verification and terms. The amount is not guaranteed for every applicant.
-        </p>
-
+      <div class="tf-pf-points">
+        <span>✓ Online process</span>
+        <span>✓ Check eligibility</span>
+        <span>✓ Offer up to ₹5 lakh*</span>
       </div>
-    </section>
-  </div>
 
-  <script>
-    /* Poonawalla Popup: 20-second delay, once dismissed per local day */
-    (function () {
-      "use strict";
+      <button type="button" class="tf-pf-button" id="tfPfStart">
+        Check Your Offer &nbsp; ➜
+      </button>
 
-      const overlay = document.getElementById("tf-pf-popup-overlay");
-      const popup = overlay
-        ? overlay.querySelector(".tf-pf-popup")
-        : null;
-      const closeButton = document.getElementById("tf-pf-popup-close");
+      <p class="tf-pf-disclaimer">
+        *Offer amount and pre-approval are subject to lender eligibility,
+        verification and terms. The amount is not guaranteed for every applicant.
+      </p>
 
-      if (!overlay || !popup || !closeButton) return;
+      <!-- NAME AND MOBILE FORM -->
+      <div class="tf-pf-form-section" id="tfPfFormSection">
 
-      const storageKey = "tfPoonawallaPopupDismissed";
-      const delayMilliseconds = 20000;
+        <h3 class="tf-pf-form-title">Enter Your Details</h3>
 
-      let popupTimer = null;
-      let previousFocus = null;
-      let popupIsOpen = false;
+        <form id="tfPfLeadForm">
 
-      function todayKey() {
-        const date = new Date();
+          <div class="tf-pf-field">
+            <label for="tfPfName">Full Name</label>
+            <input type="text" id="tfPfName" name="name"
+                   placeholder="Enter your full name"
+                   autocomplete="name" required minlength="2">
+          </div>
 
-        return [
-          date.getFullYear(),
-          String(date.getMonth() + 1).padStart(2, "0"),
-          String(date.getDate()).padStart(2, "0")
-        ].join("-");
-      }
+          <div class="tf-pf-field">
+            <label for="tfPfMobile">Mobile Number</label>
+            <input type="tel" id="tfPfMobile" name="mobile"
+                   placeholder="Enter 10-digit mobile number"
+                   inputmode="numeric" autocomplete="tel-national"
+                   pattern="[6-9][0-9]{9}" maxlength="10" required>
+          </div>
 
-      function wasDismissedToday() {
-        try {
-          return localStorage.getItem(storageKey) === todayKey();
-        } catch (error) {
-          /* If storage is blocked, the popup still works for this visit. */
-          return false;
-        }
-      }
+          <button type="submit" class="tf-pf-button tf-pf-submit"
+                  id="tfPfSubmit">
+            Submit & Continue ➜
+          </button>
 
-      function markDismissedToday() {
-        try {
-          localStorage.setItem(storageKey, todayKey());
-        } catch (error) {
-          /* Daily persistence is unavailable if browser storage is blocked. */
-        }
-      }
+          <p class="tf-pf-status" id="tfPfStatus" role="status"></p>
 
-      function openPopup() {
-        if (popupIsOpen || wasDismissedToday()) return;
+          <p class="tf-pf-privacy">
+            By submitting, you agree that TechFinserv may share these
+            details with the lender for the purpose of processing your enquiry.
+          </p>
 
-        previousFocus = document.activeElement;
-        popupIsOpen = true;
+        </form>
+      </div>
 
-        overlay.classList.add("tf-pf-popup-visible");
-        overlay.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
+    </div>
+  </section>
+</div>
 
-        closeButton.focus();
-      }
+<script>
+(function () {
+  const overlay = document.getElementById('tfPfOverlay');
+  const closeBtn = document.getElementById('tfPfClose');
+  const startBtn = document.getElementById('tfPfStart');
+  const formSection = document.getElementById('tfPfFormSection');
+  const form = document.getElementById('tfPfLeadForm');
+  const submitBtn = document.getElementById('tfPfSubmit');
+  const status = document.getElementById('tfPfStatus');
 
-      function closePopup() {
-        if (!popupIsOpen) return;
+  if (!overlay || !form || window.tfPfPopupInitialized) return;
+  window.tfPfPopupInitialized = true;
 
-        popupIsOpen = false;
+  const WEB3FORMS_KEY = 'd1bf814f-4b60-44fa-b47b-ed5e08afaf53';
 
-        overlay.classList.remove("tf-pf-popup-visible");
-        overlay.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
+  const POONAWALLA_URL =
+    'https://instant-pocket-loan.poonawallafincorp.com/?redirectto=primepl&utm_medium=QR_Code&utm_DSA_Code=DS100027&UTM_Partner_Name=RUPEE_XPERT_AR_SERVICES_PVT_LTD&UTM_SM_Name=devang.patel@poonawallafincorp.com';
 
-        markDismissedToday();
+  const storageKey = 'tfPoonawallaPopupDismissedOn';
 
-        if (
-          previousFocus &&
-          typeof previousFocus.focus === "function" &&
-          document.contains(previousFocus)
-        ) {
-          previousFocus.focus();
-        }
-      }
+  // Use the visitor's local calendar date.
+  function localDate() {
+    const d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
 
-      closeButton.addEventListener("click", closePopup);
+  let dismissedToday = false;
+  try {
+    dismissedToday = localStorage.getItem(storageKey) === localDate();
+  } catch (e) {}
 
-      /* Close when the visitor clicks the dark overlay outside the popup. */
-      overlay.addEventListener("click", function (event) {
-        if (event.target === overlay) {
-          closePopup();
-        }
+  function closePopup() {
+    overlay.classList.remove('tf-visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('tf-pf-locked');
+
+    try {
+      localStorage.setItem(storageKey, localDate());
+    } catch (e) {}
+  }
+
+  function showPopup() {
+    if (dismissedToday || document.visibilityState !== 'visible') return;
+
+    overlay.classList.add('tf-visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('tf-pf-locked');
+    closeBtn.focus();
+  }
+
+  closeBtn.addEventListener('click', closePopup);
+
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('tf-visible')) {
+      closePopup();
+    }
+  });
+
+  // Open lead form and record the Check Your Offer click.
+  startBtn.addEventListener('click', function () {
+    if (typeof gtag === 'function') {
+      gtag('event', 'poonawalla_check_offer_click', {
+        event_category: 'Poonawalla Popup',
+        event_label: 'Check Your Offer'
+      });
+    } else if (window.dataLayer) {
+      window.dataLayer.push({
+        event: 'poonawalla_check_offer_click'
+      });
+    }
+
+    formSection.classList.add('tf-form-visible');
+    startBtn.style.display = 'none';
+    form.querySelector('input[name="name"]').focus();
+  });
+
+  // Submit details to Web3Forms, then redirect.
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    if (WEB3FORMS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+      status.textContent = 'Website administrator: please configure the Web3Forms access key.';
+      return;
+    }
+
+    const name = document.getElementById('tfPfName').value.trim();
+    const mobile = document.getElementById('tfPfMobile').value.trim();
+
+    if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+      status.textContent = 'Please enter a valid 10-digit Indian mobile number.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    status.textContent = '';
+
+    const payload = new FormData(form);
+    payload.append('access_key', WEB3FORMS_KEY);
+    payload.append('subject', 'New Poonawalla Fincorp Lead - TechFinserv');
+    payload.append('from_name', 'TechFinserv EMI Calculator');
+    payload.append('source', 'EMI Calculator Poonawalla Popup');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload
       });
 
-      /* Close when the visitor presses Escape. */
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && popupIsOpen) {
-          closePopup();
+      const result = await response.json();
+
+      if (result.success) {
+        if (typeof gtag === 'function') {
+          gtag('event', 'poonawalla_lead_form_success', {
+            event_category: 'Poonawalla Popup'
+          });
         }
 
-        /* Keep keyboard focus within the open dialog. */
-        if (event.key === "Tab" && popupIsOpen) {
-          const focusable = popup.querySelectorAll(
-            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-          );
+        status.style.color = '#15803d';
+        status.textContent = 'Details submitted successfully. Redirecting...';
 
-          if (!focusable.length) return;
-
-          const first = focusable[0];
-          const last = focusable[focusable.length - 1];
-
-          if (event.shiftKey && document.activeElement === first) {
-            event.preventDefault();
-            last.focus();
-          } else if (
-            !event.shiftKey &&
-            document.activeElement === last
-          ) {
-            event.preventDefault();
-            first.focus();
-          }
-        }
-      });
-
-      /* Show after 20 seconds unless already dismissed today. */
-      if (!wasDismissedToday()) {
-        popupTimer = window.setTimeout(openPopup, delayMilliseconds);
+        window.location.assign(POONAWALLA_URL);
+      } else {
+        throw new Error(result.message || 'Submission failed');
       }
 
-      window.addEventListener("pagehide", function () {
-        if (popupTimer !== null) {
-          window.clearTimeout(popupTimer);
-          popupTimer = null;
-        }
-      });
-    })();
-  </script>
+    } catch (error) {
+      status.style.color = '#b91c1c';
+      status.textContent = 'Unable to submit. Please try again.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit & Continue ➜';
+    }
+  });
 
-	</body>
+  // Display after 20 seconds.
+  if (!dismissedToday) {
+    window.setTimeout(showPopup, 20000);
+  }
+})();
+</script>
+
+</body>
 </html>
